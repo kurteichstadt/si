@@ -1,0 +1,36 @@
+<div id="content">
+    <h1>Projects</h1>
+
+	<ul style="margin-bottom: 18px; ">
+		<li><%= link_to 'Add a Project', new_hr_si_project_path, :method => :GET, :class => "add-link" %></li>
+	</ul>
+
+    <%= render :partial => "search_form", :locals => {:countries => @countries } %>    
+	
+    <table cellspacing="0" class="list" style="clear: both;"> 
+        <tr>
+            <th>Project Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>AOA</th>
+            <th>SI Year</th>
+            <th>Partnership Region</th>
+        </tr>
+    <% for project in @projects %>
+      <tr class="<%= cycle("","alt") %>">
+        <td><%= link_to project.name, edit_hr_si_project_path(project), :class => "project" %></td>
+        <td><%= datestamp project.studentStartDate %></td>
+        <td><%= datestamp project.studentEndDate %></td>
+        <td><%= h project.city %></td>
+        <td><%= h project.country %></td>
+        <td><%= h project.AOA %></td>
+        <td><%= h project.siYear %></td>
+        <td><%= h Region.find_by_region(project.partnershipRegion).name unless project.partnershipRegion.nil? %></td>
+      </tr>
+    <% end %>
+    </table>
+    
+    <br />
+</div>  

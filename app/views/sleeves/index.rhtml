@@ -1,0 +1,24 @@
+<div id="content">
+  <h1>Applications</h1>
+  
+  <% unless @sleeves.empty? -%>
+    <table cellspacing="0" class="list"> 
+    <tr>
+      <th>Title</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% for sleeve in @sleeves -%>
+    <tr class="<%= cycle("","alt") %>">
+      <td><%= link_to sleeve.title, edit_sleeve_path(sleeve)   %></td>
+      <td class="actions"><%= link_to 'Destroy', sleeve_path(sleeve), :confirm => 'Are you sure?', :method => :delete, :class => "destroy" %></td>
+    </tr>
+    <% end -%>
+    </table>
+    
+    <br />
+  <% end -%>  
+
+  
+    
+  <%= link_to 'New Application', new_sleeve_path(), :class => "add-link" %>
+</div>

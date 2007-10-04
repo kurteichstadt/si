@@ -1,0 +1,40 @@
+		<% row_class = cycle('','alt', :name => "row_bg") %>
+		<tr class="<%= row_class %>">
+			<td><%= app.applicant.informal_full_name %></td>
+			<td><%= datestamp app.created_at %><br/>
+			    <%= datestamp app.submitted_at %><br/>
+				<%= app.has_paid? ? "Yes" : "No"  %></td>
+			<td>Staff: <% unless app.staff_reference.token.blank? -%><%= link_to app.staff_reference.name, edit_reference_url(app, app.staff_reference.token), :target => "_blank" %><% end -%><br/>
+			    Discipler: <% unless app.discipler_reference.token.blank? -%><%= link_to app.discipler_reference.name, edit_reference_url(app, app.discipler_reference.token), :target => "_blank" %><% end -%><br/>
+				Roommate: <% unless app.roommate_reference.token.blank? -%><%= link_to app.roommate_reference.name, edit_reference_url(app, app.roommate_reference.token), :target => "_blank" %><% end -%><br/>
+				Friend: <% unless app.friend_reference.token.blank? -%><%= link_to app.friend_reference.name, edit_reference_url(app, app.friend_reference.token), :target => "_blank" %><% end -%></td>
+			<td><%= datestamp app.staff_reference.started_at %><br/>
+			    <%= datestamp app.discipler_reference.started_at %><br/>
+				<%= datestamp app.roommate_reference.started_at %><br/>
+				<%= datestamp app.friend_reference.started_at %></td>
+			<td><%= datestamp app.staff_reference.submitted_at %><br/>
+			    <%= datestamp app.discipler_reference.submitted_at %><br/>
+				<%= datestamp app.roommate_reference.submitted_at %><br/>
+				<%= datestamp app.friend_reference.submitted_at %></td>
+			<td><%= app.applicant.campus %></td>
+		</tr>
+		<tr class="<%= row_class %>">
+			<td colspan="5">Ministry Preferences: #1: <%= app.hr_si_application.locationA %>; #2: <%= app.hr_si_application.locationB %>; #3: <%= app.hr_si_application.locationC %></td>
+			<td>Available: <%= app.hr_si_application.availableMonth %> / <%= app.hr_si_application.availableYear %></td>
+		</tr>
+		<tr class="<%= row_class %>">
+			<td colspan="6" style="border-bottom: solid 2px #ccc;" class="print-links">Print:
+				<%= link_to "(<b>1</b>) Complete w/Ref", application_url(app), {:popup => true} %>
+				<%= link_to "(<b>2</b>) Complete No Ref", no_ref_application_url(app), {:popup => true} %>
+				<%= link_to "(<b>3</b>) No Confidential", no_conf_application_url(app), {:popup => true} %>
+				<%= link_to "(<b>4</b>) Collated Refs", collated_refs_application_url(app), {:popup => true} %>
+				<% unless app.staff_reference.token.blank? -%><%= link_to "<b>5a</b>) Staff Ref", reference_url(app, app.staff_reference.token), {:popup => true} %><% else -%><%= link_to "5a. Staff Ref" %><% end -%>
+				<% unless app.discipler_reference.token.blank? -%><%= link_to "<b>5b</b>) Discipler Ref", reference_url(app, app.discipler_reference.token), {:popup => true} %><% else -%><%= link_to "5a. Discipler Ref" %><% end -%>
+				<% unless app.roommate_reference.token.blank? -%><%= link_to "<b>5c</b>) Roommate Ref", reference_url(app, app.roommate_reference.token), {:popup => true} %><% else -%><%= link_to "5a. Roommate Ref" %><% end -%>
+				<% unless app.friend_reference.token.blank? -%><%= link_to "<b>5d</b>) Friend Ref", reference_url(app, app.friend_reference.token), {:popup => true} %><% else -%><%= link_to "5a. Friend Ref" %><% end -%>
+				<%= link_to "(<b>6</b>) Evaluator's Worksheet", "/files/eval_worksheet.doc", {:popup => true} %>
+				<%= link_to "(<b>7</b>) Acceptance Issues", "/files/acceptance_issues.doc", {:popup => true} %>
+				<%= link_to "(<b>8</b>) Evaluator Summary", "/files/eval_summary.doc", {:popup => true} %>
+				<%= link_to "(<b>9</b>) Med Psych Form", "/files/med_psych.doc", {:popup => true} %>
+			</td>
+		</tr>

@@ -1,0 +1,66 @@
+class EmailTemplatesController < ApplicationController
+  layout 'admin'
+  
+  def index 
+    @email_templates = EmailTemplate.find(:all)
+  
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def show
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def new 
+    @email_template = EmailTemplate.new
+  
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def edit
+    @email_template = EmailTemplate.find(params[:id])
+    
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def create
+    @email_template = EmailTemplate.new(params[:email_template])
+    
+    respond_to do |format|
+      if @email_template.save
+        format.html { redirect_to email_templates_url }
+      else
+        format.html { render :action => :new }
+      end
+    end
+  end
+  
+  def update 
+    @email_template = EmailTemplate.find(params[:id])
+    
+    respond_to do |format|
+      if @email_template.update_attributes(params[:email_template])
+        format.html { redirect_to email_templates_url }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+  
+  def destroy
+    @email_template = EmailTemplate.find(params[:id])
+    @email_template.destroy
+
+    respond_to do |format|
+      format.html { redirect_to email_templates_url }
+    end
+  end
+end

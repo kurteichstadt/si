@@ -1,0 +1,54 @@
+<div id="controls">
+  <div id="panel">
+	<div id="panel-info-pages" class="panel" style="display:block;">
+	  <h3>Navigation</h3>
+	  
+	  <ul id="list-info-pages">
+	    <li class="active"><a href="/info_pages/home" title="">Home</a></li>
+	    <li><a href="/info_pages/instructions" title="">Instructions</a></li>
+	    <li><a href="/info_pages/faqs" title="">Frequently Asked Questions</a></li>
+	    <li><a href="/info_pages/about_us" title="">About Us</a></li>
+	    <li><a href="/info_pages/contact_us" title="">Contact Us</a></li>
+	    <li><a href="/info_pages/opportunities" title="">STINT/Internship Opportunities</a></li>
+	    <li><a href="/info_pages/a_real_life_story" title="">A Real Life Story</a></li>
+	    <li><a href="/info_pages/privacy_policy" title="">Privacy Policy</a></li>
+	  </ul>
+	  
+	</div>
+  </div>
+</div>
+
+<div id="preview" class="answer-page">
+  <div id="page-preview">
+  
+    <div class="page">
+    <h3>Welcome to the <%= HrSiApplication::YEAR -%>-<%= HrSiApplication::YEAR + 1 -%> STINT/Internship application!</h3>
+
+	<p>Thank you for your interest in joining us on a STINT or Internship. We 
+		welcome your application for the <%= HrSiApplication::YEAR -%>-<%= HrSiApplication::YEAR + 1 -%> STINT/Internship year! To 
+		get started with a new application for a STINT/Internship, please 
+		register, or if you are returning, just login to access your existing 
+		application.</p>
+
+	<p><%= link_to "Register/Login", login_url, :class => "button" %>
+		<%= link_to "First Time Users", signup_url, :class => "button" %></p>
+
+	<p>For more information about a STINT or Internship, please go to our 
+		Contact Us section. If you have questions about the site, please 
+		<a href="http://staff.int.uscm.org/general/feedback.jsp" 
+		title="Send us feedback!">send us feedback</a> or call 1-888-222-5462.</p>
+
+	<p>Note: The STINT/Internship Tool works best with Internet Explorer. If 
+		you are using another browser and are experiencing difficulties, we 
+		recommend using Internet Explorer to apply. If you do not have Internet 
+		Explorer on your computer, you can download it 
+		<a href="http://www.microsoft.com/windows/ie/default.asp" 
+		title="download IE">here</a>.</p>
+
+	<p>If you are using a Mac, you will probably experience problems with the 
+		short answer questions. These problems may prevent the person who 
+		reviews your application from being able to read it. We suggest that 
+		you use a PC while filling out the application. </p>
+	</div>
+  </div>
+</div>

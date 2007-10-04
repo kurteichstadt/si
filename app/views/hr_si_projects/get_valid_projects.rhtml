@@ -1,0 +1,5 @@
+<% new_projects = Array.new()
+	for project in @projects
+		new_projects << project.SIProjectID.to_s + "::" + project.name
+	end -%>
+<%= new_projects.join("|") %>

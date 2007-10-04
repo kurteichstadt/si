@@ -1,0 +1,22 @@
+<% if apps.length > 0 -%>
+  <table cellspacing="0" class="list" style="margin-bottom: 36px; ">
+  	<thead>
+  		<tr>
+			<th>Applicant Name</th>
+			<th>Date Started /<br/>
+			    Submitted /<br/>
+				Paid?</th>
+		    <th>References</th>
+			<th>Ref Started</th>
+			<th>Ref Submitted</th>
+			<th>School Language</th>
+  		</tr>
+  	</thead>	
+	<tbody>
+		<%= render :partial => 'app', :collection => apps %>
+		<% reset_cycle("row_bg") %>
+	</tbody>
+  </table>
+<% else -%>
+  <p style="margin-bottom: 36px; ">There are currently no applications in this category.</p>
+<% end -%>

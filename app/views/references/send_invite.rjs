@@ -1,0 +1,2 @@
+page.replace_html "ref_last_sent_#{@reference.id}", @reference.email_sent_at.strftime("%m/%d/%Y @ %I:%M%p")
+page.visual_effect :highlight, "ref_last_sent_#{@reference.id}"

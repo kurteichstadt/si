@@ -1,0 +1,46 @@
+<div id="content">
+  <h1>Edit Application</h1>
+  
+  <p>
+    Think of an Application as a manilla folder containing multiple forms. Select which <em>questionnaires</em>
+    you would like to include and whether the <em>applicant</em> or <em>reference</em> must complete them. You 
+    can also re-title each form, so a standard "Reference Form" can be be inserted multiple times as "Peer
+    Reference", "Spiritual Reference", etc.
+  </p>
+  
+  <%= error_messages_for :sleeve %>
+  
+  <% form_for(:sleeve, :url => sleeve_path(@sleeve), :html => { :method => :put }) do |f| %>
+    <%= render :partial => 'form', :locals => {:f => f}%>
+    <p><%= submit_tag "Update" %></p>
+  <% end %>
+  
+  <% if @question_sheets.empty? -%>
+    <p>
+      Please <%= link_to "create the Questionnaire", question_sheets_path %> forms you wish to associate with 
+      this Application.
+    </p>
+  <% else -%>
+    <table> 
+    <thead>
+      <tr>
+        <th>Questionnaire</th>
+        <th>Title</th>
+        <th>Assign to</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody id="sleeve_sheets">
+      <%= render :partial => '/sleeve_sheets/sheet', :collection => @sleeve_sheets %>
+    </tbody>
+    <tfoot>
+      <form id="new_sleeve_sheet_form">
+      <%= render :partial => '/sleeve_sheets/edit_sheet', :object => @new_sleeve_sheet %>
+      </form>
+    </tfoot>
+    </table>
+  <% end -%>
+  
+  <p><%= link_to "Back", sleeves_path, :class => "cancel" %></p>
+  
+</div>

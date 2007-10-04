@@ -1,0 +1,31 @@
+<div id="controls" id="app_info">
+  <div id="panel">
+  	<div class="panel">
+		<p><label class="desc">Applicant:</label> <%= @application.applicant.informal_full_name %></p>
+		<p><label class="desc">Date Submitted:</label> <%= datestamp @application.submitted_at %></p>
+		<p><label class="desc">Electronic Signature:</label> <%= @application.applicant.current_si_application.electronicSignature %></p>
+
+		<p><label class="desc">Current Mailing Address</label>
+			<%= @application.applicant.current_address.address1 %><br/>
+			<% unless @application.applicant.current_address.address2.blank? -%><%= @application.applicant.current_address.address2 %><br/><% end -%>
+			<%= @application.applicant.current_address.city %>, <%= @application.applicant.current_address.state %> <%= @application.applicant.current_address.zip %></p>
+		<p><label class="desc">Permanent Mailing Address</label>
+			<%= @application.applicant.permanent_address.address1 %><br/>
+			<% unless @application.applicant.permanent_address.address2.blank? -%><%= @application.applicant.permanent_address.address2 %><br/><% end -%>
+			<%= @application.applicant.permanent_address.city %>, <%= @application.applicant.permanent_address.state %> <%= @application.applicant.permanent_address.zip %></p>
+	</div>
+  </div>
+</div>
+
+<div id="preview" class="answer-page">
+
+<% @answer_sheets.each do |answer_sheet| -%>
+<% question_sheet = answer_sheet.question_sheet
+   elements = question_sheet.elements.find(:all, :include => 'page', 
+                                                 :conditions => ["#{Element.table_name}.kind not in (?)", %w(Paragraph)],
+                                                 :order => "#{Page.table_name}.number,#{Element.table_name}.position")
+   elements.reject! {|e| e.is_confidential} if @show_conf == false
+   elements = QuestionSet.new(elements, answer_sheet).elements.group_by(&:page_id) -%>
+<%= render :partial => '/answer_sheets/answer_sheet', :locals => {:answer_sheet => answer_sheet, :elements => elements } %>
+<% end -%>
+</div>

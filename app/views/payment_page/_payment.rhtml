@@ -1,0 +1,5 @@
+<tr>
+	<td width="33%"><%= payment.payment_type%></td>
+	<td width="33%"><%= datestamp payment.created_at %></td>
+	<td width="*"><%= payment.status == "Approved" ? number_to_currency(payment.amount) : payment.status %> <% if (payment.payment_type == 'Staff' && payment.status == 'Pending') -%>(Request sent)<% end -%></td>
+</tr>

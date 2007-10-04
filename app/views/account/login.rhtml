@@ -1,0 +1,30 @@
+<%='<div id="errorExplanation">'+flash[:notice]+'</div>' if flash[:notice]%>
+Login to access your STINT/Internship Application.<br><br>
+<%= start_form_tag %>
+<p><label for="username">Login (please use an email address)</label><br />
+<%= text_field_tag('username', '', :size => 40) %></p>
+
+<p><label for="password">Password</label><br />
+<%= password_field_tag 'password', '', :size => 40 %></p>
+<!-- Uncomment this if you want this functionality
+<p><label for="remember_me">Remember me:</label>
+<%= check_box_tag 'remember_me'%></p>
+-->
+<%= hidden_field_tag('remember_me', 1)%>
+
+
+<p><%= submit_tag 'Log in' %></p>
+<%= end_form_tag %>
+<% unless request.ssl? -%>
+<br />
+We HIGHLY recommend that you switch to the <a href="https://<%=request.host_with_port%>/">secure version</a> of this website.
+<br />
+<% end -%>
+<br />
+<a href="http://staff.campuscrusadeforchrist.com/servlet/AccountController?action=goToPage&page=changePassword&loginPage=https://sp.campuscrusadeforchrist.com">Click here</a> to change your password.
+<br>
+If you forgot your username or password, <a href="https://staff.campuscrusadeforchrist.com/servlet/AccountController?action=goToPage&page=lookupQuestion&loginPage=https://sp.campuscrusadeforchrist.com">click here.</a>
+<hr>
+Don't have an account? <%= link_to "Click here to register for a new account.", :action => :signup %>
+
+<hr>

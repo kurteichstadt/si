@@ -1,0 +1,85 @@
+<div id="controls">
+  <div id="panel">
+	<div id="panel-info-pages" class="panel" style="display:block;">
+	  <h3>Navigation</h3>
+	  
+	  <ul id="list-info-pages">
+	    <li><a href="/info_pages/home" title="">Home</a></li>
+	    <li><a href="/info_pages/instructions" title="">Instructions</a></li>
+	    <li><a href="/info_pages/faqs" title="">Frequently Asked Questions</a></li>
+	    <li><a href="/info_pages/about_us" title="">About Us</a></li>
+	    <li><a href="/info_pages/contact_us" title="">Contact Us</a></li>
+	    <li class="active"><a href="/info_pages/opportunities" title="">STINT/Internship Opportunities</a></li>
+	    <li><a href="/info_pages/a_real_life_story" title="">A Real Life Story</a></li>
+	    <li><a href="/info_pages/privacy_policy" title="">Privacy Policy</a></li>
+	  </ul>
+	  
+	</div>
+  </div>
+</div>
+
+<div id="preview" class="answer-page">
+  <div id="page-preview">
+  
+    <div class="page">
+    	<h3>STINT/Internship Project Opportunities</h3>
+		
+		<h4 style="font-weight: bold; font-size: 14px; border-bottom: none; margin-bottom: 9px;">National STINT/Internship Locations</h4>
+		
+		<table cellspacing="0" class="list" style=" margin-bottom: 18px;">
+			<thead>
+				<tr>
+					<th>Location</th>
+					<th>Dates</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @national_projects.each do |project| -%>    	
+				<tr class="<%= cycle('alt','', :name => "row_class") %>">
+					<td><%= project.displayLocation %></td>
+					<td><%= datestamp project.studentStartDate -%>&nbsp;-&nbsp;<%= datestamp project.studentEndDate -%></td>
+				</tr>
+			<% end -%>
+			</tbody>
+		</table>
+<% reset_cycle("row_class") -%>
+		<h4 style="font-weight: bold; font-size: 14px; border-bottom: none; margin-bottom: 9px;">Regionally Associated STINT Locations</h4>
+		
+		<table cellspacing="0" class="list" style=" margin-bottom: 18px;">
+			<thead>
+				<tr>
+					<th>Location</th>
+					<th>Dates</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @regional_stint_projects.each do |project| -%>    	
+				<tr class="<%= cycle('alt','', :name => 'row_class') %>">
+					<td><%= project.displayLocation %></td>
+					<td><%= datestamp project.studentStartDate -%>&nbsp;-&nbsp;<%= datestamp project.studentEndDate -%></td>
+				</tr>
+			<% end -%>
+			</tbody>
+		</table>
+<% reset_cycle("row_class") -%>
+		<h4 style="font-weight: bold; font-size: 14px; border-bottom: none; margin-bottom: 9px;">Regionally Associated Internship Locations</h4>
+		
+		<table cellspacing="0" class="list" style=" margin-bottom: 18px;">
+			<thead>
+				<tr>
+					<th>Location</th>
+					<th>Dates</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% @regional_internship_projects.each do |project| -%>    	
+				<tr class="<%= cycle('alt','', :name => 'row_class') %>">
+					<td><%= project.displayLocation %></td>
+					<td><%= datestamp project.studentStartDate -%>&nbsp;-&nbsp;<%= datestamp project.studentEndDate -%></td>
+				</tr>
+			<% end -%>
+			</tbody>
+		</table>
+	</div>
+  </div>
+</div>

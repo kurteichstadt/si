@@ -1,0 +1,11 @@
+<div id="content">
+    <h1>Projects</h1>
+
+	<ul style="margin-bottom: 18px; ">
+		<li><%= link_to 'Add a Project', new_hr_si_project_path, :method => :GET, :class => "add-link" %></li>
+	</ul>
+
+    <%= render :partial => "search_form", :locals => {:countries => @countries } %>    
+	
+    <br />
+</div>  

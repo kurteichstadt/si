@@ -1,0 +1,157 @@
+<style type="text/css">
+    p {  clear: both; }
+    label { float: left; display: block; width: 200px; }
+    label .help { font-weight: normal; font-size: 9px !important; color: #999; }
+</style>
+
+<p><label for="hr_si_project_name" class="desc">Project Name</label>
+    <%= f.text_field :name, :class => "text" %></p>
+    
+<p><label for="hr_si_project_projectType" class="desc">Location Type</label>
+    <%= f.select :projectType, [ ['National (Non-Regionally-Associated) Internship', 'n'],
+                                 ['Regionally-Associated STINT', 's'],
+                                 ['Regionally-Associated Internship', 'i'],
+                                 ['Please Select an option', '' ] ] %></p>
+                                 
+<p><label for="hr_si_project_staffStartDate" class="desc">Staff Start Date</label>
+    <%= f.calendar_date_select :staffStartDate, :time => false %></p>
+    
+<p><label for="hr_si_project_staffEndDate" class="desc">Staff End Date</label>
+    <%= f.calendar_date_select :staffEndDate, :time => false %></p>
+    
+<p><label for="hr_si_project_studentStartDate" class="desc">Student Start Date</label>
+    <%= f.calendar_date_select :studentStartDate, :time => false %></p>
+    
+<p><label for="hr_si_project_studentEndDate" class="desc">Student End Date</label>
+    <%= f.calendar_date_select :studentEndDate, :time => false %></p>
+    
+<p><label for="hr_si_project_city" class="desc">City</label>
+    <%= f.text_field :city, :class => "text" %></p>
+    
+<p><label for="hr_si_project_country" class="desc">Country</label>
+    <%= f.select :country, @countries, :include_blank=>true %></p>
+
+<p><label for="hr_si_project_displayLocation" class="desc">Display Location<br/>
+    <span class="help">(ie. "Ocean City, MJ", "Middle East", etc)</span></label>
+    <%= f.text_field :displayLocation, :class => "text" %></p>
+    
+<p><label for="hr_si_project_secure" class="desc">Country Status</label>
+    <%= f.select :secure, [["Open",false],["Closed",true]], :include_blank => true %></p>
+    
+<p><label for="hr_si_project_partnershipRegion">Sending Region</label>
+    <%= f.select :partnershipRegion, @regions, :include_blank=>true %></p>
+    
+<p><label for="hr_si_project_partnershipRegionOnly">Only Accepting Students from Sending Region</label>
+	<%= f.select :partnershipRegionOnly, [["Yes",true],["No",false]], :include_blank => true %></p>
+
+<p><label for="hr_si_project_AOA">AOA</label>
+	<%= f.select :AOA, @aoas, :include_blank => true %></p>
+
+<p><label for="hr_si_project_details">Details</label>
+	<%= f.text_area :details, :class => "text" %></p>
+	
+<p><label for="hr_si_project_history">History</label>
+	<%= f.text_area :history, :class => "text" %></p>
+	
+<p><label for="hr_si_project_scholarshipAccountNo">Scholarship Acct#</label>
+	<%= f.text_field :scholarshipAccountNo, :class => "text" %></p>
+
+<p><label for="hr_si_project_operatingAccountNo">Operating Acct#</label>
+	<%= f.text_field :operatingAccountNo, :class => "text" %></p>
+	
+<p><label for="hr_si_project_staffCost">Staff Cost</label>
+	<%= f.text_field :staffCost, :class => "text" %></p>	
+	
+<p><label for="hr_si_project_internCost">Intern Cost</label>
+	<%= f.text_field :internCost, :class => "text" %></p>	
+	
+<p><label for="hr_si_project_studentCost">Student Cost<br/>
+	<span class="help">(enter $0 if this is not yet determined)</span></label>
+	<%= f.text_field :studentCost, :class => "text" %></p>	
+	
+<p><label for="hr_si_project_studentCostExplaination">Student Cost Explanation</label>
+	<%= f.text_area :studentCostExplaination, :class => "text" %></p>	
+	
+<p><label for="hr_si_project_onHold">On Hold<br/>
+	<span class="help">(won't display publicly as a project option)</span></label>
+	<%= f.select :onHold, [["Yes",true],["No",false]], :include_blank => true %></p>
+
+<h3>Travel Information</h3>
+	
+<p><label for="hr_si_project_destinationGatewayCity">US City you are Departing From</label>
+	<%= f.text_field :destinationGatewayCity, :class => "text" %></p>
+	
+<p><label for="hr_si_project_departDateFromGateCity">Date of Departure from the US</label>
+	<%= f.calendar_date_select :departDateFromGateCity, :time => false %></p>
+	
+<p><label for="hr_si_project_locationGatewayCity">Int'l City you are Flying To</label>
+	<%= f.text_field :locationGatewayCity, :class => "text" %></p>	
+	
+<p><label for="hr_si_project_arrivalDateAtGatewayCity">Date of Return to the US</label>
+	<%= f.calendar_date_select :arrivalDateAtGatewayCity, :time => false %></p>
+	
+<h3>In Country Contact</h3>
+
+<p><label for="hr_si_project_inCountryContact">Name and Contact Info</label>
+	<%= f.text_area :inCountryContact, :class => "text" %></p>
+	
+<h3>Other Information</h3>	
+	
+<p><label for="hr_si_project_adminFeePaid">Admin Fee Paid</label>
+	<%= f.select :adminFeePaid, [["Yes",true],["No",false]], :include_blank => true %></p>
+	
+<h3>Size Requirements</h3>
+
+<p>Leave the box(s) blank if you want to signify an unlimited amount or don't want to set a maximum amount.</p>
+
+<table cellspacing="0" class="grid-fields">
+	<tr>
+		<th>&nbsp;</th>		
+		<th>Single Men</th>
+		<th>Single Women</th>
+		<th>Couples</th>
+		<th>Families</th>
+		<th>Total Adults</th>
+	</tr>	
+	<tr>
+		<td>Max # Staff Participants</td>
+		<td><%= f.text_field :maxNoStaffPMale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStaffPFemale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStaffPCouples, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStaffPFamilies, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStaffP, :class => "text" %></td>
+	</tr>
+	<tr>
+		<td>Max # Intern Applicants</td>
+		<td><%= f.text_field :maxNoInternAMale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoInternAFemale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoInternACouples, :class => "text" %></td>
+		<td><%= f.text_field :maxNoInternAFamilies, :class => "text" %></td>
+		<td><%= f.text_field :maxNoInternA, :class => "text" %></td>
+	</tr>
+	<tr>
+		<td>Max # Intern Participants</td>
+		<td><%= f.text_field :maxNoInternPMale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoInternPFemale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoInternPCouples, :class => "text" %></td>
+		<td><%= f.text_field :maxNoInternPFamilies, :class => "text" %></td>
+		<td><%= f.text_field :maxNoInternP, :class => "text" %></td>
+	</tr>
+	<tr>
+		<td>Max # Student Applicants</td>
+		<td><%= f.text_field :maxNoStudentAMale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStudentAFemale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStudentACouples, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStudentAFamilies, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStudentA, :class => "text" %></td>
+	</tr>
+	<tr>
+		<td>Max # Student Participants</td>
+		<td><%= f.text_field :maxNoStudentPMale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStudentPFemale, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStudentPCouples, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStudentPFamilies, :class => "text" %></td>
+		<td><%= f.text_field :maxNoStudentP, :class => "text" %></td>
+	</tr>
+</table>
+	

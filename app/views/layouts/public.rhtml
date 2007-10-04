@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>STINT/Internship Application</title>
+  <%= stylesheet_link_tag "reset", :media => 'screen', :plugin => 'questionnaire' %>
+  <%= stylesheet_link_tag "validation", :media => 'all', :plugin => 'questionnaire' %>
+  <%= stylesheet_link_tag "screen", :media => 'screen', :plugin => 'questionnaire' %>
+  <%= stylesheet_link_tag "print", :media => 'print' %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag "validation", "public", :plugin => 'questionnaire' %>
+  <%= calendar_date_select_includes %>
+</head>
+<body>
+
+<div id="wrapper">
+
+<div id="status" style="display: none;"><img id="status-img" src="/plugin_assets/questionnaire/images/status.gif" /> <span id="status-msg">Please Wait...</span></div>
+
+   <div id="header">
+      <h1>apply4stint.com</h1>
+   </div>
+   
+   <div id="main">
+    <%= yield %>
+   </div>
+</div>
+
+</body>
+</html>

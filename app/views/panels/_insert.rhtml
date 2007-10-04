@@ -1,0 +1,68 @@
+<div id="panel-elements" class="panel">
+  <p class="instruction">Click an element to add it to the end of 
+  your page (you can drag and drop fields to reorder them later).</p>
+     
+  <ul id="list-elements" class="list-elements">
+    <li id="sp"><%= link_to_remote "Heading", 
+                                   :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
+                                                        :page_id => @current_page.id, 
+                                                        :element_type => "Section" ), 
+                                   :method => :post %></li>
+    <li id="pa"><%= link_to_remote "Paragraph", 
+                                  :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
+                                                                    :page_id => @current_page.id, 
+                                                                    :element_type => "Paragraph" ), 
+                                  :method => :post %></li>
+                                  
+     <li id="sl"><%= link_to_remote "Short Answer", 
+                                    :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
+                                                                      :page_id => @current_page.id, 
+                                                                      :element_type => "TextField" ), 
+                                    :method => :post,
+                                    :with => %{"element[style]=short"} %></li>
+     <li id="ml"><%= link_to_remote "Long Answer", 
+                                    :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
+                                                                      :page_id => @current_page.id, 
+                                                                      :element_type => "TextField" ), 
+                                    :method => :post,
+                                    :with => %{"element[style]=essay"} %></li>
+     <li id="co"><%= link_to_remote "Choose One", 
+                                    :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
+                                                                      :page_id => @current_page.id, 
+                                                                      :element_type => "ChoiceField" ), 
+                                    :method => :post,
+                                    :with => %{"element[style]=radio"} %></li>
+     <li id="cm"><%= link_to_remote "Choose Many", 
+                                    :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
+                                                                      :page_id => @current_page.id, 
+                                                                      :element_type => "ChoiceField" ), 
+                                    :method => :post,
+                                    :with => %{"element[style]=checkbox"} %></li>
+     <li id="dt"><%= link_to_remote "Date", 
+                                    :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
+                                                                      :page_id => @current_page.id, 
+                                                                      :element_type => "DateField" ), 
+                                    :method => :post %></li>
+  </ul>
+  
+  <p style="clear: both;">&nbsp;</p>
+
+  <ul id="list-custom-elements" class="list-elements">
+    <li id="sc"><%= link_to_remote "State",
+                                   :url => elements_url(:question_sheet_id => @current_page.question_sheet_id,
+                                                        :page_id => @current_page.id,
+                                                        :element_type => "StateChooser") %></li>
+    <li id="sk"><%= link_to_remote "School Picker",
+                                   :url => elements_url(:question_sheet_id => @current_page.question_sheet_id,
+                                                        :page_id => @current_page.id,
+                                                        :element_type => "SchoolPicker") %></li>
+    <li id="pp"><%= link_to_remote "Project Preference",
+                                   :url => elements_url(:question_sheet_id => @current_page.question_sheet_id,
+                                                        :page_id => @current_page.id,
+                                                        :element_type => "ProjectPreference") %></li>
+                                  
+  </ul>
+  
+  <p>&nbsp;</p>
+</div>
+
