@@ -143,16 +143,28 @@ module ActiveRecord
           false
         end
 
+# patch by Lance Leonard <lance.leonard@evermindmedia.com>
+#
+# the record.is_a? was failing since the object hadn't been reloaded. there are plenty of sites out there that 
+# reference it and provide workarounds, but all of the logical ones that prevented patching rails applied to 
+# plugins and didn't work with engines
+# 
+# it's related to an engine referencing a model in the enclosing application
+# so, yes, overloading models causes it
+
 #        def raise_on_type_mismatch(record)
 #          unless record.is_a?(@reflection.klass)
 #            raise ActiveRecord::AssociationTypeMismatch, "#{@reflection.class_name} expected, got #{record.class}"
 #          end
 #        end
+
         def raise_on_type_mismatch(record)
           unless record.is_a?(eval(@reflection.class_name))
             raise ActiveRecord::AssociationTypeMismatch, "#{@reflection.class_name} #{@reflection.klass} #{record.is_a?(eval(@reflection.class_name)) } expected, got #{record.class}"
           end
         end
+
+## end of patch
         
         # Array#flatten has problems with recursive arrays. Going one level deeper solves the majority of the problems.
         def flatten_deeper(array)
