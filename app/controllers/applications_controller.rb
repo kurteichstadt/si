@@ -42,9 +42,14 @@ class ApplicationsController < ApplicationController
   def edit
     @application = Apply.find(params[:id]) unless @application
 
-    setup_view
+    if @application.applicant == current_user.person
+      setup_view
+      
+      render :template => 'answer_sheets/edit'
+    else 
+      no_access
+    end
     
-    render :template => 'answer_sheets/edit'
   end
   
   def show
