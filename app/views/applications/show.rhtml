@@ -9,10 +9,12 @@
 			<%= @application.applicant.current_address.address1 %><br/>
 			<% unless @application.applicant.current_address.address2.blank? -%><%= @application.applicant.current_address.address2 %><br/><% end -%>
 			<%= @application.applicant.current_address.city %>, <%= @application.applicant.current_address.state %> <%= @application.applicant.current_address.zip %></p>
+<% unless @application.applicant.permanent_address.nil? -%>
 		<p><label class="desc">Permanent Mailing Address</label>
 			<%= @application.applicant.permanent_address.address1 %><br/>
 			<% unless @application.applicant.permanent_address.address2.blank? -%><%= @application.applicant.permanent_address.address2 %><br/><% end -%>
 			<%= @application.applicant.permanent_address.city %>, <%= @application.applicant.permanent_address.state %> <%= @application.applicant.permanent_address.zip %></p>
+<% end -%>
 	</div>
   </div>
 </div>
