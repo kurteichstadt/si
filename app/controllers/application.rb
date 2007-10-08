@@ -110,7 +110,7 @@ class ApplicationController < ActionController::Base
                                     {'applicant_full_name' => @application.applicant.informal_full_name,
                                      'reference_full_name' => reference.name,
                                      'reference_email' => reference.email,
-                                     'application_url' => application_url(@application)})
+                                     'application_url' => edit_application_url(@application)})
 
     reference.email_sent_at = Time.now
     reference.save
