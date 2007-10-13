@@ -13,6 +13,12 @@
                                                                     :page_id => @current_page.id, 
                                                                     :element_type => "Paragraph" ), 
                                   :method => :post %></li>
+
+    <li id="qg"><%= link_to_remote "Grid", 
+                                  :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
+                                                                    :page_id => @current_page.id, 
+                                                                    :element_type => "QuestionGrid" ), 
+                                  :method => :post %></li>
                                   
      <li id="sl"><%= link_to_remote "Short Answer", 
                                     :url => elements_url(:question_sheet_id => @current_page.question_sheet_id, 
