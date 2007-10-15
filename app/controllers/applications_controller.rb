@@ -95,7 +95,7 @@ class ApplicationsController < ApplicationController
       raise "No Reference sheets in sleeve '#{@application.sleeve.title}'."
     end
     
-    render :template => 'applications/show'
+#    render :template => 'applications/show'
   end
   
   def no_access

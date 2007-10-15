@@ -1,0 +1,22 @@
+<div id="content">
+    <h1>Users</h1>
+
+	<ul style="margin-bottom: 18px; ">
+		<li><%= link_to 'Add a User', new_user_path, :method => :GET, :class => "add-link" %></li>
+	</ul>
+
+    <table cellspacing="0" class="list" style="clear: both;"> 
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+        </tr>
+    <% for user in @users %>
+      <tr class="<%= cycle("","alt") %>">
+		<td nowrap="true"><%=user.person.informal_full_name if user.person%></td>
+		<td><%=user.role%></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <br />
+</div>  

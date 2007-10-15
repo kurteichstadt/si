@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   before_filter AuthenticationFilter, :except => ['no_access','logout']
-  helper_method :is_true
+  helper_method :is_true, :si_user, :user
 
   include CommonEngine
 
@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
     unless @si_user
       @si_user = SiUser.new(:ssm_id => user.id)
       # check to see if they are staff
-#      @si_user = user.person.isStaff? ? SpUser.new(:ssm_id => user.id) : SpGeneralStaff.new(:ssm_id => user.id)
+      @si_user = user.person.isStaff? ? SiGeneralStaff.new(:ssm_id => user.id) : SiUser.new(:ssm_id => user.id)
     end
     unless session[:login_stamped]
       @si_user.update_attribute(:last_login, Time.now)

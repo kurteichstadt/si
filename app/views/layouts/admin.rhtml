@@ -59,7 +59,6 @@
 <body onload="preloadImages();">
 
 <div id="status" style="display: none;"><img id="status-img" src="/plugin_assets/questionnaire/images/status.gif" /> <span id="status-msg">Please Wait...</span></div>
-
 <% unless @hide_header -%>
 	<!-- Header begin -->
 	<table cellspacing="0" style="margin: 10px auto;" class="header" >
@@ -103,10 +102,21 @@
 	  
       <ul id="nav-main">
          <li <% if controller.controller_name == "admin" -%> class="active" <% end -%>><%= link_to 'Home', admin_home_url %></li>
+<% if si_user.can_edit_sleeve? -%>
          <li <% if controller.controller_name == "sleeves" -%> class="active" <% end -%>><%= link_to 'Applications', sleeves_path %></li>
+<% end -%>
+<% if si_user.can_edit_questionnaire? -%>
          <li <% if controller.controller_name == "question_sheets" -%> class="active" <% end -%>><%= link_to 'Questionnaires', question_sheets_path %></li>
+<% end -%>
+<% if si_user.can_edit_email_template? -%>
          <li <% if controller.controller_name == "email_templates" -%> class="active" <% end -%>><%= link_to 'Email Templates', email_templates_path %></li>
+<% end -%>
+<% if si_user.can_see_projects? -%>
          <li <% if controller.controller_name == "hr_si_projects" -%> class="active" <% end -%>><%= link_to 'Projects', hr_si_projects_path %></li>
+<% end -%>
+<% if si_user.can_add_user? -%>
+         <li <% if controller.controller_name == "users" -%> class="active" <% end -%>><%= link_to 'Users', users_path %></li>
+<% end -%>
       </ul>
    </div>
    

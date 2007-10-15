@@ -1,0 +1,20 @@
+<style type="text/css">
+    label .help { font-weight: normal; font-size: 9px !important; color: #999; }
+</style>
+
+<p><label for="name" class="desc">1. Find a person to give access</label>
+    <%= text_field_tag :name, "", :class => "text" %>
+	<%= submit_to_remote "search", "Search", :update => "people",
+  									:with => "Form.serialize('user_form')+'&='",
+									:url => search_users_url,
+									:loading => "Element.show('search_spinner')",
+									:loaded => "Element.hide('search_spinner');"%>
+	<%= image_tag "/plugin_assets/questionnaire/images/ajax-loader.gif", :id => 'search_spinner', :style => 'display:none' %></p>
+	
+<p><label class="desc" style="margin: 0;">2. Select a person</label>
+<div id="people" style="margin-top: 0">You must first enter a name to search for.</div></p>
+	
+<p><label for="user_role">3. Select a role for this user</label>
+	<%= f.select :role, si_user.creatable_user_types %></p>
+    
+<div id="person_list"></div>

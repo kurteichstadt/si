@@ -1,7 +1,7 @@
-<div id="content">
+<div id="content" style="background: #fff url(/images/uamlogo.gif) center 27px no-repeat; overflow: hidden;">
     <h1>Admin Home</h1>
 
-    <div id="announcements">
+    <div id="announcements" style="width: 30%; float: left; ">
         <h2>Announcements</h2>
         
         <p>Welcome to the New STINT/Internship Tool. Here you will be able to see all of the people who have applied for a STINT or an Internship via www.apply4internship.com.</p>
@@ -10,17 +10,18 @@
     
         <p>Check back here for updated information. If you have questions, please contact your regional STINT or Internship Coordinator.</p>
     </div>
-    
-    <div id="tools">
-        <ul>
+	
+    <div id="tools" style="margin-left: 66%;">
+        <ul style="margin-bottom: 26px;">
             <li><a href="/" title="">Online STINT/Internship Application</a></li>
             <li><a href="/info_pages/opportunities" title="">Current STINT/Internship Opportunities</a></li>
             <li><a href="http://www.thisiswhereilive.info/" title="">WSN STINT Site</a></li>
             <li><a href="https://sitrack.uscm.org/" title="">STINT Tracker</a></li>
         </ul>
 
+<% if si_user.can_see_applicants? %>
 <% form_tag :action => "select_region" do %>
-        <p><label for="region">Select your region</label>
+        <p style="clear: none;"><label for="region" class="desc">Select your region</label>
             <%= select_tag :region, 
                            options_for_select([ ['Unassigned', ''],
                                               ['Northeast', 'NE'],
@@ -36,12 +37,12 @@
                                               ['Nat\'l Campus', 'NC'] ],
                            @params[:region]) %> <%= submit_tag "Go" %></p>
             
-        <p><label for="year_select">Select Year</label>
+        <p style="clear: none; margin-bottom: 36px;"><label for="year_select" class="desc">Select Year</label>
             <%= select_tag :year, 
                            options_for_select(@years_for_select,
                            @params[:year]) %></p>
 						   
-            
+<% end %>
 <% end %>	 
 <h2>Other Information</h2>
         <ul>

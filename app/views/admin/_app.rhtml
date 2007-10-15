@@ -27,11 +27,11 @@
 				<%= link_to "(<b>1</b>) Complete w/Ref", application_url(app), {:popup => true} %>
 				<%= link_to "(<b>2</b>) Complete No Ref", no_ref_application_url(app), {:popup => true} %>
 				<%= link_to "(<b>3</b>) No Confidential", no_conf_application_url(app), {:popup => true} %>
-				<%= link_to "(<b>4</b>) Collated Refs", collated_refs_application_url(app), {:popup => true} %>
-				<% unless app.staff_reference.token.blank? -%><%= link_to "<b>5a</b>) Staff Ref", reference_url(app, app.staff_reference.token), {:popup => true} %><% else -%><%= link_to "5a. Staff Ref" %><% end -%>
-				<% unless app.discipler_reference.token.blank? -%><%= link_to "<b>5b</b>) Discipler Ref", reference_url(app, app.discipler_reference.token), {:popup => true} %><% else -%><%= link_to "5a. Discipler Ref" %><% end -%>
-				<% unless app.roommate_reference.token.blank? -%><%= link_to "<b>5c</b>) Roommate Ref", reference_url(app, app.roommate_reference.token), {:popup => true} %><% else -%><%= link_to "5a. Roommate Ref" %><% end -%>
-				<% unless app.friend_reference.token.blank? -%><%= link_to "<b>5d</b>) Friend Ref", reference_url(app, app.friend_reference.token), {:popup => true} %><% else -%><%= link_to "5a. Friend Ref" %><% end -%>
+				<% unless app.reference_answer_sheets.length <= 0 -%><%= link_to "(<b>4</b>) Collated Refs", collated_refs_application_url(app), {:popup => true} %><% else -%><%= link_to "(<b>4</b>) Collated Refs", "#" %><% end -%>
+				<% unless app.staff_reference.token.blank? -%><%= link_to "(<b>5a</b>) Staff Ref", reference_url(app, app.staff_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5a</b>) Staff Ref", "#" %><% end -%>
+				<% unless app.discipler_reference.token.blank? -%><%= link_to "(<b>5b</b>) Discipler Ref", reference_url(app, app.discipler_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5b</b>) Discipler Ref", "#" %><% end -%>
+				<% unless app.roommate_reference.token.blank? -%><%= link_to "(<b>5c</b>) Roommate Ref", reference_url(app, app.roommate_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5c</b>) Roommate Ref", "#" %><% end -%>
+				<% unless app.friend_reference.token.blank? -%><%= link_to "(<b>5d</b>) Friend Ref", reference_url(app, app.friend_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5d</b>) Friend Ref", "#" %><% end -%>
 				<%= link_to "(<b>6</b>) Evaluator's Worksheet", "/files/eval_worksheet.doc", {:popup => true} %>
 				<%= link_to "(<b>7</b>) Acceptance Issues", "/files/acceptance_issues.doc", {:popup => true} %>
 				<%= link_to "(<b>8</b>) Evaluator Summary", "/files/eval_summary.doc", {:popup => true} %>
