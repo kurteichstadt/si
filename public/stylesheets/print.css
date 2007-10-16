@@ -1,5 +1,8 @@
 h1 { display: none; }
 #link-log-out { display: none; }
 #meta { display: none; }
-ol.readonly li label { display: block; margin-bottom: 3px; }
-ol.readonly li { margin-bottom: 9px !important; }
+ul.readonly li label { display: block; margin-bottom: 3px; }
+ul.readonly li { margin-bottom: 9px !important; }
+table.grid th, table.grid td { border: solid 1px #ccc; }
+table.grid { border-collapse: collapse; }
+label.desc { display: block; }

@@ -89,13 +89,34 @@ class ApplicationsController < ApplicationController
   def collated_refs
     @application = Apply.find(params[:id]) unless @application
     @answer_sheets = @application.reference_answer_sheets
-    @show_conf = true
-    
+
     if @answer_sheets.empty?
       raise "No Reference sheets in sleeve '#{@application.sleeve.title}'."
     end
+
+    @reference_question_sheet = @answer_sheets.empty? ? nil : @answer_sheets[0].question_sheet 
+
+    setup_reference("staff")
+    setup_reference("discipler")
+    setup_reference("roommate")
+    setup_reference("friend")
+    
+    @show_conf = true
     
 #    render :template => 'applications/show'
+  end
+
+  def setup_reference(type)
+    ref = nil
+    eval("ref = @" + type + "_reference = @application." + type + "_reference")
+    answer_sheet = @application.find_or_create_reference_answer_sheet(ref.sleeve_sheet)
+    question_sheet = answer_sheet.question_sheet
+    elements = question_sheet.elements.find(:all, :include => 'page', 
+                                                 :conditions => ["#{Element.table_name}.kind not in (?)", %w(Paragraph)],
+                                                 :order => "#{Page.table_name}.number,#{Element.table_name}.position")
+    elements.reject! {|e| e.is_confidential} if @show_conf == false
+    eval("@" + type + "_elements = QuestionSet.new(elements, answer_sheet).elements")
+
   end
   
   def no_access
