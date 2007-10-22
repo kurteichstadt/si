@@ -19,6 +19,10 @@
   			application, but you will be able to change your your personal information, your 
   			school information, and your reference information as necessary.</p>
 	
+	    <div id="application_errors">
+	       <%= render :partial => "errors"%>
+	    </div>
+
 	    <%= hidden_field_tag "submit_to", submit_submit_page_path(@application) %>
 	    <div id="submit_message" class="validation-advice" style="display: none;"></div>
   		<p class="buttons"><%= submit_tag "Submit Application" %></p>
