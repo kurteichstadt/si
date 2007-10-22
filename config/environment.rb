@@ -61,7 +61,6 @@ end
 # Include your application configuration below
 
 CAS::Filter.login_url = "https://signin.mygcx.org/cas/login"
-CAS::Filter.logout_url = "https://signin.mygcx.org/cas/logout"
 CAS::Filter.validate_url = "https://signin.mygcx.org/cas/serviceValidate"
 
 # retrieve table_name_prefix from database.yml
