@@ -17,4 +17,14 @@ class ProjectPreference < Question
       []
     end
   end
+  
+  def display_response(app=nil)
+    r = get_response(app)
+    p = HrSiProject.find(r)
+    if p.nil? 
+      return ""
+    else
+      return p.displayLocation
+    end
+  end
 end

@@ -19,7 +19,9 @@
 			<td><%= app.applicant.campus %></td>
 		</tr>
 		<tr class="<%= row_class %>">
-			<td colspan="5">Ministry Preferences: #1: <%= app.hr_si_application.locationA %>; #2: <%= app.hr_si_application.locationB %>; #3: <%= app.hr_si_application.locationC %></td>
+			<td colspan="5">Ministry Preferences: (<b>1</b>) <%= HrSiProject.find(app.hr_si_application.locationA).displayLocation unless app.hr_si_application.locationA.blank? %>; 
+			                                      (<b>2</b>) <%= HrSiProject.find(app.hr_si_application.locationB).displayLocation unless app.hr_si_application.locationB.blank? %>; 
+												  (<b>3</b>) <%= HrSiProject.find(app.hr_si_application.locationC).displayLocation unless app.hr_si_application.locationC.blank? %></td>
 			<td>Available: <%= app.hr_si_application.availableMonth %> / <%= app.hr_si_application.availableYear %></td>
 		</tr>
 		<tr class="<%= row_class %>">
