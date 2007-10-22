@@ -20,7 +20,7 @@ class ProjectPreference < Question
   
   def display_response(app=nil)
     r = get_response(app)
-    p = HrSiProject.find(r)
+    p = HrSiProject.find(r) unless r.nil?
     if p.nil? 
       return ""
     else
