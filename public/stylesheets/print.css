@@ -6,3 +6,5 @@ ul.readonly li { margin-bottom: 9px !important; }
 table.grid th, table.grid td { border: solid 1px #ccc; }
 table.grid { border-collapse: collapse; }
 label.desc { display: block; }
+.panel { font-size: 16pt; }
+.panel label { font-size: 12pt; }
