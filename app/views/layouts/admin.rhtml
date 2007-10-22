@@ -100,6 +100,8 @@
    <div id="header">
       <h1>Stint/Internship Tool</h1>
 	  
+	  <%= link_to "Log Out", "https://signin.mygcx.org/cas/logout", { :style => "color: #fff;", :id => "link-log-out" } %>
+	  
       <ul id="nav-main">
          <li <% if controller.controller_name == "admin" -%> class="active" <% end -%>><%= link_to 'Home', admin_home_url %></li>
 <% if si_user.can_edit_sleeve? -%>
