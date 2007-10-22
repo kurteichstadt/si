@@ -7,6 +7,11 @@ class AdminController < ApplicationController
     @years_for_select.reverse!
   end
   
+  def logout
+    reset_session
+    redirect_to "https://signin.mygcx.org/cas/logout"
+  end
+  
   def select_region
     @region = Region.find_by_region(params[:region])
     @year = params[:year] || HrSiApplication::YEAR
