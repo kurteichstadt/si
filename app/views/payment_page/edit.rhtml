@@ -19,6 +19,7 @@
 				<th>Payment Type</th>
 				<th>Payment Date</th>
 				<th>Amount Paid</th>
+				<th>&nbsp;</th>
 			</tr>
 			<% @application.payments.each do |payment| -%>
 				<%= render :partial => 'payment', :locals => {:payment => payment}%>
@@ -44,6 +45,10 @@
 				<label for="payment_payment_type_staff">Transfer from a Staff/Project/Scholarship Fund</label></li>
 		</ul>
 		
+<div id="payment_errors">
+	<%= render :partial => "payments/errors", :locals => {:payment => @payment} %>
+</div>
+
 		<div id="pay_credit" class="pay_view" <% unless @payment.payment_type == "Credit Card" -%>style="display: none;"<% end -%>>
 			<%= render :partial => 'credit' %>
 		</div>

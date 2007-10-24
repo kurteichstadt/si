@@ -54,6 +54,7 @@ class ReferencesController < ApplicationController
     render :update do |page|
       page[:submit_message].replace_html "Thank you for submitting your reference."
       page[:submit_message].show
+      page[:submit_button].hide
     end
   end
 

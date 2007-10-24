@@ -7,50 +7,55 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = Payment.new(params[:payment])
-    @payment.amount = @application.sleeve.fee_amount
-    @payment.apply_id = @application.id
-    @payment.status = 'Pending'
-    if @payment.valid?
-      case @payment.payment_type
-        when "Credit Card"
-          card_type = params[:payment][:card_type]
-          
-          creditcard = ActiveMerchant::Billing::CreditCard.new(
-            :type       => card_type,
-            :number     => @payment.card_number,
-            :month      => @payment.expiration_month,
-            :year       => @payment.expiration_year,
-            :first_name => @payment.first_name,
-            :last_name  => @payment.last_name
-          )   
-          
-          if creditcard.valid?
-            # Load UN/PW from /config/active_merchant.yml
-            config = YAML.load_file("#{RAILS_ROOT}/config/active_merchant.yml")
-            un = config[RAILS_ENV]['auth_net_user']
-            pw = config[RAILS_ENV]['auth_net_pass']
+    if @application.payments.length > 0
+      @payment.errors.add_to_base("You have already submitted a payment for this application.")
+      render :action => "error.rjs"
+    else
+      @payment.amount = @application.sleeve.fee_amount
+      @payment.apply_id = @application.id
+      @payment.status = 'Pending'
+      if @payment.valid?
+        case @payment.payment_type
+          when "Credit Card"
+            card_type = params[:payment][:card_type]
             
-            gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
-              :login    => un,
-              :password => pw
-            )
-    
-            response = gateway.purchase(@payment.amount * 100, creditcard)
-        
-            if response.success?
-              @payment.approve!
-              # TODO: Send notification email
+            creditcard = ActiveMerchant::Billing::CreditCard.new(
+              :type       => card_type,
+              :number     => @payment.card_number,
+              :month      => @payment.expiration_month,
+              :year       => @payment.expiration_year,
+              :first_name => @payment.first_name,
+              :last_name  => @payment.last_name
+            )   
+            
+            if creditcard.valid?
+              # Load UN/PW from /config/active_merchant.yml
+              config = YAML.load_file("#{RAILS_ROOT}/config/active_merchant.yml")
+              un = config[RAILS_ENV]['auth_net_user']
+              pw = config[RAILS_ENV]['auth_net_pass']
+              
+              gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
+                :login    => un,
+                :password => pw
+              )
+      
+              response = gateway.purchase(@payment.amount * 100, creditcard)
+          
+              if response.success?
+                @payment.approve!
+                # TODO: Send notification email
+              else
+                @payment.errors.add_to_base("Credit card transaction failed: #{response.message}")
+              end
             else
-              @payment.errors.add_to_base("Credit card transaction failed: #{response.message}")
+              @payment.errors.add(:card_number, "is invalid.  Check the number and/or the expiration date.")
             end
-          else
-            @payment.errors.add(:card_number, "is invalid.  Check the number and/or the expiration date.")
-          end
-        when "Mail"
-          @payment.save
-        when "Staff"
-          @payment.save
-          send_staff_payment_request(@payment)
+          when "Mail"
+            @payment.save
+          when "Staff"
+            @payment.save
+            send_staff_payment_request(@payment)
+        end
       end
     end
   end
@@ -95,6 +100,11 @@ end
 
   def no_access
     render :layout => false
+  end
+  
+  def destroy
+    @payment = Payment.find(params[:id])
+    @payment.destroy
   end
 
 private
