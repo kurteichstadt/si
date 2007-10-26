@@ -13,11 +13,13 @@
 				<h4>Search for Staff</h4>
 				
 				<p><label for="payment_staff_first">First &amp; Last Name</label>
-					<%= text_field :payment, :staff_first, {:size => 10 }%>
-					<%= text_field :payment, :staff_last, {:size => 10 }%>
-					<%=submit_to_remote "submit", "Search", :html => {:class => "button"},
+					<%= text_field :payment, :staff_first, {:size => 10, :onkeydown => "submitOnEnter('submit_staff_search',event);" }%>
+					<%= text_field :payment, :staff_last, {:size => 10, :onkeydown => "submitOnEnter('submit_staff_search',event);" }%>
+					<%=submit_to_remote "submit_staff_search", "Search", :html => {:class => "button", :id => "submit_staff_search"},
 										:url 	=> {:controller => :payment_page, :action => :staff_search, :application_id => @application.id },
 										:loading => "Element.show('spinner_staff2');" %>
 					<%= image_tag "/plugin_assets/questionnaire/images/ajax-loader.gif", :id => "spinner_staff", :style => 'display:none' %></p>
 						
 				<div id="staff_results"></div>
+
+

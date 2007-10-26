@@ -6,6 +6,11 @@ function swapPayment(type) {
 	$('pay_' + type).show();
 }
 
+function submitOnEnter(submit_el,e) {
+	var evt = e || window.event;
+	if (evt.keyCode == 13) { $(submit_el).click(); }
+}
+
 var CreditCard = Class.create();
 CreditCard.prototype = {
 	initialize : function(num) {

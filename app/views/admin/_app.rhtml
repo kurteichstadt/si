@@ -34,9 +34,11 @@
 				<% unless app.discipler_reference.token.blank? -%><%= link_to "(<b>5b</b>) Discipler Ref", reference_url(app, app.discipler_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5b</b>) Discipler Ref", "#" %><% end -%>
 				<% unless app.roommate_reference.token.blank? -%><%= link_to "(<b>5c</b>) Roommate Ref", reference_url(app, app.roommate_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5c</b>) Roommate Ref", "#" %><% end -%>
 				<% unless app.friend_reference.token.blank? -%><%= link_to "(<b>5d</b>) Friend Ref", reference_url(app, app.friend_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5d</b>) Friend Ref", "#" %><% end -%>
+<!--
 				<%= link_to "(<b>6</b>) Evaluator's Worksheet", "/files/eval_worksheet.doc", {:popup => true} %>
 				<%= link_to "(<b>7</b>) Acceptance Issues", "/files/acceptance_issues.doc", {:popup => true} %>
 				<%= link_to "(<b>8</b>) Evaluator Summary", "/files/eval_summary.doc", {:popup => true} %>
 				<%= link_to "(<b>9</b>) Med Psych Form", "/files/med_psych.doc", {:popup => true} %>
+-->
 			</td>
 		</tr>
