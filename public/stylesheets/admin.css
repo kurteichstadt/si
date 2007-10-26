@@ -22,3 +22,5 @@ table.grid-fields th, td { padding: 3px 9px; }
 table.grid-fields td { border-bottom: solid 1px #dadada; }
 table.grid-fields .text { width: 50px; }
 table.header td { padding: 0; }
+
+.help { font-size: 10px; color: #666; font-style: italic; line-height: 1px important; }

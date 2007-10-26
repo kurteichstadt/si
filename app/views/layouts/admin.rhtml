@@ -8,9 +8,10 @@
   <%= stylesheet_link_tag "reset", :media => 'all', :plugin => 'questionnaire' %>
   <%= stylesheet_link_tag "validation", :media => 'all', :plugin => 'questionnaire' %>
   <%= stylesheet_link_tag "screen", :media => 'all', :plugin => 'questionnaire' %>
+  <%= stylesheet_link_tag "lightbox", :media => 'all', :plugin => 'questionnaire' %>
   <%= stylesheet_link_tag "admin", :media => 'all' %>
   <%= javascript_include_tag "prototype", "effects", "dragdrop" %>
-  <%= javascript_include_tag "admin", :plugin => 'questionnaire' %>
+  <%= javascript_include_tag "admin", "lightbox", :plugin => 'questionnaire' %>
   <%= calendar_date_select_includes %>
 
   <%= javascript_include_tag "sleeve" %>
@@ -50,7 +51,7 @@
 	
 	<script language="javascript" type="text/javascript">
 		Ajax.Responders.register({
-		  onComplete: function() { $('status').hide(); },
+		  onComplete: function() { setTimeout("$('status').hide();", 50); },
 		  onLoading: function() { $('status').show(); }
 		})
 	</script>
