@@ -41,10 +41,10 @@
 			  <% if element.question? && element.question_grid_id.nil? -%>
 				<li >
 			      <label class="desc"><%= element.label %></label>
-					(STAFF) <span class="answer"><%= (@staff_elements.find {|el| el.id == element.id}).response.blank? ? "No&nbsp;Answer" : (@staff_elements.find {|el| el.id == element.id}).response %></span><br/>
-					(DISCIPLER) <span class="answer"><%= (@discipler_elements.find {|el| el.id == element.id}).response.blank? ? "No&nbsp;Answer" : (@discipler_elements.find {|el| el.id == element.id}).response %></span><br/>
-					(ROOMMATE) <span class="answer"><%= (@roommate_elements.find {|el| el.id == element.id}).response.blank? ? "No&nbsp;Answer" : (@roommate_elements.find {|el| el.id == element.id}).response %></span><br/>
-					(FRIEND) <span class="answer"><%= (@friend_elements.find {|el| el.id == element.id}).response.blank? ? "No&nbsp;Answer" : (@friend_elements.find {|el| el.id == element.id}).response %></span><br/>
+					(STAFF) <span class="answer"><%= (@staff_elements.find {|el| el.id == element.id}).response.blank? ? "No&nbsp;Answer" : (@staff_elements.find {|el| el.id == element.id}).display_response %></span><br/>
+					(DISCIPLER) <span class="answer"><%= (@discipler_elements.find {|el| el.id == element.id}).response.blank? ? "No&nbsp;Answer" : (@discipler_elements.find {|el| el.id == element.id}).display_response %></span><br/>
+					(ROOMMATE) <span class="answer"><%= (@roommate_elements.find {|el| el.id == element.id}).response.blank? ? "No&nbsp;Answer" : (@roommate_elements.find {|el| el.id == element.id}).display_response %></span><br/>
+					(FRIEND) <span class="answer"><%= (@friend_elements.find {|el| el.id == element.id}).response.blank? ? "No&nbsp;Answer" : (@friend_elements.find {|el| el.id == element.id}).display_response %></span><br/>
 					</li>
 			  <% elsif element.kind == "QuestionGrid" %>
 <li>
@@ -64,10 +64,10 @@
 						<% if %w(Paragraph).include?(grid_element.kind) -%>
 						<%= grid_element.content %>
 						<% else -%>
-							(STAFF) <span class="answer"><%= @staff_elements.find { |item| item.id == grid_element.id}.response.blank? ? "No Answer" : @staff_elements.find { |item| item.id == grid_element.id}.response %></span><br/>
-							(DISCIPLER) <span class="answer"><%= @discipler_elements.find { |item| item.id == grid_element.id}.response.blank? ? "No Answer" : @discipler_elements.find { |item| item.id == grid_element.id}.response %></span><br/>
-							(ROOMMATE) <span class="answer"><%= @roommate_elements.find { |item| item.id == grid_element.id}.response.blank? ? "No Answer" : @roommate_elements.find { |item| item.id == grid_element.id}.response %></span><br/>
-							(FRIEND) <span class="answer"><%= @friend_elements.find { |item| item.id == grid_element.id}.response.blank? ? "No Answer" : @friend_elements.find { |item| item.id == grid_element.id}.response %></span>
+							(STAFF) <span class="answer"><%= @staff_elements.find { |item| item.id == grid_element.id}.response.blank? ? "No Answer" : @staff_elements.find { |item| item.id == grid_element.id}.display_response %></span><br/>
+							(DISCIPLER) <span class="answer"><%= @discipler_elements.find { |item| item.id == grid_element.id}.response.blank? ? "No Answer" : @discipler_elements.find { |item| item.id == grid_element.id}.display_response %></span><br/>
+							(ROOMMATE) <span class="answer"><%= @roommate_elements.find { |item| item.id == grid_element.id}.response.blank? ? "No Answer" : @roommate_elements.find { |item| item.id == grid_element.id}.display_response %></span><br/>
+							(FRIEND) <span class="answer"><%= @friend_elements.find { |item| item.id == grid_element.id}.response.blank? ? "No Answer" : @friend_elements.find { |item| item.id == grid_element.id}.display_response %></span>
 						<% end -%>
 					</td>
 					<%- 	col_count += 1
