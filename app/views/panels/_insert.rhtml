@@ -1,4 +1,11 @@
 <div id="panel-elements" class="panel">
+<div style="float: right;"><a href="/plugin_assets/questionnaire/help/builder.html" class="lbOn help" id="link-builder-help" >?</a></div>
+<% if controller.action_name == "show_panel" -%>
+<script language="javascript" type="text/javascript">
+	var valid = new lightbox($('link-builder-help'));
+</script>
+<% end -%>
+
   <p class="instruction">Click an element to add it to the end of 
   your page (you can drag and drop fields to reorder them later).</p>
      
