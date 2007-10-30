@@ -27,6 +27,14 @@ class HrSiProjectsController < ApplicationController
     @aoas = Aoa.find(:all).collect { |a| a.name }
   end
   
+  def show
+    edit
+    render :xml => @hr_si_project.to_xml(:only => [:SIProjectID, :studentStartDate,
+                                                   :studentEndDate, :details,
+                                                   :displayLocation,
+                                                   :studentCost, :partnershipRegion])
+  end
+  
   def create
     @hr_si_project = HrSiProject.new(params[:hr_si_project])
     @hr_si_project.siYear = HrSiApplication::YEAR
@@ -61,6 +69,15 @@ class HrSiProjectsController < ApplicationController
     end
   end
   
+  def projects_feed
+    params[:format] = "xml"
+    search
+    render :xml => @projects.to_xml(:only => [:SIProjectID, :studentStartDate,
+                                                   :studentEndDate, :details,
+                                                   :displayLocation,
+                                                   :studentCost, :partnershipRegion])
+  end
+
   def search
     @regions = [["",-1]] + Region.find(:all).collect { |r| [ r.name, r.region ] }
     @countries = [""] + Country.find(:all).collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
@@ -68,6 +85,10 @@ class HrSiProjectsController < ApplicationController
     @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
     @years_for_select << ["Current",HrSiApplication::YEAR]
     @years_for_select.reverse!
+
+    #XML Feed needs
+    params[:partnershipRegion] = params[:region] unless params[:region].to_s.empty?
+    params[:siYear] = "2008" if params[:format] == "xml"
 
     conditions = "1=1 "
     conditions += "and name like '%#{escape_string(params[:name])}%' " unless params[:name].to_s.empty?
@@ -77,6 +98,7 @@ class HrSiProjectsController < ApplicationController
     conditions += "and aoa like '%#{params[:AOA]}%' " unless params[:AOA].to_s.empty?
     conditions += "and studentStartDate like '%#{Date.strptime(params[:studentStartDate], "%d/%m/%Y")}%' " unless params[:studentStartDate].to_s.empty?
     conditions += "and studentEndDate like '%#{Date.strptime(params[:studentEndDate], "%d/%m/%Y")}%' " unless params[:studentEndDate].to_s.empty?
+    conditions += "and siYear like '%#{escape_string(params[:siYear])}' " unless params[:siYear].to_s.empty?
     
     if conditions.blank? 
       @projects = HrSiProject.find(:all)

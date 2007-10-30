@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :email_templates
   map.resources :campuses, :collection => {:search  => :post}
-  map.resources :hr_si_projects, :collection => {:search => :post, :get_valid_projects => :post}
+  map.resources :hr_si_projects, :collection => {:search => :post, :get_valid_projects => :post, :projects_feed => :get, :show => :get}
   map.resources :users, :collection => {:search => :post}
   
   map.login 'account/login', :controller => "account", :action => "login"
