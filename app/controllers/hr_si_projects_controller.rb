@@ -88,7 +88,7 @@ class HrSiProjectsController < ApplicationController
 
     #XML Feed needs
     params[:partnershipRegion] = params[:region] unless params[:region].to_s.empty?
-    params[:siYear] = "2008" if params[:format] == "xml"
+    params[:siYear] = HrSiApplication::YEAR.to_s if params[:format] == "xml"
 
     conditions = "1=1 "
     conditions += "and name like '%#{escape_string(params[:name])}%' " unless params[:name].to_s.empty?
