@@ -24,11 +24,23 @@
     <div class="page">
     <h3>Welcome to the <%= HrSiApplication::YEAR -%>-<%= HrSiApplication::YEAR + 1 -%> STINT/Internship application!</h3>
 
+	<p>Thank you for your interest in joining us on a STINT or Internship. We
+		welcome your application for the <%= HrSiApplication::YEAR -%>-<%= HrSiApplication::YEAR + 1 -%> STINT/Internship
+		year!&nbsp; If you have logged on to any CCC site before (for
+		example to register for a conference or a summer project) or have
+		already started an application please use your previous login and
+		password when you click on the "register/login" button.&nbsp; (If
+		you have forgotten your username or password, it is possible to
+		retrieve them.)&nbsp; If you are completely new to registering on
+		any CCC site, please click on the "First Time Users" button.
+	</p>
+<!--
 	<p>Thank you for your interest in joining us on a STINT or Internship. We 
 		welcome your application for the <%= HrSiApplication::YEAR -%>-<%= HrSiApplication::YEAR + 1 -%> STINT/Internship year! To 
 		get started with a new application for a STINT/Internship, please 
 		register, or if you are returning, just login to access your existing 
 		application.</p>
+-->
 
 	<p><%= link_to "Register/Login", login_url, :class => "button" %>
 		<%= link_to "First Time Users", signup_url, :class => "button" %></p>
