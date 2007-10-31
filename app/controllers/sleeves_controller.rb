@@ -45,4 +45,22 @@ class SleevesController < ApplicationController
     end
   end
   
+  def destroy
+    @sleeve = Sleeve.find(params[:id])
+    
+    unless @sleeve.applies.length > 0
+      #destroy sleeve_sheets for this sleeve
+      @sleeve.sleeve_sheets.each do |ss|
+        ss.destroy
+      end
+      #destroy sleeve
+      @sleeve.destroy
+      redirect_to sleeves_url
+    else
+      @sleeves = Sleeve.find(:all)
+      flash[:error] = "Applicants have applied for this application.  It cannot be deleted."
+      render :action => :index
+    end
+  end
+  
 end

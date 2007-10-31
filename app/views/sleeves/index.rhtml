@@ -1,6 +1,10 @@
 <div id="content">
   <h1>Applications</h1>
   
+	<% if flash[:error] -%>
+		<div style="background: #ffe5df; border: solid 1px #efbeb3; padding: 9px; margin: 0 0 18px;"><%= flash[:error] %></div>
+	<% end -%>
+
   <% unless @sleeves.empty? -%>
     <table cellspacing="0" class="list"> 
     <tr>
