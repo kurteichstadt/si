@@ -16,9 +16,9 @@ Login to access your STINT/Internship Application.<br><br>
 <p><%= submit_tag 'Log in' %></p>
 <%= end_form_tag %>
 <% unless request.ssl? -%>
-<br />
+<!--<br />
 We HIGHLY recommend that you switch to the <a href="https://<%=request.host_with_port%>/">secure version</a> of this website.
-<br />
+<br />-->
 <% end -%>
 <br />
 <a href="http://staff.campuscrusadeforchrist.com/servlet/AccountController?action=goToPage&page=changePassword&loginPage=https://sp.campuscrusadeforchrist.com">Click here</a> to change your password.
