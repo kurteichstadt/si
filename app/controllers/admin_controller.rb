@@ -1,6 +1,15 @@
 class AdminController < ApplicationController
   layout 'admin'
   
+  def ssl_test
+    out = "ssl? " + request.ssl?.inspect + "<br/>"
+    env = request.instance_variable_get(:@env)
+    env.each_pair do |key, value|
+      out += key.to_s + ': ' + value.to_s + "<br/>"
+    end
+    render :text => out
+  end
+
   def index
     @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
     @years_for_select << ["Current",HrSiApplication::YEAR]
