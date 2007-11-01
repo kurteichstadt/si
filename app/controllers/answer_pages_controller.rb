@@ -26,7 +26,7 @@ class AnswerPagesController < ApplicationController
     @presenter.active_answer_sheet = answer_sheet
     @elements = @presenter.questions_for_page(params[:id]).elements
 
-    render :partial => 'answer_page'
+    render :partial => 'answer_page', :locals => { :show_first => nil }
   end
   
   
