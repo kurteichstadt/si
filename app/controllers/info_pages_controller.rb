@@ -5,8 +5,8 @@ class InfoPagesController < ApplicationController
   layout 'public'
   
   def index
-    if current_person
-      render :controller => "applications", :action => :show_default
+    if user
+      redirect_to home_url
     else  
       redirect_to :action => :home
     end

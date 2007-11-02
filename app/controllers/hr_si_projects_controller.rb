@@ -1,6 +1,8 @@
 class HrSiProjectsController < ApplicationController
+  include AuthenticatedSystem
   skip_before_filter CAS::Filter, :only => [:get_valid_projects]
   skip_before_filter AuthenticationFilter, :only => [:get_valid_projects]
+  prepend_before_filter :login_from_cookie
   layout 'admin', :except => :get_valid_projects
   
   def index

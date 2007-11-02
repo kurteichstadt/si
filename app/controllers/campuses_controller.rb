@@ -1,6 +1,8 @@
 class CampusesController < ApplicationController
+  include AuthenticatedSystem
   skip_before_filter CAS::Filter 
   skip_before_filter AuthenticationFilter
+  prepend_before_filter :login_from_cookie
   
   layout nil
  
