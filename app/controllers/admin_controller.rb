@@ -22,6 +22,10 @@ class AdminController < ApplicationController
   end
   
   def select_region
+    unless params[:region]
+      redirect_to :action => :index
+      return
+    end
     @region = Region.find_by_region(params[:region])
     @year = params[:year] || HrSiApplication::YEAR
     
