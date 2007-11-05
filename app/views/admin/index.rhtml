@@ -50,9 +50,14 @@
 <!--
             <li><a href="http://staff.int.uscm.org/servlet/StaffController?action=showHome" title="">Your References</a></li>
 -->
-            <li><a href="http://staff.int.uscm.org/servlet/WsnSpController?action=showIndex" title="">The New Summer Project Tool</a></li>
-            <li><a href="http://staff.int.uscm.org/servlet/MSController" title="">Online Summer Project Application</a></li>
-            <li><a href="http://staff.int.uscm.org/hr_ms/opportunities.jsp" title="">Current Summer Project Opportunities  </a></li>  
+			<% if RAILS_ENV == "production" %>
+	            <li><a href="https://sp.campuscrusadeforchrist.com/admin" title="">The New Summer Project Tool</a></li>
+	            <li><a href="https://sp.campuscrusadeforchrist.com" title="">Online Summer Project Application</a></li>
+			<% else %>
+	            <li><a href="https://sp.int.campuscrusadeforchrist.com/admin" title="">The New Summer Project Tool</a></li>
+	            <li><a href="https://sp.int.campuscrusadeforchrist.com" title="">Online Summer Project Application</a></li>
+			<% end %>
+            <li><a href="http://www.gosummerproject.com" title="">Current Summer Project Opportunities  </a></li>  
         </ul>
     </div>
 </div>
