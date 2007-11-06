@@ -23,7 +23,9 @@ class Answer < ActiveRecord::Base
     
     if !q.nil? and !q.object_name.nil? and !q.attribute_name.nil? and !q.object_name.blank? and !q.attribute_name.blank?
       unless eval("@application." + q.object_name + ".nil?")
-        eval("@application." + q.object_name + ".update_attribute(:" + q.attribute_name + ", \"" + Regexp.escape(self.value) + "\")")  
+        value = Regexp.escape(self.value)
+        value = value.gsub(/"/, '\"')
+        eval("@application." + q.object_name + ".update_attribute(:" + q.attribute_name + ", \"" + value + "\")")  
         # Prevents actual answer from saving
         return false
       end
