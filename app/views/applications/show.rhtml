@@ -1,19 +1,19 @@
 <div id="controls" id="app_info">
   <div id="panel">
   	<div class="panel">
-		<p><label class="desc">Applicant:</label> <%= @application.applicant.informal_full_name %></p>
-		<p><label class="desc">Date Submitted:</label> <%= datestamp @application.submitted_at %></p>
-		<p><label class="desc">Electronic Signature:</label> <%= @application.applicant.current_si_application.electronicSignature %></p>
+		<p><label class="desc">Applicant:</label> <span class="answer"><%= @application.applicant.informal_full_name %></span></p>
+		<p><label class="desc">Date Submitted:</label> <span class="answer"><%= datestamp @application.submitted_at %></span></p>
+		<p><label class="desc">Electronic Signature:</label> <span class="answer"><%= @application.applicant.current_si_application.electronicSignature %></span></p>
 
 		<p><label class="desc">Current Mailing Address</label>
-			<%= @application.applicant.current_address.address1 %><br/>
+			<span class="answer"><%= @application.applicant.current_address.address1 %><br/>
 			<% unless @application.applicant.current_address.address2.blank? -%><%= @application.applicant.current_address.address2 %><br/><% end -%>
-			<%= @application.applicant.current_address.city %>, <%= @application.applicant.current_address.state %> <%= @application.applicant.current_address.zip %></p>
+			<%= @application.applicant.current_address.city %>, <%= @application.applicant.current_address.state %> <%= @application.applicant.current_address.zip %></span></p>
 <% unless @application.applicant.permanent_address.nil? -%>
 		<p><label class="desc">Permanent Mailing Address</label>
-			<%= @application.applicant.permanent_address.address1 %><br/>
+			<span class="answer"><%= @application.applicant.permanent_address.address1 %><br/>
 			<% unless @application.applicant.permanent_address.address2.blank? -%><%= @application.applicant.permanent_address.address2 %><br/><% end -%>
-			<%= @application.applicant.permanent_address.city %>, <%= @application.applicant.permanent_address.state %> <%= @application.applicant.permanent_address.zip %></p>
+			<%= @application.applicant.permanent_address.city %>, <%= @application.applicant.permanent_address.state %> <%= @application.applicant.permanent_address.zip %></span></p>
 <% end -%>
 	</div>
   </div>

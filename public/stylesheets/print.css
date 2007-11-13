@@ -7,5 +7,6 @@ ul.readonly { list-style: none !important; margin-left: 0; padding-left: 18px; }
 table.grid th, table.grid td { border: solid 1px #ccc; }
 table.grid { border-collapse: collapse; }
 label.desc { display: block; }
+span.answer { color: #339; }
 .panel { font-size: 16pt; }
 .panel label { font-size: 12pt; }
