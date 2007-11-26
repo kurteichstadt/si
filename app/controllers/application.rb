@@ -94,16 +94,19 @@ class ApplicationController < ActionController::Base
   end
 
   def send_reference_invite(reference)
-    unless reference.email.nil?
+    @sent = false
+    unless reference.email.nil? || reference.email.empty?
       # Send invite to reference
-      Notifier.deliver_notification(reference.email,
+      if (Notifier.deliver_notification(reference.email,
                                     "help@campuscrusadeforchrist.com", 
                                     "Reference Invite", 
                                     {'reference_full_name' => reference.name, 
                                      'applicant_full_name' => @application.applicant.informal_full_name,
                                      'applicant_email' => @application.applicant.email, 
                                      'applicant_home_phone' => @application.applicant.current_address.homePhone, 
-                                     'reference_url' => edit_reference_url(@application, reference.token)})
+                                     'reference_url' => edit_reference_url(@application, reference.token)}))
+        @sent = true
+      end
 
       # Send notification to applicant
       Notifier.deliver_notification(@application.applicant.email, # RECIPIENTS
