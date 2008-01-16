@@ -1,15 +1,15 @@
 <div id="content">
   <h1>Applicants in Region: <%= @region.name %> (<%= @year %>)</h1>
   
-  <h2>Ready Applications</h2>
+  <h2>Ready Applications: <%= @ready_apps.size %></h2>
   
     <%= render :partial => 'applicants', :locals => {:apps => @ready_apps} %>
   
-  <h2>In Process Applications</h2>
+  <h2>In Process Applications: <%= @in_process_apps.size %></h2>
   
   <%= render :partial => 'applicants', :locals => {:apps => @in_process_apps} %>
 
-  <h2>Started Applications</h2>
+  <h2>Started Applications: <%= @started_apps.size %></h2>
 
   <%= render :partial => 'applicants', :locals => {:apps => @started_apps} %>
 </div>

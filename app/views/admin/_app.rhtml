@@ -1,6 +1,7 @@
 		<% row_class = cycle('','alt', :name => "row_bg") %>
 		<tr class="<%= row_class %>">
-			<td><%= app.applicant.informal_full_name %></td>
+			<td><%= @counter += 1 %></td>
+			<td><h3><b><%= app.applicant.informal_full_name %></b></h3></td>
 			<td><%= datestamp app.created_at %><br/>
 			    <%= datestamp app.submitted_at %><br/>
 				<%= app.has_paid? ? "Yes" : "No"  %></td>
@@ -19,13 +20,13 @@
 			<td><%= app.applicant.campus %></td>
 		</tr>
 		<tr class="<%= row_class %>">
-			<td colspan="5">Ministry Preferences: (<b>1</b>) <%= HrSiProject.find(app.hr_si_application.locationA).displayLocation unless app.hr_si_application.locationA.blank? %>; 
+			<td colspan="6">Ministry Preferences: (<b>1</b>) <%= HrSiProject.find(app.hr_si_application.locationA).displayLocation unless app.hr_si_application.locationA.blank? %>; 
 			                                      (<b>2</b>) <%= HrSiProject.find(app.hr_si_application.locationB).displayLocation unless app.hr_si_application.locationB.blank? %>; 
 												  (<b>3</b>) <%= HrSiProject.find(app.hr_si_application.locationC).displayLocation unless app.hr_si_application.locationC.blank? %></td>
 			<td>Available: <%= app.hr_si_application.availableMonth %> / <%= app.hr_si_application.availableYear %></td>
 		</tr>
 		<tr class="<%= row_class %>">
-			<td colspan="6" style="border-bottom: solid 2px #ccc;" class="print-links">Print:
+			<td colspan="7" style="border-bottom: solid 2px #ccc;" class="print-links">Print:
 				<%= link_to "(<b>1</b>) Complete w/Ref", application_url(app), {:popup => true} %>
 				<%= link_to "(<b>2</b>) Complete No Ref", no_ref_application_url(app), {:popup => true} %>
 				<%= link_to "(<b>3</b>) No Confidential", no_conf_application_url(app), {:popup => true} %>
