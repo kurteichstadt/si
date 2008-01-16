@@ -30,7 +30,8 @@ class AdminController < ApplicationController
     @year = params[:year] || HrSiApplication::YEAR
     
     Apply.with_scope(:find => {:include => [:applicant, :references, :hr_si_application],
-                               :conditions => ["#{HrSiApplication.table_name}.siYear = ? and #{Person.table_name}.region = ?", @year, @region.region]}) do
+                               :conditions => ["#{HrSiApplication.table_name}.siYear = ? and #{Person.table_name}.region = ?", @year, @region.region],
+                               :order => "#{Person.table_name}.lastName, #{Person.table_name}.firstName"}) do
 
       # Start with a list of all applications for this region
       @apps_in_region = Apply.find(:all)
@@ -58,6 +59,6 @@ class AdminController < ApplicationController
     
     @started_apps.reject! {|app| @in_process_apps.include?(app) or @ready_apps.include?(app)}
     @in_process_apps.reject! { |app| @ready_apps.include?(app)}
-end
+  end
 
 end
