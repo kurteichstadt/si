@@ -1,20 +1,49 @@
 <div id="controls" id="app_info">
   <div id="panel">
   	<div class="panel">
-		<p><label class="desc">Applicant:</label> <span class="answer"><%= @application.applicant.informal_full_name %></span></p>
+		<p><label class="desc">Applicant:</label> <span class="answer"><b><%= @application.applicant.informal_full_name %></b></span></p>
+		<p><label class="desc">Full Name:</label> <span class="answer"><%= @application.applicant.title + " " + @application.applicant.long_name %></span></p>
 		<p><label class="desc">Date Submitted:</label> <span class="answer"><%= datestamp @application.submitted_at %></span></p>
 		<p><label class="desc">Electronic Signature:</label> <span class="answer"><%= @application.applicant.current_si_application.electronicSignature %></span></p>
 
-		<p><label class="desc">Current Mailing Address</label>
+		<p><label class="desc"><h4>Current Mailing Address</h4></label>
 			<span class="answer"><%= @application.applicant.current_address.address1 %><br/>
 			<% unless @application.applicant.current_address.address2.blank? -%><%= @application.applicant.current_address.address2 %><br/><% end -%>
-			<%= @application.applicant.current_address.city %>, <%= @application.applicant.current_address.state %> <%= @application.applicant.current_address.zip %></span></p>
+			<%= @application.applicant.current_address.city %>, <%= @application.applicant.current_address.state %> <%= @application.applicant.current_address.zip %></span></p><br/>
+			<% unless @application.applicant.current_address.end_date.blank? -%><label>Last Date at this Address:</label> <span class="answer"><%= datestamp @application.applicant.current_address.end_date %></span></p><br/><% end -%>
+			<% unless @application.applicant.current_address.homePhone.blank? -%><label>Home Phone:</label> <span class="answer"><%= @application.applicant.current_address.homePhone %></span></p><br/><% end -%>
+			<% unless @application.applicant.current_address.workPhone.blank? -%><label>Work Phone:</label> <span class="answer"><%= @application.applicant.current_address.workPhone %></span></p><br/><% end -%>
+			<% unless @application.applicant.current_address.cellPhone.blank? -%><label>Cell Phone:</label> <span class="answer"><%= @application.applicant.current_address.cellPhone %></span></p><br/><% end -%>
+			<label>Email:</label> <span class="answer"><%= @application.applicant.current_address.email %></span></p><br/>
 <% unless @application.applicant.permanent_address.nil? -%>
-		<p><label class="desc">Permanent Mailing Address</label>
+		<p><label class="desc"><h4>Permanent Mailing Address</h4></label>
 			<span class="answer"><%= @application.applicant.permanent_address.address1 %><br/>
 			<% unless @application.applicant.permanent_address.address2.blank? -%><%= @application.applicant.permanent_address.address2 %><br/><% end -%>
-			<%= @application.applicant.permanent_address.city %>, <%= @application.applicant.permanent_address.state %> <%= @application.applicant.permanent_address.zip %></span></p>
+			<%= @application.applicant.permanent_address.city %>, <%= @application.applicant.permanent_address.state %> <%= @application.applicant.permanent_address.zip %></span></p><br/>
+			<% unless @application.applicant.permanent_address.homePhone.blank? -%><label>Home Phone:</label> <span class="answer"><%= @application.applicant.permanent_address.homePhone %></span></p><br/><% end -%>
+			<% unless @application.applicant.permanent_address.workPhone.blank? -%><label>Work Phone:</label> <span class="answer"><%= @application.applicant.permanent_address.workPhone %></span></p><br/><% end -%>
+			<% unless @application.applicant.permanent_address.cellPhone.blank? -%><label>Cell Phone:</label> <span class="answer"><%= @application.applicant.permanent_address.cellPhone %></span></p><br/><% end -%>
+			<% unless @application.applicant.permanent_address.email.blank? -%><label>Email:</label> <span class="answer"><%= @application.applicant.permanent_address.email %></span></p><br/><% end -%>
 <% end -%>
+<% unless @application.applicant.emergency_address.nil? -%>
+		<p><label class="desc"><h4>Emergency Mailing Address</h4></label>
+			<span class="answer"><%= @application.applicant.emergency_address.contactName %><br/>
+			<%= @application.applicant.emergency_address.address1 %><br/>
+			<% unless @application.applicant.emergency_address.address2.blank? -%><%= @application.applicant.emergency_address.address2 %><br/><% end -%>
+			<%= @application.applicant.emergency_address.city %>, <%= @application.applicant.emergency_address.state %> <%= @application.applicant.emergency_address.zip %></span></p><br/>
+			<label>Relationship:</label> <span class="answer"><%= @application.applicant.emergency_address.contactRelationship %></span></p><br/>
+			<% unless @application.applicant.emergency_address.homePhone.blank? -%><label>Home Phone:</label> <span class="answer"><%= @application.applicant.emergency_address.homePhone %></span></p><br/><% end -%>
+			<% unless @application.applicant.emergency_address.workPhone.blank? -%><label>Work Phone:</label> <span class="answer"><%= @application.applicant.emergency_address.workPhone %></span></p><br/><% end -%>
+			<% unless @application.applicant.emergency_address.cellPhone.blank? -%><label>Cell Phone:</label> <span class="answer"><%= @application.applicant.emergency_address.cellPhone %></span></p><br/><% end -%>
+			<% unless @application.applicant.emergency_address.email.blank? -%><label>Email:</label> <span class="answer"><%= @application.applicant.emergency_address.email %></span></p><br/><% end -%>
+<% end -%>
+		<br/>
+		<p><label class="desc">Marital Status:</label> <span class="answer"><%= @application.applicant.maritalStatus %></span></p>
+		<p><label class="desc">Number of Children:</label> <span class="answer"><%= @application.applicant.numberChildren %></span></p>
+		<p><label class="desc">Legal right to work in US:</label> <span class="answer"><%= @application.applicant.workInUS %></span></p>
+		<p><label class="desc">Most recent school attended:</label> <span class="answer"><%= @application.applicant.campus %></span></p>
+		<p><label class="desc">Graduation Date:</label> <span class="answer"><%= datestamp @application.applicant.graduation_date %></span></p>
+		<p><label class="desc">Major(s):</label> <span class="answer"><%= @application.applicant.major %></span></p>
 	</div>
   </div>
 </div>
@@ -27,6 +56,7 @@
                                                  :conditions => ["#{Element.table_name}.kind not in (?)", %w(Paragraph)],
                                                  :order => "#{Page.table_name}.number,#{Element.table_name}.position")
    elements.reject! {|e| e.is_confidential} if @show_conf == false
+   elements.reject! {|e| e.page_id == 5}
    elements = QuestionSet.new(elements, answer_sheet).elements.group_by(&:page_id) -%>
 <%= render :partial => '/answer_sheets/answer_sheet', :locals => {:answer_sheet => answer_sheet, :elements => elements } %>
 <% end -%>
