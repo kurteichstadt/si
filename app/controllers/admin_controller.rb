@@ -29,12 +29,9 @@ class AdminController < ApplicationController
     @region = Region.find_by_region(params[:region])
     @year = params[:year] || HrSiApplication::YEAR
     
-    Apply.with_scope(:find => {:include => [:applicant, :references, :hr_si_application],
+    Apply.with_scope(:find => {:include => [:applicant, {:references => :sleeve_sheet}, :hr_si_application, :payments, :sleeve],
                                :conditions => ["#{HrSiApplication.table_name}.siYear = ? and #{Person.table_name}.region = ?", @year, @region.region],
                                :order => "#{Person.table_name}.lastName, #{Person.table_name}.firstName"}) do
-
-      # Start with a list of all applications for this region
-      @apps_in_region = Apply.find(:all)
 
       # Started apps are those that meet the following conditions:
       #   - First Name or Last Name filled in (check :person)
@@ -44,7 +41,7 @@ class AdminController < ApplicationController
                                
     # In Process apps
     @in_process_apps = Array.new()
-    @apps_in_region.each do |app|
+    @started_apps.each do |app|
       @in_process_apps << app if app.submitted? or app.has_paid? or app.completed_references.length == app.sleeve.reference_sheets.length
     end
       
@@ -53,7 +50,7 @@ class AdminController < ApplicationController
     #     AND Paid
     #     AND All References Submitted
     @ready_apps = Array.new()
-    @apps_in_region.each do |app|
+    @started_apps.each do |app|
       @ready_apps << app if app.submitted? and app.has_paid? and app.completed_references.length == app.sleeve.reference_sheets.length
     end
     
