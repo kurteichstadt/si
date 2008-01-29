@@ -2,10 +2,11 @@
   <div id="panel">
   	<div class="panel">
 		<p><label class="desc">Applicant:</label> <span class="answer"><b><%= @application.applicant.informal_full_name %></b></span></p>
-		<p><label class="desc">Full Name:</label> <span class="answer"><%= @application.applicant.title + " " + @application.applicant.long_name %></span></p>
+		<p><label class="desc">Full Name:</label> <span class="answer"><%= (@application.applicant.title.blank? ? "" : @application.applicant.title + " ") + @application.applicant.long_name %></span></p>
 		<p><label class="desc">Date Submitted:</label> <span class="answer"><%= datestamp @application.submitted_at %></span></p>
 		<p><label class="desc">Electronic Signature:</label> <span class="answer"><%= @application.applicant.current_si_application.electronicSignature %></span></p>
 
+<% unless @application.applicant.current_address.nil? -%>
 		<p><label class="desc"><h4>Current Mailing Address</h4></label>
 			<span class="answer"><%= @application.applicant.current_address.address1 %><br/>
 			<% unless @application.applicant.current_address.address2.blank? -%><%= @application.applicant.current_address.address2 %><br/><% end -%>
@@ -15,6 +16,7 @@
 			<% unless @application.applicant.current_address.workPhone.blank? -%><label>Work Phone:</label> <span class="answer"><%= @application.applicant.current_address.workPhone %></span></p><br/><% end -%>
 			<% unless @application.applicant.current_address.cellPhone.blank? -%><label>Cell Phone:</label> <span class="answer"><%= @application.applicant.current_address.cellPhone %></span></p><br/><% end -%>
 			<label>Email:</label> <span class="answer"><%= @application.applicant.current_address.email %></span></p><br/>
+<% end -%>
 <% unless @application.applicant.permanent_address.nil? -%>
 		<p><label class="desc"><h4>Permanent Mailing Address</h4></label>
 			<span class="answer"><%= @application.applicant.permanent_address.address1 %><br/>
