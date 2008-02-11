@@ -149,7 +149,7 @@ protected
     	if @person.current_si_application.nil?
     		@app = HrSiApplication.create(:siYear => get_year, :fk_personID => @person.id)
     		@person.current_si_application = @app
-    end
+      end
       if @person.current_si_application.apply_id.nil?
         @application = @person.current_si_application.find_or_create_apply
         @person.current_si_application.save!
