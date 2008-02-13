@@ -28,15 +28,7 @@ class ReferencePageController < ApplicationController
   end
   
   def update
-    @references = @application.reference_sheets.index_by(&:sleeve_sheet_id)
-    
-    params[:references].each do |sleeve_sheet_id, data|
-      sleeve_sheet_id = sleeve_sheet_id.to_i
-      # @references[sleeve_sheet_id] ||= @application.references.build(:sleeve_sheet_id => sleeve_sheet_id) # new reference if needed
-      @references[sleeve_sheet_id].attributes = data  # store posted data
-      @references[sleeve_sheet_id].save! 
-    end
-    
+    update_references
     head :ok
   end
   

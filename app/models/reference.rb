@@ -48,7 +48,11 @@ class Reference < ActiveRecord::Base
   end
 
   def before_validation_on_create
-    self.token = UUID.timestamp_create.to_s
+    create_new_token
+  end
+  
+  def create_new_token
+     self.token = UUID.timestamp_create.to_s
   end
   
   def email_sent?() !self.email_sent_at.nil? end

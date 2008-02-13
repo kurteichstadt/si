@@ -14,20 +14,18 @@ class ReferencesController < ApplicationController
     # look up reference information provided by Applicant
     @reference = @application.references.find_by_token(params[:id])
     
-    if @reference.nil?
-      raise "No reference form found for token '#{params[:id]}'."
+    if !@reference.nil?
+      @reference.start! unless @reference.started?
+
+      # find or create answer sheet for reference to fill in
+      @answer_sheet = @application.find_or_create_reference_answer_sheet(@reference.sleeve_sheet)
+
+      # edit the first page
+      @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
+      @elements = @presenter.questions_for_page(:first).elements
+
+      render :template => 'answer_sheets/edit'
     end
-    
-    @reference.start! unless @reference.started?
-    
-    # find or create answer sheet for reference to fill in
-    @answer_sheet = @application.find_or_create_reference_answer_sheet(@reference.sleeve_sheet)
-    
-    # edit the first page
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
-    @elements = @presenter.questions_for_page(:first).elements
-    
-    render :template => 'answer_sheets/edit'
   end
 
   # final submission
@@ -78,13 +76,7 @@ class ReferencesController < ApplicationController
   
   def send_invite
     # Save references on page first
-    @references = @application.reference_sheets.index_by(&:sleeve_sheet_id)
-    params[:references].each do |sleeve_sheet_id, data|
-      sleeve_sheet_id = sleeve_sheet_id.to_i
-      # @references[sleeve_sheet_id] ||= @application.references.build(:sleeve_sheet_id => sleeve_sheet_id) # new reference if needed
-      @references[sleeve_sheet_id].attributes = data  # store posted data
-      @references[sleeve_sheet_id].save! 
-    end
+    update_references
     
     @reference = Reference.find(params[:id])
     send_reference_invite(@reference)

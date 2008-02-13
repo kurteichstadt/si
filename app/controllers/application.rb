@@ -92,6 +92,22 @@ class ApplicationController < ActionController::Base
   def is_false(val)
     [0,'0',false,'false'].include?(val)
   end
+  
+  def update_references
+    @references = @application.reference_sheets.index_by(&:sleeve_sheet_id)
+    
+    params[:references].each do |sleeve_sheet_id, data|
+      sleeve_sheet_id = sleeve_sheet_id.to_i
+      # @references[sleeve_sheet_id] ||= @application.references.build(:sleeve_sheet_id => sleeve_sheet_id) # new reference if needed
+      # If email address changes, we need a new link and a new answer sheet
+      if(data["email"] != @references[sleeve_sheet_id].email)
+        @references[sleeve_sheet_id].create_new_token
+        @application.find_or_create_reference_answer_sheet(@references[sleeve_sheet_id].sleeve_sheet, true)
+      end
+      @references[sleeve_sheet_id].attributes = data  # store posted data
+      @references[sleeve_sheet_id].save!
+    end
+  end
 
   def send_reference_invite(reference)
     @sent = false

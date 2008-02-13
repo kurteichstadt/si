@@ -9,6 +9,7 @@
 </li>
 <li>
   <label for="<%= "email_#{index}" %>" class="desc">E-mail</label>
+  <% if (!reference.email.blank?) %><div class="warningText">Please be aware that any changes to this email address after your reference has started filling out their form will cause their answers to be lost.</div><% end %>
   <%= text_field_tag "references[#{index}][email]", reference.email, :class => 'text required validate-email', :id => "email_#{index}" %>
 </li>
 <li>
