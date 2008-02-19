@@ -30,7 +30,7 @@ class AdminController < ApplicationController
     @year = params[:year] || HrSiApplication::YEAR
     
 
-    Apply.with_scope(:find => {:include => [:applicant, {:references => :sleeve_sheet}, :hr_si_application, :payments, :sleeve],
+    Apply.with_scope(:find => {:include => [:applicant, :references, :hr_si_application, :payments],
                                :conditions => ["#{HrSiApplication.table_name}.siYear = ? and #{Person.table_name}.region = ?", @year, @region.region],
                                :order => "#{Person.table_name}.lastName, #{Person.table_name}.firstName"}) do
 
