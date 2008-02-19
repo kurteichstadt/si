@@ -29,6 +29,7 @@ class AdminController < ApplicationController
     @region = Region.find_by_region(params[:region])
     @year = params[:year] || HrSiApplication::YEAR
     
+
     Apply.with_scope(:find => {:include => [:applicant, {:references => :sleeve_sheet}, :hr_si_application, :payments, :sleeve],
                                :conditions => ["#{HrSiApplication.table_name}.siYear = ? and #{Person.table_name}.region = ?", @year, @region.region],
                                :order => "#{Person.table_name}.lastName, #{Person.table_name}.firstName"}) do
@@ -36,26 +37,18 @@ class AdminController < ApplicationController
       # Started apps are those that meet the following conditions:
       #   - First Name or Last Name filled in (check :person)
       @started_apps = Apply.find(:all,
-                                 :conditions => "#{Person.table_name}.firstName != '' or #{Person.table_name}.lastName != ''")
-    end                                 
-                               
-    # In Process apps
-    @in_process_apps = Array.new()
-    @started_apps.each do |app|
-      @in_process_apps << app if app.submitted? or app.has_paid? or app.completed_references.length == app.sleeve.reference_sheets.length
-    end
-      
-    # Ready apps are those that meet the following conditions:
-    #   - Submitted (or Completed)
-    #     AND Paid
-    #     AND All References Submitted
-    @ready_apps = Array.new()
-    @started_apps.each do |app|
-      @ready_apps << app if app.submitted? and app.has_paid? and app.completed_references.length == app.sleeve.reference_sheets.length
-    end
-    
-    @started_apps.reject! {|app| @in_process_apps.include?(app) or @ready_apps.include?(app)}
-    @in_process_apps.reject! { |app| @ready_apps.include?(app)}
+                                 :conditions => ["(#{Person.table_name}.firstName != '' or #{Person.table_name}.lastName != '') AND #{Apply.table_name}.status IN(?)", Apply.unsubmitted_statuses])
+      # In Process apps
+      @in_process_apps = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.not_ready_statuses] )
+
+      # Ready apps are those that meet the following conditions:
+      #   - Submitted (or Completed)
+      #     AND Paid
+      #     AND All References Submitted
+      @ready_apps = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.ready_statuses], 
+                                     :order => "#{Person.table_name}.lastName" )
+    end 
   end
+
 
 end
