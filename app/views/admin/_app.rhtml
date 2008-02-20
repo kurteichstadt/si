@@ -20,9 +20,9 @@
 			<td><%= app.applicant.campus %></td>
 		</tr>
 		<tr class="<%= row_class %>">
-			<td colspan="6">Ministry Preferences: (<b>1</b>) <%= app.hr_si_application.location_a.displayLocation unless app.hr_si_application.locationA.blank? %>; 
-			                                      (<b>2</b>) <%= app.hr_si_application.location_b.displayLocation unless app.hr_si_application.locationB.blank? %>; 
-												  (<b>3</b>) <%= app.hr_si_application.location_c.displayLocation unless app.hr_si_application.locationC.blank? %></td>
+			<td colspan="6">Ministry Preferences: (<b>1</b>) <%= app.hr_si_application.location_a.displayLocation unless app.hr_si_application.location_a.blank? %>; 
+			                                      (<b>2</b>) <%= app.hr_si_application.location_b.displayLocation unless app.hr_si_application.location_b.blank? %>; 
+												  (<b>3</b>) <%= app.hr_si_application.location_c.displayLocation unless app.hr_si_application.location_c.blank? %></td>
 			<td>Available: <%= app.hr_si_application.availableMonth %> / <%= app.hr_si_application.availableYear %></td>
 		</tr>
 		<tr class="<%= row_class %>">
