@@ -12,4 +12,12 @@
   <h2>Started Applications: <%= @started_apps.size %></h2>
 
   <%= render :partial => 'applicants', :locals => {:apps => @started_apps} %>
+
+  <h2>Withdrawn or Declined: <%= @not_going.size %></h2>
+
+  <%= render :partial => 'applicants', :locals => {:apps => @not_going} %>
+
+  <h2>Everyone Else: <%= @post_ready_apps.size %></h2>
+
+  <%= render :partial => 'applicants', :locals => {:apps => @post_ready_apps} %>
 </div>

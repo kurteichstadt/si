@@ -45,8 +45,15 @@ class AdminController < ApplicationController
       #   - Submitted (or Completed)
       #     AND Paid
       #     AND All References Submitted
-      @ready_apps = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.ready_statuses], 
-                                     :order => "#{Person.table_name}.lastName" )
+      @ready_apps = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.ready_statuses])
+      
+      # Post Ready apps
+      # Everything from Evaluation through Termination, but not the ppl who dropped out
+      @post_ready_apps = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.post_ready_statuses])
+      
+      # Not Going apps
+      # Withdrawn or declined
+      @not_going = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.not_going_statuses])
     end 
   end
 
