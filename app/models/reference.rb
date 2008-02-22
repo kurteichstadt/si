@@ -28,12 +28,20 @@ class Reference < ActiveRecord::Base
   belongs_to :apply
   belongs_to :sleeve_sheet
   
+  after_save :check_app_complete
+  
   attr_accessor :title  # fixed title from sleeve_sheet
   
   # :name, :months_known, etc. are quite necessary... no validates here because I want auto-save to still work with incomplete forms
   
   validates_length_of [:name, :email, :phone], :maximum => 255, :allow_nil => true
   validates_numericality_of :months_known, :only_integer => true, :allow_nil => true
+  
+  def check_app_complete
+    if self.completed?
+      self.apply.complete
+    end
+  end
   
   def frozen?
     !%w(started).include?(self.status)

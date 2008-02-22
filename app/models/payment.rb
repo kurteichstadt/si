@@ -6,11 +6,19 @@ class Payment < ActiveRecord::Base
 
   belongs_to :apply
   
+  after_save :check_app_complete
+  
   def validate
     if credit?
       errors.add_on_empty([:first_name, :last_name, :address, :city, :state, :zip, :card_number,
                 :expiration_month, :expiration_year])
       errors.add(:card_number, "is invalid.") if get_card_type.nil?
+    end
+  end
+  
+  def check_app_complete
+    if self.approved?
+      self.apply.complete
     end
   end
   
