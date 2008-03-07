@@ -61,17 +61,17 @@ class ReferencesController < ApplicationController
     @reference = @application.references.find_by_token(params[:id])
 
     if @reference.nil?
-      raise "No reference form found for token '#{params[:id]}'."
+      render :action => :edit
+    else
+      @answer_sheet = @application.find_or_create_reference_answer_sheet(@reference.sleeve_sheet)
+      @question_sheet = @answer_sheet.question_sheet
+      @elements = @question_sheet.elements.find(:all, :include => 'page', 
+                                                      :conditions => ["#{Element.table_name}.kind not in (?) ", %w(Section Paragraph)],
+                                                      :order => "#{Page.table_name}.number,#{Element.table_name}.position")
+      @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
+
+      render :template => 'answer_sheets/show'
     end
-    
-    @answer_sheet = @application.find_or_create_reference_answer_sheet(@reference.sleeve_sheet)
-    @question_sheet = @answer_sheet.question_sheet
-    @elements = @question_sheet.elements.find(:all, :include => 'page', 
-                                                    :conditions => ["#{Element.table_name}.kind not in (?) ", %w(Section Paragraph)],
-                                                    :order => "#{Page.table_name}.number,#{Element.table_name}.position")
-    @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
-    
-    render :template => 'answer_sheets/show'
   end
   
   def send_invite
