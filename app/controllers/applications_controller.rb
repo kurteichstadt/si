@@ -4,7 +4,7 @@ class ApplicationsController < ApplicationController
   skip_before_filter AuthenticationFilter
   prepend_before_filter :ssm_login_required, :except => [:no_access, :show, :no_ref, :no_conf, :collated_refs]
   prepend_before_filter :login_from_cookie
-  before_filter :setup
+  append_before_filter :setup
   
   layout 'application'
   helper :answer_pages
