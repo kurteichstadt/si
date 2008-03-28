@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
   include AuthenticatedSystem
-  skip_before_filter CAS::Filter, :except => [:show, :collated_refs]
+  skip_before_filter CAS::Filter, :except => [:show, :collated_refs, :no_conf]
   skip_before_filter AuthenticationFilter
   prepend_before_filter :ssm_login_required, :except => [:no_access, :show, :no_ref, :no_conf, :collated_refs]
   prepend_before_filter :login_from_cookie
