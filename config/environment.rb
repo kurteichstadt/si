@@ -60,8 +60,8 @@ end
 
 # Include your application configuration below
 
-CAS::Filter.login_url = "https://signin.mygcx.org/cas/login"
-CAS::Filter.validate_url = "https://signin.mygcx.org/cas/serviceValidate"
+CAS::Filter.login_url = "https://cas.ccci.org/cas/login"
+CAS::Filter.validate_url = "https://cas.ccci.org.org/cas/serviceValidate"
 
 ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org justin.sabelko@uscm.org)
 ExceptionNotifier.sender_address = %("Application Error" <si_error@uscm.org>)

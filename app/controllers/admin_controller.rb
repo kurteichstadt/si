@@ -18,7 +18,7 @@ class AdminController < ApplicationController
   
   def logout
     reset_session
-    redirect_to "https://signin.mygcx.org/cas/logout"
+    redirect_to "https://cas.ccci.org/cas/logout"
   end
   
   def select_region
