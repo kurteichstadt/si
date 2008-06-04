@@ -19,8 +19,8 @@ class ProjectPreference < Question
   end
   
   def display_response(app=nil)
-    r = get_response(app)
-    p = HrSiProject.find(r) unless r.nil?
+    r = get_response(app).first
+    p = HrSiProject.find(r) unless r.blank?
     if p.nil? 
       return ""
     else

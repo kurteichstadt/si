@@ -69,8 +69,6 @@ class ReferencesController < ApplicationController
                                                       :conditions => ["#{Element.table_name}.kind not in (?) ", %w(Section Paragraph)],
                                                       :order => "#{Page.table_name}.number,#{Element.table_name}.position")
       @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
-
-      render :template => 'answer_sheets/show'
     end
   end
   
