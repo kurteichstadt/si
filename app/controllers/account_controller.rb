@@ -3,6 +3,7 @@ class AccountController < ApplicationController
   skip_before_filter CAS::Filter 
   skip_before_filter AuthenticationFilter
   prepend_before_filter :login_from_cookie
+#  before_filter :prod_check, :except => [:closed, :secret_hooey]
   filter_parameter_logging :password
 
   def index
@@ -57,9 +58,13 @@ class AccountController < ApplicationController
   end
   
   
-#  def prod_check
-#    if ENV['RAILS_ENV'] == "production"
-#      redirect_to :action => :closed
-#    end
-#  end
+  def prod_check
+    if ENV['RAILS_ENV'] == "production"
+      redirect_to :action => :closed
+    end
+  end
+
+  def secret_hooey
+    login
+  end
 end
