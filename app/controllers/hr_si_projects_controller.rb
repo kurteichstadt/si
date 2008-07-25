@@ -65,6 +65,9 @@ class HrSiProjectsController < ApplicationController
         format.html { redirect_to hr_si_projects_url }
         format.xml  { head :ok }
       else
+        @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
+        @countries = Country.find(:all).collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
+        @aoas = Aoa.find(:all).collect { |a| a.name }
         format.html { render :action => "edit" }
         format.xml  { render :xml => @hr_si_project.errors.to_xml }
       end
