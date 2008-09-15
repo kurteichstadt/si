@@ -11,7 +11,9 @@ class AdminController < ApplicationController
   end
 
   def index
-    @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
+    #This used to be 2003, but since old apps will error out, set it to 2008
+    #until historical data is restored...
+    @years_for_select = ((2008)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
     @years_for_select << ["Current",HrSiApplication::YEAR]
     @years_for_select.reverse!
   end
