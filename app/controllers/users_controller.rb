@@ -33,15 +33,21 @@ class UsersController < ApplicationController
       type = params[:temp_user][:role]
       @new_user = type.constantize.create!(:ssm_id => @person.user.id,
                                            :created_at => Time.now,
-                                           :created_by_id => user.id)
-  
+                                           :created_by_id => user.id,
+                                           :role => type)
       redirect_to users_url
     end
   end
   
   def update
+    @temp_user = SiUser.find(params[:id])
+    
     respond_to do |format|
-      format.html
+      if @temp_user.update_attributes(params[:temp_user])
+        format.html { redirect_to users_path }
+      else
+        format.html { render :action => "edit" }
+      end
     end
   end
   

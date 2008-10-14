@@ -27,7 +27,8 @@ class SiUser < ActiveRecord::Base
     @region ||= person.region
   end
   def before_save
-    si_role = SiRole.find_by_user_class(self[:type])
+    si_role = SiRole.find_by_user_class(self[:role])
+    self[:type] = si_role.user_class if si_role
     self[:role] = si_role.role if si_role
   end
 end

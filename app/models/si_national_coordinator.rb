@@ -10,6 +10,6 @@ class SiNationalCoordinator < SiUser
   def can_see_applicants?() true; end
   def can_see_projects?() true; end
   def creatable_user_types
-    creatable_user_types_array("'SiNationalCoordinator'")
+    creatable_user_types_array("'SiGeneralStaff','SiNationalCoordinator'")
   end
 end
