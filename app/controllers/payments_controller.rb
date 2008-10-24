@@ -36,7 +36,8 @@ class PaymentsController < ApplicationController
               
               gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
                 :login    => un,
-                :password => pw
+                :password => pw#,
+#                :test => true
               )
       
               response = gateway.purchase(@payment.amount * 100, creditcard)
@@ -46,6 +47,11 @@ class PaymentsController < ApplicationController
                 # TODO: Send notification email
               else
                 @payment.errors.add_to_base("Credit card transaction failed: #{response.message}")
+                #Send email this way instead of raising error in order to still give an error message to user.
+                Notifier.deliver_notification(ExceptionNotifier.exception_recipients, # RECIPIENTS
+                                    "si_error@uscm.org", # FROM
+                                    "Credit Card Error", # LIQUID TEMPLATE NAME
+                                    {'error' => "Credit card transaction failed: #{response.message}"})
               end
             else
               @payment.errors.add(:card_number, "is invalid.  Check the number and/or the expiration date.")
