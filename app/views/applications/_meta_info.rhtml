@@ -7,9 +7,9 @@
 			<li><span>Started</span> <%= datestamp @application.created_at %></li>
 			<% end -%>
 			<li><span>Payment</span> <%= @application.payment_status.upcase %></li>
-			<li><span>Staff Reference</span> <%= @application.staff_reference.status.upcase %></li>
-			<li><span>Discipler Reference</span> <%= @application.discipler_reference.status.upcase %></li>
-			<li><span>Roommate Reference</span> <%= @application.roommate_reference.status.upcase %></li>
-			<li><span>Friend Reference</span> <%= @application.friend_reference.status.upcase %></li>
+			<li><span>Staff Reference</span> <%= @application.staff_reference.status.upcase if @application.staff_reference.status %></li>
+			<li><span>Discipler Reference</span> <%= @application.discipler_reference.status.upcase if @application.discipler_reference.status%></li>
+			<li><span>Roommate Reference</span> <%= @application.roommate_reference.status.upcase if @application.roommate_reference.status%></li>
+			<li><span>Friend Reference</span> <%= @application.friend_reference.status.upcase if @application.friend_reference.status%></li>
 		</ul>
 </div>

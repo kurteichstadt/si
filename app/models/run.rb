@@ -1,4 +1,15 @@
 class Run
+  def self.daily_tasks
+    check_pay_by_check_apps
+  end
+  
+  def self.check_pay_by_check_apps
+    payments = Payment.find_all_by_payment_type("Mail")
+    payments.each do |payment|
+      payment.check_app_complete
+    end
+  end
+  
   def self.change_si_year
     last_years = HrSiProject.find_all_by_siYear("2008")
     last_years.each do |project|
