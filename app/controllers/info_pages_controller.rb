@@ -6,7 +6,7 @@ class InfoPagesController < ApplicationController
   
   def index
     if user
-      redirect_to home_url
+      redirect_to home_path
     else  
       redirect_to :action => :home
     end

@@ -6,7 +6,7 @@
     <%= text_field_tag :name, "", :class => "text" %>
 	<%= submit_to_remote "search", "Search", :update => "people",
   									:with => "Form.serialize('user_form')+'&='",
-									:url => search_users_url,
+									:url => search_users_path,
 									:loading => "Element.show('search_spinner')",
 									:loaded => "Element.hide('search_spinner');"%>
 	<%= image_tag "/plugin_assets/questionnaire/images/ajax-loader.gif", :id => 'search_spinner', :style => 'display:none' %></p>

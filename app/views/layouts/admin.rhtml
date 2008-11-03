@@ -104,7 +104,7 @@
 	  <%= link_to "Log Out", { :controller => "admin", :action => "logout" }, { :style => "color: #fff;", :id => "link-log-out" } %>
 	  
       <ul id="nav-main">
-         <li <% if controller.controller_name == "admin" -%> class="active" <% end -%>><%= link_to 'Home', admin_home_url %></li>
+         <li <% if controller.controller_name == "admin" -%> class="active" <% end -%>><%= link_to 'Home', admin_home_path %></li>
 <% if si_user.can_edit_sleeve? -%>
          <li <% if controller.controller_name == "sleeves" -%> class="active" <% end -%>><%= link_to 'Applications', sleeves_path %></li>
 <% end -%>

@@ -47,8 +47,8 @@ class HrSiProjectsController < ApplicationController
     respond_to do |format|
       if @hr_si_project.save
         flash[:notice] = 'Project was successfully created.'
-        format.html { redirect_to hr_si_projects_url }
-        format.xml  { head :created, :location => hr_si_project_url(@hr_si_project) }
+        format.html { redirect_to hr_si_projects_path }
+        format.xml  { head :created, :location => hr_si_project_path(@hr_si_project) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @hr_si_project.errors.to_xml }
@@ -62,7 +62,7 @@ class HrSiProjectsController < ApplicationController
     respond_to do |format|
       if @hr_si_project.update_attributes(params[:hr_si_project])
         flash[:notice] = 'Project was successfully updated.'
-        format.html { redirect_to hr_si_projects_url }
+        format.html { redirect_to hr_si_projects_path }
         format.xml  { head :ok }
       else
         @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }

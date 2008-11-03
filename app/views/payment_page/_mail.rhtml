@@ -23,5 +23,5 @@
 				<p class="buttons">
 					<%=submit_to_remote "submit", "Click here if you have mailed your payment", 
 										:html => {:class => "button"},
-										:url => payments_url(@application),
+										:url => payments_path(@application),
 										:loading => "new Effect.Fade('pay_mail');" %></p>

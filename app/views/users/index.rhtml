@@ -13,9 +13,9 @@
         </tr>
     <% for user in @users %>
       <tr class="<%= cycle("","alt") %>">
-		<td nowrap="true"><%= link_to user.person.informal_full_name, edit_user_url(user) if user.person%></td>
+		<td nowrap="true"><%= link_to user.person.informal_full_name, edit_user_path(user) if user.person%></td>
 		<td><%=user.role%></td>
-		<td><%= link_to "Delete", user_url(user), :method => :delete, :confirm => "Are you sure you wish to delete this user?", :class => "destroy" %></td>
+		<td><%= link_to "Delete", user_path(user), :method => :delete, :confirm => "Are you sure you wish to delete this user?", :class => "destroy" %></td>
       </tr>
     <% end %>
     </table>

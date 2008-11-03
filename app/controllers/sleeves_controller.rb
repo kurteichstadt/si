@@ -14,7 +14,7 @@ class SleevesController < ApplicationController
 
     if @sleeve.save
       flash[:notice] = "Application successfully created."
-      redirect_to edit_sleeve_url(@sleeve)
+      redirect_to edit_sleeve_path(@sleeve)
     else
       render :action => :new
     end
@@ -34,7 +34,7 @@ class SleevesController < ApplicationController
 
     if @sleeve.update_attributes(params[:sleeve])
       flash[:notice] = "Application updated."
-      redirect_to sleeves_url
+      redirect_to sleeves_path
     else
       @sleeve_sheets = @sleeve.sleeve_sheets.find(:all)
       @new_sleeve_sheet = @sleeve.sleeve_sheets.build
@@ -55,7 +55,7 @@ class SleevesController < ApplicationController
       end
       #destroy sleeve
       @sleeve.destroy
-      redirect_to sleeves_url
+      redirect_to sleeves_path
     else
       @sleeves = Sleeve.find(:all)
       flash[:error] = "Applicants have applied for this application.  It cannot be deleted."

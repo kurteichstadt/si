@@ -41,4 +41,4 @@
 					<%= select :payment, :expiration_year, ((Time.now.year)..(Time.now.year+8)).to_a.map(&:to_s), {:include_blank => true} %></p>
 
 				<p class="buttons">
-					<%= submit_to_remote "submit", "Submit Payment", :url => payments_url(@application) %></p>
+					<%= submit_to_remote "submit", "Submit Payment", :url => payments_path(@application) %></p>

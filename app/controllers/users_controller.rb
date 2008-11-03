@@ -35,7 +35,7 @@ class UsersController < ApplicationController
                                            :created_at => Time.now,
                                            :created_by_id => user.id,
                                            :role => type)
-      redirect_to users_url
+      redirect_to users_path
     end
   end
   
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
     @temp_user.destroy
     
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to users_path }
     end
   end
   
