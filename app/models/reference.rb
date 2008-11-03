@@ -79,7 +79,7 @@ class Reference < ActiveRecord::Base
                                    'applicant_full_name' => application.applicant.informal_full_name,
                                    'applicant_email' => application.applicant.email, 
                                    'applicant_home_phone' => application.applicant.current_address.homePhone, 
-                                   'reference_url' => edit_reference_path(application, self.token)})
+                                   'reference_url' => edit_reference_url(application, self.token)})
   end
   
 protected

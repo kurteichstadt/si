@@ -120,7 +120,7 @@ class ApplicationController < ActionController::Base
                                      'applicant_full_name' => @application.applicant.informal_full_name,
                                      'applicant_email' => @application.applicant.email, 
                                      'applicant_home_phone' => @application.applicant.current_address.homePhone, 
-                                     'reference_url' => edit_reference_path(@application, reference.token)}))
+                                     'reference_url' => edit_reference_url(@application, reference.token)}))
         @sent = true
       end
 
@@ -131,7 +131,7 @@ class ApplicationController < ActionController::Base
                                     {'applicant_full_name' => @application.applicant.informal_full_name,
                                      'reference_full_name' => reference.name,
                                      'reference_email' => reference.email,
-                                     'application_url' => edit_application_path(@application)})
+                                     'application_url' => edit_application_url(@application)})
 
     reference.email_sent_at = Time.now
     reference.save
