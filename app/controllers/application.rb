@@ -102,6 +102,7 @@ class ApplicationController < ActionController::Base
       # If email address changes, we need a new link and a new answer sheet
       if(data["email"] != @references[sleeve_sheet_id].email)
         @references[sleeve_sheet_id].create_new_token
+        @references[sleeve_sheet_id].email_sent_at = nil
         @application.find_or_create_reference_answer_sheet(@references[sleeve_sheet_id].sleeve_sheet, true)
       end
       @references[sleeve_sheet_id].attributes = data  # store posted data
