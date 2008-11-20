@@ -36,7 +36,7 @@ class Reference < ActiveRecord::Base
   
   validates_length_of [:name, :email, :phone], :maximum => 255, :allow_nil => true
   validates_numericality_of :months_known, :only_integer => true, :allow_nil => true
-#  validate :valid_email?
+  validates_format_of :email, :with => /.{1,}[@][\w\-]{1,}([.]([\w\-]{1,})){1,3}$/i, :if => Proc.new { |ref| !ref.email.blank? }
   
   def check_app_complete
     if self.completed?
