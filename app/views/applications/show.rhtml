@@ -4,7 +4,7 @@
            <h2><%= @application.applicant.informal_full_name %></h2><br/>
 		<p><label class="desc">Full Name:</label> <span class="answer"><%= (@application.applicant.title.blank? ? "" : @application.applicant.title + " ") + @application.applicant.long_name %></span></p>
 		<p><label class="desc">Date Submitted:</label> <span class="answer"><%= datestamp @application.submitted_at %></span></p>
-		<p><label class="desc">Electronic Signature:</label> <span class="answer"><%= @application.applicant.current_si_application.electronicSignature %></span></p>
+		<p><label class="desc">Electronic Signature:</label> <span class="answer"><%= @application.hr_si_application.electronicSignature %></span></p>
 
 <% unless @application.applicant.current_address.nil? -%>
 		<p><label class="desc"><h4>Current Mailing Address</h4></label>

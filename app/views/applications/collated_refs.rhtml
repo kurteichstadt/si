@@ -4,7 +4,7 @@
   		<h2>Collated References</h2>
 		<p><label class="desc">Applicant:</label> <%= @application.applicant.informal_full_name %></p>
 		<p><label class="desc">Date Submitted:</label> <%= datestamp @application.submitted_at %></p>
-		<p><label class="desc">Electronic Signature:</label> <%= @application.applicant.current_si_application.electronicSignature %></p>
+		<p><label class="desc">Electronic Signature:</label> <%= @application.hr_si_application.electronicSignature %></p>
 
 		<p><label class="desc">Current Mailing Address</label>
 			<%= @application.applicant.current_address.address1 %><br/>

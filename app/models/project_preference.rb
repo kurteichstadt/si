@@ -5,7 +5,7 @@
 class ProjectPreference < Question
   def choices(app=nil)
     if !app.nil?
-      locations = "'#{app.applicant.current_si_application.locationA}','#{app.applicant.current_si_application.locationB}','#{app.applicant.current_si_application.locationC}'"
+      locations = "'#{app.hr_si_application.locationA}','#{app.hr_si_application.locationB}','#{app.hr_si_application.locationC}'"
       campus = Campus.find_by_name(app.applicant.campus, :conditions => ["state = ?", app.applicant.universityState])
       region = campus.nil? ? nil : campus.region
       show_all = false
