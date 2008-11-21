@@ -10,6 +10,7 @@ class Run
     end
   end
   
+  #In addition to running this method we need to add two rows to sitrack_enum_values
   def self.change_si_year
     last_years = HrSiProject.find_all_by_siYear("2008")
     last_years.each do |project|
