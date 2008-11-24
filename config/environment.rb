@@ -63,11 +63,11 @@ end
 CAS::Filter.login_url = "https://signin.mygcx.org/cas/login"
 CAS::Filter.validate_url = "https://signin.mygcx.org/cas/serviceValidate"
 
-ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org justin.sabelko@uscm.org)
-ExceptionNotifier.sender_address = %("Application Error" <si_error@uscm.org>)
-ExceptionNotifier.email_prefix = "[SI] "
+# ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org justin.sabelko@uscm.org)
+# ExceptionNotifier.sender_address = %("Application Error" <si_error@uscm.org>)
+# ExceptionNotifier.email_prefix = "[SI] "
 FILTER_KEYS = %w(card_number expiration_year expiration_month card_type password)
-ExceptionNotifier.filter_keys = FILTER_KEYS
+# ExceptionNotifier.filter_keys = FILTER_KEYS
 
 # retrieve table_name_prefix from database.yml
 # Had to move this here because USCM uses a shared database.yml file for all apps
@@ -93,4 +93,8 @@ ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
     html_tag[first_whitespace] = " class='#{error_class}' " 
   end
   html_tag
+end
+
+HoptoadNotifier.configure do |config|
+  config.api_key = '9cc98e1341f302b0fe6f496da702086b'
 end
