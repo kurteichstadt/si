@@ -106,7 +106,7 @@ class ApplicationController < ActionController::Base
         @application.find_or_create_reference_answer_sheet(@references[sleeve_sheet_id].sleeve_sheet, true)
       end
       @references[sleeve_sheet_id].attributes = data  # store posted data
-      @references[sleeve_sheet_id].save!
+      @references[sleeve_sheet_id].save
     end
   end
 
