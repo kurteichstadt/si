@@ -88,7 +88,7 @@ class PaymentsController < ApplicationController
                                     "Applicant Staff Payment Receipt", # LIQUID TEMPLATE NAME
                                     {'applicant_full_name' => @person.informal_full_name})
       # Send notice to Tool Owner
-      Notifier.deliver_notification("sarah.clemens@uscm.org", # RECIPIENTS - HARD CODED!
+      Notifier.deliver_notification("erik.kinyon@uscm.org", # RECIPIENTS - HARD CODED!
                                     "help@campuscrusadeforchrist.com", # FROM
                                     "Tool Owner Payment Confirmation", # LIQUID TEMPLATE NAME
                                     {'payment_amount' => "$" + @payment.amount.to_s,
