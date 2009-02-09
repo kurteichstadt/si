@@ -5,8 +5,7 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging *FILTER_KEYS
   before_filter AuthenticationFilter, :except => ['no_access','logout']
   helper_method :is_true, :si_user, :user
-  include HoptoadNotifier::Catcher
-  # include ExceptionNotifiable #Automatically generates emails of errors
+  include ExceptionNotifiable #Automatically generates emails of errors
 
   include CommonEngine
 
