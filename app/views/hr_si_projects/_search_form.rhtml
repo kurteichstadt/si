@@ -20,9 +20,9 @@
 <td>
 		<p><label for="aoa">AOA</label>
 			<%= select_tag(:AOA, options_for_select(@aoas, @params[:AOA])) %></p>
-		<p><label for="start_date">Start Date</label>
+		<p><label for="start_date">Start Date After</label>
 			<%= calendar_date_select_tag :studentStartDate, @params[:studentStartDate], :buttons => false %></p>
-		<p><label for="end_date">End Date</label>
+		<p><label for="end_date">End Date Before</label>
 			<%= calendar_date_select_tag :studentEndDate, @params[:studentEndDate], :buttons => false %></p>
 		<p><label for="year">Year</label>
 			<%= select_tag :siYear, options_for_select(@years_for_select, @params[:siYear]) %></p>
