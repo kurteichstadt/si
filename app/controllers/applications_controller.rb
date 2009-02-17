@@ -58,7 +58,9 @@ class ApplicationsController < ApplicationController
     @show_conf = true
 
     if @answer_sheets.empty?
-      raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
+      render :action => :too_old
+      #raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
+      return
     end
   end
   
@@ -68,7 +70,9 @@ class ApplicationsController < ApplicationController
     @show_conf = true
     
     if @answer_sheets.empty?
-      raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
+      render :action => :too_old
+      #raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
+      return
     end
     
     render :template => 'applications/show'
@@ -80,7 +84,9 @@ class ApplicationsController < ApplicationController
     @show_conf = false
     
     if @answer_sheets.empty?
-      raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
+      render :action => :too_old
+      #raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
+      return
     end
     
     render :template => 'applications/show'
@@ -91,7 +97,9 @@ class ApplicationsController < ApplicationController
     @answer_sheets = @application.reference_answer_sheets
 
     if @answer_sheets.empty?
-      raise "No Reference sheets in sleeve '#{@application.sleeve.title}'."
+      render :action => :too_old
+      #raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
+      return
     end
 
     @reference_question_sheet = @answer_sheets.empty? ? nil : @answer_sheets[0].question_sheet 
