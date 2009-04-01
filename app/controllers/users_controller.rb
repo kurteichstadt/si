@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_filter CAS::Filter, :only => [:search]
   skip_before_filter AuthenticationFilter, :only => [:search]
+  before_filter :check_valid_user, :except => [:search]
   layout 'admin', :except => [:search]
   
   def index

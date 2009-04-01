@@ -1,4 +1,5 @@
 class EmailTemplatesController < ApplicationController
+  before_filter :check_valid_user
   layout 'admin'
   
   def index 

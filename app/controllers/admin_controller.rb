@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+  before_filter :check_valid_user, :except => [:no_access, :logout]
   layout 'admin'
   
   def ssl_test

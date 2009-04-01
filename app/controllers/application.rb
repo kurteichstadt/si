@@ -37,16 +37,22 @@ class ApplicationController < ActionController::Base
   def si_user
     return nil unless user
     @si_user ||= SiUser.find_by_ssm_id(user.id)
-    unless @si_user
-      @si_user = SiUser.new(:ssm_id => user.id)
+#    unless @si_user
+#      @si_user = SiUser.new(:ssm_id => user.id)
       # check to see if they are staff
-      @si_user = user.person.isStaff? ? SiGeneralStaff.new(:ssm_id => user.id) : SiUser.new(:ssm_id => user.id)
-    end
-    unless session[:login_stamped]
+#      @si_user = user.person.isStaff? ? SiGeneralStaff.new(:ssm_id => user.id) : SiUser.new(:ssm_id => user.id)
+#    end
+    if @si_user && !session[:login_stamped]
       @si_user.update_attribute(:last_login, Time.now)
       session[:login_stamped] = true
     end
     @si_user
+  end
+
+  def check_valid_user
+    unless si_user
+      redirect_to :controller => :admin, :action => :no_access
+    end
   end
 
   def get_valid_projects(show_all)

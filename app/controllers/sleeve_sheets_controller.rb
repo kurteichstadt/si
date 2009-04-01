@@ -1,6 +1,6 @@
 # Used to add sheets to a sleeve in the "Edit Application" interface
 class SleeveSheetsController < ApplicationController
-
+  before_filter :check_valid_user
   before_filter :setup
   
   # add a sheet to a specific sleeve
