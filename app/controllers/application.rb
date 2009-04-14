@@ -52,6 +52,7 @@ class ApplicationController < ActionController::Base
   def check_valid_user
     unless si_user
       redirect_to :controller => :admin, :action => :no_access
+      return false
     end
   end
 
