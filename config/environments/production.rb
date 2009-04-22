@@ -29,3 +29,5 @@ config.action_mailer.perform_deliveries = true
 #   # :user_name => "dave", 
 #   # :password => "secret" 
 # } 
+
+ActionController::Base.session_options[:session_secure] = true
