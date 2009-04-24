@@ -24,6 +24,7 @@ class PaymentsController < ApplicationController
               :number     => @payment.card_number,
               :month      => @payment.expiration_month,
               :year       => @payment.expiration_year,
+              :verification_value => @payment.security_code,
               :first_name => @payment.first_name,
               :last_name  => @payment.last_name
             )   

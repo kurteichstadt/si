@@ -2,7 +2,7 @@ class Payment < ActiveRecord::Base
   set_table_name "#{TABLE_NAME_PREFIX}payments"   # `references` is a reserved word in MySQL
 
   attr_accessor :first_name, :last_name, :address, :city, :state, :zip, :card_number,
-                :expiration_month, :expiration_year, :staff_first, :staff_last, :card_type
+                :expiration_month, :expiration_year, :security_code, :staff_first, :staff_last, :card_type
 
   belongs_to :apply
   
@@ -11,7 +11,7 @@ class Payment < ActiveRecord::Base
   def validate
     if credit?
       errors.add_on_empty([:first_name, :last_name, :address, :city, :state, :zip, :card_number,
-                :expiration_month, :expiration_year])
+                :expiration_month, :expiration_year, :security_code])
       errors.add(:card_number, "is invalid.") if get_card_type.nil?
     end
   end
