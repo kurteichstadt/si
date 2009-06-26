@@ -100,7 +100,11 @@ class HrSiProjectsController < ApplicationController
     conditions = "1=1 "
     conditions += "and name like '%#{escape_string(params[:name])}%' " unless params[:name].to_s.empty?
     conditions += "and city like '%#{escape_string(params[:city])}%' " unless params[:city].to_s.empty?
-    conditions += "and country like '%#{params[:country]}%' " unless params[:country].to_s.empty?
+    if params[:country].to_s=="INTL"
+          conditions += "and country <>'USA' "
+    elsif !params[:country].to_s.empty?
+          conditions += "and country like '%#{params[:country]}%' "
+    end
     conditions += "and partnershipRegion like '%#{params[:partnershipRegion]}%' " unless params[:partnershipRegion].to_i == -1
     conditions += "and aoa like '%#{params[:AOA]}%' " unless params[:AOA].to_s.empty?
     conditions += "and studentStartDate >= '#{Date.parse(params[:studentStartDate])}' " unless params[:studentStartDate].to_s.empty?
