@@ -34,7 +34,7 @@ class AdminController < ApplicationController
     
 
     Apply.with_scope(:find => {:include => [:applicant, :references, :hr_si_application, :payments],
-                               :conditions => ["#{HrSiApplication.table_name}.siYear = ? and #{Person.table_name}.region = ?", @year, @region.region],
+                               :conditions => ["#{HrSiApplication.table_name}.siYear = ? and concat_ws('','',#{Person.table_name}.region )= ?", @year, @region.region],
                                :order => "#{Person.table_name}.lastName, #{Person.table_name}.firstName"}) do
 
       # Started apps are those that meet the following conditions:
