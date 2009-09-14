@@ -36,7 +36,7 @@
 			<tbody>
 			<% @national_projects.each do |project| -%>    	
 				<tr class="<%= cycle('alt','', :name => "row_class") %>">
-					<td><%= project.displayLocation %></td>
+					<td><%= project.name %></td>
 					<td><%= datestamp project.studentStartDate -%>&nbsp;-&nbsp;<%= datestamp project.studentEndDate -%></td>
 				</tr>
 			<% end -%>
@@ -55,7 +55,7 @@
 			<tbody>
 			<% @regional_stint_projects.each do |project| -%>    	
 				<tr class="<%= cycle('alt','', :name => 'row_class') %>">
-					<td><%= project.displayLocation %></td>
+					<td><%= project.name %></td>
 					<td><%= datestamp project.studentStartDate -%>&nbsp;-&nbsp;<%= datestamp project.studentEndDate -%></td>
 				</tr>
 			<% end -%>
@@ -74,7 +74,7 @@
 			<tbody>
 			<% @regional_internship_projects.each do |project| -%>    	
 				<tr class="<%= cycle('alt','', :name => 'row_class') %>">
-					<td><%= project.displayLocation %></td>
+					<td><%= project.name %></td>
 					<td><%= datestamp project.studentStartDate -%>&nbsp;-&nbsp;<%= datestamp project.studentEndDate -%></td>
 				</tr>
 			<% end -%>

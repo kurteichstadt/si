@@ -28,9 +28,9 @@ class InfoPagesController < ApplicationController
   end
   
   def opportunities
-    @national_projects = HrSiProject.find_all_by_projectType('n', :conditions => ['siYear = ? and onHold <> \'1\'', HrSiApplication::YEAR], :order => "displayLocation ASC")
-    @regional_stint_projects = HrSiProject.find_all_by_projectType('s', :conditions => ['siYear = ? and onHold <> \'1\'', HrSiApplication::YEAR], :order => "displayLocation ASC")
-    @regional_internship_projects = HrSiProject.find_all_by_projectType('i', :conditions => ['siYear = ? and onHold <> \'1\'', HrSiApplication::YEAR], :order => "displayLocation ASC")
+    @national_projects = HrSiProject.find_all_by_projectType('n', :conditions => ['siYear = ? and onHold <> \'1\'', HrSiApplication::YEAR], :order => "name ASC")
+    @regional_stint_projects = HrSiProject.find_all_by_projectType('s', :conditions => ['siYear = ? and onHold <> \'1\'', HrSiApplication::YEAR], :order => "name ASC")
+    @regional_internship_projects = HrSiProject.find_all_by_projectType('i', :conditions => ['siYear = ? and onHold <> \'1\'', HrSiApplication::YEAR], :order => "name ASC")
   end
   
   def a_real_life_story
