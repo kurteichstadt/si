@@ -1,0 +1,48 @@
+
+# /
+/log
+/previous_failures.txt
+/.project
+/.loadpath
+/.settings
+/nbproject
+/debug.log
+
+# /config/
+/config/database.yml
+/config/active_merchant.yml
+
+# /db/
+/db/schema.rb
+
+# /log/
+/log/*
+
+# /public/
+/public/plugin_assets
+
+# /public/images/
+/public/images/calendar_date_select
+
+# /public/javascripts/
+/public/javascripts/calendar_date_select
+
+# /public/stylesheets/
+/public/stylesheets/calendar_date_select
+
+# /tmp/
+/tmp/*
+
+# /tmp/cache/
+/tmp/cache/*
+
+# /tmp/pids/
+/tmp/pids/*
+
+# /tmp/sessions/
+/tmp/sessions/*
+
+# /tmp/sockets/
+/tmp/sockets/*
+
+# /vendor/plugins/
