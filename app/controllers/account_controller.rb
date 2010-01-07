@@ -50,7 +50,7 @@ class AccountController < ApplicationController
     cookies.delete :auth_token
     reset_session
     flash[:notice] = "You have been logged out."
-    redirect_back_or_default(:controller => '/account', :action => 'login')
+    redirect_back_or_default(login_path)
   end
   
   def post_login
@@ -66,5 +66,6 @@ class AccountController < ApplicationController
 
   def secret_hooey
     login
+    render :action => :login
   end
 end

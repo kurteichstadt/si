@@ -110,13 +110,12 @@ class ApplicationsController < ApplicationController
     setup_reference("friend")
     
     @show_conf = true
-    
-#    render :template => 'applications/show'
   end
 
   def setup_reference(type)
     ref = nil
     eval("ref = @" + type + "_reference = @application." + type + "_reference")
+    raise type if ref.sleeve_sheet.nil?
     answer_sheet = @application.find_or_create_reference_answer_sheet(ref.sleeve_sheet)
     question_sheet = answer_sheet.question_sheet
     elements = question_sheet.elements.find(:all, :include => 'page', 

@@ -32,6 +32,7 @@ class ApplicationsControllerTest < ActionController::TestCase
     cas_login
     get :show, :id => @apply
     assert_response :success, @response.body
+    assert_template :show
   end
   
   test "show with no answer sheets" do
@@ -41,5 +42,60 @@ class ApplicationsControllerTest < ActionController::TestCase
     get :show, :id => @apply
     assert_response :success, @response.body
     assert_template :too_old
+  end
+  
+  test "no ref" do
+    cas_login
+    get :no_ref, :id => @apply
+    assert_response :success, @response.body
+    assert_template :show
+  end
+  
+  test "no ref with no answer sheets" do
+    @apply.apply_sheets.collect(&:destroy)
+    @sleeve.sleeve_sheets.collect(&:destroy)
+    cas_login
+    get :no_ref, :id => @apply
+    assert_response :success, @response.body
+    assert_template :too_old
+  end
+  
+  test "no conf" do
+    cas_login
+    get :no_conf, :id => @apply
+    assert_response :success, @response.body
+    assert_template :show
+  end
+  
+  test "no conf with no answer sheets" do
+    @apply.apply_sheets.collect(&:destroy)
+    @sleeve.sleeve_sheets.collect(&:destroy)
+    cas_login
+    get :no_conf, :id => @apply
+    assert_response :success, @response.body
+    assert_template :too_old
+  end
+  
+  test "collated refs" do
+    setup_reference
+    
+    cas_login
+    get :collated_refs, :id => @apply
+    assert_response :success, @response.body
+    assert_template :collated_refs
+  end
+  
+  test "collated refs with no answer sheets" do
+    @apply.apply_sheets.collect(&:destroy)
+    @sleeve.sleeve_sheets.collect(&:destroy)
+    cas_login
+    get :collated_refs, :id => @apply
+    assert_response :success, @response.body
+    assert_template :too_old
+  end
+  
+  test "no access" do
+    get :no_access
+    assert_redirected_to :action => "login", :controller => :account
   end
 end

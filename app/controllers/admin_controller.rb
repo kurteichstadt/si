@@ -31,33 +31,27 @@ class AdminController < ApplicationController
     end
     @region = Region.find_by_region(params[:region])
     @year = params[:year] || HrSiApplication::YEAR
+    apply_base = Apply.by_region(@region.region, @year)
+    # Started apps are those that meet the following conditions:
+    #   - First Name or Last Name filled in (check :person)
+    @started_apps = apply_base.find(:all,
+                                    :conditions => ["(#{Person.table_name}.firstName != '' or #{Person.table_name}.lastName != '') AND #{Apply.table_name}.status IN(?)", Apply.unsubmitted_statuses])
+    # In Process apps
+    @in_process_apps = apply_base.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.not_ready_statuses] )
+
+    # Ready apps are those that meet the following conditions:
+    #   - Submitted (or Completed)
+    #     AND Paid
+    #     AND All References Submitted
+    @ready_apps = apply_base.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.ready_statuses])
     
-
-    Apply.with_scope(:find => {:include => [:applicant, :references, :hr_si_application, :payments],
-                               :conditions => ["#{HrSiApplication.table_name}.siYear = ? and concat_ws('','',#{Person.table_name}.region )= ?", @year, @region.region],
-                               :order => "#{Person.table_name}.lastName, #{Person.table_name}.firstName"}) do
-
-      # Started apps are those that meet the following conditions:
-      #   - First Name or Last Name filled in (check :person)
-      @started_apps = Apply.find(:all,
-                                 :conditions => ["(#{Person.table_name}.firstName != '' or #{Person.table_name}.lastName != '') AND #{Apply.table_name}.status IN(?)", Apply.unsubmitted_statuses])
-      # In Process apps
-      @in_process_apps = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.not_ready_statuses] )
-
-      # Ready apps are those that meet the following conditions:
-      #   - Submitted (or Completed)
-      #     AND Paid
-      #     AND All References Submitted
-      @ready_apps = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.ready_statuses])
-      
-      # Post Ready apps
-      # Everything from Evaluation through Termination, but not the ppl who dropped out
-      @post_ready_apps = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.post_ready_statuses])
-      
-      # Not Going apps
-      # Withdrawn or declined
-      @not_going = Apply.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.not_going_statuses])
-    end 
+    # Post Ready apps
+    # Everything from Evaluation through Termination, but not the ppl who dropped out
+    @post_ready_apps = apply_base.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.post_ready_statuses])
+    
+    # Not Going apps
+    # Withdrawn or declined
+    @not_going = apply_base.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.not_going_statuses])
   end
 
 
