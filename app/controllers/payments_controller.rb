@@ -30,18 +30,7 @@ class PaymentsController < ApplicationController
             )   
             
             if creditcard.valid?
-              # Load UN/PW from /config/active_merchant.yml
-              config = YAML.load_file("#{RAILS_ROOT}/config/active_merchant.yml")
-              un = config[RAILS_ENV]['auth_net_user']
-              pw = config[RAILS_ENV]['auth_net_pass']
-              
-              gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
-                :login    => un,
-                :password => pw#,
-#                :test => true
-              )
-      
-              response = gateway.purchase(@payment.amount * 100, creditcard)
+              response = GATEWAY.purchase(@payment.amount * 100, creditcard)
           
               if response.success?
                 @payment.approve!
@@ -72,7 +61,7 @@ class PaymentsController < ApplicationController
     # if this isn't a staff payment they shouldn't be here
     unless 'Staff' == @payment.payment_type
       redirect_to(:action => :no_access, :id => 'sorry') 
-      return;
+      return
     end
     @payment.status = "Approved" # set the status so a default radio button will be selected
   end

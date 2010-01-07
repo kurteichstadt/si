@@ -4,19 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>STINT/Internship Application</title>
-  <%= stylesheet_link_tag "reset", :media => 'screen', :plugin => 'questionnaire' %>
-  <%= stylesheet_link_tag "validation", :media => 'all', :plugin => 'questionnaire' %>
-  <%= stylesheet_link_tag "screen", :media => 'screen', :plugin => 'questionnaire' %>
   <%= stylesheet_link_tag "print", :media => 'print' %>
+  <%= stylesheet_link_tag 'base' %>
   <%= javascript_include_tag :defaults %>
-  <%= javascript_include_tag "validation", "public", :plugin => 'questionnaire' %>
   <%= calendar_date_select_includes %>
+  <%= questionnaire_engine_includes %>
 </head>
 <body>
 
 <div id="wrapper">
 
-<div id="status" style="display: none;"><img id="status-img" src="/plugin_assets/questionnaire/images/status.gif" /> <span id="status-msg">Please Wait...</span></div>
+<div id="status" style="display: none;"><%= image_tag('questionnaire_engine/status.gif', :id => "status-img") %> <span id="status-msg">Please Wait...</span></div>
 
    <div id="header">
       <h1>apply4stint.com</h1>

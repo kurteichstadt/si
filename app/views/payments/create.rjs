@@ -2,7 +2,7 @@ page.hide 'pay_credit', 'pay_mail', 'pay_staff'
 if @payment.errors.empty? 
   page << "new Effect.ScrollTo('main');"
   page.hide "no-payments"
-  page.insert_html :bottom, 'payment_table', :partial => 'payment_page/payment', :locals => {:payment => @payment}
+  page.insert_html :bottom, 'payment_table', :partial => 'payment_pages/payment', :locals => {:payment => @payment}
   page.visual_effect :highlight, 'payment_table'
 else
   page << "new Effect.ScrollTo('main');"
@@ -10,7 +10,7 @@ else
 end
 case @payment.payment_type
 when "Credit Card"
-  page.replace_html 'pay_credit', :partial => 'payment_page/credit'
+  page.replace_html 'pay_credit', :partial => 'payment_pages/credit'
   page.show 'pay_credit'
 when "Mail"
   page.show 'pay_mail'

@@ -13,8 +13,6 @@ class ApplicationsController < ApplicationController
   # dashboard
   def index
     redirect_to :action => :show_default
-#    @sleeves = Sleeve.find(:all)
-#    @applications = @person.applies.find(:all)
   end
   
   def show_default

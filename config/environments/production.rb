@@ -30,4 +30,9 @@ config.action_mailer.perform_deliveries = true
 #   # :password => "secret" 
 # } 
 
-ActionController::Base.session_options[:session_secure] = true
+config.action_mailer.default_url_options = { :host => 'stint.uscm.org' }
+
+config.after_initialize do
+  ActionController::Base.session_options[:session_secure] = true
+end
+

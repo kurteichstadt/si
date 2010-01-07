@@ -1,5 +1,5 @@
 # load in original Answer model
-require_dependency RAILS_ROOT + "/vendor/plugins/questionnaire/app/models/answer"
+require_dependency RAILS_ROOT + "/vendor/plugins/questionnaire_engine/app/models/answer"
 
 class Answer < ActiveRecord::Base
   def after_find
@@ -19,9 +19,8 @@ class Answer < ActiveRecord::Base
   def before_save
     q = Element.find(question_id)
     
-    @application = get_application
-    
     if !q.nil? and !q.object_name.nil? and !q.attribute_name.nil? and !q.object_name.blank? and !q.attribute_name.blank?
+      @application = get_application
       unless eval("@application." + q.object_name + ".nil?")
         value = Regexp.escape(self.value)
         value = value.gsub(/"/, '\"')
@@ -35,6 +34,11 @@ class Answer < ActiveRecord::Base
   
 private
   def get_application
-    AnswerSheet.find(answer_sheet_id).apply_sheet.apply
+    unless @apply
+      answer_sheet = AnswerSheet.find(answer_sheet_id)
+      apply_sheet = ApplySheet.find_by_answer_sheet_id(answer_sheet.id)
+      @apply = Apply.find(apply_sheet.apply_id)
+    end
+    @apply
   end
 end

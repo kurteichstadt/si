@@ -17,3 +17,8 @@ config.action_controller.perform_caching             = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+
+config.gem 'factory_girl'
+config.gem 'mocha'
+
+config.action_mailer.default_url_options = { :host => 'localhost:3000' }

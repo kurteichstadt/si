@@ -17,8 +17,6 @@ ActionController::Routing::Routes.draw do |map|
   # instead of a file named 'wsdl'
   #map.connect ':controller/service.wsdl', :action => 'wsdl'
 
-  map.from_plugin :questionnaire
-  
   map.resources :email_templates
   map.resources :campuses, :collection => {:search  => :post}
   map.resources :hr_si_projects, :collection => {:search => :post, :get_valid_projects => :post, :projects_feed => :get, :show => :get}
@@ -41,10 +39,9 @@ ActionController::Routing::Routes.draw do |map|
       applications.resources :references, :member => {:print => :get, :submit => :post, :send_invite => :post}
       # custom pages (singular resources)
       applications.resource :reference_page
-      applications.resource :payment_page
+      applications.resource :payment_page, :collection => {:staff_search => :post}
       applications.resource :submit_page, :member => { :submit => :post }
-      applications.resources :payments, :collection => {:staff_search => :post},
-                                        :member => {:approve => :post }
+      applications.resources :payments, :member => {:approve => :post }
   end
   
   

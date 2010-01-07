@@ -35,12 +35,12 @@
                                               ['Greater Northwest', 'NW'],
                                               ['Pacific Southwest', 'SW'],
                                               ['Nat\'l Campus', 'NC'] ],
-                           @params[:region]) %> <%= submit_tag "Go" %></p>
+                           params[:region]) %> <%= submit_tag "Go" %></p>
             
         <p style="clear: none; margin-bottom: 36px;"><label for="year_select" class="desc">Select Year</label>
             <%= select_tag :year, 
                            options_for_select(@years_for_select,
-                           @params[:year]) %></p>
+                           params[:year]) %></p>
 						   
 <% end %>
 <% end %>	 

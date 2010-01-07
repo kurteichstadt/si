@@ -1,6 +1,5 @@
 
 # /
-/log
 /previous_failures.txt
 /.project
 /.loadpath
@@ -15,7 +14,6 @@
 # /db/
 /db/schema.rb
 
-# /log/
 /log/*
 
 # /public/
@@ -45,4 +43,10 @@
 # /tmp/sockets/
 /tmp/sockets/*
 
-# /vendor/plugins/
+coverage
+public/javascripts/questionnaire_engine/
+public/stylesheets/questionnaire_engine/
+public/questionnaire_engine/
+public/images/questionnaire_engine/
+
+config/initializers/payment.rb

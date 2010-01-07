@@ -3,7 +3,7 @@
   <td><%= sheet.title %></td>    
   <td><%= sheet.assign_to_text %></td>
   <td class="actions">
-    <%= link_to_remote 'Edit', :url => sleeve_edit_sheet_path(@sleeve, sheet), :method => :get %>&nbsp;&nbsp;<%= link_to_remote 'Remove', {:url => sleeve_sheet_path(@sleeve, sheet), 
+    <%= link_to_remote 'Edit', :url => edit_sleeve_sheet_path(@sleeve, sheet), :method => :get %>&nbsp;&nbsp;<%= link_to_remote 'Remove', {:url => sleeve_sheet_path(@sleeve, sheet), 
       :confirm => 'Are you sure?', :method => :delete}, 
       :class => "destroy" %>
   </td>

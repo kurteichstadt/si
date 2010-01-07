@@ -1,10 +1,7 @@
-require 'uuidtools'
-
 class Reference < ActiveRecord::Base
   set_table_name "#{TABLE_NAME_PREFIX}character_references"   # `references` is a reserved word in MySQL
   
   include ActionController::UrlWriter # named routes
-  default_url_options[:host] = 'www.powertochange.jobs'       # set this to what you want!!
       
   acts_as_state_machine :initial => :created, :column => :status
 
@@ -22,6 +19,7 @@ class Reference < ActiveRecord::Base
   end
 
   event :submit do
+    transitions :to => :completed, :from => :created
     transitions :to => :completed, :from => :started
   end
 
@@ -34,7 +32,7 @@ class Reference < ActiveRecord::Base
   
   # :name, :months_known, etc. are quite necessary... no validates here because I want auto-save to still work with incomplete forms
   
-  validates_length_of [:name, :email, :phone], :maximum => 255, :allow_nil => true
+  validates_length_of :name, :email, :phone, :maximum => 255, :allow_nil => true
   validates_numericality_of :months_known, :only_integer => true, :allow_nil => true
   validates_format_of :email, :with => /.{1,}[@][\w\-]{1,}([.]([\w\-]{1,})){1,3}$/i, :if => Proc.new { |ref| !ref.email.blank? }
   
@@ -61,7 +59,7 @@ class Reference < ActiveRecord::Base
   end
   
   def create_new_token
-     self.token = UUID.timestamp_create.to_s
+     self.token = UUIDTools::UUID.timestamp_create.to_s
   end
   
   def email_sent?() !self.email_sent_at.nil? end
@@ -79,7 +77,7 @@ class Reference < ActiveRecord::Base
                                    'applicant_full_name' => application.applicant.informal_full_name,
                                    'applicant_email' => application.applicant.email, 
                                    'applicant_home_phone' => application.applicant.current_address.homePhone, 
-                                   'reference_url' => edit_reference_url(application, self.token)})
+                                   'reference_url' => edit_application_reference_url(application, self.token, :host => ActionMailer::Base.default_url_options[:host])})
   end
   
 protected

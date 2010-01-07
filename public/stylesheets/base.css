@@ -1,0 +1,56 @@
+#meta {
+  height: 27px;
+  background: #bbb;
+  padding: 9px;
+}
+
+#meta li {
+  font-family: arial;
+  font-size: 14px;
+  float: left;
+  font-weight: bold;
+  padding: 0 9px;
+}
+
+#meta li span {
+  display: block;
+  line-height: 9px;
+  font-size: 11px;
+}
+
+#meta.started {
+  background: #dff1c9;
+  border-bottom: solid 1px #cce2b4;
+}
+
+#meta.started li {
+  color: #549110;
+  border-right: solid 1px #cce2b4;
+}
+
+#meta.started li span {
+  color: #98b275;
+}
+
+#meta.submitted {
+  background: #666;
+  border-bottom: solid 1px #666;
+}
+
+#meta.submitted li {
+  color: #fff;
+  border-right: solid 1px #999;
+}
+
+#meta.submitted li span {
+  color: #ccc;
+}
+
+#link-log-out {
+  float: right;
+  margin: 9px 18px;
+}
+
+div.warningText {
+  color: red;
+}

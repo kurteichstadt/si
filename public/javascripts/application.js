@@ -61,7 +61,7 @@ function checkCard(num) {
 
 function searchCampuses(state_el_id, campus_el_id, url) {
 	// This is really stupid.  You can't update select elements using an Updater.  IE doesn't allow innerHTML updates on select elements.
-	new Ajax.Request('/campuses;search', {asynchronous:true, evalScripts:true, parameters: {state: $F(state_el_id)},
+	new Ajax.Request('/campuses/search', {asynchronous:true, evalScripts:true, parameters: {state: $F(state_el_id)},
 	                                      onSuccess: function(transport) {
 										  	campuses = transport.responseText.split('|');
 											$(campus_el_id).options.length = 0;
@@ -78,7 +78,7 @@ function searchCampuses(state_el_id, campus_el_id, url) {
 }
 
 function searchProjects(show_all_el_id, project_el_id, url) {
-	new Ajax.Request('/hr_si_projects;get_valid_projects', {asynchronous:true, evalScripts:true, parameters: { show_all: $F(show_all_el_id)},
+	new Ajax.Request('/hr_si_projects/get_valid_projects', {asynchronous:true, evalScripts:true, parameters: { show_all: $F(show_all_el_id)},
 	                                      onSuccess: function(transport) {
 										  	projects = transport.responseText.split('|');
 											$(project_el_id).options.length = 0;

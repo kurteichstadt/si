@@ -1,5 +1,5 @@
 class Payment < ActiveRecord::Base
-  set_table_name "#{TABLE_NAME_PREFIX}payments"   # `references` is a reserved word in MySQL
+  set_table_name "#{TABLE_NAME_PREFIX}payments" 
 
   attr_accessor :first_name, :last_name, :address, :city, :state, :zip, :card_number,
                 :expiration_month, :expiration_year, :security_code, :staff_first, :staff_last, :card_type

@@ -5,7 +5,7 @@
 class SleeveSheet < ActiveRecord::Base
   set_table_name "#{TABLE_NAME_PREFIX}#{self.table_name}"
   
-  belongs_to :sleeves
+  belongs_to :sleeve
   belongs_to :question_sheet
   has_many :apply_sheets  # people applying for this sheet
 

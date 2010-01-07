@@ -34,20 +34,20 @@ class ReferencesController < ApplicationController
     @reference.submit!
     
     # Send Reference Thank You
-      Notifier.deliver_notification(@reference.email,
-                                    "help@campuscrusadeforchrist.com", 
-                                    "Reference Thank You", 
-                                    {'reference_full_name' => @reference.name, 
-                                     'applicant_full_name' => @application.applicant.informal_full_name})
+    Notifier.deliver_notification(@reference.email,
+                                  "help@campuscrusadeforchrist.com", 
+                                  "Reference Thank You", 
+                                  {'reference_full_name' => @reference.name, 
+                                   'applicant_full_name' => @application.applicant.informal_full_name})
 
     
     # Send Reference Completion Notice
-      Notifier.deliver_notification(@application.applicant.email,
-                                    "help@campuscrusadeforchrist.com", 
-                                    "Reference Complete", 
-                                    {'reference_full_name' => @reference.name, 
-                                     'applicant_full_name' => @application.applicant.informal_full_name,
-                                     'reference_submission_date' => @reference.submitted_at.strftime("%m/%d/%Y")})
+    Notifier.deliver_notification(@application.applicant.email,
+                                  "help@campuscrusadeforchrist.com", 
+                                  "Reference Complete", 
+                                  {'reference_full_name' => @reference.name, 
+                                   'applicant_full_name' => @application.applicant.informal_full_name,
+                                   'reference_submission_date' => @reference.submitted_at.strftime("%m/%d/%Y")})
     
     render :update do |page|
       page[:submit_message].replace_html "Thank you for submitting your reference."

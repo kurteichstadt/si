@@ -1,0 +1,82 @@
+credit_card:
+  name: Credit Card Error
+  content: {{error}}
+  subject: Problem with STINT Application Credit Card Submission
+
+reference_invite:
+  name: Reference Invite
+  subject: Reference Request for {{ applicant_full_name }}
+  content: | 
+    Dear {{ reference_full_name }},
+    {{ applicant_full_name }} has just applied for an exciting internship opportunity with Campus Crusade for Christ and has suggested that we contact you as a reference. If you could take some time and fill out a recommendation for this applicant, we can continue with the application process.  The application materials will then be reviewed and a decision will be given as soon as possible.
+    In case you don't have time to finish the reference form in one sitting, we allow you to save and come back to it whenever it is convenient for you to finish.
+    The reference form is on our secure web site.  Just use the link below to go directly to the reference form for {{ applicant_full_name }}.  Your reference will be kept confidential, and the applicant will not be able to read the information you share with us.  The insight that you provide will be very helpful in determining a decision about this applicant's internship!
+    You may contact the applicant by email at {{ applicant_email }} or by phone at {{ applicant_home_phone }}.
+    If you would prefer not to participate, please notify the applicant yourself so that they can take you off of their reference list.  If you would prefer to fill out a paper reference form, please ask the applicant to provide you one.
+    Please do not forward this email to the applicant, so that they do not receive the link for editing their own reference form.
+    Thank you very much.
+    Sincerely,
+    Campus Crusade for Christ
+    Please use the following link. The link should be all in one line, so if it is split up into more than one line, you may need to copy the entire address (including both/all of the lines) into your web browser's address bar.
+    {{ reference_url }}
+    You do not have to fill out the entire form at one time.  After you start filling out the form, you may exit at any time and return later to finish.  Just use the same link to return to finishing the form. 
+    
+reference_appplicant:
+  name: Reference Notification to Applicant
+  subject: STINT/Internship Reference for {{ applicant_full_name }}
+  content: |
+    Dear {{ applicant_full_name }}:
+    This email is to notify you that we have sent an email on your behalf to {{ reference_full_name }} inviting him or her to submit a reference for your participation in a  STINT or Internship.  The email was sent to: {{ reference_email }}.  If the email address is invalid or the message is returned for any reason, you will receive the returned email.  If this happens, 1) please login to your STINT/Internship application, 2) go to the References page, 3) correct the reference's email address, and 4) click the 'Send Email Invitation' button.
+    To make any changes to your application form or to this reference, please click on this link: {{ application_url }}
+    Sincerely,
+    Campus Crusade for Christ
+    
+reference_thank:
+  name: Reference Thank You
+  subject: Thank You for Completing an Internship Reference for {{ applicant_full_name }}
+  content: |
+    Dear {{ reference_full_name }}:
+    Thank you for completing the reference form for {{ applicant_full_name }}!  You are helping this applicant to make an eternal spiritual investment!  We thank you for giving of your limited time in order to give us insight about this applicant.
+    Sincerely,
+    Campus Crusade for Christ
+    
+reference_complete:
+  name: Reference Complete
+  subject: STINT/Internship Reference Complete for {{ applicant_full_name }}
+  content: |
+    Dear {{ applicant_full_name }}:
+    A reference form filled out by {{ reference_full_name }} recommending you for a STINT/Internship has been completed and was submitted on {{ reference_submission_date }}.  You are now one step closer to finding out the decision about your internship application!   When a final decision is reached, we will let you know.  We trust that God will use this time of waiting as you continue to seek His will.
+    Sincerely,
+    Campus Crusade for Christ
+
+tool_owner_payment_confirmation:
+  name: Tool Owner Payment Confirmation
+  subject: Application Payment Notification
+  content: |
+    To whom it may concern:
+    Take: {{ payment_amount }}
+    From: {{ payment_account_no }}
+    Authorized by: {{ payment_auth_code }}
+    Payment record ID: {{ payment_id }}
+    Sincerely,
+    Campus Crusade for Christ
+
+applicant_staff_receipt:
+  name: Applicant Staff Payment Receipt
+  subject: Application Payment Notification
+  content: |
+    Dear {{ applicant_full_name }},
+    A staff member has just paid for your application via account transfer.
+    Thank you very much.
+    Sincerely,
+    Campus Crusade for Christ
+    
+payment_refusal:
+  name: Payment Refusal
+  subject: Application Payment Notification
+  content: |
+    Dear {{ applicant_full_name }},
+    The staff member you requested payment from for your Application has just notified us of their refusal to pay.  Please contact them or make other payment arrangements.  You can log onto the system and pay via credit card or check/money order.
+    Sorry for the inconvenience...  Please remember your application will not be processed until the fee is paid.
+    Sincerely,
+    Campus Crusade for Christ
