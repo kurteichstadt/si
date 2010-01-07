@@ -4,7 +4,7 @@ class ReferencesControllerTest < ActionController::TestCase
   def setup
     login
     setup_application
-    setup_reference
+    setup_reference(@sleeve)
   end
   
   test "edit" do

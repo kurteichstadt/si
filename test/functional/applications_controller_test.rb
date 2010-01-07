@@ -12,42 +12,34 @@ class ApplicationsControllerTest < ActionController::TestCase
     assert_redirected_to :action => "show_default"
   end
   
-  test "show_default" do
+  test "show default" do 
     get :show_default
     assert_response :success, @response.body
   end
   
-  # test "edit with sheets" do
-  #   sleeve = Factory(:sleeve)
-  #   sleeve_sheet = Factory(:sleeve_sheet, :sleeve => sleeve)
-  #   get :edit, :id => sleeve
-  #   assert_response :success, @response.body
-  # end
-  # 
-  # test "update" do
-  #   sleeve = Factory(:sleeve)
-  #   put :update, :id => sleeve, :sleeve => {:title => 'foo'}
-  #   assert(sleeve = assigns(:sleeve))
-  #   assert_equal('foo', sleeve.title)
-  #   assert_redirected_to sleeves_path
-  # end
-  # 
-  # test "new" do
-  #   get :new
-  #   assert_response :success, @response.body
-  # end
-  # 
-  # test "create" do
-  #   post :create, :sleeve => Factory.attributes_for(:sleeve)
-  #   assert sleeve = assigns(:sleeve)
-  #   assert_redirected_to edit_sleeve_path(sleeve)
-  # end
-  # 
-  # test "destroy" do
-  #   sleeve = Factory(:sleeve)
-  #   assert_difference("Sleeve.count", -1) do
-  #     delete :destroy, :id => sleeve
-  #   end
-  #   assert_redirected_to sleeves_path
-  # end
+  test "create" do
+    post :create, :sleeve_id => @sleeve
+    assert(application = assigns(:application), "Cannot find @application")
+    assert_redirected_to application_path(application)
+  end
+  
+  test "edit" do
+    get :edit, :id => @apply
+    assert_response :success, @response.body
+  end
+  
+  test "show" do
+    cas_login
+    get :show, :id => @apply
+    assert_response :success, @response.body
+  end
+  
+  test "show with no answer sheets" do
+    @apply.apply_sheets.collect(&:destroy)
+    @sleeve.sleeve_sheets.collect(&:destroy)
+    cas_login
+    get :show, :id => @apply
+    assert_response :success, @response.body
+    assert_template :too_old
+  end
 end
