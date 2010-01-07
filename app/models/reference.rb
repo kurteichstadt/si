@@ -1,3 +1,4 @@
+require 'digest/md5'
 class Reference < ActiveRecord::Base
   set_table_name "#{TABLE_NAME_PREFIX}character_references"   # `references` is a reserved word in MySQL
   
@@ -59,7 +60,7 @@ class Reference < ActiveRecord::Base
   end
   
   def create_new_token
-     self.token = UUIDTools::UUID.timestamp_create.to_s
+     self.token = object_id.to_s + ':' + Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s)
   end
   
   def email_sent?() !self.email_sent_at.nil? end

@@ -21,8 +21,8 @@
    </div>
    
    <div id="main">
-     <% if controller.controller_name == "references" -%>
-       <%= hidden_field_tag "submit_to", submit_application_reference_path(@application, @reference) %>  <!-- url for final submission (reference). not the ideal spot -->
+     <% if controller.controller_name == "references" && @application && @reference -%>
+       <%= hidden_field_tag "submit_to", submit_application_reference_path(@application, @reference) %>
      <% end -%>
      <%= yield %>
    </div>

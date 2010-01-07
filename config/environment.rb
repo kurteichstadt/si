@@ -14,7 +14,6 @@ Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
   
   config.gem 'activemerchant', :lib => 'active_merchant'
-  config.gem 'uuidtools'
   config.gem 'liquid'
   # Use the database for sessions instead of the file system
   # (create the session table with 'rake db:sessions:create')
