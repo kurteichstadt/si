@@ -2,25 +2,25 @@
 require_dependency RAILS_ROOT + "/vendor/plugins/questionnaire_engine/app/models/answer"
 
 class Answer < ActiveRecord::Base
-  def after_find
-    # for some reason, self.question is nil on subsequent initializations
-    begin
-      q = Element.find(question_id)
-
-      @application = get_application
-      
-      if !q.nil? and !q.object_name.nil? and !q.attribute_name.nil? and !q.object_name.blank? and !q.attribute_name.blank?
-        self.value = self.short_value = eval("@application." + q.object_name + "." + q.attribute_name) unless eval("@application." + q.object_name + ".nil?")
-      end
-    rescue
-    end
-  end
+  # def after_find
+  #   # for some reason, self.question is nil on subsequent initializations
+  #   begin
+  #     q = Element.find(question_id)
+  # 
+  #     @application = get_application
+  #     
+  #     if !q.nil? and !q.object_name.nil? and !q.attribute_name.nil? and !q.object_name.blank? and !q.attribute_name.blank?
+  #       self.value = self.short_value = eval("@application." + q.object_name + "." + q.attribute_name) unless eval("@application." + q.object_name + ".nil?")
+  #     end
+  #   rescue
+  #   end
+  # end
 
   def before_save
     q = Element.find(question_id)
     
-    if !q.nil? and !q.object_name.nil? and !q.attribute_name.nil? and !q.object_name.blank? and !q.attribute_name.blank?
-      @application = get_application
+    if q.present? && q.object_name.present? && q.attribute_name.present?
+      @application = application
       unless eval("@application." + q.object_name + ".nil?")
         value = Regexp.escape(self.value)
         value = value.gsub(/"/, '\"')
@@ -32,8 +32,7 @@ class Answer < ActiveRecord::Base
     end
   end
   
-private
-  def get_application
+  def application
     unless @apply
       answer_sheet = AnswerSheet.find(answer_sheet_id)
       apply_sheet = ApplySheet.find_by_answer_sheet_id(answer_sheet.id)

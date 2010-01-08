@@ -60,7 +60,7 @@ class Reference < ActiveRecord::Base
   end
   
   def create_new_token
-     self.token = object_id.to_s + ':' + Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s)
+     self.token = object_id.to_s + '-' + Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s)
   end
   
   def email_sent?() !self.email_sent_at.nil? end
