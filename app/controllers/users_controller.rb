@@ -15,8 +15,7 @@ class UsersController < ApplicationController
   end
   
   def edit
-   @temp_user = SiUser.find(params[:id])
-   
+    @temp_user = SiUser.find(params[:id])
     respond_to do |format|
       format.html
     end

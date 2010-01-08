@@ -10,12 +10,6 @@ class EmailTemplatesController < ApplicationController
     end
   end
   
-  def show
-    respond_to do |format|
-      format.html
-    end
-  end
-
   def new 
     @email_template = EmailTemplate.new
   

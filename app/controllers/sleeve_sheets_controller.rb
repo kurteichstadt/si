@@ -6,7 +6,7 @@ class SleeveSheetsController < ApplicationController
   # add a sheet to a specific sleeve
   def create
     @sleeve_sheet = @sleeve.sleeve_sheets.build(params[:sleeve_sheet])
-    
+
     if @sleeve_sheet.save
       render :update do |page|
         page.insert_html :bottom, 'sleeve_sheets', :partial => 'sheet', :object => @sleeve_sheet
@@ -60,12 +60,9 @@ class SleeveSheetsController < ApplicationController
   # remove a sheet
   def destroy
     @sleeve_sheet = @sleeve.sleeve_sheets.find(params[:id])
-    if @sleeve_sheet && @sleeve_sheet.destroy
-      render :update do |page|
-        page.visual_effect :fade, dom_id(@sleeve_sheet)        
-      end
-    else
-      render :nothing => true, :status => 500
+    @sleeve_sheet.destroy
+    render :update do |page|
+      page.visual_effect :fade, dom_id(@sleeve_sheet)        
     end
   end
 

@@ -50,3 +50,5 @@ public/questionnaire_engine/
 public/images/questionnaire_engine/
 
 config/initializers/payment.rb
+
+public/blank_iframe.html

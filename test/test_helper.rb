@@ -9,7 +9,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
   def cas_login
-    Factory(:si_user)
+    @si_user = Factory(:si_user)
     CAS::Filter.fake = true
     @request.session[:casfilterreceipt] = Receipt.new
   end
@@ -28,7 +28,7 @@ class ActiveSupport::TestCase
     @sleeve_sheet = Factory(:sleeve_sheet, :sleeve => @sleeve)
     @question_sheet = @sleeve_sheet.question_sheet
     @answer_sheet = @question_sheet.answer_sheets.create
-    Factory(:page, :question_sheet => @question_sheet)
+    @page = Factory(:page, :question_sheet => @question_sheet)
     @apply.apply_sheets.create(:sleeve_sheet => @sleeve_sheet, :answer_sheet => @answer_sheet)
   end
   
@@ -37,7 +37,7 @@ class ActiveSupport::TestCase
     @ref_question_sheet = @ref_sheet.question_sheet
     @ref_answer_sheet = @ref_question_sheet.answer_sheets.create
     @ref_apply_sheet = Factory(:apply_sheet, :apply => @apply, :sleeve_sheet => @ref_sheet, :answer_sheet => @ref_answer_sheet)
-    Factory(:page, :question_sheet => @ref_question_sheet)
+    @ref_page = Factory(:page, :question_sheet => @ref_question_sheet)
     
     #Staff Reference
     @reference = Factory(:reference, :apply => @apply, :sleeve_sheet => @ref_sheet)
