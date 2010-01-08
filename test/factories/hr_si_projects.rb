@@ -5,6 +5,7 @@ Factory.define :hr_si_project do |p|
   p.country             'USA'
   p.displayLocation     'Italy:Rome'
   p.projectType         's'
-  p.studentStartDate    Time.now
+  p.studentStartDate    3.days.from_now
   p.studentEndDate      1.month.from_now
+  p.siYear              HrSiApplication::YEAR
 end

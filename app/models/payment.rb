@@ -40,21 +40,8 @@ class Payment < ActiveRecord::Base
   end
 
   def get_card_type
-    mc_regEx = /^5[1-5]/
-    visa_regEx = /^4/
-    amex_regEx = /^3(4|7)/
-    disc_regEx = /^6(011|5)/
-    
-    if mc_regEx.match(self.card_number)
-      return "master"
-    elsif (visa_regEx.match(self.card_number)) 
-      return "visa"
-    elsif (amex_regEx.match(self.card_number)) 
-      return "american_express"
-    elsif (disc_regEx.match(self.card_number)) 
-      return "discover"
-    else 
-      return nil
-    end
+    card =  ActiveMerchant::Billing::CreditCard.new(:number => card_number)
+    card.valid?
+    card.type
   end
 end

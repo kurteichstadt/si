@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
     p = user.person || user.create_person_and_address
     p
   end
+  helper_method :current_person
   
   def user
     if session[:casfilterreceipt]
@@ -30,6 +31,7 @@ class ApplicationController < ActionController::Base
     end
     return false unless @user
   end
+  helper_method :user
 
   def si_user
     return nil unless user
