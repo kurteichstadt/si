@@ -8,17 +8,13 @@ class SchoolPicker < Question
       s = app.applicant.universityState
       if s.blank?
         # get from the campus
-        c = Campus.find_by_name(response)
+        c = Campus.find_by_name(response(app))
         if !c.nil?
           s = c.state
-        else
-          s = ""
         end
       end
-    else
-      s = ""
     end
-    return s
+    s.to_s
   end
   
   def choices(app=nil)

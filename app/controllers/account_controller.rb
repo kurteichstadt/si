@@ -56,16 +56,18 @@ class AccountController < ApplicationController
   def post_login
     {:controller => 'applications', :action => 'show_default'}
   end
-  
-  
-  def prod_check
-    if ENV['RAILS_ENV'] == "production"
-      redirect_to :action => :closed
-    end
-  end
 
   def secret_hooey
     login
     render :action => :login
   end
+  
+  protected 
+    #   
+    # def prod_check
+    #   if Rails.env.production? || Rails.env.test?
+    #     redirect_to :action => :closed
+    #     return false
+    #   end
+    # end
 end

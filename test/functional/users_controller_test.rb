@@ -20,6 +20,12 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to users_path
   end
   
+  test "update with missing attributes" do
+    put :update, :id => @si_user, :temp_user => {:role => ''}
+    assert(si_user = assigns(:temp_user))
+    assert_response :success, @response.body
+  end
+  
   test "new" do
     get :new
     assert_response :success, @response.body

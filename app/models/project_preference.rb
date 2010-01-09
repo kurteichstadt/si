@@ -12,7 +12,7 @@ class ProjectPreference < Question
       person = app.applicant
       project_type = 'n'
       @projects = HrSiProject.find_all_available(locations, region, show_all, person, project_type)
-      @projects = @projects.collect {|x| [x.name, x.SIProjectID] }
+      @projects.collect {|x| [x.name, x.SIProjectID] }
     else
       []
     end

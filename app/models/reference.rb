@@ -82,12 +82,12 @@ class Reference < ActiveRecord::Base
   end
   
 protected
-  def valid_email?
-    unless email.blank?
-      TMail::Address.parse(email)
-    end
-  rescue
-    errors.add_to_base("Must be a valid email")
-  end
+#   def valid_email?
+#     unless email.blank?
+#       TMail::Address.parse(email)
+#     end
+#   rescue
+#     errors.add_to_base("Must be a valid email")
+#   end
 
 end

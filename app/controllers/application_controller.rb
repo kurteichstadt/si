@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
     p = user.person || user.create_person_and_address
     p
   end
+  helper_method :current_person
   
   def user
     if session[:casfilterreceipt]
@@ -30,6 +31,7 @@ class ApplicationController < ActionController::Base
     end
     return false unless @user
   end
+  helper_method :user
 
   def si_user
     return nil unless user
@@ -48,13 +50,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def get_valid_projects(show_all)
-    conditions = "siYear = #{HrSiApplication::YEAR}"
-    @projects = HrSiProject.find(:all, :conditions => conditions, :order => "name ASC")
-  end
+  # def get_valid_projects(show_all)
+  #   conditions = "siYear = #{HrSiApplication::YEAR}"
+  #   @projects = HrSiProject.find(:all, :conditions => conditions, :order => "name ASC")
+  # end
 
-  protected # not user-accessible
-  
   # custom pages in sidebar of application
   def custom_pages(apply)
     [

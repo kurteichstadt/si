@@ -17,7 +17,27 @@ class ApplicationsControllerTest < ActionController::TestCase
     assert_response :success, @response.body
   end
   
+  test "show default no apply" do 
+    @person.current_si_application.update_attribute(:apply_id, nil)
+    get :show_default
+    assert_response :success, @response.body
+  end
+  
+  test "show default no hr_si_application" do 
+    @person.current_si_application.destroy
+    begin
+      get :show_default
+    rescue RuntimeError; end
+    assert_response :success, @response.body
+  end
+  
   test "create" do
+    post :create, :sleeve_id => @sleeve
+    assert(application = assigns(:application), "Cannot find @application")
+    assert_redirected_to application_path(application)
+  end
+  
+  test "create missing attributes" do
     post :create, :sleeve_id => @sleeve
     assert(application = assigns(:application), "Cannot find @application")
     assert_redirected_to application_path(application)
@@ -28,13 +48,19 @@ class ApplicationsControllerTest < ActionController::TestCase
     assert_response :success, @response.body
   end
   
+  test "edit other person's application" do
+    @app = Factory(:apply, :sleeve => @sleeve, :applicant => Factory(:josh))
+    get :edit, :id => @app
+    assert_redirected_to :action => "login", :controller => :account
+  end
+  
   test "show" do
     cas_login
     get :show, :id => @apply
     assert_response :success, @response.body
     assert_template :show
   end
-  
+
   test "show with no answer sheets" do
     @apply.apply_sheets.collect(&:destroy)
     @sleeve.sleeve_sheets.collect(&:destroy)
@@ -98,4 +124,9 @@ class ApplicationsControllerTest < ActionController::TestCase
     get :no_access
     assert_redirected_to :action => "login", :controller => :account
   end
+  
+  test "get year" do
+    assert_equal(HrSiApplication::YEAR, ApplicationsController.new.send(:get_year))
+  end
+  
 end
