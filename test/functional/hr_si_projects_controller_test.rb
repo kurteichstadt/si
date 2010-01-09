@@ -5,6 +5,13 @@ class HrSiProjectsControllerTest < ActionController::TestCase
     @project = Factory(:hr_si_project)
   end
   
+  test "index not logged in" do
+    CAS::Filter.fake = true
+    @request.session[:casfilterreceipt] = Receipt.new
+    get :index
+    assert_redirected_to :action => "no_access", :controller => :admin
+  end
+  
   test "index" do
     cas_login
     get :index
@@ -30,6 +37,11 @@ class HrSiProjectsControllerTest < ActionController::TestCase
   
   test "projects feed" do
     get :projects_feed, :contry => 'USA'
+    assert_response :success, @response.body
+  end
+  
+  test "international projects feed" do
+    get :projects_feed, :country => 'INTL'
     assert_response :success, @response.body
   end
   

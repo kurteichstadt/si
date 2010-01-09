@@ -1,7 +1,7 @@
 class SiUser < ActiveRecord::Base
   belongs_to :user, :foreign_key => :ssm_id
   
-  validates_presence_of :ssm_id
+  validates_presence_of :ssm_id, :role
   
   def can_delete_project?() false; end
   def can_change_project_status?() false; end

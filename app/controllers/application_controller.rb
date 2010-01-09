@@ -50,13 +50,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def get_valid_projects(show_all)
-    conditions = "siYear = #{HrSiApplication::YEAR}"
-    @projects = HrSiProject.find(:all, :conditions => conditions, :order => "name ASC")
-  end
+  # def get_valid_projects(show_all)
+  #   conditions = "siYear = #{HrSiApplication::YEAR}"
+  #   @projects = HrSiProject.find(:all, :conditions => conditions, :order => "name ASC")
+  # end
 
-  protected # not user-accessible
-  
   # custom pages in sidebar of application
   def custom_pages(apply)
     [

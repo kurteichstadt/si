@@ -17,13 +17,9 @@ class ApplicationsController < ApplicationController
   
   def show_default
     @application = get_application
-    if @application
-      setup_view
-      
-      render :template => 'answer_sheets/edit'
-    else
-      raise "Could not find a default application for you."
-    end
+    setup_view
+    
+    render :template => 'answer_sheets/edit'
   end
   
   # create app
@@ -31,11 +27,8 @@ class ApplicationsController < ApplicationController
     @sleeve = Sleeve.find(params[:sleeve_id])
     @application = @sleeve.applies.build(:applicant => @person)    
     
-    if @application.save
-      redirect_to application_path(@application)
-    else
-      render :nothing => true, :status => 500
-    end
+    @application.save!
+    redirect_to application_path(@application)
   end
   
   # edit an application
@@ -148,14 +141,12 @@ protected
   end
   
   def get_application
-    if @application
-      @person ||= @application.person   # .applicant??
-    else
+    unless @application
       @person ||= get_person
       # if this is the user's first visit, we will need to create an hr_si_application
-    	if @person.current_si_application.nil?
-    		@app = HrSiApplication.create(:siYear => get_year, :fk_personID => @person.id)
-    		@person.current_si_application = @app
+      if @person.current_si_application.nil?
+        @app = HrSiApplication.create(:siYear => get_year, :fk_personID => @person.id)
+        @person.current_si_application = @app
       end
       if @person.current_si_application.apply_id.nil?
         @application = @person.current_si_application.find_or_create_apply
@@ -171,7 +162,7 @@ protected
     @answer_sheets = @application.find_or_create_applicant_answer_sheets
     
     if @answer_sheets.empty?
-      raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
+      raise "No applicant sheets in sleeve '#{@application.sleeve.try(:title)}'."
     end
         
     # edit the first page
