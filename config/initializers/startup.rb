@@ -2,7 +2,7 @@ CAS::Filter.login_url = "https://signin.mygcx.org/cas/login"
 CAS::Filter.validate_url = "https://signin.mygcx.org/cas/serviceValidate"
 
 ExceptionNotifier.exception_recipients = %w(josh.starcher@uscm.org justin.sabelko@uscm.org)
-ExceptionNotifier.sender_address = %("Application Error" <si_error@uscm.org>)
+ExceptionNotifier.sender_address = %(si_error@uscm.org)
 ExceptionNotifier.email_prefix = "[SI] "
 FILTER_KEYS = %w(card_number expiration_year expiration_month card_type password)
 ExceptionNotifier.filter_keys = FILTER_KEYS
