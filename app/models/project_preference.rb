@@ -21,7 +21,9 @@ class ProjectPreference < Question
   def display_response(app=nil)
     r = get_response(app).first
     p = HrSiProject.find_by_SIProjectID(r) unless r.blank?
-    if p.nil? 
+    if r.blank?
+      return ""
+    elsif p.nil? 
       return "<span class='answerwarn'><b>Applicant's location preference is closed and is no longer being offered as a project.</b></span>"
     else
       return p.displayLocation
