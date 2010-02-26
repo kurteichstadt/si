@@ -31,4 +31,11 @@ class ProjectPreferencesTest < ActiveSupport::TestCase
     assert_equal('', @project_preference.display_response(@apply))
   end
   
+  test "display response with deleted location" do
+    @person = Factory(:person, :universityState => 'IL', :campus => 'UIUC')
+    setup_application
+    @project_preference = Factory(:project_preference, :question_sheet => @question_sheet, :page => @page)
+    Answer.create(:question_id => @project_preference.id, :answer_sheet_id => @answer_sheet.id, :value => "0")
+    assert_equal("<span class='answerwarn'><b>Applicant's location preference is closed and is no longer being offered as a project.</b></span>", @project_preference.display_response(@apply))
+  end
 end
