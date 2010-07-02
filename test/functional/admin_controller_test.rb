@@ -18,7 +18,7 @@ class AdminControllerTest < ActionController::TestCase
   
   test "logout" do
     get :logout
-    assert_redirected_to "https://signin.mygcx.org/cas/logout"
+    assert_redirected_to "https://signin.ccci.org/cas/logout"
   end
   
   test "select region with no region" do

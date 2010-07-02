@@ -57,8 +57,8 @@ module CAS
   # CAS::Filter.authorized_proxies.
   #
   class Filter
-    @@login_url = "https://signin.mygcx.org/cas/login"
-    @@validate_url = "https://signin.mygcx.org/cas/serviceValidate"
+    @@login_url = "https://signin.ccci.org/cas/login"
+    @@validate_url = "https://signin.ccci.org/cas/serviceValidate"
     @@server_name = nil
     @@renew = false
     @@session_username = :casfilteruser
