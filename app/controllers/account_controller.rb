@@ -63,11 +63,11 @@ class AccountController < ApplicationController
   end
   
   protected 
-    #   
-    # def prod_check
-    #   if Rails.env.production? || Rails.env.test?
-    #     redirect_to :action => :closed
-    #     return false
-    #   end
-    # end
+       
+    def prod_check
+      if Rails.env.production? || Rails.env.test?
+        redirect_to :action => :closed
+        return false
+      end
+    end
 end
