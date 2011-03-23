@@ -11,6 +11,7 @@ class Run
   end
   
   #In addition to running this method we need to add two rows to sitrack_enum_values
+  #There are also a few month/year questions on the application that need additional years added as choices
   def self.change_si_year
     last_years = HrSiProject.find_all_by_siYear("2010")
     last_years.each do |project|
