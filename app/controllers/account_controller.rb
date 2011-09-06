@@ -3,7 +3,7 @@ class AccountController < ApplicationController
   skip_before_filter CAS::Filter 
   skip_before_filter AuthenticationFilter
   prepend_before_filter :login_from_cookie
-  before_filter :prod_check, :except => [:closed, :secret_hooey]
+  #before_filter :prod_check, :except => [:closed, :secret_hooey]
   filter_parameter_logging :password
 
   def index
