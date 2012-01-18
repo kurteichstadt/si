@@ -1,7 +1,7 @@
 		<% row_class = cycle('','alt', :name => "row_bg") %>
 		<tr class="<%= row_class %>">
 			<td><%= @counter += 1 %></td>
-			<td><h3><b><%= app.applicant.informal_full_name %></b></h3></td>
+			<td><h3><b><%= app.applicant ? app.applicant.informal_full_name : "Person record doesn't exist anymore." %></b></h3></td>
 			<td><%= datestamp app.created_at %><br/>
 			    <%= datestamp app.submitted_at %><br/>
 				<%= app.has_paid? ? "Yes" : "No"  %></td>
@@ -17,7 +17,7 @@
 			    <%= datestamp app.discipler_reference.submitted_at %><br/>
 				<%= datestamp app.roommate_reference.submitted_at %><br/>
 				<%= datestamp app.friend_reference.submitted_at %></td>
-			<td><%= app.applicant.campus %></td>
+			<td><%= app.applicant ? app.applicant.campus : "Person record doesn't exist anymore." %></td>
 		</tr>
 		<tr class="<%= row_class %>">
 			<td colspan="6">Ministry Preferences: (<b>1</b>) <%= app.hr_si_application.location_a.displayLocation unless app.hr_si_application.location_a.blank? %>; 
