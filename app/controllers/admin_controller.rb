@@ -30,6 +30,7 @@ class AdminController < ApplicationController
       return
     end
     @region = Region.find_by_region(params[:region])
+    @region ||= Region.new # in case unassigned region is selected
     @year = params[:year] || HrSiApplication::YEAR
     apply_base = Apply.by_region(@region.region, @year)
     # Started apps are those that meet the following conditions:
