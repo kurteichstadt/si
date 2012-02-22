@@ -98,6 +98,7 @@ class ApplicationController < ActionController::Base
       sleeve_sheet_id = sleeve_sheet_id.to_i
       # @references[sleeve_sheet_id] ||= @application.references.build(:sleeve_sheet_id => sleeve_sheet_id) # new reference if needed
       # If email address changes, we need a new link and a new answer sheet
+      data["email"] = data["email"].gsub(/â€[[:cntrl:]]/, '').strip # try to get rid of weird characters and spaces
       if(data["email"] != @references[sleeve_sheet_id].email)
         @references[sleeve_sheet_id].create_new_token
         @references[sleeve_sheet_id].email_sent_at = nil
