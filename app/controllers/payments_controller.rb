@@ -47,7 +47,7 @@ class PaymentsController < ApplicationController
               @payment.errors.add(:card_number, "is invalid.  Check the number and/or the expiration date.")
             end
           when "Mail"
-            @payment.save
+            @payment.approve!
           when "Staff"
             @payment.save
             send_staff_payment_request(@payment)
