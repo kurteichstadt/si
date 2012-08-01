@@ -37,6 +37,6 @@ module Si
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :card_number, :expiration_year, :expiration_month, :card_type]
   end
 end
