@@ -1,28 +1,69 @@
 Si::Application.routes.draw do
-  map.resources :email_templates
-  map.resources :campuses, :collection => {:search  => :post}
-  map.resources :hr_si_projects, :collection => {:search => :post, :get_valid_projects => :post, :projects_feed => :get, :show => :get}
-  map.resources :users, :collection => {:search => :post}
+  resources :email_templates
   
-  map.login 'account/login', :controller => "account", :action => "login"
-  map.logout 'account/logout', :controller => "account", :action => "logout"
-  map.signup 'account/signup', :controller => "account", :action => "signup"
-  map.admin_home 'admin/', :controller => "admin", :action => 'index'   # could possibly be a singular resource?
-  map.home '', :controller => "applications", :action => 'show_default'
+  resources :campuses do
+    collection do
+      post :search
+    end
+  end
   
-  map.resources :sleeves, 
-    :singular => :sleeve  do |sleeves| # where does it get sleeve from?? (defect is closed: http://dev.rubyonrails.org/ticket/8263)
-      sleeves.resources :sheets,
-        :controller => :sleeve_sheets,
-        :name_prefix => 'sleeve_'
+  resources :hr_si_projects do
+    collection do 
+      post :search
+      post :get_valid_projects
+      get :projects_feed
+      get :show
+    end
+  end
+  
+  resources :users do
+    collection do
+      post :search
+    end
+  end
+  
+  match 'account/login' => "account#login", :as => :login
+  match 'account/logout' => "account#logout", :as => :logout
+  match 'account/signup' => "account#signup", :as => :signup
+  match 'admin/' => "admin#index", :as => :admin_home   # could possibly be a singular resource?
+  root :to => "applications#show_default", :as => :home
+  
+  resource :sleeves do
+    resources :sheets, :controller => :sleeve_sheets, :name_prefix => 'sleeve_'
   end
 
-  map.resources :applications, :member => {:no_ref => :get, :no_conf => :get, :collated_refs => :get} do |applications|
-    applications.resources :references, :member => {:print => :get, :submit => :post, :send_invite => :post}
+  resources :applications do
+    member do
+      get :no_ref
+      get :no_conf
+      get :collated_refs
+    end
+    
+    resources :references do
+      member do
+        get :print
+        post :submit
+        post :send_invite
+      end
+    end
+    
     # custom pages (singular resources)
-    applications.resource :reference_page
-    applications.resource :payment_page, :collection => {:staff_search => :post}
-    applications.resource :submit_page, :member => { :submit => :post }
-    applications.resources :payments, :member => {:approve => :post }
+    resource :reference_page
+    resource :payment_page do
+      collection do
+        post :staff_search
+      end
+    end
+    resource :submit_page do
+      member do
+        post :submit
+      end
+    end
+    
+    resources :payments do
+      member do
+        post :approve
+      end
+    end
   end
 end
