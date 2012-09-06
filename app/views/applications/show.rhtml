@@ -27,17 +27,17 @@
 			<% unless @application.applicant.permanent_address.cellPhone.blank? -%><p><label class="desc">Cell Phone:</label> <span class="answer"><%= @application.applicant.permanent_address.cellPhone %></span></p><% end -%>
 			<% unless @application.applicant.permanent_address.email.blank? -%><p><label class="desc">Email:</label> <span class="answer"><%= @application.applicant.permanent_address.email %></span></p><% end -%>
 <% end -%>
-<% unless @application.applicant.emergency_address.nil? -%>
+<% unless @application.applicant.emergency_address1.nil? -%>
 		<p><label class="desc"><h4>Emergency Mailing Address</h4></label>
-			<span class="answer"><%= @application.applicant.emergency_address.contactName %><br/>
-			<%= @application.applicant.emergency_address.address1 %><br/>
-			<% unless @application.applicant.emergency_address.address2.blank? -%><%= @application.applicant.emergency_address.address2 %><br/><% end -%>
-			<%= @application.applicant.emergency_address.city %>, <%= @application.applicant.emergency_address.state %> <%= @application.applicant.emergency_address.zip %></span></p>
-			<p><label class="desc">Relationship:</label> <span class="answer"><%= @application.applicant.emergency_address.contactRelationship %></span></p>
-			<% unless @application.applicant.emergency_address.homePhone.blank? -%><p><label class="desc">Home Phone:</label> <span class="answer"><%= @application.applicant.emergency_address.homePhone %></span></p><% end -%>
-			<% unless @application.applicant.emergency_address.workPhone.blank? -%><p><label class="desc">Work Phone:</label> <span class="answer"><%= @application.applicant.emergency_address.workPhone %></span></p><% end -%>
-			<% unless @application.applicant.emergency_address.cellPhone.blank? -%><p><label class="desc">Cell Phone:</label> <span class="answer"><%= @application.applicant.emergency_address.cellPhone %></span></p><% end -%>
-			<% unless @application.applicant.emergency_address.email.blank? -%><p><label class="desc">Email:</label> <span class="answer"><%= @application.applicant.emergency_address.email %></span></p><% end -%>
+			<span class="answer"><%= @application.applicant.emergency_address1.contactName %><br/>
+			<%= @application.applicant.emergency_address1.address1 %><br/>
+			<% unless @application.applicant.emergency_address1.address2.blank? -%><%= @application.applicant.emergency_address1.address2 %><br/><% end -%>
+			<%= @application.applicant.emergency_address1.city %>, <%= @application.applicant.emergency_address1.state %> <%= @application.applicant.emergency_address1.zip %></span></p>
+			<p><label class="desc">Relationship:</label> <span class="answer"><%= @application.applicant.emergency_address1.contactRelationship %></span></p>
+			<% unless @application.applicant.emergency_address1.homePhone.blank? -%><p><label class="desc">Home Phone:</label> <span class="answer"><%= @application.applicant.emergency_address1.homePhone %></span></p><% end -%>
+			<% unless @application.applicant.emergency_address1.workPhone.blank? -%><p><label class="desc">Work Phone:</label> <span class="answer"><%= @application.applicant.emergency_address1.workPhone %></span></p><% end -%>
+			<% unless @application.applicant.emergency_address1.cellPhone.blank? -%><p><label class="desc">Cell Phone:</label> <span class="answer"><%= @application.applicant.emergency_address1.cellPhone %></span></p><% end -%>
+			<% unless @application.applicant.emergency_address1.email.blank? -%><p><label class="desc">Email:</label> <span class="answer"><%= @application.applicant.emergency_address1.email %></span></p><% end -%>
 <% end -%>
 		<br/>
 		<p><label class="desc">Marital Status:</label> <span class="answer"><%= @application.applicant.maritalStatus %></span></p>

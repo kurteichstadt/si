@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  include AuthenticatedSystem
   before_filter AuthenticationFilter, :except => ['no_access','logout']
   helper_method :is_true, :si_user, :user
 
@@ -56,9 +57,9 @@ class ApplicationController < ActionController::Base
   # custom pages in sidebar of application
   def custom_pages(apply)
     [
-      PageLink.new('References', edit_application_reference_page_path(apply), 'reference_page'),
-      PageLink.new('Payment', edit_application_payment_page_path(apply), 'payment_page'),
-      PageLink.new('Submit Application', edit_application_submit_page_path(apply), 'submit_page')
+      PageLink.new('References', edit_application_reference_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new),
+      PageLink.new('Payment', edit_application_payment_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new),
+      PageLink.new('Submit Application', edit_application_submit_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new)
     ]
   end
   
@@ -128,4 +129,14 @@ class ApplicationController < ActionController::Base
     reference.save
     end
   end
+  
+  private
+  
+  # page is identified by answer sheet, so can have multiple sheets loaded at once
+  def dom_page(answer_sheet, page)
+    dom = "#{dom_id(answer_sheet)}-#{dom_id(page)}"
+    dom += "-no_cache" if page.no_cache
+    dom
+  end
+
 end

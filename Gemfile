@@ -11,6 +11,7 @@ gem 'activemerchant'
 gem 'liquid'
 gem 'dalli'
 gem 'rack-contrib'
+gem 'aasm'
 
 gem 'airbrake'
 

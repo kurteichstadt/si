@@ -1,5 +1,4 @@
 class ApplicationsController < ApplicationController
-  include AuthenticatedSystem
   skip_before_filter CAS::Filter, :except => [:show, :collated_refs, :no_conf, :no_ref]
   skip_before_filter AuthenticationFilter
   prepend_before_filter :ssm_login_required, :except => [:no_access, :show, :no_ref, :no_conf, :collated_refs]
@@ -135,7 +134,7 @@ protected
   def get_person
     @person ||= current_person
     @person.current_address = Address.new(:addressType =>'current') unless @person.current_address
-    @person.emergency_address = Address.new(:addressType =>'emergency1') unless @person.emergency_address
+    @person.emergency_address1 = Address.new(:addressType =>'emergency1') unless @person.emergency_address1
     @person.permanent_address = Address.new(:addressType =>'permanent') unless @person.permanent_address
     return @person
   end
