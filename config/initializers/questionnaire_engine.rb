@@ -5,7 +5,7 @@ module Questionnaire
   self.table_name_prefix = TABLE_NAME_PREFIX
   
   mattr_accessor :answer_sheet_class
-#  self.answer_sheet_class = 'SiAnswerSheet'
+  self.answer_sheet_class = 'Apply'
   
   mattr_accessor :from_email
   self.from_email = 'STINT and Internships <StintandInternships@uscm.org>'

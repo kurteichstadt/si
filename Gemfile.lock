@@ -58,10 +58,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    metaclass (0.0.1)
     mime-types (1.19)
-    mocha (0.12.3)
-      metaclass (~> 0.0.1)
     money (5.0.0)
       i18n (~> 0.4)
       json
@@ -108,7 +105,6 @@ DEPENDENCIES
   dalli
   factory_girl
   liquid
-  mocha
   mysql2 (~> 0.2.7)
   rack-contrib
   rails (~> 3.0.16)

@@ -17,7 +17,7 @@ gem 'airbrake'
 
 group :development, :test do
   gem 'factory_girl'
-  gem 'mocha'
+#  gem 'mocha'
 end
 
 # Use unicorn as the web server

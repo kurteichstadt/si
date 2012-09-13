@@ -1,6 +1,6 @@
 require 'digest/md5'
-class Reference < ActiveRecord::Base
-  set_table_name "#{TABLE_NAME_PREFIX}character_references"   # `references` is a reserved word in MySQL
+class OldReference < ActiveRecord::Base
+  set_table_name "#{TABLE_NAME_PREFIX}references"   # `references` is a reserved word in MySQL
   
   include ActionController::UrlWriter # named routes
       

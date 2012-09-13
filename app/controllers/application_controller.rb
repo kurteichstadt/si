@@ -57,9 +57,9 @@ class ApplicationController < ActionController::Base
   # custom pages in sidebar of application
   def custom_pages(apply)
     [
-      PageLink.new('References', edit_application_reference_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new),
-      PageLink.new('Payment', edit_application_payment_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new),
-      PageLink.new('Submit Application', edit_application_submit_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new)
+#      PageLink.new('References', edit_application_reference_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new),
+#      PageLink.new('Payment', edit_application_payment_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new),
+#      PageLink.new('Submit Application', edit_application_submit_page_path(apply), dom_page(apply.answer_sheets.first, Page.new), Page.new)
     ]
   end
   
