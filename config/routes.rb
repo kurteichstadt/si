@@ -28,9 +28,9 @@ Si::Application.routes.draw do
   match 'admin' => "admin#index", :as => :admin_home   # could possibly be a singular resource?
   root :to => "applications#show_default"
   
-  resource :sleeves do
-    resources :sheets, :controller => :sleeve_sheets, :name_prefix => 'sleeve_'
-  end
+#  resource :sleeves do
+#    resources :sheets, :controller => :sleeve_sheets, :name_prefix => 'sleeve_'
+#  end
 
   resources :applications do
     member do
