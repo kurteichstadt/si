@@ -1,19 +1,19 @@
 <div id="meta" class="<%= @application.status.downcase %>">
-		<ul>
-			<% if Apply.completed_statuses.include?(@application.status) %>
-				<li><span>Status</span>APPLICATION COMPLETED</li>
-			<% else -%>
-				<li><span>Status</span><%= @application.status.upcase %></li>
-			<% end -%>
-			<% if Apply.post_submitted_statuses.include?(@application.status) -%>
-				<li><span>Submitted</span> <%= datestamp @application.submitted_at %></li>
-			<% else -%>
-				<li><span>Started</span> <%= datestamp @application.created_at %></li>
-			<% end -%>
-			<li><span>Payment</span> <%= @application.payment_status.upcase %></li>
-			<li><span>Staff Reference</span> <%= @application.staff_reference.status.upcase if @application.staff_reference.status %></li>
-			<li><span>Discipler Reference</span> <%= @application.discipler_reference.status.upcase if @application.discipler_reference.status%></li>
-			<li><span>Roommate Reference</span> <%= @application.roommate_reference.status.upcase if @application.roommate_reference.status%></li>
-			<li><span>Friend Reference</span> <%= @application.friend_reference.status.upcase if @application.friend_reference.status%></li>
-		</ul>
+  <ul>
+		<% if Apply.completed_statuses.include?(@application.status) %>
+			<li><span>Status</span>APPLICATION COMPLETED</li>
+		<% else -%>
+			<li><span>Status</span><%= @application.status.upcase %></li>
+		<% end -%>
+		<% if Apply.post_submitted_statuses.include?(@application.status) -%>
+			<li><span>Submitted</span> <%= datestamp @application.submitted_at %></li>
+		<% else -%>
+			<li><span>Started</span> <%= datestamp @application.created_at %></li>
+		<% end -%>
+		<li><span>Payment</span> <%= @application.payment_status.upcase %></li>
+		<li><span>Staff Reference</span> <%= @application.staff_reference.status.upcase if @application.staff_reference.status %></li>
+		<li><span>Discipler Reference</span> <%= @application.discipler_reference.status.upcase if @application.discipler_reference.status%></li>
+		<li><span>Roommate Reference</span> <%= @application.roommate_reference.status.upcase if @application.roommate_reference.status%></li>
+		<li><span>Friend Reference</span> <%= @application.friend_reference.status.upcase if @application.friend_reference.status%></li>
+  </ul>
 </div>

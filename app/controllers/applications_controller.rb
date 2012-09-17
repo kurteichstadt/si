@@ -158,16 +158,12 @@ protected
   end
 
   def setup_view
-    @answer_sheets = @application.find_or_create_applicant_answer_sheets
-    
-    if @answer_sheets.empty?
-      raise "No applicant sheets in sleeve '#{@application.sleeve.try(:title)}'."
-    end
-        
+    @answer_sheet = @application
     # edit the first page
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheets, custom_pages(@application))
-
+    @presenter = AnswerPagesPresenter.new(self, @answer_sheet, custom_pages(@application))
     @elements = @presenter.questions_for_page(:first).elements
+    @page = @presenter.pages.first
+    @presenter.active_page ||= @page
   end
 end
 
