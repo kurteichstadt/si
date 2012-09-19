@@ -12,6 +12,7 @@ gem 'liquid'
 gem 'dalli'
 gem 'rack-contrib'
 gem 'aasm'
+gem 'jammit'
 
 gem 'airbrake'
 

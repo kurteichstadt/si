@@ -18,7 +18,7 @@ class ElementsUpdates < ActiveRecord::Migration
     add_column :si_elements, :conditional_id, :integer
     add_column :si_elements, :tooltip, :text
     add_column :si_elements, :hide_label, :boolean, :default => false
-    add_column :si_elements, :hide_options_labels, :boolean, :default => false
+    add_column :si_elements, :hide_option_labels, :boolean, :default => false
     add_column :si_elements, :max_length, :integer
     add_index :si_elements, :position
     
