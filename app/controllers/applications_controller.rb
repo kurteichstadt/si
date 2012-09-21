@@ -58,7 +58,7 @@ class ApplicationsController < ApplicationController
   
   def no_ref
     @application = Apply.find(params[:id]) unless @application
-    @answer_sheets = @application.find_or_create_applicant_answer_sheets
+    @answer_sheets = [@application]
     @show_conf = true
     
     if @answer_sheets.empty?
@@ -72,7 +72,7 @@ class ApplicationsController < ApplicationController
   
   def no_conf
     @application = Apply.find(params[:id]) unless @application
-    @answer_sheets = @application.find_or_create_applicant_answer_sheets
+    @answer_sheets = [@application]
     @show_conf = false
     
     if @answer_sheets.empty?
@@ -86,7 +86,7 @@ class ApplicationsController < ApplicationController
   
   def collated_refs
     @application = Apply.find(params[:id]) unless @application
-    @answer_sheets = @application.reference_answer_sheets
+    @answer_sheets = @application.references
 
     if @answer_sheets.empty?
       render :action => :too_old
@@ -107,12 +107,14 @@ class ApplicationsController < ApplicationController
   def setup_reference(type)
     ref = nil
     eval("ref = @" + type + "_reference = @application." + type + "_reference")
-    raise type if ref.sleeve_sheet.nil?
-    answer_sheet = @application.find_or_create_reference_answer_sheet(ref.sleeve_sheet)
+    raise type unless ref
+    answer_sheet = ref
     question_sheet = answer_sheet.question_sheet
-    elements = question_sheet.elements.find(:all, :include => 'page', 
-                                                 :conditions => ["#{Element.table_name}.kind not in (?)", %w(Paragraph)],
-                                                 :order => "#{Page.table_name}.number,#{Element.table_name}.position")
+    elements = []
+    question_sheet.pages.order(:number).each do |page|
+      elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Paragraph)).all
+    end
+    elements = elements.flatten
     elements.reject! {|e| e.is_confidential} if @show_conf == false
     eval("@" + type + "_elements = QuestionSet.new(elements, answer_sheet).elements")
 

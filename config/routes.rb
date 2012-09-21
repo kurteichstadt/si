@@ -25,7 +25,11 @@ Si::Application.routes.draw do
   match 'account/login' => "account#login", :as => :login
   match 'account/logout' => "account#logout", :as => :logout
   match 'account/signup' => "account#signup", :as => :signup
-  match 'admin' => "admin#index", :as => :admin_home   # could possibly be a singular resource?
+
+  match 'admin' => "admin#index", :as => :admin_home
+  match 'admin/select_region' => 'admin#select_region', :via => :post, :as => :select_region
+  match 'admin/logout' => 'admin#logout'
+
   root :to => "applications#show_default"
   
 #  resource :sleeves do

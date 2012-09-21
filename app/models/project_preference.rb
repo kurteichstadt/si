@@ -19,7 +19,7 @@ class ProjectPreference < Question
   end
   
   def display_response(app=nil)
-    r = get_response(app).first
+    r = responses(app).first
     p = HrSiProject.find_by_SIProjectID(r) unless r.blank?
     if r.blank?
       return ""

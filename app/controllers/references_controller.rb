@@ -58,16 +58,18 @@ class ReferencesController < ApplicationController
 
   
   def show
-    @reference = @application.references.find_by_token(params[:id])
+    @reference = @application.references.find_by_access_key(params[:id])
 
     if @reference.nil?
       render :action => :edit
     else
-      @answer_sheet = @application.find_or_create_reference_answer_sheet(@reference.sleeve_sheet)
+      @answer_sheet = @reference
       @question_sheet = @answer_sheet.question_sheet
-      @elements = @question_sheet.elements.find(:all, :include => 'page', 
-                                                      :conditions => ["#{Element.table_name}.kind not in (?) ", %w(Section Paragraph)],
-                                                      :order => "#{Page.table_name}.number,#{Element.table_name}.position")
+      @elements = []
+      @question_sheet.pages.order(:number).each do |page|
+        @elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Section Paragraph)).all
+      end
+      @elements = @elements.flatten
       @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
     end
   end

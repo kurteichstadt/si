@@ -2,9 +2,9 @@
   <div id="panel">
   	<div class="panel">
      <% unless @reference.nil? -%> 
-        <h2><%= @reference.sleeve_sheet.title %></h2> 
+        <h2><%= @reference.question_sheet.label %></h2> 
          
-        <p><label class="desc">Applicant:</label> <%= @reference.apply.applicant.informal_full_name %></p> 
+        <p><label class="desc">Applicant:</label> <%= @application.applicant.informal_full_name %></p> 
         <p><label class="desc">Reference:</label> <%= @reference.name %></p> 
      <% end -%> 
 	</div>

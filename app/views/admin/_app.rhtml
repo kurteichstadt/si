@@ -5,10 +5,10 @@
 			<td><%= datestamp app.created_at %><br/>
 			    <%= datestamp app.submitted_at %><br/>
 				<%= app.has_paid? ? "Yes" : "No"  %></td>
-			<td>Staff: <% unless app.staff_reference.token.blank? -%><%= link_to app.staff_reference.name, edit_application_reference_path(app, app.staff_reference.token), :target => "_blank" %><% end -%><br/>
-			    Discipler: <% unless app.discipler_reference.token.blank? -%><%= link_to app.discipler_reference.name, edit_application_reference_path(app, app.discipler_reference.token), :target => "_blank" %><% end -%><br/>
-				Roommate: <% unless app.roommate_reference.token.blank? -%><%= link_to app.roommate_reference.name, edit_application_reference_path(app, app.roommate_reference.token), :target => "_blank" %><% end -%><br/>
-				Friend: <% unless app.friend_reference.token.blank? -%><%= link_to app.friend_reference.name, edit_application_reference_path(app, app.friend_reference.token), :target => "_blank" %><% end -%></td>
+			<td>Staff: <% unless app.staff_reference.access_key.blank? -%><%= link_to app.staff_reference.name, edit_reference_sheet_path(app.staff_reference, :a => app.staff_reference.access_key), :target => "_blank" %><% end -%><br/>
+			    Discipler: <% unless app.discipler_reference.access_key.blank? -%><%= link_to app.discipler_reference.name, edit_reference_sheet_path(app.discipler_reference, :a => app.discipler_reference.access_key), :target => "_blank" %><% end -%><br/>
+				Roommate: <% unless app.roommate_reference.access_key.blank? -%><%= link_to app.roommate_reference.name, edit_reference_sheet_path(app.roommate_reference, :a => app.roommate_reference.access_key), :target => "_blank" %><% end -%><br/>
+				Friend: <% unless app.friend_reference.access_key.blank? -%><%= link_to app.friend_reference.name, edit_reference_sheet_path(app.friend_reference, :a => app.friend_reference.access_key), :target => "_blank" %><% end -%></td>
 			<td><%= datestamp app.staff_reference.started_at %><br/>
 			    <%= datestamp app.discipler_reference.started_at %><br/>
 				<%= datestamp app.roommate_reference.started_at %><br/>
@@ -27,14 +27,14 @@
 		</tr>
 		<tr class="<%= row_class %>">
 			<td colspan="7" style="border-bottom: solid 2px #ccc;" class="print-links">Print:
-				<%= link_to "(<b>1</b>) Complete w/Ref", application_path(app), {:popup => true} %>
-				<%= link_to "(<b>2</b>) Complete No Ref", no_ref_application_path(app), {:popup => true} %>
-				<%= link_to "(<b>3</b>) No Confidential", no_conf_application_path(app), {:popup => true} %>
-				<% if app.has_references? -%><%= link_to "(<b>4</b>) Collated Refs", collated_refs_application_path(app), {:popup => true} %><% else -%><%= link_to "(<b>4</b>) Collated Refs", "#" %><% end -%>
-				<% unless app.staff_reference.token.blank? -%><%= link_to "(<b>5a</b>) Staff Ref", application_reference_path(app, app.staff_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5a</b>) Staff Ref", "#" %><% end -%>
-				<% unless app.discipler_reference.token.blank? -%><%= link_to "(<b>5b</b>) Discipler Ref", application_reference_path(app, app.discipler_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5b</b>) Discipler Ref", "#" %><% end -%>
-				<% unless app.roommate_reference.token.blank? -%><%= link_to "(<b>5c</b>) Roommate Ref", application_reference_path(app, app.roommate_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5c</b>) Roommate Ref", "#" %><% end -%>
-				<% unless app.friend_reference.token.blank? -%><%= link_to "(<b>5d</b>) Friend Ref", application_reference_path(app, app.friend_reference.token), {:popup => true} %><% else -%><%= link_to "(<b>5d</b>) Friend Ref", "#" %><% end -%>
+				<%= link_to "(<b>1</b>) Complete w/Ref".html_safe, application_path(app), {:popup => true} %>
+				<%= link_to "(<b>2</b>) Complete No Ref".html_safe, no_ref_application_path(app), {:popup => true} %>
+				<%= link_to "(<b>3</b>) No Confidential".html_safe, no_conf_application_path(app), {:popup => true} %>
+				<% if app.has_references? -%><%= link_to "(<b>4</b>) Collated Refs".html_safe, collated_refs_application_path(app), {:popup => true} %><% else -%><%= link_to "(<b>4</b>) Collated Refs", "#" %><% end -%>
+				<% unless app.staff_reference.access_key.blank? -%><%= link_to "(<b>5a</b>) Staff Ref".html_safe, application_reference_path(app, app.staff_reference.access_key), {:popup => true} %><% else -%><%= link_to "(<b>5a</b>) Staff Ref", "#" %><% end -%>
+				<% unless app.discipler_reference.access_key.blank? -%><%= link_to "(<b>5b</b>) Discipler Ref".html_safe, application_reference_path(app, app.discipler_reference.access_key), {:popup => true} %><% else -%><%= link_to "(<b>5b</b>) Discipler Ref", "#" %><% end -%>
+				<% unless app.roommate_reference.access_key.blank? -%><%= link_to "(<b>5c</b>) Roommate Ref".html_safe, application_reference_path(app, app.roommate_reference.access_key), {:popup => true} %><% else -%><%= link_to "(<b>5c</b>) Roommate Ref", "#" %><% end -%>
+				<% unless app.friend_reference.access_key.blank? -%><%= link_to "(<b>5d</b>) Friend Ref".html_safe, application_reference_path(app, app.friend_reference.access_key), {:popup => true} %><% else -%><%= link_to "(<b>5d</b>) Friend Ref", "#" %><% end -%>
 <!--
 				<%= link_to "(<b>6</b>) Evaluator's Worksheet", "/files/eval_worksheet.doc", {:popup => true} %>
 				<%= link_to "(<b>7</b>) Acceptance Issues", "/files/acceptance_issues.doc", {:popup => true} %>

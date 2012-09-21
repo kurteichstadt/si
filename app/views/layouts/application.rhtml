@@ -37,7 +37,7 @@
    	  <% if user %><%= link_to "Log Out", { :controller => "account", :action => "logout" }, { :style => "color: #fff;", :id => "link-log-out" } %><% end %>
    </div>
    
-   <% if user -%><%= render :partial => "/applications/meta_info" %><% end -%>
+   <% if user && @application -%><%= render :partial => "/applications/meta_info" %><% end -%>
    
    <div id="main">
     <%= yield %>

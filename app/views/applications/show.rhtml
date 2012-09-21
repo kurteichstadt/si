@@ -54,12 +54,15 @@
 <div id="preview" class="answer-page">
 
 <% @answer_sheets.each do |answer_sheet| -%>
-<% question_sheet = answer_sheet.question_sheet
-   elements = question_sheet.elements.find(:all, :include => 'page', 
-                                                 :conditions => ["#{Element.table_name}.kind not in (?)", %w(Paragraph)],
-                                                 :order => "#{Page.table_name}.number,#{Element.table_name}.position")
+<% @answer_sheet = answer_sheet
+   question_sheet = answer_sheet.question_sheet
+   elements = []
+   question_sheet.pages.order(:number).each do |page|
+     elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Paragraph)).all
+   end
+   elements = elements.flatten
    elements.reject! {|e| e.is_confidential} if @show_conf == false
-   elements.reject! {|e| e.page_id == 5}
+   elements.reject! {|e| e.page_elements.where("page_id = 5").size > 0 }
    elements = QuestionSet.new(elements, answer_sheet).elements.group_by(&:page_id) -%>
 <%= render :partial => '/answer_sheets/answer_sheet', :locals => {:answer_sheet => answer_sheet, :elements => elements } %>
 <% end -%>

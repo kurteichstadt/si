@@ -1,6 +1,6 @@
 <%= select_tag "answers[#{project_preference.id}]", 
     options_for_select([""] + project_preference.choices(@application), project_preference.response(@application)), 
-    :class => 'select ' + project_preference.validation_class, 
+    :class => 'select ' + project_preference.validation_class(@application), 
     :id => dom_id(project_preference),
     :disabled => @application.frozen?&&@reference.nil?,
     :readonly => @application.frozen?&&@reference.nil? %>
