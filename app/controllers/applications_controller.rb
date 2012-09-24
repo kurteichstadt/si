@@ -54,6 +54,7 @@ class ApplicationsController < ApplicationController
       #raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
       return
     end
+    render :layout => 'admin_application'
   end
   
   def no_ref

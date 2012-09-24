@@ -28,6 +28,7 @@ Si::Application.routes.draw do
 
   match 'admin' => "admin#index", :as => :admin_home
   match 'admin/select_region' => 'admin#select_region', :via => :post, :as => :select_region
+  match 'admin/no_access' => 'admin#no_access'
   match 'admin/logout' => 'admin#logout'
 
   root :to => "applications#show_default"

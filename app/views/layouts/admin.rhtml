@@ -10,9 +10,8 @@
   <%= javascript_include_tag 'qe/jquery.tooltips.min' %>
   <%= include_javascripts :admin %>
   <%= stylesheet_link_tag 'jquery-ui-1.8.2.custom' %>
-  <%#= questionnaire_engine_includes %>
-  <%= stylesheet_link_tag 'admin', 'eval', 'reports' %>
   <%= questionnaire_engine_includes %>
+  <%= stylesheet_link_tag 'admin', 'base', 'screen' %>
   <%= csrf_meta_tag %>
 	<script language="javascript" type="text/javascript">
 		Ajax.Responders.register({
