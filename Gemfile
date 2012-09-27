@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~>3.0.16'
+gem 'rails', '~>3.1.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2', '~>0.2.7'
+gem 'mysql2'
 
 gem 'activemerchant'
 gem 'liquid'
@@ -14,6 +14,7 @@ gem 'rack-contrib'
 gem 'aasm'
 gem 'jammit'
 gem 'dynamic_form'
+gem 'jquery-rails'
 
 gem 'airbrake'
 
@@ -21,6 +22,27 @@ group :development, :test do
   gem 'factory_girl'
 #  gem 'mocha'
 end
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+#  gem 'sass-rails',   '~> 3.1.5'
+  gem 'coffee-rails'
+  gem 'therubyracer'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer'
+
+  gem 'uglifier', '>= 1.0.3'
+end
+
+group :test do
+  # Pretty printed test output
+  gem 'turn', '~> 0.8.3', :require => false
+end
+
+# To use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the web server
 # gem 'unicorn'

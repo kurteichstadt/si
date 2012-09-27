@@ -1,5 +1,5 @@
 # enable detailed CAS logging
-cas_logger = CASClient::Logger.new(RAILS_ROOT+'/log/cas.log')
+cas_logger = CASClient::Logger.new(Rails.root+'/log/cas.log')
 cas_logger.level = Logger::DEBUG
 
 CASClient::Frameworks::Rails3::Filter.configure(

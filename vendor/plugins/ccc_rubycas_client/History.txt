@@ -180,7 +180,7 @@ See http://www.opensource.org/licenses/mit-license.php
   parameters once you are redirected back to CAS (and that in turn can result 
   in an endless redirection loop).
 * Logging has been greatly improved, which should make debugging your CAS
-  installation much easier. Look for the logs under log/cas_client_RAILS_ENV.log
+  installation much easier. Look for the logs under log/cas_client_Rails.env.log
 * When you install RubyCAS-Client as a Rails plugin, it will now by default
   use a custom logger. You can change this by explicitly setting your own
   logger in your environment.rb, or by modifying the plugin's init.rb.

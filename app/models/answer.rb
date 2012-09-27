@@ -1,5 +1,5 @@
 # load in original Answer model
-require_dependency RAILS_ROOT + "/vendor/plugins/questionnaire_engine/app/models/answer"
+require_dependency Rails.root + "/vendor/plugins/questionnaire_engine/app/models/answer"
 
 class Answer < ActiveRecord::Base
   # def after_find

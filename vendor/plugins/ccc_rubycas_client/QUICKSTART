@@ -1,9 +1,9 @@
 ==== Installation Notes
 
-An initializer file cas.rb has been created for you in RAILS_ROOT/config/initializers. If you are using an older version
+An initializer file cas.rb has been created for you in Rails.root/config/initializers. If you are using an older version
 of Rails that doesn't automatically include the initializer files, add the following to the bottom of your environment.rb:
 
-  Dir.glob(File.join(RAILS_ROOT, "config", "initializers", "*.rb")).sort.map { |initializer| require initializer }
+  Dir.glob(File.join(Rails.root, "config", "initializers", "*.rb")).sort.map { |initializer| require initializer }
   
 ==== Session Store Issues
 
