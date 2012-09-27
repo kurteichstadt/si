@@ -13,6 +13,7 @@ gem 'dalli'
 gem 'rack-contrib'
 gem 'aasm'
 gem 'jammit'
+gem 'dynamic_form'
 
 gem 'airbrake'
 

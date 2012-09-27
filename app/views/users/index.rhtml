@@ -11,7 +11,7 @@
             <th>Role</th>
 			<th>&nbsp;</th>
         </tr>
-    <% for user in @users %>
+    <% @users.each do |user| %>
       <tr class="<%= cycle("","alt") %>">
 		<td nowrap="true"><%= link_to user.person.informal_full_name, edit_user_path(user) if user.person%></td>
 		<td><%=user.role%></td>

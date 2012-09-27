@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   layout 'admin', :except => [:search]
   
   def index
-    @users = SiUser.find(:all, :order => 'ministry_person.lastName, ministry_person.firstName', :include => {:user => :person})
+    @users = SiUser.includes(:user => :person).order('ministry_person.lastName, ministry_person.firstName')
   end
   
   def new

@@ -63,6 +63,7 @@
    elements = elements.flatten
    elements.reject! {|e| e.is_confidential} if @show_conf == false
    elements.reject! {|e| e.page_elements.where("page_id = 5").size > 0 }
+   elements.reject! {|e| e.page_elements.where("page_id > 32").size > 0 }
    elements = QuestionSet.new(elements, answer_sheet).elements.group_by(&:page_id) -%>
 <%= render :partial => '/answer_sheets/answer_sheet', :locals => {:answer_sheet => answer_sheet, :elements => elements } %>
 <% end -%>

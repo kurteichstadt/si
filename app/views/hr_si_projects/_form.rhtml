@@ -14,10 +14,10 @@
                                  ['Please Select an option', '' ] ] %></p>
                                  
 <p><label for="hr_si_project_studentStartDate" class="desc">Student Start Date</label>
-    <%= f.calendar_date_select :studentStartDate, :time => false %></p>
+    <%= calendar_date_select_tag "hr_si_project[studentStartDate]", @hr_si_project.studentStartDate, :time => false %></p>
     
 <p><label for="hr_si_project_studentEndDate" class="desc">Student End Date</label>
-    <%= f.calendar_date_select :studentEndDate, :time => false %></p>
+    <%= calendar_date_select_tag "hr_si_project[studentEndDate]", @hr_si_project.studentEndDate, :time => false %></p>
     
 <p><label for="hr_si_project_city" class="desc">City</label>
     <%= f.text_field :city, :class => "text" %></p>
@@ -76,13 +76,13 @@
 	<%= f.text_field :destinationGatewayCity, :class => "text" %></p>
 	
 <p><label for="hr_si_project_departDateFromGateCity">Date of Departure from the US</label>
-	<%= f.calendar_date_select :departDateFromGateCity, :time => false %></p>
+	<%= calendar_date_select_tag "hr_si_project[departDateFromGateCity]", @hr_si_project.departDateFromGateCity, :time => false %></p>
 	
 <p><label for="hr_si_project_locationGatewayCity">Int'l City you are Flying To</label>
 	<%= f.text_field :locationGatewayCity, :class => "text" %></p>	
 	
 <p><label for="hr_si_project_arrivalDateAtGatewayCity">Date of Return to the US</label>
-	<%= f.calendar_date_select :arrivalDateAtGatewayCity, :time => false %></p>
+	<%= calendar_date_select_tag "hr_si_project[arrivalDateAtGatewayCity]", @hr_si_project.arrivalDateAtGatewayCity, :time => false %></p>
 	
 <h3>In Country Contact</h3>
 
