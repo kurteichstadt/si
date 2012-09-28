@@ -1,5 +1,5 @@
 # load in original Answer model
-require_dependency Rails.root + "/vendor/plugins/questionnaire_engine/app/models/element"
+require_dependency Rails.root.to_s + "/vendor/plugins/questionnaire_engine/app/models/element"
 
 class Element < ActiveRecord::Base
   def limit(application)

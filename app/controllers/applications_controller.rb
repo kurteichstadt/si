@@ -163,7 +163,7 @@ protected
   def setup_view
     @answer_sheet = @application
     # edit the first page
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheet, "392187409218ifjlo3ia7489")
+    @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
     @elements = @presenter.questions_for_page(:first).elements
     @page = @presenter.pages.first
     @presenter.active_page ||= @page
