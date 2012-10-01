@@ -66,10 +66,10 @@
 						<% if %w(Paragraph).include?(grid_element.kind) -%>
 						<%= grid_element.content %>
 						<% else -%>
-							(STAFF) <span class="answer"><%= @staff_elements.find { |item| item.id == grid_element.id}.response(@staff_reference).blank? ? "No Answer".html_safe : @staff_elements.find { |item| item.id == grid_element.id}.display_response(@staff_reference) %></span><br/>
-							(DISCIPLER) <span class="answer"><%= @discipler_elements.find { |item| item.id == grid_element.id}.response(@discipler_reference).blank? ? "No Answer".html_safe : @discipler_elements.find { |item| item.id == grid_element.id}.display_response(@discipler_reference) %></span><br/>
-							(ROOMMATE) <span class="answer"><%= @roommate_elements.find { |item| item.id == grid_element.id}.response(@roommate_reference).blank? ? "No Answer".html_safe : @roommate_elements.find { |item| item.id == grid_element.id}.display_response(@roommate_reference) %></span><br/>
-							(FRIEND) <span class="answer"><%= @friend_elements.find { |item| item.id == grid_element.id}.response(@friend_reference).blank? ? "No Answer".html_safe : @friend_elements.find { |item| item.id == grid_element.id}.display_response(@friend_reference) %></span>
+							(STAFF) <span class="answer"><%= Element.find(grid_element.id).response(@staff_reference).blank? ? "No Answer".html_safe : Element.find(grid_element.id).display_response(@staff_reference) %></span><br/>
+							(DISCIPLER) <span class="answer"><%= Element.find(grid_element.id).response(@discipler_reference).blank? ? "No Answer".html_safe : Element.find(grid_element.id).display_response(@discipler_reference) %></span><br/>
+							(ROOMMATE) <span class="answer"><%= Element.find(grid_element.id).response(@roommate_reference).blank? ? "No Answer".html_safe : Element.find(grid_element.id).display_response(@roommate_reference) %></span><br/>
+							(FRIEND) <span class="answer"><%= Element.find(grid_element.id).response(@friend_reference).blank? ? "No Answer".html_safe : Element.find(grid_element.id).display_response(@friend_reference) %></span>
 						<% end -%>
 					</td>
 					<%- 	col_count += 1
