@@ -20,7 +20,7 @@
         </ul>
 
 <% if si_user.can_see_applicants? %>
-<% form_tag :action => "select_region" do %>
+<%= form_tag :action => "select_region" do %>
         <p style="clear: none;"><label for="region" class="desc">Select your region</label>
             <%= select_tag :region, 
                            options_for_select([ ['Unassigned', ''],

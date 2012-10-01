@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter CASClient::Frameworks::Rails3::Filter
+  prepend_before_filter CASClient::Frameworks::Rails3::Filter
   before_filter :check_valid_user, :except => [:no_access, :logout]
   layout 'admin'
   

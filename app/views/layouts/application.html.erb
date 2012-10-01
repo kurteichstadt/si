@@ -34,7 +34,7 @@
    <div id="header" style="height: 72px;">
       <h1 style="position: absolute; color: #F3F3F3; margin: 4.5px 18px; line-height: 36px;">STINT/Internship Application</h1>
    
-   	  <% if user %><%= link_to "Log Out", { :controller => "account", :action => "logout" }, { :style => "color: #fff;", :id => "link-log-out" } %><% end %>
+   	  <% if user %><%= link_to "Log Out", logout_path, { :style => "color: #fff;", :id => "link-log-out" } %><% end %>
    </div>
    
    <% if user && @application -%><%= render :partial => "/applications/meta_info" %><% end -%>

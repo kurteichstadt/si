@@ -21,16 +21,16 @@ Si::Application.routes.draw do
     end
   end
   
-  match 'account/login' => "account#login", :as => :login
-  match 'account/logout' => "account#logout", :as => :logout
-  match 'account/signup' => "account#signup", :as => :signup
+#  match 'account/login' => "account#login", :as => :login
+#  match 'account/logout' => "account#logout", :as => :logout
+#  match 'account/signup' => "account#signup", :as => :signup
   
   match 'payment_pages/staff_search' => 'payment_pages#staff_search', :as => :payment_page_staff_search
 
   match 'admin' => "admin#index", :as => :admin_home
   match 'admin/select_region' => 'admin#select_region', :via => :post, :as => :select_region
   match 'admin/no_access' => 'admin#no_access'
-  match 'admin/logout' => 'admin#logout', :as => :admin_logout
+#  match 'admin/logout' => 'admin#logout', :as => :admin_logout
 
   root :to => "applications#show_default"
   
