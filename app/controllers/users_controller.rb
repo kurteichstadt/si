@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   skip_before_filter AuthenticationFilter, :only => [:search]
   before_filter :check_valid_user, :except => [:search]
   layout 'admin', :except => [:search]
-  
+  respond_to :html, :js
+
   def index
     @users = SiUser.includes(:user => :person).order('ministry_person.lastName, ministry_person.firstName')
   end
@@ -35,6 +36,9 @@ class UsersController < ApplicationController
                                            :created_at => Time.now,
                                            :created_by_id => user.id,
                                            :role => type)
+      role = SiRole.where("user_class = ?", type).first
+      @new_user.role = role.role
+      @new_user.save!
       redirect_to users_path
     end
   end
@@ -42,8 +46,14 @@ class UsersController < ApplicationController
   def update
     @temp_user = SiUser.find(params[:id])
     
+    if params[:temp_user][:type]
+      role = SiRole.where("user_class = ?", (params[:temp_user][:type])).first
+      @temp_user.type = role.user_class
+      @temp_user.role = role.role
+    end
+    
     respond_to do |format|
-      if @temp_user.update_attributes(params[:temp_user])
+      if @temp_user.save
         format.html { redirect_to users_path }
       else
         format.html { render :action => "edit" }
@@ -63,7 +73,7 @@ class UsersController < ApplicationController
   def search
     @name = params[:name]
     @people = person_search(params[:name])
-    render :layout => false
+    respond_with(@people)
   end
   
   protected

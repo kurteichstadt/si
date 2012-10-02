@@ -12,7 +12,7 @@
   		<%= @temp_user.user.person.informal_full_name %></p>
 
   	<p><label for="user_role" class="desc">Select a role for this user</label>
-  		<%= f.select :role, si_user.creatable_user_types %></p>
+  		<%= f.select :type, si_user.creatable_user_types %></p>
      
     <p style="margin-top: 36px;"><%= submit_tag "Update" %> or <%= link_to "Cancel", users_path, :class => "cancel" %></p>
   <% end %>
