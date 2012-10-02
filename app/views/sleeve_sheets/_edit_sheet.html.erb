@@ -1,4 +1,4 @@
-<% fields_for(:sleeve_sheet, :object => edit_sheet) do |f| %>
+<%= fields_for(:sleeve_sheet, :object => edit_sheet) do |f| %>
 
 <tr id="<%= dom_id(edit_sheet) %>" class="alt">
   <td><%= f.select :question_sheet_id, @question_sheets, {:include_blank => true}, :onchange => %{setSleeveTitle('#{dom_id(edit_sheet)}')} %></td>

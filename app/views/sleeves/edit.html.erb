@@ -10,7 +10,7 @@
   
   <%= error_messages_for :sleeve %>
   
-  <% form_for(:sleeve, :url => sleeve_path(@sleeve), :html => { :method => :put }) do |f| %>
+  <%= form_for(:sleeve, :url => sleeve_path(@sleeve), :html => { :method => :put }) do |f| %>
     <%= render :partial => 'form', :locals => {:f => f}%>
     <p><%= submit_tag "Update" %></p>
   <% end %>

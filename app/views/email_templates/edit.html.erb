@@ -3,7 +3,7 @@
     
     <%= error_messages_for :email_template %>
     
-    <% form_for(:email_template, :url => email_template_path(@email_template), :html => { :method => :put } ) do |f| %>
+    <%= form_for(:email_template, :url => email_template_path(@email_template), :html => { :method => :put } ) do |f| %>
         <%= render :partial => 'form', :locals => {:f => f} %>
     <% end %>
 

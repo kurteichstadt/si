@@ -3,7 +3,7 @@
 
   <%= error_messages_for :temp_user %>
   
-  <% form_for(:temp_user, :url => user_path(@temp_user), :html => {:method => :put, :id => "user_form"}) do |f| %>
+  <%= form_for(:temp_user, :url => user_path(@temp_user), :html => {:method => :put, :id => "user_form"}) do |f| %>
     <style type="text/css">
       label .help { font-weight: normal; font-size: 9px !important; color: #999; }
     </style>

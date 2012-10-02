@@ -3,7 +3,7 @@
     
     <%= error_messages_for :hr_si_project %>
     
-    <% form_for(:hr_si_project, :url => hr_si_project_path(@hr_si_project), :html => { :method => :put }) do |f| %>
+    <%= form_for(:hr_si_project, :url => hr_si_project_path(@hr_si_project), :html => { :method => :put }) do |f| %>
         <%= render :partial => 'form', :locals => {:f => f}%>
         
         <p style="margin-top: 36px;"><%= submit_tag "Update" %> or <%= link_to "Cancel", hr_si_projects_path, :class => "cancel" %></p>

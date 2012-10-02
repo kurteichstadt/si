@@ -8,7 +8,7 @@
   <div id="page-preview">
     <div class="page">
 
-    <% form_tag application_payment_page_path(@application), :id => "#{page_dom}-form", :onsubmit => next_js + "; return false;"  do -%>
+    <%= form_tag application_payment_page_path(@application), :id => "#{page_dom}-form", :onsubmit => next_js + "; return false;"  do -%>
   
 		<p>Application Fee: <%= number_to_currency(@application.sleeve.fee_amount) %></p>
 

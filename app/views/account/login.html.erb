@@ -1,6 +1,6 @@
 <%='<div id="errorExplanation">'+flash[:notice]+'</div>' if flash[:notice]%>
 Login to access your STINT/Internship Application.<br><br>
-<% form_tag do %>
+<%= form_tag do %>
   <p><label for="username">Login (please use an email address)</label><br />
   <%= text_field_tag('username', params[:username], :size => 40) %></p>
 
