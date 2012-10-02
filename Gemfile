@@ -16,6 +16,7 @@ gem 'acts_as_list'
 gem 'jammit'
 gem 'dynamic_form'
 gem 'jquery-rails'
+gem 'american_date'
 
 gem 'airbrake'
 

@@ -49,6 +49,7 @@ GEM
     airbrake (3.1.4)
       builder
       girl_friday
+    american_date (1.0.0)
     ansi (1.4.3)
     arel (2.2.3)
     builder (3.0.3)
@@ -149,6 +150,7 @@ DEPENDENCIES
   activemerchant
   acts_as_list
   airbrake
+  american_date
   coffee-rails
   dalli
   dynamic_form
