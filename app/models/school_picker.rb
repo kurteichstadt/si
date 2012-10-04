@@ -5,28 +5,37 @@ class SchoolPicker < Question
   def state(app=nil)
     if !app.nil?
       # try to get state from the applicant
-      s = app.applicant.universityState
-      if s.blank?
+      state = app.applicant.universityState
+      unless state.present?
         # get from the campus
-        c = Campus.find_by_name(response(app))
-        if !c.nil?
-          s = c.state
+        name = response(app)
+        campus = Campus.find_by_name(name)
+        if campus.present?
+          state = campus.state
         end
       end
     end
-    s.to_s
+    state.to_s
+  end  
+  
+  def colleges(app=nil)
+    unless self.state(app) == ""
+      return Campus.where("state = ?", self.state(app)).where("type = 'College'")
+        .where("isClosed is null or isClosed <> 'T'").order(:name).all.collect {|c| c.name} 
+    end
+    []
   end
   
-  def choices(app=nil)
+  def high_schools(app=nil)
     unless self.state(app) == ""
-      return Campus.find_all_by_state(self.state(app), :order => :name).to_a.collect {|c| c.name} 
+      return Campus.find_all_by_type('HighSchool', :order => :name).to_a.collect {|c| c.name} 
     end
     []
   end
   
   def validation_class
     if self.required?
-      'validate-selection'
+      'validate-selection required'
     else
       ''
     end

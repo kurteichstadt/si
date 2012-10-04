@@ -1,11 +1,11 @@
-<div style="border: solid 1px #dadada; padding: 9px;">
-<label for="school_picker_<%= school_picker.id %>" class="desc">Select the state your school is in and click 'Find Schools'</label>
+<div style="border: solid 1px #dadada; padding: 9px;" id="<%= dom_id(school_picker) %>_div">
+	<label for="school_picker_<%= school_picker.id %>" class="desc">Select the state your school is in and click 'Find Schools'</label>
 	<%= select_tag "school_picker_state_#{school_picker.id}", options_for_select(State::NAMES, school_picker.state(@application)), :disabled => @application.frozen?&&@reference.nil?, :readonly => @application.frozen?&&@reference.nil? %>
-	<%= button_to_function 'Find Schools', "searchCampuses('school_picker_state_#{school_picker.id}', '#{dom_id(school_picker)}');return false;", :disabled => @application.frozen?&&@reference.nil?, :readonly => @application.frozen?&&@reference.nil? %>
-<label for="<%= dom_id(school_picker) %>" class="desc" style="margin-top: 9px;">School</label>
-    <%= select_tag "answers[#{school_picker.id}]", 
-      options_for_select([""] + school_picker.choices(@application), school_picker.response(@application)), 
-      :class => 'select ' + school_picker.validation_class, 
-      :id => dom_id(school_picker), :disabled => @application.frozen?&&@reference.nil?, :readonly => @application.frozen?&&@reference.nil?,
-	  :onchange => "page_handler.savePage()" %>
+	<%= button_to_function 'Find Schools', "searchCampuses('school_picker_state_#{school_picker.id}', '#{dom_id(school_picker)}', #{@application.try(:id)});return false;", :disabled => @application.frozen?&&@reference.nil?, :readonly => @application.frozen?&&@reference.nil? %>
+	<%= spinner(dom_id(school_picker)) %>
+	<%= hidden_field_tag "answers[#{school_picker.id}]", school_picker.response(@application), :id => dom_id(school_picker) %>
+	<div id="<%= dom_id(school_picker) %>_colleges">
+	 <label for="<%= dom_id(school_picker) %>" class="desc" style="margin-top: 9px;">College Name</label>
+   <%= render 'questions/college_dropdown', :school_picker => school_picker %><br/><br/>
+	</div>
 </div>
