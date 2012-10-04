@@ -54,3 +54,57 @@
 div.warningText {
   color: red;
 }
+
+label.error {
+  font-size: 11px;
+  color: red;
+}
+
+input.error[type=text],
+input.error[type=password] {
+  border: 1px solid red;
+  background: #FFEAEA;
+  margin-top: -1px;
+}
+
+table.grid tr.error {
+  background: #FFEAEA;
+}
+
+table.grid tr.error td {
+  color: red;
+}
+
+table.grid tr.error label.error {
+  display: none;
+}
+
+#errorExplanation {
+  border: 1px solid red;
+  padding: 10px 15px;
+  margin-bottom: 1em;
+}
+
+#errorExplanation h2 {
+  font-size: 16px;
+  margin-top: 0;
+}
+
+#errorExplanation ul {
+  margin: 0;
+  padding: 0 2em;
+  list-style: circle;
+}
+
+#errorExplanation ul li {
+  list-style: disc;
+}
+
+.field_with_errors label {
+  color: red;
+  font-weight: bold;
+}
+
+.field_with_errors input {
+  border-color: red;
+}
