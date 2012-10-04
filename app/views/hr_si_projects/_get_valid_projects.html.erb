@@ -1,0 +1,8 @@
+<div id="div_<%= dom_id(project_preference) %>">
+<%= select_tag "answers[#{project_preference.id}]", 
+    options_for_select([""] + projects.collect {|x| [x.name, x.SIProjectID]}, project_preference.response(application)), 
+    :class => 'select ' + project_preference.validation_class(application), 
+    :id => dom_id(project_preference),
+    :disabled => application.frozen?&&reference.nil?,
+    :readonly => application.frozen?&&reference.nil? %>
+</div>

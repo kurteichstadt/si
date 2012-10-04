@@ -6,6 +6,7 @@ class HrSiProjectsController < ApplicationController
   prepend_before_filter :login_from_cookie
   before_filter :check_valid_user, :except => [:get_valid_projects, :projects_feed, :show]
   layout 'admin', :except => :get_valid_projects
+  respond_to :html, :js
   
   def index
     params[:partnershipRegion] ||= -1
@@ -120,7 +121,9 @@ class HrSiProjectsController < ApplicationController
   
   def get_valid_projects
     person = current_person
-    application = Apply.find(person.current_si_application.apply_id)
+    @application = application = Apply.find(person.current_si_application.apply_id)
+    @project_preference = ProjectPreference.find(params[:dom_id].split('_').last)
+    @dom_id = params[:dom_id]
     @projects = Array.new
     show_all = params[:show_all] == "true" ? true : false
     if !application.nil?
@@ -130,6 +133,6 @@ class HrSiProjectsController < ApplicationController
       project_type = 'n'
       @projects = HrSiProject.find_all_available(locations, region, show_all, person, project_type)
     end
-    render(:layout => false)
+    respond_with(@application, @project_preference, @dom_id, @projects)
   end
 end

@@ -1,0 +1,1 @@
+$('#<%= @dom_id %>').replaceWith('<%= escape_javascript(render('get_valid_projects', :projects => @projects, :application => @application, :project_preference => @project_preference)) %>')

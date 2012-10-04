@@ -148,6 +148,8 @@ protected
       # if this is the user's first visit, we will need to create an hr_si_application
       if @person.current_si_application.nil?
         @app = HrSiApplication.create(:siYear => get_year, :fk_personID => @person.id)
+        @app.siYear = get_year
+        @app.save!
         @person.current_si_application = @app
       end
       if @person.current_si_application.apply_id.nil?
