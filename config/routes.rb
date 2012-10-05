@@ -32,6 +32,8 @@ Si::Application.routes.draw do
   match 'admin/no_access' => 'admin#no_access'
 #  match 'admin/logout' => 'admin#logout', :as => :admin_logout
 
+  match '/references/done' => "reference_sheets#done"
+
   root :to => "applications#show_default"
   
 #  resource :sleeves do
@@ -43,6 +45,7 @@ Si::Application.routes.draw do
       get :no_ref
       get :no_conf
       get :collated_refs
+      get :done
     end
     
     resources :references do
@@ -55,20 +58,19 @@ Si::Application.routes.draw do
     
     # custom pages (singular resources)
     resource :reference_page
-    resource :payment_page do
+
+    resources :payments do
+      member do
+        get :approve
+      end
       collection do
         post :staff_search
       end
     end
+
     resource :submit_page do
       member do
         post :submit
-      end
-    end
-    
-    resources :payments do
-      member do
-        post :approve
       end
     end
   end

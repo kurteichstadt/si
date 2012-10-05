@@ -9,6 +9,7 @@ class SiNationalCoordinator < SiUser
   def can_edit_payments?() true; end
   def can_see_applicants?() true; end
   def can_see_projects?() true; end
+  def can_su_application?() true; end
   def creatable_user_types
     creatable_user_types_array("'SiGeneralStaff','SiNationalCoordinator'")
   end

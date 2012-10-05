@@ -1,4 +1,4 @@
-<h2 id='sheet-name'><%= answer_sheet.question_sheet.label %></h2>
+<h2 id='sheet-name'><%= answer_sheet.question_sheet.label if answer_sheet.question_sheet %></h2>
 
 <% if elements.length > 0 -%>
   
@@ -18,7 +18,7 @@
 <% else -%>
 
     <div style="background: #ffc;">
-      <p>That's odd. There are no answers to review.</p>
+      <p>There are no answers to review at this time.</p>
     </div>
 
 <% end -%>

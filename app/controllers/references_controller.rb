@@ -66,11 +66,13 @@ class ReferencesController < ApplicationController
       @answer_sheet = @reference
       @question_sheet = @answer_sheet.question_sheet
       @elements = []
-      @question_sheet.pages.order(:number).each do |page|
-        @elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Section Paragraph)).all
+      if @question_sheet
+        @question_sheet.pages.order(:number).each do |page|
+          @elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Section Paragraph)).all
+        end
+        @elements = @elements.flatten
+        @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
       end
-      @elements = @elements.flatten
-      @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
     end
   end
   

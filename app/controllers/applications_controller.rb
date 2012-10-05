@@ -111,13 +111,17 @@ class ApplicationsController < ApplicationController
     raise type unless ref
     answer_sheet = ref
     question_sheet = answer_sheet.question_sheet
-    elements = []
-    question_sheet.pages.order(:number).each do |page|
-      elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Paragraph)).all
+    if question_sheet
+      elements = []
+      question_sheet.pages.order(:number).each do |page|
+        elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Paragraph)).all
+      end
+      elements = elements.flatten
+      elements.reject! {|e| e.is_confidential} if @show_conf == false
+      eval("@" + type + "_elements = QuestionSet.new(elements, answer_sheet).elements")
+    else
+      eval("@" + type + "_elements = []")
     end
-    elements = elements.flatten
-    elements.reject! {|e| e.is_confidential} if @show_conf == false
-    eval("@" + type + "_elements = QuestionSet.new(elements, answer_sheet).elements")
 
   end
   

@@ -43,10 +43,10 @@
 			  <% if element.question? && element.question_grid_id.nil? -%>
 				<li >
 			      <label class="desc"><%= element.label %></label>
-					(STAFF) <span class="answer"><%= (@staff_elements.find {|el| el.id == element.id}).response(@staff_reference).blank? ? "No&nbsp;Answer".html_safe : (@staff_elements.find {|el| el.id == element.id}).display_response(@staff_reference) %></span><br/>
-					(DISCIPLER) <span class="answer"><%= (@discipler_elements.find {|el| el.id == element.id}).response(@discipler_reference).blank? ? "No&nbsp;Answer".html_safe : (@discipler_elements.find {|el| el.id == element.id}).display_response(@discipler_reference) %></span><br/>
-					(ROOMMATE) <span class="answer"><%= (@roommate_elements.find {|el| el.id == element.id}).response(@roommate_reference).blank? ? "No&nbsp;Answer".html_safe : (@roommate_elements.find {|el| el.id == element.id}).display_response(@roommate_reference) %></span><br/>
-					(FRIEND) <span class="answer"><%= (@friend_elements.find {|el| el.id == element.id}).response(@friend_reference).blank? ? "No&nbsp;Answer".html_safe : (@friend_elements.find {|el| el.id == element.id}).display_response(@friend_reference) %></span><br/>
+					(STAFF) <span class="answer"><%= (@staff_elements.empty? || (@staff_elements.find {|el| el.id == element.id}).response(@staff_reference).blank?) ? "No&nbsp;Answer".html_safe : (@staff_elements.find {|el| el.id == element.id}).display_response(@staff_reference) %></span><br/>
+					(DISCIPLER) <span class="answer"><%= (@discipler_elements.empty? || (@discipler_elements.find {|el| el.id == element.id}).response(@discipler_reference).blank?) ? "No&nbsp;Answer".html_safe : (@discipler_elements.find {|el| el.id == element.id}).display_response(@discipler_reference) %></span><br/>
+					(ROOMMATE) <span class="answer"><%= (@roommate_elements.empty? || (@roommate_elements.find {|el| el.id == element.id}).response(@roommate_reference).blank?) ? "No&nbsp;Answer".html_safe : (@roommate_elements.find {|el| el.id == element.id}).display_response(@roommate_reference) %></span><br/>
+					(FRIEND) <span class="answer"><%= (@friend_elements.empty? || (@friend_elements.find {|el| el.id == element.id}).response(@friend_reference).blank?) ? "No&nbsp;Answer".html_safe : (@friend_elements.find {|el| el.id == element.id}).display_response(@friend_reference) %></span><br/>
 					</li>
 			  <% elsif element.kind == "QuestionGrid" %>
 <li>
