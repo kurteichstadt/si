@@ -52,5 +52,3 @@ public/images/questionnaire_engine/
 config/initializers/payment.rb
 
 public/blank_iframe.html
-
-/vendor/cache/libv8*
