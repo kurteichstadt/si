@@ -19,6 +19,7 @@ gem 'jquery-rails'
 gem 'american_date'
 
 gem 'airbrake'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'factory_girl'
