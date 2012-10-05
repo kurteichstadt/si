@@ -1,5 +1,11 @@
 class Element < ActiveRecord::Base # Actual Element class file has page_id overwritten, so clear it out here
-  set_table_name "#{Questionnaire.table_name_prefix}#{self.table_name}"
+  set_table_name "si_elements"
+end
+
+class PageElement < ActiveRecord::Base
+  set_table_name "si_page_elements"
+  belongs_to :page
+  belongs_to :element
 end
 
 class ElementsUpdates < ActiveRecord::Migration

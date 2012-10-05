@@ -1,3 +1,17 @@
+class Element < ActiveRecord::Base # Actual Element class file has page_id overwritten, so clear it out here
+  set_table_name "si_elements"
+end
+
+class PageElement < ActiveRecord::Base
+  set_table_name "si_page_elements"
+  belongs_to :page
+  belongs_to :element
+end
+
+class Page < ActiveRecord::Base
+  set_table_name "si_pages"
+end
+  
 class AddSubmitPage < ActiveRecord::Migration
   def self.up
     p = Page.create!(:question_sheet_id => 1, :label => "Submit", :number => 20)

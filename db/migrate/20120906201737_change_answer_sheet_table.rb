@@ -1,4 +1,12 @@
 # links sheets
+class Apply < AnswerSheet
+  set_table_name = "si_applies"
+end
+
+class ReferenceSheet < AnswerSheet
+  set_table_name "si_references"
+end
+
 class ApplySheet < ActiveRecord::Base
   set_table_name "si_apply_sheets"
   
