@@ -17,6 +17,7 @@ gem 'jammit'
 gem 'dynamic_form'
 gem 'jquery-rails'
 gem 'american_date'
+gem 'paperclip'
 
 gem 'airbrake'
 gem 'newrelic_rpm'
