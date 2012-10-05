@@ -1,15 +1,3 @@
-# links sheets
-class AnswerSheet < ActiveRecord::Base
-end
-
-class Apply < AnswerSheet
-  set_table_name = "si_applies"
-end
-
-class ReferenceSheet < AnswerSheet
-  set_table_name "si_references"
-end
-
 class ApplySheet < ActiveRecord::Base
   set_table_name "si_apply_sheets"
   
@@ -28,6 +16,9 @@ end
 
 class ChangeAnswerSheetTable < ActiveRecord::Migration
   def self.up
+    #First check to make sure we have QE models available
+    Apply.where("id = 1")
+    
     rename_table :si_character_references, :si_references
     rename_column :si_references, :apply_id, :applicant_answer_sheet_id
     rename_column :si_references, :sleeve_sheet_id, :question_id

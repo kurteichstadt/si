@@ -2,12 +2,6 @@ class Element < ActiveRecord::Base # Actual Element class file has page_id overw
   set_table_name "si_elements"
 end
 
-class PageElement < ActiveRecord::Base
-  set_table_name "si_page_elements"
-  belongs_to :page
-  belongs_to :element
-end
-
 class ElementsUpdates < ActiveRecord::Migration
   def self.up
     create_table :si_page_elements do |t|

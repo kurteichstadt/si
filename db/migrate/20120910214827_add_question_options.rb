@@ -1,10 +1,6 @@
 class SiQuestionOption < ActiveRecord::Base
 end
 
-class Element < ActiveRecord::Base # Actual Element class file has page_id overwritten, so clear it out here
-  set_table_name "si_elements"
-end
-
 class AddQuestionOptions < ActiveRecord::Migration
   def self.up
     create_table :si_question_options do |t|
