@@ -4,7 +4,7 @@ class AccountController < ApplicationController
   skip_before_filter AuthenticationFilter
   prepend_before_filter :login_from_cookie
   #before_filter :prod_check, :except => [:closed, :secret_hooey]
-  filter_parameter_logging :password
+  #filter_parameter_logging :password
 
   def index
     redirect_to(:action => 'login')
