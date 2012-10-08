@@ -27,6 +27,11 @@ Si::Application.routes.draw do
   
   match 'payment_pages/staff_search' => 'payment_pages#staff_search', :as => :payment_page_staff_search
 
+  resources :authentications
+
+  match '/auth/:provider/callback' => 'authentications#create'
+  match '/auth/failure' => 'authentications#failed'
+
   match 'admin' => "admin#index", :as => :admin_home
   match 'admin/select_region' => 'admin#select_region', :via => :post, :as => :select_region
   match 'admin/no_access' => 'admin#no_access'

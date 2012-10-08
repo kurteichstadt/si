@@ -10,6 +10,7 @@
 # /config/
 /config/database.yml
 /config/active_merchant.yml
+/config/facebook.yml
 
 # /db/
 /db/schema.rb
