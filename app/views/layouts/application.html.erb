@@ -13,6 +13,7 @@
                              'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
   <%- end %>
   <%= javascript_include_tag 'qe/jquery.metadata', 'qe/jquery.tooltips.min' %>
+  <%= include_stylesheets :base, :media => 'all' %>
   <%= include_javascripts :base %>
   <script type="text/javascript" charset="utf-8">
     var answer_sheet_type = '<%= @answer_sheet.class %>'
@@ -42,6 +43,19 @@
    <div id="main">
     <%= yield %>
    </div>
+</div>
+<div id="footerwrap">
+  <div id="footer">
+    <!-- anything in here my be custom branded -->
+    <table>
+      <tr>
+        <td>
+          <img src="/images/icons/lifebuoy.png" style="vertical-align: top; margin-right: 5px;"> If you're having any issues, or have a question about something, please <a href="mailto:help@campuscrusadeforchrist.com" class="issueslink">send us an email. <img src="/images/icons/mail.png" style="vertical-align: top; border: 0px;"></a>
+        </td>
+      </tr>
+    </table>
+    <!-- END -->
+  </div>
 </div>
 </body>
 </html>

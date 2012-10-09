@@ -51,6 +51,17 @@
   margin: 9px 18px;
 }
 
+#main {
+  overflow:hidden;
+  width:100%;
+}
+
+#footerwrap {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 0;
+}
+
 div.warningText {
   color: red;
 }
