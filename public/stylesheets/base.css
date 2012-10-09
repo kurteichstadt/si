@@ -56,6 +56,25 @@
   width:100%;
 }
 
+#page_ajax_spinner {
+  position: absolute;
+  top: -52px;
+  width: 1000px;
+}
+
+#page_ajax_spinner div {
+  -moz-box-shadow:0 0 10px #666666;
+  -webkit-box-shadow:0 0 10px #666666;
+  box-shadow:0 0 10px #666666;
+  background:none repeat scroll 0 0 #FFFFFF;
+  border:2px solid #411E08;
+  color:#411E08;
+  margin:0 auto;
+  padding:10px;
+  text-align:center;
+  width:200px;
+}
+
 #footerwrap {
   width: 1000px;
   margin: 0 auto;
