@@ -18,7 +18,7 @@
 					<%=submit_to_remote "submit_staff_search", "Search", :html => {:class => "button", :id => "submit_staff_search"},
 										:url 	=> staff_search_application_payment_page_path(@application),
 										:loading => "Element.show('spinner_staff2');" %>
-					<%= image_tag "/plugin_assets/questionnaire/images/ajax-loader.gif", :id => "spinner_staff", :style => 'display:none' %></p>
+					<%= image_tag "/images/qe/ajax-loader.gif", :id => "spinner_staff", :style => 'display:none' %></p>
 						
 				<div id="staff_results"></div>
 
