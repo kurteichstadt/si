@@ -290,6 +290,7 @@ div.p_content p {
 
 div.p_content ul {
   list-style: disc;
+  padding-left: 10px;
 }
 
 div.p_content ul li {
