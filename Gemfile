@@ -25,6 +25,7 @@ gem 'oa-openid'
 
 gem 'airbrake'
 gem 'newrelic_rpm'
+gem 'test-unit'
 
 group :development, :test do
   gem 'factory_girl'
