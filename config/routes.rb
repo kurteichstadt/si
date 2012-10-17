@@ -38,13 +38,24 @@ Si::Application.routes.draw do
 #  match 'admin/logout' => 'admin#logout', :as => :admin_logout
 
   match '/references/done' => "reference_sheets#done"
+  
+  match '/info_pages/a_real_life_story' => 'info_pages#a_real_life_story'
+  match '/info_pages/about_us' => 'info_pages#about_us'
+  match '/info_pages/contact_us' => 'info_pages#contact_us'
+  match '/info_pages/faqs' => 'info_pages#faqs'
+  match '/info_pages/home' => 'info_pages#home'
+  match '/info_pages/index' => 'info_pages#index'
+  match '/info_pages/instructions' => 'info_pages#instructions'
+  match '/info_pages/opportunities' => 'info_pages#opportunities'
+  match '/info_pages/privacy_policy' => 'info_pages#privacy_policy'
 
-  root :to => "applications#show_default"
+  root :to => "info_pages#home"
   
 #  resource :sleeves do
 #    resources :sheets, :controller => :sleeve_sheets, :name_prefix => 'sleeve_'
 #  end
 
+  match 'applications/show_default' => 'applications#show_default', :as => 'show_default'
   resources :applications do
     member do
       get :no_ref

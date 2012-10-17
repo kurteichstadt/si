@@ -1,12 +1,12 @@
 <script type="text/javascript" language="javascript">
 var current_region = '';
 function showDetail(region) {
-	if (current_region != '') { $('detail_' + current_region).hide(); }
-	$('detail_' + region).show();
+	if (current_region != '') { $('#detail_' + current_region).hide(); }
+	$('#detail_' + region).show();
 	current_region = region;
 }	
 function hideDetail(region) {
-	$('detail_' + current_region).hide();
+	$('#detail_' + current_region).hide();
 }
 </script>
 
@@ -17,17 +17,12 @@ function hideDetail(region) {
 
 <div id="controls">
   <div id="panel">
-	<div id="panel-info-pages" class="panel" style="display:block;">
-	  <h3>Navigation</h3>
-	  
-	  <ul id="list-info-pages">
+	<div id="panel-pages" class="panel" style="display:block;">
+	  <ul id="list-pages">
 	    <li><a href="/info_pages/home" title="">Home</a></li>
-	    <li><a href="/info_pages/instructions" title="">Instructions</a></li>
-	    <li><a href="/info_pages/faqs" title="">Frequently Asked Questions</a></li>
 	    <li><a href="/info_pages/about_us" title="">About Us</a></li>
 	    <li class="active"><a href="/info_pages/contact_us" title="">Contact Us</a></li>
 	    <li><a href="/info_pages/opportunities" title="">STINT/Internship Opportunities</a></li>
-	    <li><a href="/info_pages/a_real_life_story" title="">A Real Life Story</a></li>
 	    <li><a href="/info_pages/privacy_policy" title="">Privacy Policy</a></li>
 	  </ul>
 	  
@@ -41,13 +36,12 @@ function hideDetail(region) {
 			<h3>Contact Us</h3>
 			<p>When trying to decide where to go on STINT, the first thing you want to figure out is where your campus's partnership is located. A partnership is about your school (plus a few others) pulling together the manpower to start a new ministry in another part of the world. Partnerships are designed to pioneer new campus ministries on strategic universities around the world, with the vision to see a movement led by nationals.</p>
 
-			<p>By participating in your partnership, you can be a part of seeing students raised up from your partnership campus to go to the world themselves.  
-			<a href="http://campuscrusadeforchrist.com/wsn/stint_partnership.html" target="_blank">Learn more about why partnerships are so important.</a></p>
+			<p>By participating in your partnership, you can be a part of seeing students raised up from your partnership campus to go to the world themselves.</p>
 			<p>Like STINT, Internships are for one year, and specific Internships have been designed in your area.</p>
 			<p>Click on your state to find information about who to contact about partnership locations and/or Internship opportunities near you.</p>
 			<p align="center"><img src="/images/USA.gif" width="350" height="240" usemap="#Map" border="0"></p>
 			<p>If you have general question about a STINT or Internship, you can also contact the same person who knows abouts specific partnerships and Internships near you.  You can also <a href="mailto:stintandinternships@uscm.org">email</a> us to obtain general information @ <a href="mailto:stintandinternships@uscm.org">stintandinternships@uscm.org</a>.</p>
-			<p>You can also <a href="http://staff.campuscrusadeforchrist.com/general/feedback.jsp" target="_blank">send us feedback</a> or call 407-826-2948 for further assistance.</p>
+			<p>You can also <a href="mailto:help@campuscrusadeforchrist.com">send us feedback</a> or call 407-826-2948 for further assistance.</p>
 			
 			<map name="Map">
 				<area shape="poly" coords="18,9,34,4,67,14,132,20,130,55,88,52,83,89,96,91,93,124,60,121,52,131,27,95,34,68,6,60" href="javascript:showDetail('nw');" alt="Greater Northwest Region" title="Greater Northwest Region">

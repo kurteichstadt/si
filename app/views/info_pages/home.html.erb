@@ -1,16 +1,11 @@
 <div id="controls">
   <div id="panel">
-	<div id="panel-info-pages" class="panel" style="display:block;">
-	  <h3>Navigation</h3>
-	  
-	  <ul id="list-info-pages">
+	<div id="panel-pages" class="panel" style="display:block;">
+	  <ul id="list-pages">
 	    <li class="active"><a href="/info_pages/home" title="">Home</a></li>
-	    <li><a href="/info_pages/instructions" title="">Instructions</a></li>
-	    <li><a href="/info_pages/faqs" title="">Frequently Asked Questions</a></li>
 	    <li><a href="/info_pages/about_us" title="">About Us</a></li>
 	    <li><a href="/info_pages/contact_us" title="">Contact Us</a></li>
 	    <li><a href="/info_pages/opportunities" title="">STINT/Internship Opportunities</a></li>
-	    <li><a href="/info_pages/a_real_life_story" title="">A Real Life Story</a></li>
 	    <li><a href="/info_pages/privacy_policy" title="">Privacy Policy</a></li>
 	  </ul>
 	  
@@ -26,13 +21,7 @@
 
 	<p>Thank you for your interest in joining us on a STINT or Internship. We
 		welcome your application for the <%= HrSiApplication::YEAR -%>-<%= HrSiApplication::YEAR + 1 -%> STINT/Internship
-		year!&nbsp; If you have logged on to any CCC site before (for
-		example to register for a conference or a summer project) or have
-		already started an application please use your previous login and
-		password when you click on the "register/login" button.&nbsp; (If
-		you have forgotten your username or password, it is possible to
-		retrieve them.)&nbsp; If you are completely new to registering on
-		any CCC site, please click on the "First Time Users" button.
+		year!&nbsp; Click below to log in and start or continue your application!
 	</p>
 <!--
 	<p>Thank you for your interest in joining us on a STINT or Internship. We 
@@ -42,12 +31,11 @@
 		application.</p>
 -->
 
-	<p><%= link_to "Register/Login", login_path, :class => "button" %>
-		<%= link_to "First Time Users", signup_path, :class => "button" %></p>
+	<p><%= link_to "Register/Login", show_default_path, :class => "button" %></p>
 
 	<p>For more information about a STINT or Internship, please go to our 
 		Contact Us section. If you have questions about the site, please 
-		<a href="http://staff.campuscrusadeforchrist.com/general/feedback.jsp" 
+		<a href="mailto:help@campuscrusadeforchrist.com" 
 		title="Send us feedback!">send us feedback</a> or call 407-826-2948.</p>
 
 <!--
