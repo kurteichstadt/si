@@ -3,7 +3,7 @@
 	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>STINT/Internship Application</title>
+  <title>STINT/Internship/PTFS Application</title>
   <%= stylesheet_link_tag "print", :media => 'print' %>
   <%= stylesheet_link_tag 'base', 'screen' %>
   <%- if Rails.env.development? %>
@@ -32,7 +32,8 @@
 <div id="status" style="display: none;"><%= image_tag('qe/status.gif', :id => "status-img") %> <span id="status-msg">Please Wait...</span></div>
 
    <div id="header">
-      <h1>STINT/Internship Application</h1>
+   	 <%= image_tag "cru_logo_top.jpg", :style => "padding-left: 10px; padding-top: 5px;" %>
+     <h1 style="display: inline; position: absolute; color: #F3F3F3; margin: 4.5px 10px; line-height: 36px;">STINT/Internship/PTFS Application</h1>
    
    	  <% if user %><%= link_to "Log Out", logout_path, { :style => "color: #fff;", :id => "link-log-out" } %><% end %>
    </div>

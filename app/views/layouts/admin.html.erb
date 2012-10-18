@@ -3,7 +3,7 @@
 	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>STINT/Internship Tool</title>
+  <title>STINT/Internship/PTFS Tool</title>
 
   <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
                              'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
@@ -27,11 +27,12 @@
 
 <div id="wrapper">
    <div id="header">
-      <h1>Stint/Internship Tool</h1>
+   	 <%= image_tag "cru_logo_top.jpg", :style => "position: absolute; padding-left: 10px; padding-top: 5px;" %>
+     <h1 style="display: inline; position: absolute; color: #F3F3F3; margin: 4.5px 70px; line-height: 36px;">STINT/Internship/PTFS Application</h1>
 	  
 	  <%= link_to "Log Out", logout_path, { :style => "color: #fff;", :id => "link-log-out" } %>
 	  
-      <ul id="nav-main">
+      <ul id="nav-main" style="display: inline-block;">
          <li <% if controller.controller_name == "admin" -%> class="active" <% end -%>><%= link_to 'Home', admin_home_path %></li>
 <% if si_user && si_user.can_edit_questionnaire? -%>
          <li <% if controller.controller_name == "question_sheets" -%> class="active" <% end -%>><%= link_to 'Application', admin_question_sheets_path %></li>
