@@ -11,21 +11,8 @@ class ReferencesController < ApplicationController
   # AnswerSheet for reference to fill in
   # /applications/1/references/{token}
   def edit
-    # look up reference information provided by Applicant
-    @reference = @application.references.find_by_token(params[:id])
-    
-    if !@reference.nil?
-      @reference.start! unless @reference.started?
-
-      # find or create answer sheet for reference to fill in
-      @answer_sheet = @application.find_or_create_reference_answer_sheet(@reference.sleeve_sheet)
-
-      # edit the first page
-      @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
-      @elements = @presenter.questions_for_page(:first).elements
-
-      render :template => 'answer_sheets/edit'
-    end
+    ref = ReferenceSheet.find_by_access_key(params[:id])
+    redirect_to edit_reference_sheet_path(ref, :a => params[:id])
   end
 
   # final submission
