@@ -49,7 +49,7 @@ Si::Application.routes.draw do
   match '/info_pages/opportunities' => 'info_pages#opportunities'
   match '/info_pages/privacy_policy' => 'info_pages#privacy_policy'
 
-  root :to => "info_pages#home"
+  root :to => "info_pages#index"
   
 #  resource :sleeves do
 #    resources :sheets, :controller => :sleeve_sheets, :name_prefix => 'sleeve_'
