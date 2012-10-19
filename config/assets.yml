@@ -18,15 +18,15 @@ javascripts:
     - public/javascripts/qe/qe.common.js
     - public/javascripts/rails.js
     - public/javascripts/rails.extra.js
-    - public/javascripts/admin/projects.js
-    - public/javascripts/admin/admin.js
-    - public/javascripts/admin/users.js
-    - public/javascripts/admin/evaluations.js
-    - public/javascripts/admin/reports.js
+#    - public/javascripts/admin/projects.js
+#    - public/javascripts/admin/admin.js
+#    - public/javascripts/admin/users.js
+#    - public/javascripts/admin/evaluations.js
+#    - public/javascripts/admin/reports.js
     
 stylesheets:
   base:
     - public/stylesheets/jquery-ui-1.8.2.custom.css
     - public/stylesheets/qe/qe.screen.css
 #    - public/stylesheets/message_block.css
-    - public/stylesheets/theme.css
+#    - public/stylesheets/theme.css

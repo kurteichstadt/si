@@ -142,6 +142,15 @@ table.grid tr.error label.error {
   display: none;
 }
 
+label.choice {
+  display: inline;
+}
+
+label.choice:after {
+  content:"\A";
+  white-space:pre;
+}
+
 #errorExplanation {
   border: 1px solid red;
   padding: 10px 15px;
