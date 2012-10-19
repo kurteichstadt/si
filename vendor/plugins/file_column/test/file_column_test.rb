@@ -190,7 +190,7 @@ class FileColumnTest < Test::Unit::TestCase
     e.image = uploaded_file(file_path("kerb.jpg"), "image/jpeg", "kerb.jpg")
     e.save
     
-    assert_equal_paths File.join(RAILS_ROOT, "public", "entry", "image", e.id.to_s), e.image_dir
+    assert_equal_paths File.join(Rails.root, "public", "entry", "image", e.id.to_s), e.image_dir
     assert_equal File.join(e.id.to_s), e.image_relative_dir
   end
 
@@ -201,7 +201,7 @@ class FileColumnTest < Test::Unit::TestCase
     e.image = uploaded_file(file_path("kerb.jpg"), "image/jpeg", "kerb.jpg")    
     assert e.save
     
-    assert_equal_paths File.join(RAILS_ROOT, "public", "my_store_dir", e.id), e.image_dir   
+    assert_equal_paths File.join(Rails.root, "public", "my_store_dir", e.id), e.image_dir   
   end
 
   def test_tmp_dir_with_store_dir_callback
@@ -209,7 +209,7 @@ class FileColumnTest < Test::Unit::TestCase
     e = Entry.new
     e.image = upload(f("kerb.jpg"))
     
-    assert_equal File.expand_path(File.join(RAILS_ROOT, "public", "my_store_dir", "tmp")), File.expand_path(File.join(e.image_dir,".."))
+    assert_equal File.expand_path(File.join(Rails.root, "public", "my_store_dir", "tmp")), File.expand_path(File.join(e.image_dir,".."))
   end
 
   def test_invalid_store_dir_callback

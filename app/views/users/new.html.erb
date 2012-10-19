@@ -1,0 +1,33 @@
+<div id="content">
+  <h1>New User</h1>
+
+  <%= error_messages_for :temp_user %>
+    
+  <style type="text/css">
+      label .help { font-weight: normal; font-size: 9px !important; color: #999; }
+  </style>
+  
+  <p><label for="name" class="desc">1. Find a person to give access</label>
+    <%= form_tag(search_users_path, :remote => true, :html => {:id => "user_form"}) do %>
+      <%= text_field_tag :name, "", :class => "text" %>
+      <%= submit_tag "Search" %>
+      <%= image_tag "/images/qe/ajax-loader.gif", :id => 'search_spinner', :style => 'display:none' %>
+    <% end %>
+  </p>
+  
+  <%= form_for(:temp_user, :url => users_path, :html => {:id => "user_form"}) do |f| %>
+    <p><label class="desc" style="margin: 0;">2. Select a person</label>
+      <div id="people" style="margin-top: 0">
+        <%= render :partial => "search", :locals => {:people => @people} %>
+      </div>
+    </p>
+    
+    <p><label for="user_role">3. Select a role for this user</label>
+      <%= f.select :role, si_user.creatable_user_types %>
+    </p>
+      
+    <div id="person_list"></div>
+  
+    <p style="margin-top: 36px;"><%= submit_tag "Create" %> or <%= link_to "Cancel", users_path, :class => "cancel" %></p>
+  <% end %>
+</div>

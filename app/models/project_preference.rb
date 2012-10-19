@@ -6,7 +6,7 @@ class ProjectPreference < Question
   def choices(app=nil)
     if !app.nil?
       locations = "'#{app.hr_si_application.locationA}','#{app.hr_si_application.locationB}','#{app.hr_si_application.locationC}'"
-      campus = Campus.find_by_name(app.applicant.campus, :conditions => ["state = ?", app.applicant.universityState])
+      campus = Campus.where("name = ? && state = ?", app.applicant.campus, app.applicant.universityState).first
       region = campus.nil? ? nil : campus.region
       show_all = false
       person = app.applicant
@@ -19,7 +19,7 @@ class ProjectPreference < Question
   end
   
   def display_response(app=nil)
-    r = get_response(app).first
+    r = responses(app).first
     p = HrSiProject.find_by_SIProjectID(r) unless r.blank?
     if r.blank?
       return ""

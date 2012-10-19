@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>STINT/Internship/PTFS Tool</title>
+
+  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
+                             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
+  <%= javascript_include_tag 'qe/jquery.tooltips.min' %>
+  <%= include_javascripts :admin %>
+  <%= stylesheet_link_tag 'jquery-ui-1.8.2.custom' %>
+  <%= questionnaire_engine_includes %>
+  <%= stylesheet_link_tag 'admin', 'base', 'screen' %>
+  <%= csrf_meta_tag %>
+	<script language="javascript" type="text/javascript">
+		Ajax.Responders.register({
+		  onComplete: function() { setTimeout("$('status').hide();", 50); },
+		  onLoading: function() { $('status').show(); }
+		})
+	</script>
+
+</head>
+<body>
+
+<div id="status" style="display: none;"><%= image_tag('qe/status.gif', :id => "status-img") %> <span id="status-msg">Please Wait...</span></div>
+
+<div id="wrapper">
+   <div id="header">
+   	 <%= image_tag "cru_logo_top.jpg", :style => "position: absolute; padding-left: 10px; padding-top: 5px;" %>
+     <h1 style="display: inline; position: absolute; color: #F3F3F3; margin: 4.5px 70px; line-height: 36px;">STINT/Internship/PTFS Application</h1>
+	  
+	  <%= link_to "Log Out", logout_path, { :style => "color: #fff;", :id => "link-log-out" } %>
+	  
+      <ul id="nav-main" style="display: inline-block;">
+         <li <% if controller.controller_name == "admin" -%> class="active" <% end -%>><%= link_to 'Home', admin_home_path %></li>
+<% if si_user && si_user.can_edit_questionnaire? -%>
+         <li <% if controller.controller_name == "question_sheets" -%> class="active" <% end -%>><%= link_to 'Application', admin_question_sheets_path %></li>
+<% end -%>
+<% if si_user && si_user.can_edit_email_template? -%>
+         <li <% if controller.controller_name == "email_templates" -%> class="active" <% end -%>><%= link_to 'Email Templates', admin_email_templates_path %></li>
+<% end -%>
+<% if si_user && si_user.can_see_projects? -%>
+         <li <% if controller.controller_name == "hr_si_projects" -%> class="active" <% end -%>><%= link_to 'Projects', hr_si_projects_path %></li>
+<% end -%>
+<% if si_user && si_user.can_add_user? -%>
+         <li <% if controller.controller_name == "users" -%> class="active" <% end -%>><%= link_to 'Users', users_path %></li>
+<% end -%>
+      </ul>
+   </div>
+   
+   <div id="main">
+     <%= yield %>
+   </div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-79392-15");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+</body>
+</html>

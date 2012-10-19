@@ -1,0 +1,26 @@
+<%#= error_messages_for :person %>
+<%= error_messages_for :user %>
+<%= form_for :user do |f| -%>
+<p><label for="person[firstName]">First Name</label><br />
+<%= text_field :person, :firstName %></p>
+
+<p><label for="person[lastName]">Last Name</label><br />
+<%= text_field :person, :lastName %></p>
+
+<p><label for="username">Login (must be an email address)</label><br />
+<%= f.text_field :username %></p>
+
+<p><label for="passwordQuestion">Secret Question</label><br />
+<%= f.text_field :secret_question %></p>
+
+<p><label for="passwordAnswer">Secret Answer</label><br />
+<%= f.text_field :secret_answer %></p>
+
+<p><label for="plain_password">Password (must be at least 8 characters, including at least one upper case letter and one lower case letter)</label><br />
+<%= f.password_field :plain_password %></p>
+
+<p><label for="plain_password_confirmation">Confirm Password</label><br />
+<%= f.password_field :plain_password_confirmation %></p>
+
+<p><%= submit_tag 'Sign up' %></p>
+<% end -%>

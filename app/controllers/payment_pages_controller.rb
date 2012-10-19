@@ -27,7 +27,7 @@ class PaymentPagesController < ApplicationController
     if @payment.staff_first.strip.empty? || @payment.staff_last.strip.empty?
       render; return
     end
-    @results = Staff.find(:all, :order => 'lastName, firstName', :conditions => ["firstName like ? AND lastName like ? and removedFromPeopleSoft <> 'Y'", @payment.staff_first+'%', @payment.staff_last+'%'])
+    @results = Staff.find(:all, :order => 'lastName, firstName', :conditions => ["(firstName like ? OR preferredName like ?) AND lastName like ? and removedFromPeopleSoft <> 'Y'", @payment.staff_first+'%', @payment.staff_first+'%', @payment.staff_last+'%'])
   end
 
  private

@@ -3,9 +3,10 @@ class UsersController < ApplicationController
   skip_before_filter AuthenticationFilter, :only => [:search]
   before_filter :check_valid_user, :except => [:search]
   layout 'admin', :except => [:search]
-  
+  respond_to :html, :js
+
   def index
-    @users = SiUser.find(:all, :order => 'ministry_person.lastName, ministry_person.firstName', :include => {:user => :person})
+    @users = SiUser.includes(:user => :person).order('ministry_person.lastName, ministry_person.firstName')
   end
   
   def new
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
       @temp_user.errors.add_to_base "You must first select a person before creating a new user."
       render :action => :new
     else
-      @person = Person.find(:first, :conditions => ['personID = ?', params[:person_id]], :include => :user)
+      @person = Person.where('personID = ?', params[:person_id]).includes(:user).first
       old_user = SiUser.find_by_ssm_id(@person.user) 
       old_user.destroy if old_user # delete the old user so we can create the new one.
       type = params[:temp_user][:role]
@@ -35,6 +36,9 @@ class UsersController < ApplicationController
                                            :created_at => Time.now,
                                            :created_by_id => user.id,
                                            :role => type)
+      role = SiRole.where("user_class = ?", type).first
+      @new_user.role = role.role
+      @new_user.save!
       redirect_to users_path
     end
   end
@@ -42,8 +46,14 @@ class UsersController < ApplicationController
   def update
     @temp_user = SiUser.find(params[:id])
     
+    if params[:temp_user][:type]
+      role = SiRole.where("user_class = ?", (params[:temp_user][:type])).first
+      @temp_user.type = role.user_class
+      @temp_user.role = role.role
+    end
+    
     respond_to do |format|
-      if @temp_user.update_attributes(params[:temp_user])
+      if @temp_user.save
         format.html { redirect_to users_path }
       else
         format.html { render :action => "edit" }
@@ -63,7 +73,7 @@ class UsersController < ApplicationController
   def search
     @name = params[:name]
     @people = person_search(params[:name])
-    render :layout => false
+    respond_with(@people)
   end
   
   protected
@@ -81,7 +91,7 @@ class UsersController < ApplicationController
       end
       @conditions[0] += " AND fk_ssmUserId <> 0 AND fk_ssmUserId is NOT NULL " if !options[:all_users]
       @conditions[0] += " AND accountNo <> '' AND accountNo is NOT NULL " if options[:staff_only]
-      @people = Person.find(:all, :order => "lastName, firstName", :conditions => @conditions)
+      @people = Person.order("lastName, firstName").where(@conditions)
     end
     return @people
   end

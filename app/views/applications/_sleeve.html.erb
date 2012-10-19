@@ -1,0 +1,4 @@
+<%= form_tag applications_path, :method => :post do -%>
+  <%= hidden_field_tag 'sleeve_id', sleeve.id %>
+  <%= sleeve.title %> <%= submit_tag 'Create' %>
+<% end -%>

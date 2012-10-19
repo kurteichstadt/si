@@ -1,0 +1,14 @@
+<% if people.blank? || people.size == 0 %>
+	<strong>There are no matches for the name you have entered. Please try something else.</strong>
+<% else %> 
+	<table cellspacing="1" class="list">
+	<% people.each do |person| -%>
+		<tr>
+			<td><%= radio_button_tag :person_id, person.id %></td>
+			<td><%= person.informal_full_name %></td>
+			<td><%= person.current_address.email if person.current_address %>&nbsp;</td>
+			<td><%= person.accountNo if person.accountNo %>&nbsp;</td>
+		</tr>
+	<% end -%>
+	</table>
+<% end -%>

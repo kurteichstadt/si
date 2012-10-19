@@ -1,5 +1,4 @@
 class ApplicationsController < ApplicationController
-  include AuthenticatedSystem
   skip_before_filter CAS::Filter, :except => [:show, :collated_refs, :no_conf, :no_ref]
   skip_before_filter AuthenticationFilter
   prepend_before_filter :ssm_login_required, :except => [:no_access, :show, :no_ref, :no_conf, :collated_refs]
@@ -55,11 +54,12 @@ class ApplicationsController < ApplicationController
       #raise "No applicant sheets in sleeve '#{@application.sleeve.title}'."
       return
     end
+    render :layout => 'admin_application'
   end
   
   def no_ref
     @application = Apply.find(params[:id]) unless @application
-    @answer_sheets = @application.find_or_create_applicant_answer_sheets
+    @answer_sheets = [@application]
     @show_conf = true
     
     if @answer_sheets.empty?
@@ -73,7 +73,7 @@ class ApplicationsController < ApplicationController
   
   def no_conf
     @application = Apply.find(params[:id]) unless @application
-    @answer_sheets = @application.find_or_create_applicant_answer_sheets
+    @answer_sheets = [@application]
     @show_conf = false
     
     if @answer_sheets.empty?
@@ -87,7 +87,7 @@ class ApplicationsController < ApplicationController
   
   def collated_refs
     @application = Apply.find(params[:id]) unless @application
-    @answer_sheets = @application.reference_answer_sheets
+    @answer_sheets = @application.references
 
     if @answer_sheets.empty?
       render :action => :too_old
@@ -108,14 +108,20 @@ class ApplicationsController < ApplicationController
   def setup_reference(type)
     ref = nil
     eval("ref = @" + type + "_reference = @application." + type + "_reference")
-    raise type if ref.sleeve_sheet.nil?
-    answer_sheet = @application.find_or_create_reference_answer_sheet(ref.sleeve_sheet)
+    raise type unless ref
+    answer_sheet = ref
     question_sheet = answer_sheet.question_sheet
-    elements = question_sheet.elements.find(:all, :include => 'page', 
-                                                 :conditions => ["#{Element.table_name}.kind not in (?)", %w(Paragraph)],
-                                                 :order => "#{Page.table_name}.number,#{Element.table_name}.position")
-    elements.reject! {|e| e.is_confidential} if @show_conf == false
-    eval("@" + type + "_elements = QuestionSet.new(elements, answer_sheet).elements")
+    if question_sheet
+      elements = []
+      question_sheet.pages.order(:number).each do |page|
+        elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Paragraph)).all
+      end
+      elements = elements.flatten
+      elements.reject! {|e| e.is_confidential} if @show_conf == false
+      eval("@" + type + "_elements = QuestionSet.new(elements, answer_sheet).elements")
+    else
+      eval("@" + type + "_elements = []")
+    end
 
   end
   
@@ -135,7 +141,7 @@ protected
   def get_person
     @person ||= current_person
     @person.current_address = Address.new(:addressType =>'current') unless @person.current_address
-    @person.emergency_address = Address.new(:addressType =>'emergency1') unless @person.emergency_address
+    @person.emergency_address1 = Address.new(:addressType =>'emergency1') unless @person.emergency_address1
     @person.permanent_address = Address.new(:addressType =>'permanent') unless @person.permanent_address
     return @person
   end
@@ -146,6 +152,8 @@ protected
       # if this is the user's first visit, we will need to create an hr_si_application
       if @person.current_si_application.nil?
         @app = HrSiApplication.create(:siYear => get_year, :fk_personID => @person.id)
+        @app.siYear = get_year
+        @app.save!
         @person.current_si_application = @app
       end
       if @person.current_si_application.apply_id.nil?
@@ -159,16 +167,12 @@ protected
   end
 
   def setup_view
-    @answer_sheets = @application.find_or_create_applicant_answer_sheets
-    
-    if @answer_sheets.empty?
-      raise "No applicant sheets in sleeve '#{@application.sleeve.try(:title)}'."
-    end
-        
+    @answer_sheet = @application
     # edit the first page
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheets, custom_pages(@application))
-
+    @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
     @elements = @presenter.questions_for_page(:first).elements
+    @page = @presenter.pages.first
+    @presenter.active_page ||= @page
   end
 end
 

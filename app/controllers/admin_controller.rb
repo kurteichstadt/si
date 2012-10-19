@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+  prepend_before_filter CASClient::Frameworks::Rails3::Filter
   before_filter :check_valid_user, :except => [:no_access, :logout]
   layout 'admin'
   
@@ -35,24 +36,23 @@ class AdminController < ApplicationController
     apply_base = Apply.by_region(@region.region, @year)
     # Started apps are those that meet the following conditions:
     #   - First Name or Last Name filled in (check :person)
-    @started_apps = apply_base.find(:all,
-                                    :conditions => ["(#{Person.table_name}.firstName != '' or #{Person.table_name}.lastName != '') AND #{Apply.table_name}.status IN(?)", Apply.unsubmitted_statuses])
+    @started_apps = apply_base.where("(#{Person.table_name}.firstName != '' or #{Person.table_name}.lastName != '') AND #{Apply.table_name}.status IN(?)", Apply.unsubmitted_statuses).all
     # In Process apps
-    @in_process_apps = apply_base.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.not_ready_statuses] )
+    @in_process_apps = apply_base.where("#{Apply.table_name}.status IN(?)", Apply.not_ready_statuses).all
 
     # Ready apps are those that meet the following conditions:
     #   - Submitted (or Completed)
     #     AND Paid
     #     AND All References Submitted
-    @ready_apps = apply_base.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.ready_statuses])
+    @ready_apps = apply_base.where("#{Apply.table_name}.status IN(?)", Apply.ready_statuses).all
     
     # Post Ready apps
     # Everything from Evaluation through Termination, but not the ppl who dropped out
-    @post_ready_apps = apply_base.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.post_ready_statuses])
+    @post_ready_apps = apply_base.where("#{Apply.table_name}.status IN(?)", Apply.post_ready_statuses).all
     
     # Not Going apps
     # Withdrawn or declined
-    @not_going = apply_base.find(:all, :conditions => ["#{Apply.table_name}.status IN(?)", Apply.not_going_statuses])
+    @not_going = apply_base.where("#{Apply.table_name}.status IN(?)", Apply.not_going_statuses).all
   end
 
 

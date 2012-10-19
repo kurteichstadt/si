@@ -1,0 +1,62 @@
+<div id="content" style="background: #fff url(/images/cru_logo_screen.jpg) center 75px no-repeat; overflow: hidden;">
+    <h1>Admin Home</h1>
+
+    <div id="announcements" style="width: 30%; float: left; ">
+        <h2>Announcements</h2>
+        
+        <p>Welcome to the New STINT/Internship Tool. Here you will be able to see all of the people who have applied for a STINT or an Internship via www.apply4internship.com.</p>
+    
+        <p>To get started, go to the region drop down list and pick your region, then click "Go".</p>
+    
+        <p>Check back here for updated information. If you have questions, please contact your regional STINT or Internship Coordinator.</p>
+    </div>
+	
+    <div id="tools" style="margin-left: 66%;">
+        <ul style="margin-bottom: 26px;">
+            <li><a href="/" title="">Online STINT/Internship Application</a></li>
+            <li><a href="/info_pages/opportunities" title="">Current STINT/Internship Opportunities</a></li>
+            <li><a href="https://sitrack.uscm.org/" title="">STINT Tracker</a></li>
+            <li><a href="http://wiki.uscm.org/display/SIC/Evaluator+Information" title="" target="_blank">Evaluator Documents</a></li>
+        </ul>
+
+<% if si_user.can_see_applicants? %>
+<%= form_tag :action => "select_region" do %>
+        <p style="clear: none;"><label for="region" class="desc">Select your region</label>
+            <%= select_tag :region, 
+                           options_for_select([ ['Unassigned', ''],
+                                              ['Northeast', 'NE'],
+                                              ['Mid-Atlantic', 'MA'],
+                                              ['MidSouth', 'MS'],
+                                              ['Southeast', 'SE'],
+                                              ['Great Lakes', 'GL'],
+                                              ['Upper Midwest', 'UM'],
+                                              ['Great Plains Int\'l', 'GP'],
+                                              ['Red River', 'RR'],
+                                              ['Greater Northwest', 'NW'],
+                                              ['Pacific Southwest', 'SW'],
+                                              ['Nat\'l Campus', 'NC'] ],
+                           params[:region]) %> <%= submit_tag "Go" %></p>
+            
+        <p style="clear: none; margin-bottom: 36px;"><label for="year_select" class="desc">Select Year</label>
+            <%= select_tag :year, 
+                           options_for_select(@years_for_select,
+                           params[:year]) %></p>
+						   
+<% end %>
+<% end %>	 
+<h2>Other Information</h2>
+        <ul>
+<!--
+            <li><a href="http://staff.int.uscm.org/servlet/StaffController?action=showHome" title="">Your References</a></li>
+-->
+			<% if Rails.env == "production" %>
+	            <li><a href="https://sp.campuscrusadeforchrist.com/admin" title="">The New Summer Project Tool</a></li>
+	            <li><a href="https://sp.campuscrusadeforchrist.com" title="">Online Summer Project Application</a></li>
+			<% else %>
+	            <li><a href="https://sp.int.uscm.org/admin" title="">The New Summer Project Tool</a></li>
+	            <li><a href="https://sp.int.uscm.org" title="">Online Summer Project Application</a></li>
+			<% end %>
+            <li><a href="http://www.gosummerproject.com" title="">Current Summer Project Opportunities  </a></li>  
+        </ul>
+    </div>
+</div>

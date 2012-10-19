@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>STINT/Internship/PTFS Application</title>
+  <%= stylesheet_link_tag "print", :media => 'print' %>
+  <%= stylesheet_link_tag 'base' %>
+  <%- if Rails.env.development? %>
+    <%= javascript_include_tag 'jquery.min.1.4.2.js', 'jquery-ui.min.1.8.2.js' %>
+  <%- else %>
+    <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
+                             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
+  <%- end %>
+  <%= javascript_include_tag 'qe/jquery.metadata', 'qe/jquery.tooltips.min' %>
+  <%= include_stylesheets :base, :media => 'all' %>
+  <%= include_javascripts :base %>
+  <script type="text/javascript" charset="utf-8">
+    var answer_sheet_type = '<%= @answer_sheet.class %>'
+  </script>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag 'message_block' %>
+  <script type="text/javascript" charset="utf-8">
+    <%= raw Rack::TimeZone::Javascript %>
+    setTimezoneCookie()
+  </script>
+  <%= questionnaire_engine_includes %>
+</head>
+<body>
+
+<div id="wrapper">
+
+   <div id="header" style="height: 72px;">
+   	 <%= image_tag "cru_logo_top.jpg", :style => "padding-left: 10px; padding-top: 5px;" %>
+     <h1 style="display: inline; position: absolute; color: #F3F3F3; margin: 4.5px 10px; line-height: 36px;">STINT/Internship/PTFS Application</h1>
+   
+   	  <% if user %><%= link_to "Log Out", logout_path, { :style => "color: #fff;", :id => "link-log-out" } %><% end %>
+   </div>
+   
+   <% if user && @application -%><%= render :partial => "/applications/meta_info" %><% end -%>
+   
+   <div id="main">
+    <%= yield %>
+   </div>
+</div>
+<div id="footerwrap">
+  <div id="footer">
+    <!-- anything in here my be custom branded -->
+    <table>
+      <tr>
+        <td>
+          <img src="/images/icons/lifebuoy.png" style="vertical-align: top; margin-right: 5px;"> If you're having any issues, or have a question about something, please <a href="mailto:help@campuscrusadeforchrist.com" class="issueslink">send us an email. <img src="/images/icons/mail.png" style="vertical-align: top; border: 0px;"></a>
+        </td>
+      </tr>
+    </table>
+    <!-- END -->
+  </div>
+</div>
+</body>
+</html>

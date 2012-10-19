@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>STINT/Internship/PTFS Application</title>
+  <%= stylesheet_link_tag "print", :media => 'print' %>
+  <%= stylesheet_link_tag 'base', 'screen' %>
+  <%- if Rails.env.development? %>
+    <%= javascript_include_tag 'jquery.min.1.4.2.js', 'jquery-ui.min.1.8.2.js' %>
+  <%- else %>
+    <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
+                             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
+  <%- end %>
+  <%= javascript_include_tag 'qe/jquery.metadata', 'qe/jquery.tooltips.min' %>
+  <%= include_javascripts :base %>
+  <script type="text/javascript" charset="utf-8">
+    var answer_sheet_type = '<%= @answer_sheet.class %>'
+  </script>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag 'message_block' %>
+  <script type="text/javascript" charset="utf-8">
+    <%= raw Rack::TimeZone::Javascript %>
+    setTimezoneCookie()
+  </script>
+  <%= questionnaire_engine_includes %>
+</head>
+<body>
+
+<div id="wrapper">
+
+<div id="status" style="display: none;"><%= image_tag('qe/status.gif', :id => "status-img") %> <span id="status-msg">Please Wait...</span></div>
+
+   <div id="header">
+   	 <%= image_tag "cru_logo_top.jpg", :style => "padding-left: 10px; padding-top: 5px;" %>
+     <h1 style="display: inline; position: absolute; color: #F3F3F3; margin: 4.5px 10px; line-height: 36px;">STINT/Internship/PTFS Application</h1>
+   
+   	  <% if user %><%= link_to "Log Out", logout_path, { :style => "color: #fff;", :id => "link-log-out" } %><% end %>
+   </div>
+   
+   <% if user && @application -%><%= render :partial => "/applications/meta_info" %><% end -%>
+   
+   <div id="main">
+    <%= yield %>
+   </div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-79392-15");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>

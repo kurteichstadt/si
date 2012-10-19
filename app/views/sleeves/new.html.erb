@@ -1,0 +1,11 @@
+<div id="content">
+  <h1>New Application</h1>
+  
+  <%= error_messages_for :sleeve %>
+  
+  <%= form_for(:sleeve, :url => sleeves_path) do |f| %>
+      <%= render :partial => 'form', :locals => {:f => f}%>
+      
+      <p><%= submit_tag "Create" %> or <%= link_to "Cancel", sleeves_path, :class => "cancel" %></p>
+  <% end %>
+</div>
