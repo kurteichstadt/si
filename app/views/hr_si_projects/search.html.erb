@@ -27,10 +27,10 @@
         <td><%= h project.country %></td>
         <td><%= h project.AOA %></td>
         <td><%= h project.siYear %></td>
-        <td><%= h Region.find_by_region(project.partnershipRegion).name unless project.partnershipRegion.nil? %></td>
+        <td><%= h Region.find_by_region(project.partnershipRegion).name unless project.partnershipRegion.blank? %></td>
       </tr>
     <% end %>
     </table>
     
     <br />
-</div>  
+</div>
