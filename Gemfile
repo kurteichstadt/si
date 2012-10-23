@@ -24,6 +24,7 @@ gem 'omniauth-cas'
 gem 'oa-openid'
 
 gem 'airbrake'
+gem 'airbrake_user_attributes'
 gem 'newrelic_rpm'
 gem 'test-unit'
 
