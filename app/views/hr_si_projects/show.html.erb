@@ -1,0 +1,30 @@
+<div id="controls">
+  <div id="panel">
+  <div id="panel-pages" class="panel" style="display:block;">
+    <ul id="list-pages">
+      <li><a href="/info_pages/home" title="">Home</a></li>
+      <li><a href="/info_pages/about_us" title="">About Us</a></li>
+      <li><a href="/info_pages/contact_us" title="">Contact Us</a></li>
+      <li class="active"><a href="/info_pages/opportunities" title="">STINT/Internship Opportunities</a></li>
+      <li><a href="/info_pages/privacy_policy" title="">Privacy Policy</a></li>
+    </ul>
+    
+  </div>
+  </div>
+</div>
+
+<div id="preview" class="answer-page">
+  <div id="page-preview">
+  
+    <div class="page">
+      <h3><%= @hr_si_project.name %></h3>
+      <p><b>Dates:</b> <%= datestamp(@hr_si_project.studentStartDate) %> - <%= datestamp(@hr_si_project.studentEndDate) %></p>
+      <%= "<p><b>Location: </b>".html_safe + @hr_si_project.displayLocation + "</p>".html_safe if !@hr_si_project.displayLocation.blank? %>
+      <p><b>Cost:</b> <%= @hr_si_project.studentCost %></p>
+      <%= "<p><b>Cost Explanation: </b>".html_safe + @hr_si_project.studentCostExplaination.html_safe + "</p>".html_safe if !@hr_si_project.studentCostExplaination.blank? %>
+      <p><b>Description:</b> <%= @hr_si_project.details.html_safe %></p>
+      <%= "<p><b>History: </b>".html_safe + @hr_si_project.history.html_safe + "</p>".html_safe if !@hr_si_project.history.blank? %>
+      <%= "<p><b>Region: </b>".html_safe + Region.full_name(@hr_si_project.partnershipRegion) + "</p>".html_safe if !@hr_si_project.partnershipRegion.blank? %>
+    </div>
+  </div>
+</div>

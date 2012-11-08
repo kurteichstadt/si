@@ -34,10 +34,13 @@ class HrSiProjectsController < ApplicationController
   
   def show
     edit
-    render :xml => @hr_si_project.to_xml(:only => [:SIProjectID, :studentStartDate,
+    respond_to do |format|
+      format.html { render :layout => 'public' }
+      format.xml { render :xml => @hr_si_project.to_xml(:only => [:SIProjectID, :studentStartDate,
                                                    :studentEndDate, :details,
                                                    :displayLocation,
-                                                   :studentCost, :partnershipRegion])
+                                                   :studentCost, :partnershipRegion]) }
+    end
   end
   
   def create
