@@ -13,21 +13,27 @@ class InfoPagesController < ApplicationController
   end
   
   def home
+    @active = "home"
   end
 
   def instructions
   end
 
   def faqs
+    @active = "faq"
+    @faq = Element.find(50) # The FAQ from the application
   end
 
   def about_us
+    @active = "about"
   end
 
   def contact_us
+    @active = "contact"
   end
   
   def opportunities
+    @active = "opportunities"
     @national_projects = HrSiProject.where("projectType = 'n' AND siYear = ? AND (onHold <> 1 OR onHold is null)", HrSiApplication::YEAR).order("name ASC").all
     @regional_stint_projects = HrSiProject.where("projectType = 's' AND siYear = ? AND (onHold <> 1 OR onHold is null)", HrSiApplication::YEAR).order("name ASC").all
     @regional_internship_projects = HrSiProject.where("projectType = 'i' AND siYear = ? AND (onHold <> 1 OR onHold is null)", HrSiApplication::YEAR).order("name ASC").all
@@ -37,5 +43,6 @@ class InfoPagesController < ApplicationController
   end
   
   def privacy_policy
+    @active = "privacy"
   end
 end

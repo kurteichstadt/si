@@ -1,0 +1,15 @@
+<div id="controls">
+  <div id="panel">
+  <div id="panel-pages" class="panel" style="display:block;">
+    <ul id="list-pages">
+      <li<%= " class=active" if @active == "home" %>><a href="/info_pages/home" title="">Home</a></li>
+      <li<%= " class=active" if @active == "faq" %>><a href="/info_pages/faqs" title="">FAQ</a></li>
+      <li<%= " class=active" if @active == "about" %>><a href="/info_pages/about_us" title="">About Us</a></li>
+      <li<%= " class=active" if @active == "contact" %>><a href="/info_pages/contact_us" title="">Contact Us</a></li>
+      <li<%= " class=active" if @active == "opportunities" %>><a href="/info_pages/opportunities" title="">STINT/Internship Opportunities</a></li>
+      <li<%= " class=active" if @active == "privacy" %>><a href="/info_pages/privacy_policy" title="">Privacy Policy</a></li>
+    </ul>
+    
+  </div>
+  </div>
+</div>
