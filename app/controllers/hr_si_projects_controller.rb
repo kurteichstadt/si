@@ -11,7 +11,7 @@ class HrSiProjectsController < ApplicationController
   def index
     params[:partnershipRegion] ||= -1
     @regions = [["",-1]] + Region.find(:all).collect { |r| [ r.name, r.region ] }
-    @countries = [""] + Country.find(:all).collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
+    @countries = [""] + Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
     @aoas = [""] + Aoa.find(:all).collect { |a| [a.name, a.id ] }
     @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
     @years_for_select << ["Current",HrSiApplication::YEAR]
@@ -21,14 +21,14 @@ class HrSiProjectsController < ApplicationController
   def new 
     @hr_si_project = HrSiProject.new
     @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
-    @countries = Country.find(:all).collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
+    @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
     @aoas = Aoa.find(:all).collect { |a| a.name }
   end
   
   def edit
     @hr_si_project = HrSiProject.find(params[:id])
     @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
-    @countries = Country.find(:all).collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
+    @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
     @aoas = Aoa.find(:all).collect { |a| a.name }
   end
   
@@ -48,7 +48,7 @@ class HrSiProjectsController < ApplicationController
     @hr_si_project = HrSiProject.new(params[:hr_si_project])
     @hr_si_project.siYear = HrSiApplication::YEAR
     @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
-    @countries = Country.find(:all).collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
+    @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
     @aoas = Aoa.find(:all).collect { |a| a.name }
 
     respond_to do |format|
@@ -73,7 +73,7 @@ class HrSiProjectsController < ApplicationController
         format.xml  { head :ok }
       else
         @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
-        @countries = Country.find(:all).collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
+        @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
         @aoas = Aoa.find(:all).collect { |a| a.name }
         format.html { render :action => "edit" }
         format.xml  { render :xml => @hr_si_project.errors.to_xml }
@@ -92,7 +92,7 @@ class HrSiProjectsController < ApplicationController
 
   def search
     @regions = [["",-1]] + Region.find(:all).collect { |r| [ r.name, r.region ] }
-    @countries = [""] + Country.find(:all).collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
+    @countries = [""] + Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
     @aoas = [""] + Aoa.find(:all).collect { |a| a.name }
     @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
     @years_for_select << ["Current",HrSiApplication::YEAR]
