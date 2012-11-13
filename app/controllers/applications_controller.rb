@@ -68,7 +68,7 @@ class ApplicationsController < ApplicationController
       return
     end
     
-    render :template => 'applications/show'
+    render :layout => 'admin_application', :template => 'applications/show'
   end
   
   def no_conf
@@ -82,7 +82,7 @@ class ApplicationsController < ApplicationController
       return
     end
     
-    render :template => 'applications/show'
+    render :layout => 'admin_application', :template => 'applications/show'
   end
   
   def collated_refs

@@ -1,16 +1,25 @@
 h1 { display: none; }
+h2 {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
+  font-size: 12pt;
+}
 h3 {
   margin-top: 1px;
   margin-bottom: 1px;
   margin-left: 1px;
   margin-right: 1px;
+  font-size: 10pt;
 }
 h4 {
-  font-size: 12pt;
+  font-size: 10pt;
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
+  font-size: 10pt;
   padding-top: 8px;
 }
 p {
@@ -18,43 +27,50 @@ p {
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
-  font-size: 12px;
+  font-size: 10pt;
 }
 p label {
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
-  font-size: 12px;
+  font-size: 10pt;
 }
 p label.desc {
   margin-top: 0px;
   margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
-  font-size: 12px;
+  font-size: 10pt;
+}
+label.desc {
+  display: inline;
+}
+.answer p {
+  display: inline;
 }
 #link-log-out { display: none; }
 #meta { display: none; }
 ul.readonly li label {}
 ul.readonly li { list-style: none !important; }
-ul.readonly { list-style: none !important; margin-left: 0; padding-left: 18px; 
-  font-size: 12px;
+ul.readonly { list-style: none !important; margin-left: 0; padding-left: 18pt; 
+  font-size: 10pt;
 }
 table.grid th, table.grid td { border: solid 1px #ccc; 
-  font-size: 12px;
+  font-size: 10pt;
 }
 table.grid { border-collapse: collapse; }
 label {
-  font-size: 12px;
+  font-size: 10pt;
 }
 label.desc {
-  font-size: 12px;
+  font-size: 10pt;
 }
 span.answer { color: #339; 
-  font-size: 12px;
+  font-size: 10pt;
 }
 .panel {
-  font-size: 12pt;
+  font-size: 10pt;
+  width: 750px;
 }
-.panel label { font-size: 12pt; }
+.panel label { font-size: 10pt; }
