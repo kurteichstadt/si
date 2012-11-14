@@ -91,7 +91,7 @@ class UsersController < ApplicationController
       end
       @conditions[0] += " AND fk_ssmUserId <> 0 AND fk_ssmUserId is NOT NULL " if !options[:all_users]
       @conditions[0] += " AND accountNo <> '' AND accountNo is NOT NULL " if options[:staff_only]
-      @people = Person.order("lastName, firstName").where(@conditions)
+      @people = Person.order("lastName, firstName").where(@conditions).all
     end
     return @people
   end
