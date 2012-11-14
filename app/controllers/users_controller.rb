@@ -73,7 +73,9 @@ class UsersController < ApplicationController
   def search
     @name = params[:name]
     @people = person_search(params[:name])
-    respond_with(@people)
+    respond_to do |format|
+      format.js
+    end
   end
   
   protected
