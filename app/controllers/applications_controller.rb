@@ -95,7 +95,7 @@ class ApplicationsController < ApplicationController
       return
     end
 
-    @reference_question_sheet = @answer_sheets.empty? ? nil : @answer_sheets[0].question_sheet 
+    @reference_question_sheet = QuestionSheet.find(2) #TODO: constant
 
     setup_reference("staff")
     setup_reference("discipler")
