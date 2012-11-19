@@ -18,7 +18,7 @@ Si::Application.configure do
   # Just log mail, don't send
   #config.action_mailer.delivery_method = :test
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :sendmail
   config.action_mailer.default_url_options = { :host => 'stint.stage.uscm.org' }
 
   # Print deprecation notices to the Rails logger
