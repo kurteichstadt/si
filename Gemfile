@@ -25,7 +25,7 @@ gem 'oa-openid'
 
 gem 'airbrake'
 gem 'airbrake_user_attributes'
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', '>= 3.5.3.25'
 gem 'test-unit'
 
 group :development, :test do
