@@ -54,3 +54,4 @@ config/initializers/payment.rb
 
 public/blank_iframe.html
 vendor/ruby
+config/config.yml
