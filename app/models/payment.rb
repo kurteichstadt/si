@@ -4,7 +4,7 @@ class Payment < ActiveRecord::Base
   attr_accessor :first_name, :last_name, :address, :city, :state, :zip, :card_number,
                 :expiration_month, :expiration_year, :security_code, :staff_first, :staff_last, :card_type
 
-  scope :non_denied, where("status <> 'Denied' OR status is null")
+  scope :non_denied, where("(status <> 'Denied' AND status <> 'Errored') OR status is null")
   
   belongs_to :apply
   
