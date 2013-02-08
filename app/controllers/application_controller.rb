@@ -20,12 +20,17 @@ class ApplicationController < ActionController::Base
   helper_method :current_person
   
   def user
-    if session[:casfilterreceipt]
-      @user ||= User.find_by_globallyUniqueID(session[:casfilterreceipt].attributes[:ssoGuid])
-      return @user
-    end
     if session[:user_id]
       @user ||= User.find_by_id(session[:user_id])
+      if params[:user_id] && params[:su] && (@user.developer? || (session[:old_user_id] && old_user = User.find(session[:old_user_id]).developer?))
+        session[:old_user_id] = @user.id if @user.developer?
+        session[:user_id] = params[:user_id] 
+        @user = User.find(session[:user_id])
+      end
+      return @user
+    end
+    if session[:casfilterreceipt]
+      @user ||= User.find_by_globallyUniqueID(session[:casfilterreceipt].attributes[:ssoGuid])
       return @user
     end
     return false unless @user
