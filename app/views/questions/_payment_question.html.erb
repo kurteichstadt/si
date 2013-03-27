@@ -58,14 +58,6 @@
 	      </li>
 	      <li>
 	        <div class="field field_check">
-  	        <%= radio_button :payment, :payment_type, "Mail", {:onclick => "swapPayment('mail');"} %><label for="payment_payment_type_mail">Check or Money Order via Postal Mail</label>
-  	        <div id="pay_mail" class="pay_view" <% unless @payment.payment_type == "Mail" -%> style="display: none;" <% end -%>>
-  	          <%= render :partial => 'payments/mail' %>
-  	        </div>
-  	      </div>
-	      </li>
-	      <li>
-	        <div class="field field_check">
   	        <%= radio_button :payment, :payment_type, "Staff", {:onclick => "swapPayment('staff');"} %><label for="payment_payment_type_staff">Transfer from a Staff/Project/Scholarship Fund</label>
   	        <div id="pay_staff" class="pay_view" <% unless @payment.payment_type == "Staff" -%> style="display: none;" <% end -%>>
   	          <%= render :partial => 'payments/staff' %>
