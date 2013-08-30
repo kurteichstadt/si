@@ -15,7 +15,9 @@ class Run
   def self.change_si_year
     last_years = HrSiProject.find_all_by_siYear("2013")
     last_years.each do |project|
-      new_project = HrSiProject.new(project.attributes)
+      attrs = project.attributes.clone
+      attrs.delete("SIProjectID")
+      new_project = HrSiProject.new(attrs)
       new_project.siYear = "2014"
       new_project.studentStartDate = new_project.studentStartDate + 1.year if new_project.studentStartDate
       new_project.studentEndDate = new_project.studentEndDate + 1.year if new_project.studentEndDate
