@@ -1,11 +1,13 @@
-Factory.define :person do |p|
-  p.firstName   'GI'
-  p.lastName    'Joe'
-  p.association :user
-end
+FactoryGirl.define do
+  factory :person do
+    firstName   'GI'
+    lastName    'Joe'
+    association :user
+  end
 
-Factory.define :josh, :parent => :person do |p|
-  p.firstName   'Josh'
-  p.lastName    'Starcher'
-  p.association :user, :factory => :josh_user
+  factory :josh, :parent => :person do
+    firstName   'Josh'
+    lastName    'Starcher'
+    association :user, :factory => :josh_user
+  end
 end

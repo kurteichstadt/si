@@ -1,6 +1,6 @@
 class InfoPagesController < ApplicationController
-  skip_before_filter CAS::Filter
-  skip_before_filter AuthenticationFilter
+  skip_before_filter :cas_filter
+  skip_before_filter :authentication_filter
   
   layout 'public'
   
@@ -21,7 +21,7 @@ class InfoPagesController < ApplicationController
 
   def faqs
     @active = "faq"
-    @faq = Element.find(50) # The FAQ from the application
+    @faq = Fe::Element.find_by(slug: 'faq') # The FAQ from the application
   end
 
   def about_us

@@ -1,5 +1,5 @@
 class ApplySheet < ActiveRecord::Base
-  set_table_name "si_apply_sheets"
+  self.table_name = "si_apply_sheets"
   
   belongs_to :apply
   belongs_to :sleeve_sheet    # back to question sheet and retitle
@@ -7,7 +7,7 @@ class ApplySheet < ActiveRecord::Base
 end
 
 class SleeveSheet < ActiveRecord::Base
-  set_table_name "si_sleeve_sheets"
+  self.table_name = "si_sleeve_sheets"
   
   belongs_to :sleeve
   belongs_to :question_sheet
@@ -51,7 +51,7 @@ class ChangeAnswerSheetTable < ActiveRecord::Migration
           asqs.save!
           execute("UPDATE si_answers SET answer_sheet_id = #{apply.id} WHERE answer_sheet_question_sheet_id = #{asqs.id}")
         else
-          ref = ReferenceSheet.where("applicant_answer_sheet_id = ?", apply.id).where("question_id = ?", ss.id).first
+          ref = Fe::ReferenceSheet.where("applicant_answer_sheet_id = ?", apply.id).where("question_id = ?", ss.id).first
           asqs = as.answer_sheet_question_sheet
           asqs.answer_sheet_id = ref.id if ref
           asqs.save!

@@ -1,6 +1,8 @@
-Factory.define :answer do |a|
-  a.association :answer_sheet
-  a.association :question
-  a.value       'long foo'
-  a.short_value 'foo'
+FactoryGirl.define do
+  factory :answer do
+    association :answer_sheet
+    association :question
+    value       'long foo'
+    short_value 'foo'
+  end
 end

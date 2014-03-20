@@ -1,16 +1,16 @@
 class AdminController < ApplicationController
-  prepend_before_filter CASClient::Frameworks::Rails3::Filter
+  prepend_before_filter :cas_filter
   before_filter :check_valid_user, :except => [:no_access, :logout]
   layout 'admin'
   
-  def ssl_test
-    out = "ssl? " + request.ssl?.inspect + "<br/>"
-    env = request.instance_variable_get(:@env)
-    env.each_pair do |key, value|
-      out += key.to_s + ': ' + value.to_s + "<br/>"
-    end
-    render :text => out
-  end
+  #def ssl_test
+  #  out = "ssl? " + request.ssl?.inspect + "<br/>"
+  #  env = request.instance_variable_get(:@env)
+  #  env.each_pair do |key, value|
+  #    out += key.to_s + ': ' + value.to_s + "<br/>"
+  #  end
+  #  render :text => out
+  #end
 
   def index
     #This used to be 2003, but since old apps will error out, set it to 2008
@@ -22,7 +22,7 @@ class AdminController < ApplicationController
   
   def logout
     reset_session
-    redirect_to "https://signin.ccci.org/cas/logout"
+    redirect_to "https://signin.cru.org/cas/logout"
   end
   
   def select_region

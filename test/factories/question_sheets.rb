@@ -1,7 +1,9 @@
-Factory.define :question_sheet do |q|
-  q.label 'STINT / Internship Application'
-end
+FactoryGirl.define do
+  factory :question_sheet, class: 'Fe::QuestionSheet' do
+    sequence(:label) {|n| "STINT / Internship Application#{n}" }
+  end
 
-Factory.define :ref_question_sheet, :parent => :question_sheet do |q|
-  q.label 'Reference'
+  factory :ref_question_sheet, :parent => :question_sheet do
+    sequence(:label) {|n| "Reference#{n}" }
+  end
 end

@@ -1,5 +1,5 @@
 class Element < ActiveRecord::Base # Actual Element class file has page_id overwritten, so clear it out here
-  set_table_name "si_elements"
+  self.table_name = "si_elements"
 end
 
 class ElementsUpdates < ActiveRecord::Migration

@@ -1,10 +1,9 @@
 class SubmitPagesController < ApplicationController
-  skip_before_filter CAS::Filter
-  skip_before_filter AuthenticationFilter
+  skip_before_filter :cas_filter
+  skip_before_filter :authentication_filter
   
   before_filter :setup
-  helper :answer_pages
-  
+
   layout nil
   
   def edit
@@ -20,9 +19,9 @@ class SubmitPagesController < ApplicationController
   def submit
     valid = true
     
-    @application.errors.add_to_base("You must supply at least one payment.") if @application.payments.length < 1
+    @application.errors.add(:base, "You must supply at least one payment.") if @application.payments.length < 1
     
-    if @application.errors.length <= 0
+    if @application.errors.messages.length == 0
       @application.submit!
       
       # send references 
@@ -30,7 +29,7 @@ class SubmitPagesController < ApplicationController
         send_reference_invite(reference) unless reference.email_sent?
       end
     else
-      render :action => "error.rjs"
+      render :action => 'error'
     end
   end
 

@@ -1,4 +1,6 @@
-Factory.define :role do |r|
-  r.role          'National Coordinator'
-  r.user_class    'SiNationalCoordinator'
+FactoryGirl.define do
+  factory :role do
+    role          'National Coordinator'
+    user_class    'SiNationalCoordinator'
+  end
 end

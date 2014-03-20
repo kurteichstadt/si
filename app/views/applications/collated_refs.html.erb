@@ -25,11 +25,11 @@
 
 <% elements = []
    @reference_question_sheet.pages.order(:number).each do |page|
-     elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Paragraph)).all
+     elements << page.elements.where("#{Fe::Element.table_name}.kind not in (?)", %w(Paragraph)).all
    end
    elements = elements.flatten
    elements.reject! {|e| e.is_confidential} if @show_conf == false
-   elements = QuestionSet.new(elements, @answer_sheets[0]).elements.group_by(&:page_id) -%>
+   elements = Fe::QuestionSet.new(elements, @answer_sheets[0]).elements.group_by(&:page_id) -%>
 
 <% if elements.length > 0 -%>
   
@@ -66,10 +66,10 @@
 						<% if %w(Paragraph).include?(grid_element.kind) -%>
 						<%= grid_element.content %>
 						<% else -%>
-							(STAFF) <span class="answer"><%= Element.find(grid_element.id).response(@staff_reference).blank? ? "No Answer".html_safe : Element.find(grid_element.id).display_response(@staff_reference) %></span><br/>
-							(DISCIPLER) <span class="answer"><%= Element.find(grid_element.id).response(@discipler_reference).blank? ? "No Answer".html_safe : Element.find(grid_element.id).display_response(@discipler_reference) %></span><br/>
-							(ROOMMATE) <span class="answer"><%= Element.find(grid_element.id).response(@roommate_reference).blank? ? "No Answer".html_safe : Element.find(grid_element.id).display_response(@roommate_reference) %></span><br/>
-							(FRIEND) <span class="answer"><%= Element.find(grid_element.id).response(@friend_reference).blank? ? "No Answer".html_safe : Element.find(grid_element.id).display_response(@friend_reference) %></span>
+							(STAFF) <span class="answer"><%= Fe::Element.find(grid_element.id).response(@staff_reference).blank? ? "No Answer".html_safe : Fe::Element.find(grid_element.id).display_response(@staff_reference) %></span><br/>
+							(DISCIPLER) <span class="answer"><%= Fe::Element.find(grid_element.id).response(@discipler_reference).blank? ? "No Answer".html_safe : Fe::Element.find(grid_element.id).display_response(@discipler_reference) %></span><br/>
+							(ROOMMATE) <span class="answer"><%= Fe::Element.find(grid_element.id).response(@roommate_reference).blank? ? "No Answer".html_safe : Fe::Element.find(grid_element.id).display_response(@roommate_reference) %></span><br/>
+							(FRIEND) <span class="answer"><%= Fe::Element.find(grid_element.id).response(@friend_reference).blank? ? "No Answer".html_safe : Fe::Element.find(grid_element.id).display_response(@friend_reference) %></span>
 						<% end -%>
 					</td>
 					<%- 	col_count += 1

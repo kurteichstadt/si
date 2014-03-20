@@ -1,3 +1,3 @@
 class Country < ActiveRecord::Base
-  set_table_name 'countries'
+  self.table_name = 'countries'
 end

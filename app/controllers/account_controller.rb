@@ -1,7 +1,6 @@
 class AccountController < ApplicationController
-  include AuthenticatedSystem
-  skip_before_filter CAS::Filter 
-  skip_before_filter AuthenticationFilter
+  skip_before_filter :cas_filter
+  skip_before_filter :authentication_filter
   prepend_before_filter :login_from_cookie
   #before_filter :prod_check, :except => [:closed, :secret_hooey]
   #filter_parameter_logging :password
@@ -30,7 +29,7 @@ class AccountController < ApplicationController
     return unless request.post?
     @user.valid?
     if @person.firstName.to_s.strip.empty? || @person.lastName.to_s.strip.empty?
-      @user.errors.add_to_base "Please enter your first and last name."
+      @user.errors.add(:base, "Please enter your first and last name.")
       @person.errors.add(:firstName, "can't be blank.") if @person.firstName.to_s.empty?
       @person.errors.add(:lastName, "can't be blank.") if @person.lastName.to_s.empty?
     end

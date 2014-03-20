@@ -4,14 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
   <title>STINT/Internship/PTFS Tool</title>
-
-  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
-                             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
-  <%= javascript_include_tag 'qe/jquery.tooltips.min' %>
-  <%= include_javascripts :admin %>
-  <%= stylesheet_link_tag 'jquery-ui-1.8.2.custom' %>
-  <%= questionnaire_engine_includes %>
-  <%= stylesheet_link_tag 'qe' %>
   <%= csrf_meta_tag %>
 	<script language="javascript" type="text/javascript">
 		Ajax.Responders.register({
@@ -23,7 +15,7 @@
 </head>
 <body>
 
-<div id="status" style="display: none;"><%= image_tag('qe/status.gif', :id => "status-img") %> <span id="status-msg">Please Wait...</span></div>
+<div id="status" style="display: none;"><%= image_tag('fe/status.gif', :id => "status-img") %> <span id="status-msg">Please Wait...</span></div>
 
 <div id="wrapper">
    <div id="header" style="height: 72px;">

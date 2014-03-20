@@ -1,7 +1,7 @@
 class HrSiProjectsController < ApplicationController
   include AuthenticatedSystem
-  skip_before_filter CAS::Filter, :only => [:get_valid_projects, :projects_feed, :show]
-  skip_before_filter AuthenticationFilter, :only => [:get_valid_projects, :projects_feed, :show]
+  skip_before_filter :cas_filter, :only => [:get_valid_projects, :projects_feed, :show]
+  skip_before_filter :authentication_filter, :only => [:get_valid_projects, :projects_feed, :show]
   prepend_before_filter :ssm_login_required, :only => [:get_valid_projects]
   prepend_before_filter :login_from_cookie
   before_filter :check_valid_user, :except => [:get_valid_projects, :projects_feed, :show]
@@ -10,9 +10,9 @@ class HrSiProjectsController < ApplicationController
   
   def index
     params[:partnershipRegion] ||= -1
-    @regions = [["",-1]] + Region.find(:all).collect { |r| [ r.name, r.region ] }
+    @regions = [["",-1]] + Region.all.collect { |r| [ r.name, r.region ] }
     @countries = [""] + Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
-    @aoas = [""] + Aoa.find(:all).collect { |a| [a.name, a.id ] }
+    @aoas = [""] + Aoa.all.collect { |a| [a.name, a.id ] }
     @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
     @years_for_select << ["Current",HrSiApplication::YEAR]
     @years_for_select.reverse!
@@ -20,16 +20,16 @@ class HrSiProjectsController < ApplicationController
   
   def new 
     @hr_si_project = HrSiProject.new
-    @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
+    @regions = Region.all.collect { |r| [ r.name, r.region ] }
     @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
-    @aoas = Aoa.find(:all).collect { |a| a.name }
+    @aoas = Aoa.all.collect { |a| a.name }
   end
   
   def edit
     @hr_si_project = HrSiProject.find(params[:id])
-    @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
+    @regions = Region.all.collect { |r| [ r.name, r.region ] }
     @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
-    @aoas = Aoa.find(:all).collect { |a| a.name }
+    @aoas = Aoa.all.collect { |a| a.name }
   end
   
   def show
@@ -45,11 +45,11 @@ class HrSiProjectsController < ApplicationController
   end
   
   def create
-    @hr_si_project = HrSiProject.new(params[:hr_si_project])
+    @hr_si_project = HrSiProject.new(project_params)
     @hr_si_project.siYear = HrSiApplication::YEAR
-    @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
+    @regions = Region.all.collect { |r| [ r.name, r.region ] }
     @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
-    @aoas = Aoa.find(:all).collect { |a| a.name }
+    @aoas = Aoa.all.collect { |a| a.name }
 
     respond_to do |format|
       if @hr_si_project.save
@@ -67,14 +67,14 @@ class HrSiProjectsController < ApplicationController
     @hr_si_project = HrSiProject.find(params[:id])
 
     respond_to do |format|
-      if @hr_si_project.update_attributes(params[:hr_si_project])
+      if @hr_si_project.update_attributes(project_params)
         flash[:notice] = 'Project was successfully updated.'
         format.html { redirect_to hr_si_projects_path }
         format.xml  { head :ok }
       else
-        @regions = Region.find(:all).collect { |r| [ r.name, r.region ] }
+        @regions = Region.all.collect { |r| [ r.name, r.region ] }
         @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
-        @aoas = Aoa.find(:all).collect { |a| a.name }
+        @aoas = Aoa.all.collect { |a| a.name }
         format.html { render :action => "edit" }
         format.xml  { render :xml => @hr_si_project.errors.to_xml }
       end
@@ -91,9 +91,9 @@ class HrSiProjectsController < ApplicationController
   end
 
   def search
-    @regions = [["",-1]] + Region.find(:all).collect { |r| [ r.name, r.region ] }
+    @regions = [["",-1]] + Region.all.collect { |r| [ r.name, r.region ] }
     @countries = [""] + Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
-    @aoas = [""] + Aoa.find(:all).collect { |a| a.name }
+    @aoas = [""] + Aoa.all.collect { |a| a.name }
     @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
     @years_for_select << ["Current",HrSiApplication::YEAR]
     @years_for_select.reverse!
@@ -117,9 +117,9 @@ class HrSiProjectsController < ApplicationController
     conditions += "and siYear like '%#{escape_string(params[:siYear])}' " unless params[:siYear].to_s.empty?
     
     if conditions.blank? 
-      @projects = HrSiProject.find(:all)
+      @projects = HrSiProject.all
     else
-      @projects = HrSiProject.find(:all, :conditions => conditions)
+      @projects = HrSiProject.where(conditions)
     end
   end
   
@@ -137,6 +137,10 @@ class HrSiProjectsController < ApplicationController
       project_type = 'n'
       @projects = HrSiProject.find_all_available(locations, region, show_all, person, project_type)
     end
-    respond_with(@application, @project_preference, @dom_id, @projects)
+    #respond_with(@application, @project_preference, @dom_id, @projects)
+  end
+
+  def project_params
+    params.require(:hr_si_project).permit!
   end
 end

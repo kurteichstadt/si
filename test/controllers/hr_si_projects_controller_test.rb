@@ -1,0 +1,81 @@
+require 'test_helper'
+
+class HrSiProjectsControllerTest < ActionController::TestCase
+  def setup
+    @project = create(:hr_si_project)
+  end
+  
+  test "index not logged in" do
+    #CASClient::Frameworks::Rails::Filter.fake = true
+    #@request.session[:casfilterreceipt] = Receipt.new
+    get :index
+    assert_redirected_to :action => "no_access", :controller => :admin
+  end
+  
+  test "index" do
+    cas_login
+    get :index
+    assert_response :success, @response.body
+  end
+  
+  test "new" do
+    cas_login
+    get :new
+    assert_response :success, @response.body
+  end
+  
+  test "edit" do
+    cas_login
+    get :edit, :id => @project
+    assert_response :success, @response.body
+  end
+  
+  test "show" do
+    get :show, :id => @project.id.to_s
+    assert_response :success, @response.body
+  end
+  
+  test "projects feed" do
+    get :projects_feed, :contry => 'USA'
+    assert_response :success, @response.body
+  end
+
+  test "international projects feed" do
+    get :projects_feed, :country => 'INTL'
+    assert_response :success, @response.body
+  end
+  
+  test "create" do
+    cas_login
+    post :create, :hr_si_project => build(:hr_si_project).attributes
+    assert_redirected_to hr_si_projects_path
+  end
+  
+  test "create with missing data" do
+    cas_login
+    post :create, :hr_si_project => {:name => ''}
+    assert_response :success, @response.body
+  end
+  
+  test "update" do
+    cas_login
+    post :update, :id => @project, :hr_si_project => @project.attributes
+    assert_redirected_to hr_si_projects_path
+  end
+  
+  test "update with missing data" do
+    cas_login
+    post :update, :id => @project, :hr_si_project => {:name => ''}
+    assert_response :success, @response.body
+  end
+  
+  test "get_valid_projects" do
+    login
+    setup_application
+    project_preference = create(:project_preference)
+    xhr :post, :get_valid_projects, dom_id: "project_#{project_preference.id}"
+    assert_response :success, @response.body
+  end
+  
+  
+end

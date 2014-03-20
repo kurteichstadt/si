@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~>3.2.9'
+gem 'rails', '~>4.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -13,7 +13,6 @@ gem 'dalli'
 gem 'rack-contrib'
 gem 'aasm'
 gem 'acts_as_list'
-gem 'jammit'
 gem 'dynamic_form'
 gem 'jquery-rails'
 gem 'american_date'
@@ -22,57 +21,30 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-cas'
 gem 'oa-openid'
+gem 'sidekiq'
 
 gem 'airbrake'
 gem 'airbrake_user_attributes'
 gem 'newrelic_rpm', '>= 3.5.3.25'
-gem 'test-unit'
+#gem 'common_engine', git: 'https://github.com/CruGlobal/common_engine'
+gem 'common_engine', path: '/Users/josh/htdocs/common_engine'
+gem 'fe', path: '/Users/josh/htdocs/qe'
 
 group :development, :test do
-  gem 'factory_girl'
-#  gem 'mocha'
-end
-
-# Gems used only for assets and not required
-# in production environments by default.
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-end
-
-group :test do
   gem 'simplecov', '>= 0.3.5', require: false
+  gem 'test-unit'
+  gem 'factory_girl_rails'
+  gem 'guard-test'
+  gem 'spork-rails'#, '~> 3.2.0'
+  gem 'guard-spork'
+  gem 'spork-testunit'
+  gem 'mocha'
 end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'sass-rails'#,   '~> 3.2.3'
+gem 'coffee-rails'#, '~> 3.2.1'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
 
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
-
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for the local environment. Make sure to
-# put test-only gems in this group so their generators
-# and rake tasks are available in development mode:
-# group :development, :test do
-#   gem 'webrat'
-# end
+gem 'uglifier'#, '>= 1.0.3'

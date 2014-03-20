@@ -1,13 +1,14 @@
-Factory.define :user do |u|
-  u.username 'test.user@uscm.org'
-  u.plain_password 'asAfasfsd'
-  u.plain_password_confirmation 'asAfasfsd'
-  u.secret_question 'asdfsad'
-  u.secret_answer 'asdfdasf'
-end
+FactoryGirl.define do
+  factory :user do
+    sequence(:username) { |n| "test.user#{n}@uscm.org" }
+    plain_password 'asAfasfsd'
+    plain_password_confirmation 'asAfasfsd'
+    secret_question 'asdfsad'
+    secret_answer 'asdfdasf'
+  end
 
-Factory.define :josh_user, :parent => :user do |u|
-  u.username 'josh.starcher@uscm.org'
-  u.globallyUniqueID 'F167605D-94A4-7121-2A58-8D0F2CA6E026'
+  factory :josh_user, :parent => :user do
+    sequence(:globallyUniqueID) { |n| "F167605D-94A4-7121-2A58-8D0F2CA6E026#{n}" }
+  end
 end
 

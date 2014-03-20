@@ -1,7 +1,6 @@
 # SchoolPicker
 # - a two-part question to search for the user's school
-
-class SchoolPicker < Question
+class SchoolPicker < Fe::Question
   def state(app=nil)
     if !app.nil?
       # try to get state from the applicant
@@ -16,26 +15,26 @@ class SchoolPicker < Question
       end
     end
     state.to_s
-  end  
-  
+  end
+
   def colleges(app=nil)
-    unless self.state(app) == ""
+    unless state(app) == ""
       return Campus.where("state = ?", self.state(app)).where("type = 'College'")
-        .where("isClosed is null or isClosed <> 'T'").order(:name).all.collect {|c| c.name} 
+        .where("isClosed is null or isClosed <> 'T'").order(:name).all.collect {|c| c.name}
     end
     []
   end
-  
+
   def high_schools(app=nil)
-    unless self.state(app) == ""
-      return Campus.find_all_by_type('HighSchool', :order => :name).to_a.collect {|c| c.name} 
+    unless state(app) == ""
+      return Campus.find_all_by_type('HighSchool', :order => :name).to_a.collect {|c| c.name}
     end
     []
   end
-  
-  def validation_class
-    if self.required?
-      'validate-selection required'
+
+  def validation_class(answer_sheet = nil)
+    if required?(answer_sheet)
+      'validate-selection' + super
     else
       ''
     end

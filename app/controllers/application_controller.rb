@@ -1,9 +1,10 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
-
+require 'authenticated_system'
+require 'authentication_filter'
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
-  before_filter AuthenticationFilter, :except => ['no_access','logout']
+  before_filter :authentication_filter, :except => ['no_access','logout']
   helper_method :is_true, :si_user, :user
 
   include CommonEngine
@@ -13,8 +14,9 @@ class ApplicationController < ActionController::Base
   
   def current_person
     raise "no user" unless user
-    # Get their user, or create a new one if theirs doesn't exist
-    p = user.person || user.create_person_and_address
+    # Get their person, or create a new one if theirs doesn't exist
+    p = user.person 
+    p ||= user.create_person_and_address(firstName: session[:cas_extra_attributes]['firstName'], lastName: session[:cas_extra_attributes]['lastName']) if session[:cas_extra_attributes]
     p
   end
   helper_method :current_person
@@ -27,6 +29,10 @@ class ApplicationController < ActionController::Base
         session[:user_id] = params[:user_id] 
         @user = User.find(session[:user_id])
       end
+      return @user
+    end
+    if session[:cas_user]
+      @user ||= User.find_by(username: session[:cas_user])
       return @user
     end
     if session[:casfilterreceipt]
@@ -71,7 +77,7 @@ class ApplicationController < ActionController::Base
   def next_custom_page(apply, after_page_dom)
     custom_pages = custom_pages(apply)
     this_page = custom_pages.find { |p| p.dom_id == after_page_dom }
-    custom_pages[custom_pages.index(this_page).succ]
+    custom_pages[custom_pages.index(this_page).succ] if this_page
   end
 
   # since i'm doing a lot of raw SQL, i need to do my own escaping.
@@ -96,22 +102,22 @@ class ApplicationController < ActionController::Base
     [0,'0',false,'false'].include?(val)
   end
   
-  def update_references
-    @references = @application.reference_sheets.index_by(&:sleeve_sheet_id)
-    params[:references].each do |sleeve_sheet_id, data|
-      sleeve_sheet_id = sleeve_sheet_id.to_i
-      # @references[sleeve_sheet_id] ||= @application.references.build(:sleeve_sheet_id => sleeve_sheet_id) # new reference if needed
-      # If email address changes, we need a new link and a new answer sheet
-      # data["email"] = data["email"].gsub(/â€[[:cntrl:]]/, '').strip # try to get rid of weird characters and spaces
-      if(data["email"] != @references[sleeve_sheet_id].email)
-        @references[sleeve_sheet_id].create_new_token
-        @references[sleeve_sheet_id].email_sent_at = nil
-        @application.find_or_create_reference_answer_sheet(@references[sleeve_sheet_id].sleeve_sheet, true)
-      end
-      @references[sleeve_sheet_id].attributes = data  # store posted data
-      @references[sleeve_sheet_id].save
-    end
-  end
+  #def update_references
+  #  @references = @application.reference_sheets.index_by(&:id)
+  #  params[:references].each do |id, data|
+  #    id = id.to_i
+  #    # @references[sleeve_sheet_id] ||= @application.references.build(:sleeve_sheet_id => sleeve_sheet_id) # new reference if needed
+  #    # If email address changes, we need a new link and a new answer sheet
+  #    # data["email"] = data["email"].gsub(/â€[[:cntrl:]]/, '').strip # try to get rid of weird characters and spaces
+  #    if(data["email"] != @references[id].email)
+  #      @references[id].create_new_token
+  #      @references[id].email_sent_at = nil
+  #      #@application.find_or_create_reference_answer_sheet(@references[id].question_sheet, true)
+  #    end
+  #    @references[id].attributes = data  # store posted data
+  #    @references[id].save
+  #  end
+  #end
 
   def send_reference_invite(reference)
     @sent = false
@@ -122,13 +128,13 @@ class ApplicationController < ActionController::Base
       end
 
       # Send notification to applicant
-      Notifier.deliver_notification(@application.applicant.email, # RECIPIENTS
+      Fe::Notifier.notification(@application.applicant.email, # RECIPIENTS
                                     "help@campuscrusadeforchrist.com", # FROM
                                     "Reference Notification to Applicant", # LIQUID TEMPLATE NAME
                                     {'applicant_full_name' => @application.applicant.informal_full_name,
                                      'reference_full_name' => reference.name,
                                      'reference_email' => reference.email,
-                                     'application_url' => edit_application_url(@application)})
+                                     'application_url' => edit_application_url(@application)}).deliver
 
     reference.email_sent_at = Time.now
     reference.save
@@ -142,6 +148,14 @@ class ApplicationController < ActionController::Base
     dom = "#{dom_id(answer_sheet)}-#{dom_id(page)}"
     dom += "-no_cache" if page.no_cache
     dom
+  end
+
+  def cas_filter
+    CASClient::Frameworks::Rails::Filter.filter(self) unless session[:cas_user]
+  end
+
+  def authentication_filter
+    AuthenticationFilter.filter(self)
   end
 
 end

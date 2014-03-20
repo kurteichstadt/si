@@ -1,4 +1,4 @@
-<% @payment = Payment.new %>
+<% @payment = Fe::Payment.new %>
 <% @application = @answer_sheet %>
 <div id="<%= dom_id(payment_question) %>" class="payment_question <%= 'required' if payment_question.required? %>">
   <h2>

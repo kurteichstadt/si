@@ -1,14 +1,13 @@
 class ApplicationsController < ApplicationController
-  skip_before_filter CAS::Filter, :except => [:show, :collated_refs, :no_conf, :no_ref]
-  skip_before_filter AuthenticationFilter
+  skip_before_filter :cas_filter, :except => [:show, :collated_refs, :no_conf, :no_ref]
+  skip_before_filter :authentication_filter
   prepend_before_filter :ssm_login_required, :except => [:no_access, :show, :no_ref, :no_conf, :collated_refs]
   prepend_before_filter :login_from_cookie
   append_before_filter :check_valid_user, :only => [:show, :collated_refs, :no_conf, :no_ref]
   append_before_filter :setup
   
   layout 'application'
-  helper :answer_pages
-  
+
   # dashboard
   def index
     redirect_to :action => :show_default
@@ -23,10 +22,11 @@ class ApplicationsController < ApplicationController
   
   # create app
   def create
-    @sleeve = Sleeve.find(params[:sleeve_id])
-    @application = @sleeve.applies.build(:applicant => @person)    
+    @question_sheet = Fe::QuestionSheet.find(params[:question_sheet_id])
+    @application = @person.applies.build
     
     @application.save!
+    @application.question_sheets << @question_sheet
     redirect_to application_path(@application)
   end
   
@@ -95,7 +95,7 @@ class ApplicationsController < ApplicationController
       return
     end
 
-    @reference_question_sheet = QuestionSheet.find(2) #TODO: constant
+    @reference_question_sheet = Fe::QuestionSheet.find(2) #TODO: constant
 
     setup_reference("staff")
     setup_reference("discipler")
@@ -114,11 +114,11 @@ class ApplicationsController < ApplicationController
     if question_sheet
       elements = []
       question_sheet.pages.order(:number).each do |page|
-        elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Paragraph)).all
+        elements << page.elements.where("#{Fe::Element.table_name}.kind not in (?)", %w(Fe::Paragraph)).all
       end
       elements = elements.flatten
       elements.reject! {|e| e.is_confidential} if @show_conf == false
-      eval("@" + type + "_elements = QuestionSet.new(elements, answer_sheet).elements")
+      eval("@" + type + "_elements = Fe::QuestionSet.new(elements, answer_sheet).elements")
     else
       eval("@" + type + "_elements = []")
     end
@@ -126,7 +126,7 @@ class ApplicationsController < ApplicationController
   end
   
   def no_access
-    redirect_to :controller => :account, :action => :login
+    redirect_to '/'
   end
 
 protected
@@ -169,7 +169,7 @@ protected
   def setup_view
     @answer_sheet = @application
     # edit the first page
-    @presenter = AnswerPagesPresenter.new(self, @answer_sheet)
+    @presenter = Fe::AnswerPagesPresenter.new(self, @answer_sheet)
     @elements = @presenter.questions_for_page(:first).elements
     @page = @presenter.pages.first
     @presenter.active_page ||= @page

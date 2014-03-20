@@ -4,9 +4,9 @@ class Run
   end
   
   def self.check_pay_by_check_apps
-    payments = Payment.find_all_by_payment_type("Mail")
+    payments = Fe::Payment.find_all_by_payment_type("Mail")
     payments.each do |payment|
-      payment.check_app_complete
+      payment.check_answer_sheet_complete
     end
   end
   

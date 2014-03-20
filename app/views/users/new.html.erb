@@ -11,7 +11,7 @@
     <%= form_tag(search_users_path, :remote => true, :html => {:id => "user_form"}) do %>
       <%= text_field_tag :name, "", :class => "text" %>
       <%= submit_tag "Search" %>
-      <%= image_tag "/images/qe/ajax-loader.gif", :id => 'search_spinner', :style => 'display:none' %>
+      <%= image_tag "/images/fe/ajax-loader.gif", :id => 'search_spinner', :style => 'display:none' %>
     <% end %>
   </p>
   

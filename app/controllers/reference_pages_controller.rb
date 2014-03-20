@@ -1,13 +1,12 @@
 # gather reference information from Applicant
 class ReferencePagesController < ApplicationController
-  skip_before_filter CAS::Filter
-  skip_before_filter AuthenticationFilter
+  skip_before_filter :cas_filter
+  skip_before_filter :authentication_filter
   
   layout nil
   
   before_filter :setup
-  helper :answer_pages
-  
+
   MONTHS_KNOWN_OPTIONS = [
     ["3 months", 3],
     ["6 months", 6],
@@ -28,7 +27,7 @@ class ReferencePagesController < ApplicationController
   end
   
   def update
-    update_references
+    #update_references
     head :ok
   end
   

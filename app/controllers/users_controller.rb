@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  skip_before_filter CAS::Filter, :only => [:search]
-  skip_before_filter AuthenticationFilter, :only => [:search]
+  skip_before_filter :cas_filter, :only => [:search]
+  skip_before_filter :authentication_filter, :only => [:search]
   before_filter :check_valid_user, :except => [:search]
   layout 'admin', :except => [:search]
   respond_to :html, :js
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def create
     @temp_user = SiUser.new
     if params[:person_id].blank?
-      @temp_user.errors.add_to_base "You must first select a person before creating a new user."
+      @temp_user.errors.add(:base, "You must first select a person before creating a new user.")
       render :action => :new
     else
       @person = Person.where('personID = ?', params[:person_id]).includes(:user).first
@@ -51,13 +51,10 @@ class UsersController < ApplicationController
       @temp_user.type = role.user_class
       @temp_user.role = role.role
     end
-    
+
+    @temp_user.save
     respond_to do |format|
-      if @temp_user.save
-        format.html { redirect_to users_path }
-      else
-        format.html { render :action => "edit" }
-      end
+      format.html { redirect_to users_path }
     end
   end
   

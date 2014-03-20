@@ -1,17 +1,16 @@
 # for Reference completing answer sheet
 class ReferencesController < ApplicationController
-  skip_before_filter CAS::Filter 
-  skip_before_filter AuthenticationFilter
+  skip_before_filter :cas_filter
+  skip_before_filter :authentication_filter
   
   before_filter :setup
   
   layout 'public'
-  helper :answer_pages
-  
+
   # AnswerSheet for reference to fill in
   # /applications/1/references/{token}
   def edit
-    ref = ReferenceSheet.find_by_access_key(params[:id])
+    ref = Fe::ReferenceSheet.find_by_access_key(params[:id])
     redirect_to edit_reference_sheet_path(ref, :a => params[:id])
   end
 
@@ -21,26 +20,21 @@ class ReferencesController < ApplicationController
     @reference.submit!
     
     # Send Reference Thank You
-    Notifier.deliver_notification(@reference.email,
+    Fe::Notifier.notification(@reference.email,
                                   "help@campuscrusadeforchrist.com", 
                                   "Reference Thank You", 
                                   {'reference_full_name' => @reference.name, 
-                                   'applicant_full_name' => @application.applicant.informal_full_name})
+                                   'applicant_full_name' => @application.applicant.informal_full_name}).deliver
 
     
     # Send Reference Completion Notice
-    Notifier.deliver_notification(@application.applicant.email,
+    Fe::Notifier.notification(@application.applicant.email,
                                   "help@campuscrusadeforchrist.com", 
                                   "Reference Complete", 
                                   {'reference_full_name' => @reference.name, 
                                    'applicant_full_name' => @application.applicant.informal_full_name,
-                                   'reference_submission_date' => @reference.submitted_at.strftime("%m/%d/%Y")})
+                                   'reference_submission_date' => @reference.submitted_at.strftime("%m/%d/%Y")}).deliver
     
-    render :update do |page|
-      page[:submit_message].replace_html "Thank you for submitting your reference."
-      page[:submit_message].show
-      page[:submit_button].hide
-    end
   end
 
   
@@ -55,7 +49,7 @@ class ReferencesController < ApplicationController
       @elements = []
       if @question_sheet
         @question_sheet.pages.order(:number).each do |page|
-          @elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Section Paragraph)).all
+          @elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Fe::Section Fe::Paragraph)).all
         end
         @elements = @elements.flatten
         @elements = QuestionSet.new(@elements, @answer_sheet).elements.group_by(&:page_id)
@@ -65,9 +59,9 @@ class ReferencesController < ApplicationController
   
   def send_invite
     # Save references on page first
-    update_references
+    #update_references
     
-    @reference = Reference.find(params[:id])
+    @reference = Fe::ReferenceSheet.find(params[:id])
     send_reference_invite(@reference)
   end
 

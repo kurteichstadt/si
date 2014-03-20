@@ -6,15 +6,7 @@
   <title>STINT/Internship/PTFS Application</title>
   <%= stylesheet_link_tag "print", :media => 'print' %>
   <%= stylesheet_link_tag 'base' %>
-  <%- if Rails.env.development? %>
-    <%= javascript_include_tag 'jquery.min.1.4.2.js', 'jquery-ui.min.1.8.2.js' %>
-  <%- else %>
-    <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js' ,
-                             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js' %>
-  <%- end %>
-  <%= javascript_include_tag 'qe/jquery.metadata', 'qe/jquery.tooltips.min' %>
-  <%= include_stylesheets :base, :media => 'all' %>
-  <%= include_javascripts :base %>
+
   <script type="text/javascript" charset="utf-8">
     var answer_sheet_type = '<%= @answer_sheet.class %>'
   </script>
@@ -24,7 +16,6 @@
     <%= raw Rack::TimeZone::Javascript %>
     setTimezoneCookie()
   </script>
-  <%= questionnaire_engine_includes %>
 </head>
 <body>
 
