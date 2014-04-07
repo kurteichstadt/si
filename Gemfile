@@ -26,9 +26,13 @@ gem 'sidekiq'
 gem 'airbrake'
 gem 'airbrake_user_attributes'
 gem 'newrelic_rpm', '>= 3.5.3.25'
-#gem 'common_engine', git: 'https://github.com/CruGlobal/common_engine'
-gem 'common_engine', path: '/Users/josh/htdocs/common_engine'
-gem 'fe', path: '/Users/josh/htdocs/qe'
+
+gem 'common_engine', 
+  # path: '/Users/josh/htdocs/common_engine'
+  github: 'CruGlobal/common_engine', branch: 'master'
+gem 'fe', 
+  # path: '/Users/josh/htdocs/qe'
+  github: 'CruGlobal/qe', branch: 'fe'
 
 group :development, :test do
   gem 'simplecov', '>= 0.3.5', require: false
