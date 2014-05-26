@@ -12,6 +12,7 @@ gem 'coffee-rails'#, '~> 3.2.1'
 gem 'dalli'
 gem 'dynamic_form'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'liquid'
 gem 'mysql2'
 gem 'newrelic_rpm', '>= 3.5.3.25'
@@ -26,11 +27,11 @@ gem 'sidekiq'
 gem 'uglifier'#, '>= 1.0.3'
 
 gem 'common_engine', 
-  # path: '/Users/josh/htdocs/common_engine'
-  github: 'CruGlobal/common_engine', branch: 'master'
+  path: '/Users/andrewroth/Development/common_engine'
+  # github: 'CruGlobal/common_engine', branch: 'master'
 gem 'fe', 
-  # path: '/Users/josh/htdocs/qe'
-  github: 'CruGlobal/qe', branch: 'fe'
+  path: '/Users/andrewroth/Development/qe'
+  # github: 'CruGlobal/qe', branch: 'fe'
 
 group :development, :test do
   gem 'simplecov', '>= 0.3.5', require: false
@@ -41,4 +42,10 @@ group :development, :test do
   gem 'guard-spork'
   gem 'spork-testunit'
   gem 'mocha'
+  gem 'pry'
+  gem 'pry-remote'
+  gem 'pry-stack_explorer'
+  gem 'pry-debugger'
+  #gem 'better_errors'
+  #gem 'binding_of_caller'
 end

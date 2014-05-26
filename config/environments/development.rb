@@ -1,6 +1,15 @@
 Si::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # Do not compress assets
+  config.assets.compress = false
+
+  # Expands the lines which load the assets
+  config.assets.debug = true
+
+  config.serve_static_assets = true
+  config.assets.cache_store = :null_store
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
