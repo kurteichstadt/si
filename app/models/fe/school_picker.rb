@@ -1,6 +1,6 @@
 # SchoolPicker
 # - a two-part question to search for the user's school
-class SchoolPicker < Fe::Question
+class Fe::SchoolPicker < Fe::Question
   def state(app=nil)
     if !app.nil?
       # try to get state from the applicant

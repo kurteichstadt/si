@@ -17,7 +17,7 @@ class ApplicationsController < ApplicationController
     @application = get_application
     setup_view
     
-    render :template => 'answer_sheets/edit'
+    render :template => 'fe/answer_sheets/edit', :layout => 'public'
   end
   
   # create app
@@ -150,7 +150,6 @@ protected
     unless @application
       @person ||= get_person
       # if this is the user's first visit, we will need to create an hr_si_application
-      binding.pry
       if @person.current_si_application.nil?
         @app = HrSiApplication.create(:siYear => get_year, :fk_personID => @person.id)
         @app.siYear = get_year

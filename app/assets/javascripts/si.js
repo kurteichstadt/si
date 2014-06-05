@@ -1,6 +1,6 @@
 $(function() {
 	// Payment submission
-	$('.submit_payment').live('click', function() {
+	$('.submit_payment').on('click', function() {
 		var form = $(this).closest('form');
 		$.ajax({url: $(this).attr('data-url'), data: form.serializeArray(), type: 'POST', dataType:'script',
                        beforeSend: function (xhr) {
