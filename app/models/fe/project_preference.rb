@@ -2,7 +2,7 @@
 # - drop down of available projects
 # - user determines whether to display all projects or just those in his/her region
 
-class ProjectPreference < Fe::Question
+class Fe::ProjectPreference < Fe::Question
   def choices(app=nil)
     if !app.nil?
       locations = "'#{app.hr_si_application.locationA}','#{app.hr_si_application.locationB}','#{app.hr_si_application.locationC}'"
