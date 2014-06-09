@@ -27,6 +27,7 @@ module Fe
     protected
       # Add some security to this method
       def get_answer_sheet
+        binding.pry
         @answer_sheet = answer_sheet_type.find(params[:id])
         case @answer_sheet.class.to_s
         when 'Apply'
