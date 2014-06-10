@@ -37,8 +37,6 @@ Si::Application.routes.draw do
   match 'admin/no_access' => 'admin#no_access', via: [:get, :post]
   match 'admin/logout' => 'admin#logout', :as => :admin_logout, via: :get
 
-  match '/references/done' => "reference_sheets#done", via: [:get, :post]
-  
   match '/info_pages/a_real_life_story' => 'info_pages#a_real_life_story', via: [:get, :post]
   match '/info_pages/about_us' => 'info_pages#about_us', via: [:get, :post]
   match '/info_pages/contact_us' => 'info_pages#contact_us', via: [:get, :post]
