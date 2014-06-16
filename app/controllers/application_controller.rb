@@ -4,6 +4,8 @@ require 'authenticated_system'
 require 'authentication_filter'
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
+  include Fe::ApplicationControllerConcern
+
   before_filter :authentication_filter, :except => ['no_access','logout']
   helper_method :is_true, :si_user, :user
 
@@ -44,6 +46,7 @@ class ApplicationController < ActionController::Base
   helper_method :user
 
   def si_user
+    #binding.pry
     return nil unless user
     @si_user ||= SiUser.find_by_ssm_id(user.id)
     if @si_user && !session[:login_stamped]

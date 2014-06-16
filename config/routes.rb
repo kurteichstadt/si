@@ -25,8 +25,6 @@ Si::Application.routes.draw do
 #  match 'account/logout' => "account#logout", :as => :logout
 #  match 'account/signup' => "account#signup", :as => :signup
   
-  match 'payment_pages/staff_search' => 'payment_pages#staff_search', :as => :payment_page_staff_search, via: [:get, :post]
-
   resources :authentications
 
   match '/auth/:provider/callback' => 'authentications#create', via: [:get, :post]
@@ -52,40 +50,4 @@ Si::Application.routes.draw do
 #  resource :sleeves do
 #    resources :sheets, :controller => :sleeve_sheets, :name_prefix => 'sleeve_'
 #  end
-
-  match 'applications/show_default' => 'applications#show_default', :as => 'show_default', via: [:get, :post]
-  resources :applications do
-    member do
-      get :no_ref
-      get :no_conf
-      get :collated_refs
-      get :done
-    end
-    
-    resources :references do
-      member do
-        get :print
-        post :submit
-        post :send_invite
-      end
-    end
-    
-    # custom pages (singular resources)
-    resource :reference_page
-
-    resources :payments do
-      member do
-        get :approve
-      end
-      collection do
-        post :staff_search
-      end
-    end
-
-    resource :submit_page do
-      member do
-        post :submit
-      end
-    end
-  end
 end
