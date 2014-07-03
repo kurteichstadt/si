@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def current_person
     raise "no user" unless user
     # Get their person, or create a new one if theirs doesn't exist
-    p = user.person 
+    p = user.fe_person 
     p ||= user.create_person_and_address(firstName: session[:cas_extra_attributes]['firstName'], lastName: session[:cas_extra_attributes]['lastName']) if session[:cas_extra_attributes]
     p
   end
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
   def si_user
     #binding.pry
     return nil unless user
-    @si_user ||= SiUser.find_by_ssm_id(user.id)
+    @si_user ||= SiUser.find_by_user_id(user.id)
     if @si_user && !session[:login_stamped]
       @si_user.update_attribute(:last_login, Time.now)
       session[:login_stamped] = true
