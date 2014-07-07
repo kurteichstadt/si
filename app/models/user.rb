@@ -167,7 +167,7 @@ class User < ActiveRecord::Base
   	  person.user = self
       person.save!
       address = Address.new(new_hash.merge({:email => self.username,
-                                             :addressType => 'current'}))
+                                             :address_type => 'current'}))
       address.person = person
       address.save!
     end
@@ -183,7 +183,7 @@ class User < ActiveRecord::Base
   	  person.user = self
       person.save!
       address = Address.new(new_hash.merge({:email => self.username,
-                                             :addressType => 'current'}))
+                                             :address_type => 'current'}))
       address.person = person
       address.save!
     end

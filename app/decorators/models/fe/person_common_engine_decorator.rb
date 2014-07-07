@@ -1,4 +1,8 @@
-# copied from common_engine; no modifications made
+# copied from common_engine
+#
+# modifications:
+#
+#   - column renames from 20140707144735_change_ministry_newaddress_column_to_be_more_rails_like.rb, 20140707150646_rename_more_ministry_newaddress_columns.rb, 20140707153916_change_ministry_newaddress_primary_key_to_id.rb
 
 require_dependency 'global_registry_methods'
 require 'auto_strip_attributes'
@@ -25,10 +29,10 @@ Fe::Person.class_eval do
   # Addresses
   has_many                :email_addresses, :foreign_key => "person_id", :class_name => '::EmailAddress', dependent: :destroy
   has_many                :phone_numbers, :foreign_key => "person_id", :class_name => '::PhoneNumber', dependent: :destroy
-  has_one                 :current_address, -> { where("addressType = 'current'") }, :foreign_key => "fk_PersonID", :class_name => '::Address'
-  has_one                 :permanent_address, -> { where("addressType = 'permanent'") }, :foreign_key => "fk_PersonID", :class_name => '::Address'
-  has_one                 :emergency_address1, -> { where("addressType = 'emergency1'") }, :foreign_key => "fk_PersonID", :class_name => '::Address'
-  has_many                :addresses, :foreign_key => "fk_PersonID", dependent: :destroy
+  has_one                 :current_address, -> { where("address_type = 'current'") }, :foreign_key => "person_id", :class_name => '::Address'
+  has_one                 :permanent_address, -> { where("address_type = 'permanent'") }, :foreign_key => "person_id", :class_name => '::Address'
+  has_one                 :emergency_address1, -> { where("address_type = 'emergency1'") }, :foreign_key => "person_id", :class_name => '::Address'
+  has_many                :addresses, :foreign_key => "person_id", dependent: :destroy
 
   # Cru Commons
   has_many                :personal_links
@@ -44,7 +48,7 @@ Fe::Person.class_eval do
   has_many                :sitrack_trackings, through: :hr_si_applications
   has_many                :applies, :foreign_key => "applicant_id"   # applicants applying
   has_many                :apply_sheets    # whoever, filling in a sheet
-  #has_one                 :current_si_application, -> { where("siYear = '#{HrSiApplication::YEAR}'") }, :foreign_key => "fk_PersonID", :class_name => '::HrSiApplication'
+  #has_one                 :current_si_application, -> { where("siYear = '#{HrSiApplication::YEAR}'") }, :foreign_key => "person_id", :class_name => '::HrSiApplication'
   def current_si_application() hr_si_applications.where("siYear = '#{HrSiApplication::YEAR}'").first end
 
   # Summer Project
@@ -99,15 +103,15 @@ Fe::Person.class_eval do
   end
 
   def create_emergency_address
-    Address.create(:fk_PersonID => self.id, :addressType => 'emergency1')
+    Address.create(:person_id => self.id, :address_type => 'emergency1')
   end
 
   def create_current_address
-    Address.create(:fk_PersonID => self.id, :addressType => 'current')
+    Address.create(:person_id => self.id, :address_type => 'current')
   end
 
   def create_permanent_address
-    Address.create(:fk_PersonID => self.id, :addressType => 'permanent')
+    Address.create(:person_id => self.id, :address_type => 'permanent')
   end
 
   def region(try_target_area = true)

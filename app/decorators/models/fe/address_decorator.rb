@@ -1,4 +1,10 @@
-# copied from common engine; no modifications other than changed to a class_eval
+# copied from common engine; 
+#
+# modifications:
+#
+#   - changed to a class_eval
+#   - renamed non-rails columns as per db/migrate/20140707144735_change_ministry_newaddress_column_to_be_more_rails_like.rb
+# 
 
 require 'global_registry_methods'
 Fe::Address.class_eval do
@@ -8,23 +14,20 @@ Fe::Address.class_eval do
   self.table_name = "ministry_newaddress"
   self.primary_key = "addressID"
 
-  validates_presence_of :addressType
+  validates_presence_of :address_type
 
-  belongs_to :person, :foreign_key => "fk_PersonID"
+  belongs_to :person
 
   before_save :stamp
-
-  def updated_at() dateChanged end
-  def created_at() dateCreated end
 
   def home_phone; homePhone; end
   def cell_phone; cellPhone; end
   def work_phone; workPhone; end
 
-  #set dateChanged and changedBy
+  #set updated_at and changed_by
   def stamp
-    self.dateChanged = Time.now
-    self.changedBy = ApplicationController.application_name
+    self.updated_at = Time.now
+    self.changed_by = ApplicationController.application_name
   end
 
   def display_html
