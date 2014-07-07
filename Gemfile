@@ -26,8 +26,12 @@ gem 'sass-rails'#,   '~> 3.2.3'
 gem 'sidekiq'
 gem 'uglifier'#, '>= 1.0.3'
 
-gem 'common_engine', 
-  path: '/Users/andrewroth/Development/common_engine'
+# copied from common_engine
+gem 'rubycas-client'
+gem 'auto_strip_attributes', '~> 2.0'
+
+#gem 'common_engine', 
+  #path: '/Users/andrewroth/Development/common_engine'
   # github: 'CruGlobal/common_engine', branch: 'master'
 gem 'fe', 
   path: '/Users/andrewroth/Development/qe'

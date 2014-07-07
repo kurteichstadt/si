@@ -1,8 +1,4 @@
-# copied from common_engine
-#
-# modifications:
-#
-#   - column renames from 20140707144735_change_ministry_newaddress_column_to_be_more_rails_like.rb, 20140707150646_rename_more_ministry_newaddress_columns.rb, 20140707153916_change_ministry_newaddress_primary_key_to_id.rb
+# originally taken from common_engine
 
 require_dependency 'global_registry_methods'
 require 'auto_strip_attributes'

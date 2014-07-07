@@ -1,20 +1,4 @@
 PATH
-  remote: /Users/andrewroth/Development/common_engine
-  specs:
-    common_engine (0.0.1)
-      aasm (~> 3.0.9)
-      acts_as_list (~> 0.3.0)
-      auto_strip_attributes (~> 2.0)
-      geocoder
-      global_registry
-      paperclip
-      rails (>= 3.0.0)
-      rubycas-client
-      sidekiq
-      sidekiq-failures
-      sidekiq-unique-jobs
-
-PATH
   remote: /Users/andrewroth/Development/qe
   specs:
     fe (0.0.3)
@@ -118,12 +102,6 @@ GEM
       multipart-post (~> 1.2.0)
     ffi (1.9.3)
     formatador (0.2.4)
-    geocoder (1.1.9)
-    global_registry (1.0.2)
-      activesupport
-      oj (~> 2.1.0)
-      rest-client (~> 1.6.7)
-      retryable-rb (~> 1.1.0)
     guard (2.2.2)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -165,7 +143,6 @@ GEM
     minitest (4.7.5)
     mocha (0.14.0)
       metaclass (~> 0.0.1)
-    mock_redis (0.11.0)
     money (5.1.1)
       i18n (~> 0.6.0)
     multi_json (1.9.2)
@@ -185,7 +162,6 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    oj (2.1.7)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
@@ -245,9 +221,6 @@ GEM
     redis (3.0.5)
     redis-namespace (1.3.1)
       redis (~> 3.0.0)
-    rest-client (1.6.7)
-      mime-types (>= 1.16)
-    retryable-rb (1.1.0)
     ruby-openid (2.3.0)
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
@@ -264,11 +237,6 @@ GEM
       json
       redis (>= 3.0.4)
       redis-namespace (>= 1.3.1)
-    sidekiq-failures (0.3.0)
-      sidekiq (>= 2.14.0)
-    sidekiq-unique-jobs (2.7.1)
-      mock_redis
-      sidekiq (~> 2.6)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
@@ -312,8 +280,8 @@ DEPENDENCIES
   airbrake
   airbrake_user_attributes
   american_date
+  auto_strip_attributes (~> 2.0)
   coffee-rails
-  common_engine!
   dalli
   dynamic_form
   factory_girl_rails
@@ -337,6 +305,7 @@ DEPENDENCIES
   pry-stack_explorer
   rack-contrib
   rails (~> 4.0.4)
+  rubycas-client
   sass-rails
   sidekiq
   simplecov (>= 0.3.5)

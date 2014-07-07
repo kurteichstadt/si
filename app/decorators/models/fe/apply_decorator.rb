@@ -1,4 +1,7 @@
 Fe::Apply.class_eval do
+  YEAR = 2014
+  COST = 35
+
   self.table_name = "hr_si_applications"
 =begin
 

@@ -2,6 +2,6 @@ FactoryGirl.define do
   factory :hr_si_application do
     association   :person
     association   :apply
-    siYear        HrSiApplication::YEAR
+    si_year       2014
   end
 end

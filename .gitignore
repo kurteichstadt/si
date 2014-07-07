@@ -58,3 +58,6 @@ vendor/ruby
 config/config.yml
 
 .idea
+
+*.sql
+trash

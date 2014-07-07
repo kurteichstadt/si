@@ -5,7 +5,7 @@
 class Fe::ProjectPreference < Fe::Question
   def choices(app=nil)
     if !app.nil?
-      locations = "'#{app.hr_si_application.locationA}','#{app.hr_si_application.locationB}','#{app.hr_si_application.locationC}'"
+      locations = "'#{app.locationA}','#{app.locationB}','#{app.locationC}'"
       campus = Campus.where("name = ? && state = ?", app.applicant.campus, app.applicant.universityState).first
       region = campus.nil? ? nil : campus.region
       show_all = false

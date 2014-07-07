@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
   before_filter :authentication_filter, :except => ['no_access','logout']
   helper_method :is_true, :si_user, :user
 
-  include CommonEngine
-
   @@application_name = "si"
   cattr_accessor :application_name
   

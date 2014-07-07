@@ -1,10 +1,4 @@
-# copied from common engine; 
-#
-# modifications:
-#
-#   - changed to a class_eval
-#   - renamed non-rails columns as per db/migrate/20140707144735_change_ministry_newaddress_column_to_be_more_rails_like.rb
-# 
+# originally taken from common engine; 
 
 require 'global_registry_methods'
 Fe::Address.class_eval do
@@ -12,17 +6,12 @@ Fe::Address.class_eval do
   include Sidekiq::Worker
 
   self.table_name = "ministry_newaddress"
-  self.primary_key = "addressID"
 
   validates_presence_of :address_type
 
   belongs_to :person
 
   before_save :stamp
-
-  def home_phone; homePhone; end
-  def cell_phone; cellPhone; end
-  def work_phone; workPhone; end
 
   #set updated_at and changed_by
   def stamp
