@@ -1,4 +1,4 @@
-# copied from common_engine; no modifications made
+# copied from common_engine
 
 require 'digest/md5'
 require 'base64'
@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 	self.primary_key = "userID"
 
 	# Relationships
-	has_one :person, :foreign_key => 'fk_ssmUserId'
+	has_one :person, :foreign_key => 'fk_ssmUserId', :class_name => "Fe::Person"
 	has_many :authentications
 	has_many :activity_bookmarks, -> { where(Bookmark.table_name + ".name = 'activity'") }, :class_name => 'Bookmark'
 	has_many :activities, -> { order(TargetArea.table_name + ".name").includes(:target_area) }, :through => :activity_bookmarks

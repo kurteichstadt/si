@@ -44,9 +44,9 @@ class ApplicationController < ActionController::Base
   helper_method :user
 
   def si_user
-    #binding.pry
     return nil unless user
-    @si_user ||= SiUser.find_by_user_id(user.id)
+    @si_user ||= SiUser.where(ssm_id: user.id).first_or_create
+    #@si_user ||= SiUser.where(ssm_id: user.id).first
     if @si_user && !session[:login_stamped]
       @si_user.update_attribute(:last_login, Time.now)
       session[:login_stamped] = true
@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
   end
 
   # def get_valid_projects(show_all)
-  #   conditions = "siYear = #{HrSiApplication::YEAR}"
+  #   conditions = "siYear = #{Fe::Apply::YEAR}"
   #   @projects = HrSiProject.find(:all, :conditions => conditions, :order => "name ASC")
   # end
 

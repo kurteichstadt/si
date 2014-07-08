@@ -5,10 +5,12 @@ Fe::ApplicationsController.class_eval do
   prepend_before_filter :login_from_cookie
   append_before_filter :check_valid_user, :only => [:show, :collated_refs, :no_conf, :no_ref]
 
+  layout 'application'
+
 protected
 
   def get_year
-    HrSiApplication::YEAR  
+    Fe::Apply::YEAR  
   end
   
   def create_apply

@@ -3,7 +3,7 @@
 	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>STINT/Internship/PTFS Application</title>
+  <title>STINT/Internship/PTFS Tool</title>
   <%= stylesheet_link_tag "print", :media => 'print' %>
   <%= stylesheet_link_tag "base" %>
 
@@ -11,42 +11,36 @@
     var answer_sheet_type = '<%= @answer_sheet.class %>'
   </script>
   <%= csrf_meta_tag %>
-  <%= stylesheet_link_tag 'message_block' %>
-  <%= stylesheet_link_tag asset_path('fe/fe.screen.css') %>
   <script type="text/javascript" charset="utf-8">
-    <%= raw Rack::TimeZone::Javascript %>
-    setTimezoneCookie()
+    <%#= raw Rack::TimeZone::Javascript %>
+    //setTimezoneCookie()
   </script>
-  <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag asset_path('application.css') %>
+  <%= javascript_include_tag asset_path("application.js") %>
 </head>
 <body>
 
 <div id="wrapper">
 
    <div id="header" style="height: 72px;">
-   	 <%= image_tag "cru_logo_top.jpg", :style => "padding-left: 10px; padding-top: 5px;" %>
-     <h1 style="display: inline; position: absolute; color: #F3F3F3; margin: 4.5px 10px; line-height: 36px;">STINT/Internship/PTFS Application</h1>
+     <%= image_tag "cru_logo_top.jpg", :style => "position: absolute; padding-left: 10px; padding-top: 5px;" %>
+     <h1 style="display: inline; position: absolute; color: #F3F3F3; margin: 4.5px 70px; line-height: 36px;">STINT/Internship/PTFS Application</h1>
    
-   	  <% if user %><%= link_to "Log Out", logout_path, { :style => "color: #fff;", :id => "link-log-out" } %><% end %>
+     <%= render "fe/application/logout" %>
    </div>
    
-   <% if user && @application -%><%= render :partial => "/applications/meta_info" %><% end -%>
-   
+   <% flash.each do |key, value| %>
+     <div class="alert alert-<%= key %>"><%= value %></div>
+   <% end %>
+
    <div id="main">
-    <%= yield %>
+     <%= yield %>
    </div>
 </div>
 <div id="footerwrap">
+  <div style="clear:both"></div>
   <div id="footer">
-    <!-- anything in here my be custom branded -->
-    <table>
-      <tr>
-        <td>
-          <img src="/images/icons/lifebuoy.png" style="vertical-align: top; margin-right: 5px;"> If you're having any issues, or have a question about something, please <a href="mailto:help@campuscrusadeforchrist.com" class="issueslink">send us an email. <img src="/images/icons/mail.png" style="vertical-align: top; border: 0px;"></a>
-        </td>
-      </tr>
-    </table>
-    <!-- END -->
+    <img src="/images/icons/lifebuoy.png" style="vertical-align: top; margin-right: 5px;"> If you're having any issues, or have a question about something, please <a href="mailto:help@campuscrusadeforchrist.com" class="issueslink">send us an email. <img src="/images/icons/mail.png" style="vertical-align: top; border: 0px;"></a>
   </div>
 </div>
 </body>

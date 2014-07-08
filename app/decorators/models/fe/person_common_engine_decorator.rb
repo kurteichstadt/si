@@ -44,8 +44,8 @@ Fe::Person.class_eval do
   has_many                :sitrack_trackings, through: :hr_si_applications
   has_many                :applies, :foreign_key => "applicant_id"   # applicants applying
   has_many                :apply_sheets    # whoever, filling in a sheet
-  #has_one                 :current_si_application, -> { where("siYear = '#{HrSiApplication::YEAR}'") }, :foreign_key => "person_id", :class_name => '::HrSiApplication'
-  def current_si_application() hr_si_applications.where("siYear = '#{HrSiApplication::YEAR}'").first end
+  #has_one                 :current_si_application, -> { where("siYear = '#{Fe::Apply::YEAR}'") }, :foreign_key => "person_id", :class_name => '::Fe::Apply'
+  def current_si_application() hr_si_applications.where("siYear = '#{Fe::Apply::YEAR}'").first end
 
   # Summer Project
   has_many                :sp_applications

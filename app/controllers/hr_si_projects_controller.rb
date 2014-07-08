@@ -13,8 +13,8 @@ class HrSiProjectsController < ApplicationController
     @regions = [["",-1]] + Region.all.collect { |r| [ r.name, r.region ] }
     @countries = [""] + Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
     @aoas = [""] + Aoa.all.collect { |a| [a.name, a.id ] }
-    @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
-    @years_for_select << ["Current",HrSiApplication::YEAR]
+    @years_for_select = ((2003)..(Fe::Apply::YEAR - 1)).to_a.map(&:to_s)
+    @years_for_select << ["Current",Fe::Apply::YEAR]
     @years_for_select.reverse!
   end
   
@@ -46,7 +46,7 @@ class HrSiProjectsController < ApplicationController
   
   def create
     @hr_si_project = HrSiProject.new(project_params)
-    @hr_si_project.siYear = HrSiApplication::YEAR
+    @hr_si_project.siYear = Fe::Apply::YEAR
     @regions = Region.all.collect { |r| [ r.name, r.region ] }
     @countries = Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
     @aoas = Aoa.all.collect { |a| a.name }
@@ -94,13 +94,13 @@ class HrSiProjectsController < ApplicationController
     @regions = [["",-1]] + Region.all.collect { |r| [ r.name, r.region ] }
     @countries = [""] + Country.order("country").collect { |c| [ c.country + ' (' + c.code + ')', c.code ] }
     @aoas = [""] + Aoa.all.collect { |a| a.name }
-    @years_for_select = ((2003)..(HrSiApplication::YEAR - 1)).to_a.map(&:to_s)
-    @years_for_select << ["Current",HrSiApplication::YEAR]
+    @years_for_select = ((2003)..(Fe::Apply::YEAR - 1)).to_a.map(&:to_s)
+    @years_for_select << ["Current",Fe::Apply::YEAR]
     @years_for_select.reverse!
 
     #XML Feed needs
     params[:partnershipRegion] = params[:region] unless params[:region].to_s.empty?
-    params[:siYear] = HrSiApplication::YEAR.to_s if params[:format] == "xml"
+    params[:siYear] = Fe::Apply::YEAR.to_s if params[:format] == "xml"
 
     conditions = "1=1 "
     conditions += "and name like '%#{escape_string(params[:name])}%' " unless params[:name].to_s.empty?
