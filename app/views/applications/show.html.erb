@@ -33,7 +33,7 @@
 			<%= @application.applicant.emergency_address1.address1 %><br/>
 			<% unless @application.applicant.emergency_address1.address2.blank? -%><%= @application.applicant.emergency_address1.address2 %><br/><% end -%>
 			<%= @application.applicant.emergency_address1.city %>, <%= @application.applicant.emergency_address1.state %> <%= @application.applicant.emergency_address1.zip %></span></p>
-			<p><label class="desc">Relationship:</label> <span class="answer"><%= @application.applicant.emergency_address1.contactRelationship %></span></p>
+			<p><label class="desc">Relationship:</label> <span class="answer"><%= @application.applicant.emergency_address1.contact_relationship %></span></p>
 			<% unless @application.applicant.emergency_address1.home_phone.blank? -%><p><label class="desc">Home Phone:</label> <span class="answer"><%= @application.applicant.emergency_address1.home_phone %></span></p><% end -%>
 			<% unless @application.applicant.emergency_address1.work_phone.blank? -%><p><label class="desc">Work Phone:</label> <span class="answer"><%= @application.applicant.emergency_address1.work_phone %></span></p><% end -%>
 			<% unless @application.applicant.emergency_address1.cell_phone.blank? -%><p><label class="desc">Cell Phone:</label> <span class="answer"><%= @application.applicant.emergency_address1.cell_phone %></span></p><% end -%>
