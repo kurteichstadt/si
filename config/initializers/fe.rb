@@ -5,7 +5,7 @@ module Fe
   self.table_name_prefix = 'si_'
   
   mattr_accessor :answer_sheet_class
-  self.answer_sheet_class = 'Fe::Apply'
+  self.answer_sheet_class = 'Fe::Application'
   
   mattr_accessor :from_email
   self.from_email = 'STINT and Internships <StintandInternships@uscm.org>'

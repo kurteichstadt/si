@@ -44,8 +44,8 @@ Fe::Person.class_eval do
   has_many                :sitrack_trackings, through: :hr_si_applications
   has_many                :applies, :foreign_key => "applicant_id"   # applicants applying
   has_many                :apply_sheets    # whoever, filling in a sheet
-  #has_one                 :current_si_application, -> { where("siYear = '#{Fe::Apply::YEAR}'") }, :foreign_key => "person_id", :class_name => '::Fe::Apply'
-  def current_si_application() hr_si_applications.where("siYear = '#{Fe::Apply::YEAR}'").first end
+  #has_one                 :current_si_application, -> { where("siYear = '#{Fe::Application::YEAR}'") }, :foreign_key => "person_id", :class_name => '::Fe::Application'
+  def current_si_application() hr_si_applications.where("siYear = '#{Fe::Application::YEAR}'").first end
 
   # Summer Project
   has_many                :sp_applications
@@ -399,9 +399,9 @@ Fe::Person.class_eval do
 
   def phone
     if current_address
-      return current_address.cellPhone if current_address.cellPhone.present?
-      return current_address.homePhone if current_address.homePhone.present?
-      return current_address.workPhone if current_address.workPhone.present?
+      return current_address.cell_phone if current_address.cell_phone.present?
+      return current_address.home_phone if current_address.home_phone.present?
+      return current_address.work_phone if current_address.work_phone.present?
     else
       ''
     end

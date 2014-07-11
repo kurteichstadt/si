@@ -1,5 +1,5 @@
 PATH
-  remote: /Users/andrewroth/Development/qe
+  remote: /Users/andrewroth/Development/fe
   specs:
     fe (0.0.3)
       aasm

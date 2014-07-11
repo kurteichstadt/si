@@ -8,7 +8,7 @@ module Fe
       session[:attempted_submit] = true
       return false unless validate_sheet
       case @answer_sheet.class.to_s
-      when 'Fe::Apply'
+      when 'Fe::Application'
         @answer_sheet.submit!
         # send references
         @answer_sheet.references.each do |reference|
@@ -30,7 +30,7 @@ module Fe
         binding.pry
         @answer_sheet = answer_sheet_type.find(params[:id])
         case @answer_sheet.class.to_s
-        when 'Fe::Apply'
+        when 'Fe::Application'
           unless @answer_sheet.applicant == current_person || (si_user && si_user.can_su_application?)
             redirect_to root_path
             return false

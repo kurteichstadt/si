@@ -10,10 +10,10 @@ Fe::ApplicationsController.class_eval do
 protected
 
   def get_year
-    Fe::Apply::YEAR  
+    Fe::Application::YEAR  
   end
   
   def create_apply
-    @apply = Fe::Apply.create :fk_personID => @person.id, :siYear => get_year
+    @apply = Fe::Application.create :fk_personID => @person.id, :siYear => get_year
   end
 end

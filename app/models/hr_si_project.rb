@@ -29,7 +29,7 @@ class HrSiProject < ActiveRecord::Base
     conditions += "(studentStartDate > \'#{today}\') "
     conditions += "AND (studentStartDate is not null) "
     conditions += "AND (studentEndDate > studentStartDate) "
-    conditions += "AND (siYear = '#{Fe::Apply::YEAR}') "
+    conditions += "AND (siYear = '#{Fe::Application::YEAR}') "
         
     # is the project on hold?
     conditions += "AND ((onHold <> \'1\') or (onHold is null)) "

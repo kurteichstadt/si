@@ -5,7 +5,7 @@ class RenameAttributeNameFromSiElements < ActiveRecord::Migration
       contactRelationship: "contact_relationship",
       preferredPhone: "preferred_phone",
       homePhone: "home_phone",
-      workPhone: "work_phone",
+      work_phone: "work_phone",
       cellPhone: "cell_phone"
     }
 

@@ -34,8 +34,8 @@ gem 'auto_strip_attributes', '~> 2.0'
   #path: '/Users/andrewroth/Development/common_engine'
   # github: 'CruGlobal/common_engine', branch: 'master'
 gem 'fe', 
-  path: '/Users/andrewroth/Development/qe'
-  # github: 'CruGlobal/qe', branch: 'fe'
+  path: '/Users/andrewroth/Development/fe'
+  # github: 'CruGlobal/fe', branch: 'fe'
 
 group :development, :test do
   gem 'simplecov', '>= 0.3.5', require: false

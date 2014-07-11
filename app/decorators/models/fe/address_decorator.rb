@@ -32,8 +32,8 @@ Fe::Address.class_eval do
   alias_method :to_s, :display_html
 
   def phone_number
-    phone = (self.homePhone && !self.homePhone.empty?) ? self.homePhone : self.cellPhone
-    phone = (phone && !phone.empty?) ? phone : self.workPhone
+    phone = (self.home_phone && !self.home_phone.empty?) ? self.home_phone : self.cell_phone
+    phone = (phone && !phone.empty?) ? phone : self.work_phone
     phone
   end
 

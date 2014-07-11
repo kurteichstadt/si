@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
   end
 
   # def get_valid_projects(show_all)
-  #   conditions = "siYear = #{Fe::Apply::YEAR}"
+  #   conditions = "siYear = #{Fe::Application::YEAR}"
   #   @projects = HrSiProject.find(:all, :conditions => conditions, :order => "name ASC")
   # end
 
