@@ -5,7 +5,7 @@ class UsersControllerTest < ActionController::TestCase
     @person = create(:person)
     @user = @person.user
     @request.session[:cas_user] = @user.username
-    @si_user = create(:si_user, :user => @user)
+    @si_user = create(:si_user, :user => @user, :type => 'SiNationalCoordinator')
     @request.session[:user_id] = @user.id
   end
   
@@ -15,6 +15,7 @@ class UsersControllerTest < ActionController::TestCase
   end
   
   test "update" do
+    create(:role, :user_class => @si_user.type)
     put :update, :id => @si_user, :temp_user => @si_user.attributes
     assert(si_user = assigns(:temp_user))
     assert_redirected_to users_path
@@ -27,6 +28,7 @@ class UsersControllerTest < ActionController::TestCase
   
   test "create" do
     assert_difference("SiUser.count", 1) do
+      create(:role, :user_class => "SiNationalCoordinator")
       post :create, :person_id => create(:person, :user => create(:josh_user)), :temp_user => {:role => 'SiNationalCoordinator'}
     end
     assert si_user = assigns(:temp_user)

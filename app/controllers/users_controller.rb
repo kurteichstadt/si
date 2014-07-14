@@ -28,10 +28,11 @@ class UsersController < ApplicationController
       @temp_user.errors.add(:base, "You must first select a person before creating a new user.")
       render :action => :new
     else
-      @person = Person.where('personID = ?', params[:person_id]).includes(:user).first
+      @person = Person.where(personID: params[:person_id]).includes(:user).first
       old_user = SiUser.find_by_ssm_id(@person.user) 
       old_user.destroy if old_user # delete the old user so we can create the new one.
       type = params[:temp_user][:role]
+      binding.pry
       @new_user = type.constantize.create!(:ssm_id => @person.user.id,
                                            :created_at => Time.now,
                                            :created_by_id => user.id,
@@ -90,7 +91,7 @@ class UsersController < ApplicationController
       end
       @conditions[0] += " AND fk_ssmUserId <> 0 AND fk_ssmUserId is NOT NULL " if !options[:all_users]
       @conditions[0] += " AND accountNo <> '' AND accountNo is NOT NULL " if options[:staff_only]
-      @people = Person.order("lastName, firstName").where(@conditions).all
+      @people = Person.order("lastName, firstName").where(@conditions).to_a
     end
     return @people
   end

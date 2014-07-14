@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :reference, class: 'Fe::ReferenceSheet' do
-    association :applicant_answer_sheet, factory: :apply
+    association :applicant_answer_sheet, factory: :application
     association :question, factory: :ref_question
     access_key         { Digest::MD5.hexdigest((object_id + Time.now.to_i).to_s) }
     first_name    'Refer'

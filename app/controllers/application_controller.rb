@@ -43,6 +43,9 @@ class ApplicationController < ActionController::Base
   end
   helper_method :user
 
+  def done
+  end
+
   def si_user
     return nil unless user
     @si_user ||= SiUser.where(ssm_id: user.id).first_or_create
@@ -135,7 +138,7 @@ class ApplicationController < ActionController::Base
                                     {'applicant_full_name' => @application.applicant.informal_full_name,
                                      'reference_full_name' => reference.name,
                                      'reference_email' => reference.email,
-                                     'application_url' => edit_application_url(@application)}).deliver
+                                     'application_url' => edit_fe_application_url(@application)}).deliver
 
     reference.email_sent_at = Time.now
     reference.save

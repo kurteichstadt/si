@@ -9,12 +9,12 @@ class ReferencePagesControllerTest < ActionController::TestCase
   end
   
   test "edit" do
-    get :edit, :application_id => @apply
+    get :edit, :application_id => @application
     assert_response :success, @response.body
   end
   
   test "update" do
-    put :update, :application_id => @apply, :references => {}
+    put :update, :application_id => @application, :references => {}
     assert_response :success, @response.body
   end
   

@@ -9,7 +9,7 @@ class CampusesControllerTest < ActionController::TestCase
   
   test "search" do
     school_picker = create(:school_picker)
-    xhr :post, :search, :state => 'CA', dom_id: "school_picker_#{school_picker.id}", id: @apply.id
+    xhr :post, :search, :state => 'CA', dom_id: "school_picker_#{school_picker.id}", id: @application.id
     assert_response :success, @response.body
   end
   

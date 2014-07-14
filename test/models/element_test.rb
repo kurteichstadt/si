@@ -6,6 +6,6 @@ class ElementTest < ActiveSupport::TestCase
     @person = create(:person)
     setup_application
     element = create(:element, :object_name => 'applicant', :attribute_name => 'firstName')
-    assert_equal(50, element.limit(@apply))
+    assert_equal(50, element.limit(@application))
   end
 end

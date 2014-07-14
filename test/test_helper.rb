@@ -11,6 +11,8 @@ Spork.prefork do
 end
 
 ENV["Rails.env"] = "test"
+ENV["RAILS_ENV"] = "test"
+
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter "vendor"
@@ -46,30 +48,29 @@ class ActiveSupport::TestCase
   def setup_application
     @address = create(:address, :person => @person)
     @question_sheet = create(:question_sheet)
-    @apply = create(:apply, :applicant => @person)
-    @hr_si_application = create(:hr_si_application, :person => @person, :apply => @apply)
-    @answer_sheet = @apply
+    @application = create(:application, :applicant => @person)
+    @answer_sheet = @application
     @page = create(:page, :question_sheet => @question_sheet)
-    create(:answer_sheet_question_sheet, :question_sheet => @question_sheet, :answer_sheet => @apply)
+    create(:answer_sheet_question_sheet, :question_sheet => @question_sheet, :answer_sheet => @application)
   end
 
   def setup_reference
     @ref_question = create(:ref_question, style: 'staff')
     @ref_question_sheet = @ref_question.related_question_sheet
-    @ref_answer_sheet = create(:reference, :applicant_answer_sheet => @apply, :question => @ref_question)
+    @ref_answer_sheet = create(:reference, :applicant_answer_sheet => @application, :question => @ref_question)
     @ref_page = create(:page, :question_sheet => @ref_question_sheet)
 
     #Staff Reference
     @reference = @ref_answer_sheet
 
     @discipler_ref_question = create(:ref_question, style: 'discipler')
-    @discipler_reference = create(:reference, :applicant_answer_sheet => @apply, :question => @discipler_ref_question)
+    @discipler_reference = create(:reference, :applicant_answer_sheet => @application, :question => @discipler_ref_question)
 
-    @roomate_ref_question = create(:ref_question, style: 'roomate')
-    @roomate_reference = create(:reference, :applicant_answer_sheet => @apply, :question => @roomate_ref_question)
+    @roommate_ref_question = create(:ref_question, style: 'roommate')
+    @roommate_reference = create(:reference, :applicant_answer_sheet => @application, :question => @roommate_ref_question)
 
     @friend_ref_question = create(:ref_question, style: 'friend')
-    @friend_reference = create(:reference, :applicant_answer_sheet => @apply, :question => @friend_ref_question)
+    @friend_reference = create(:reference, :applicant_answer_sheet => @application, :question => @friend_ref_question)
   end
 end
 

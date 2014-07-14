@@ -45,7 +45,7 @@ group :development, :test do
   gem 'spork-rails'#, '~> 3.2.0'
   gem 'guard-spork'
   gem 'spork-testunit'
-  gem 'mocha'
+  gem 'mocha', require: 'mocha/setup'
   gem 'pry'
   gem 'pry-remote'
   gem 'pry-stack_explorer'

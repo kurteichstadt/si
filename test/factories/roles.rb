@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :role do
+  factory :role, class: SiRole do
     role          'National Coordinator'
     user_class    'SiNationalCoordinator'
   end

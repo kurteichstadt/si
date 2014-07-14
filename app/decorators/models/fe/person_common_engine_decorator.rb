@@ -23,11 +23,11 @@ Fe::Person.class_eval do
   has_and_belongs_to_many :activities, -> { order(TargetArea.table_name + ".name").includes(:target_area) }, :join_table => "ministry_movement_contact", :association_foreign_key => "ActivityID", :foreign_key => "personID"
 
   # Addresses
-  has_many                :email_addresses, :foreign_key => "person_id", :class_name => '::EmailAddress', dependent: :destroy
-  has_many                :phone_numbers, :foreign_key => "person_id", :class_name => '::PhoneNumber', dependent: :destroy
-  has_one                 :current_address, -> { where("address_type = 'current'") }, :foreign_key => "person_id", :class_name => '::Address'
-  has_one                 :permanent_address, -> { where("address_type = 'permanent'") }, :foreign_key => "person_id", :class_name => '::Address'
-  has_one                 :emergency_address1, -> { where("address_type = 'emergency1'") }, :foreign_key => "person_id", :class_name => '::Address'
+  has_many                :email_addresses, :foreign_key => "person_id", dependent: :destroy
+  has_many                :phone_numbers, :foreign_key => "person_id", dependent: :destroy
+  has_one                 :current_address, -> { where("address_type = 'current'") }, :foreign_key => "person_id", :class_name => 'Address'
+  has_one                 :permanent_address, -> { where("address_type = 'permanent'") }, :foreign_key => "person_id", :class_name => 'Address'
+  has_one                 :emergency_address1, -> { where("address_type = 'emergency1'") }, :foreign_key => "person_id", :class_name => 'Address'
   has_many                :addresses, :foreign_key => "person_id", dependent: :destroy
 
   # Cru Commons
@@ -40,12 +40,11 @@ Fe::Person.class_eval do
   has_one                 :spouse, :foreign_key => "fk_spouseID"
 
   # STINT
-  has_many                :hr_si_applications, :foreign_key => "fk_personID"
+  has_many                :applications, :foreign_key => "applicant_id"
   has_many                :sitrack_trackings, through: :hr_si_applications
-  has_many                :applies, :foreign_key => "applicant_id"   # applicants applying
   has_many                :apply_sheets    # whoever, filling in a sheet
   #has_one                 :current_si_application, -> { where("siYear = '#{Fe::Application::YEAR}'") }, :foreign_key => "person_id", :class_name => '::Fe::Application'
-  def current_si_application() hr_si_applications.where("siYear = '#{Fe::Application::YEAR}'").first end
+  def current_si_application() applications.where(si_year: Fe::Application::YEAR).first end
 
   # Summer Project
   has_many                :sp_applications

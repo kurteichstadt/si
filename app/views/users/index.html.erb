@@ -2,7 +2,7 @@
     <h1>Users</h1>
 
 	<ul style="margin-bottom: 18px; ">
-		<li><%= link_to 'Add a User', new_user_path, :method => :GET, :class => "add-link" %></li>
+		<li><%= link_to 'Add a User', new_user_path, method: :GET, class: "add-link" %></li>
 	</ul>
 
     <table cellspacing="0" class="list" style="clear: both;"> 
@@ -15,7 +15,7 @@
       <tr class="<%= cycle("","alt") %>">
 		<td nowrap="true"><%= link_to user.person.informal_full_name, edit_user_path(user) if user.person%></td>
 		<td><%=user.role%></td>
-		<td><%= link_to "Delete", user_path(user), :method => :delete, :confirm => "Are you sure you wish to delete this user?", :class => "destroy" %></td>
+    <td><%= link_to "Delete", user_path(user), method: :delete, data: { confirm: "Are you sure you wish to delete this user?" }, class: "destroy" %></td>
       </tr>
     <% end %>
     </table>

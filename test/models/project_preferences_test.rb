@@ -7,7 +7,7 @@ class ProjectPreferencesTest < ActiveSupport::TestCase
     @project = create(:hr_si_project, :projectType => 'n')
     campus = create(:campus)
     setup_application
-    assert ProjectPreference.new.choices(@apply).include?([@project.name, @project.id])
+    assert ProjectPreference.new.choices(@application).include?([@project.name, @project.id])
   end
   
   test "choices without application" do
@@ -29,7 +29,7 @@ class ProjectPreferencesTest < ActiveSupport::TestCase
     @project = create(:hr_si_project, :projectType => 'n')
     setup_application
     @project_preference = create(:project_preference)
-    assert_equal('', @project_preference.display_response(@apply))
+    assert_equal('', @project_preference.display_response(@application))
   end
   
   test "display response with deleted location" do

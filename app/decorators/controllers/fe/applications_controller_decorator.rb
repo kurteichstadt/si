@@ -13,7 +13,7 @@ protected
     Fe::Application::YEAR  
   end
   
-  def create_apply
-    @apply = Fe::Application.create :fk_personID => @person.id, :siYear => get_year
+  def create_application
+    @application = Fe::Application.create :applicant_id => @person.id, :si_year => get_year
   end
 end

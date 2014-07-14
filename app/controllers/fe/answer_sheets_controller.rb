@@ -14,10 +14,10 @@ module Fe
         @answer_sheet.references.each do |reference|
           reference.send_invite unless reference.email_sent?
         end
-        render 'applications/submitted'
+        render 'fe/applications/submitted'
       when 'Fe::ReferenceSheet'
         @answer_sheet.submit! unless @answer_sheet.completed?
-        render 'reference_sheets/submitted'
+        render 'fe/reference_sheets/submitted'
       else
         super
       end
@@ -27,7 +27,6 @@ module Fe
     protected
       # Add some security to this method
       def get_answer_sheet
-        binding.pry
         @answer_sheet = answer_sheet_type.find(params[:id])
         case @answer_sheet.class.to_s
         when 'Fe::Application'

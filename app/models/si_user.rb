@@ -19,7 +19,7 @@ class SiUser < ActiveRecord::Base
   def can_su_application?() false; end
   def creatable_user_types() nil; end
   def creatable_user_types_array(types = nil)
-    types.nil? ? [] : SiRole.where("user_class IN (#{types})").order('role').all.map { |role| [role.role, role.user_class] }
+    types.nil? ? [] : SiRole.where("user_class IN (#{types})").order('role').map { |role| [role.role, role.user_class] }
   end
   def person
     @person ||= user.person if user

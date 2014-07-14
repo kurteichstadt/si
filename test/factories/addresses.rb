@@ -1,8 +1,8 @@
 FactoryGirl.define do
-  factory :address do
+  factory :address, class: Fe::Address do
     association :person
     email       'test@example.com'
-    homePhone   '555-555-5555'
-    addressType 'current'
+    home_phone   '555-555-5555'
+    address_type 'current'
   end
 end
