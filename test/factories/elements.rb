@@ -8,6 +8,7 @@ FactoryGirl.define do
     is_confidential     false
     hide_label          false
     hide_option_labels  false
+    association         :question_sheet
   end
 
   factory :school_picker, :parent => :element, :class => 'Fe::SchoolPicker' do
@@ -19,10 +20,10 @@ FactoryGirl.define do
   end
 
   factory :project_preference, :parent => :element, :class => 'Fe::ProjectPreference' do
-    kind            'ProjectPreference'
+    kind            'Fe::ProjectPreference'
     label           'Project Preference'
     style           'project_preference'
-    object_name     'hr_si_application'
+    object_name     'application'
     attribute_name  'locationA'
   end
 end

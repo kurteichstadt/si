@@ -93,7 +93,8 @@ class Fe::ApplicationsControllerTest < ActionController::TestCase
     setup_reference
     
     cas_login
-    get :collated_refs, :id => @application
+    create(:question_sheet, :id => 2) # hardcoded in app/controllers/applications_controller.rb
+    get :collated_refs, :id => @application.id
     assert_response :success, @response.body
     assert_template :collated_refs
   end

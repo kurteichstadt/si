@@ -125,13 +125,13 @@ class HrSiProjectsController < ApplicationController
   
   def get_valid_projects
     person = current_person
-    @application = application = Apply.find(person.current_si_application.apply_id)
-    @project_preference = ProjectPreference.find(params[:dom_id].split('_').last)
+    @application = person.application
+    @project_preference = Fe::ProjectPreference.find(params[:dom_id].split('_').last)
     @dom_id = params[:dom_id]
     @projects = Array.new
     show_all = params[:show_all] == "true" ? true : false
-    if !application.nil?
-      locations = "'#{person.current_si_application.locationA}','#{person.current_si_application.locationB}','#{person.current_si_application.locationC}'"
+    if !@application.nil?
+      locations = "'#{@application.locationA}','#{@application.locationB}','#{@application.locationC}'"
       campus = Campus.find_by_name(person.campus, :conditions => ["state = ?", person.universityState])
       region = campus.region unless campus.nil?
       project_type = 'n'

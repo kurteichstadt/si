@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def current_person
     raise "no user" unless user
     # Get their person, or create a new one if theirs doesn't exist
-    p = user.fe_person 
+    p = user.person 
     p ||= user.create_person_and_address(firstName: session[:cas_extra_attributes]['firstName'], lastName: session[:cas_extra_attributes]['lastName']) if session[:cas_extra_attributes]
     p
   end

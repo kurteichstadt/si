@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReferencesControllerTest < ActionController::TestCase
+class Fe::ReferencesControllerTest < ActionController::TestCase
   def setup
     login
     setup_application
@@ -9,7 +9,7 @@ class ReferencesControllerTest < ActionController::TestCase
   
   test 'edit' do
     get :edit, :application_id => @application, :id => @reference.access_key
-    assert_redirected_to edit_reference_sheet_path(@reference, :a => @reference.access_key)
+    assert_redirected_to edit_fe_reference_sheet_path(@reference, :a => @reference.access_key)
   end
   #
   #test 'send invite' do

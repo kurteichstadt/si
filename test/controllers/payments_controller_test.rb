@@ -1,7 +1,7 @@
 require 'test_helper'
 
 
-class PaymentsControllerTest < ActionController::TestCase
+class Fe::PaymentsControllerTest < ActionController::TestCase
   
  def setup
     login
@@ -57,6 +57,7 @@ class PaymentsControllerTest < ActionController::TestCase
   
   test "staff payment" do
     create(:email_template)
+    create(:staff, :accountNo => '000559826')
     xhr :post, :create, :application_id => @application, :payment => {:payment_type => 'Staff', :payment_account_no => '000559826', :staff_first => 'John', :staff_last => 'Doe'}
     assert_response :success, @response.body
   end
@@ -82,6 +83,8 @@ class PaymentsControllerTest < ActionController::TestCase
   
   test "update Approve payment" do
     setup_payment
+    create(:email_template, :name => "Applicant Staff Payment Receipt")
+    create(:email_template, :name => "Tool Owner Payment Confirmation")
     #assert_difference 'ActionMailer::Base.deliveries.length', 2 do
       put :update, :id => @payment, :application_id => @application, :payment => {:status => 'Other Account'}, :other_account => '000000000'
     #end
@@ -92,6 +95,7 @@ class PaymentsControllerTest < ActionController::TestCase
   
   test "update Decline payment" do
     setup_payment
+    create(:email_template, :name => "Payment Refusal")
     #assert_difference 'ActionMailer::Base.deliveries.length', 1 do
       put :update, :id => @payment, :application_id => @application, :payment => {:status => 'Declined'}
     #end
@@ -108,4 +112,13 @@ class PaymentsControllerTest < ActionController::TestCase
     assert_response :success, @response.body
   end
 
+  test "staff search" do
+    xhr :post, :staff_search, :application_id => @application, :payment => {:staff_first => 'Josh', :staff_last => 'Starcher'}
+    assert_response :success, @response.body
+  end
+
+  test 'blank staff search' do
+    xhr :post, :staff_search, :application_id => @application, :payment => {:staff_first => '', :staff_last => ''}
+    assert_response :success, @response.body
+  end
 end

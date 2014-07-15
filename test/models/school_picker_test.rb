@@ -16,7 +16,7 @@ class SchoolPickerTest < ActiveSupport::TestCase
   
   test "state method where application doesn't have a state" do
     @person = create(:person, :universityState => '', :campus => 'UIUC')
-    create(:campus, isSecure: false)
+    create(:campus, isSecure: 'F')
     setup_application
     state = FactoryGirl.build(:school_picker).state(@application)
     assert_equal('IL', state)

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ReferencePagesControllerTest < ActionController::TestCase
+class Fe::ReferencePagesControllerTest < ActionController::TestCase
   
  def setup
     login

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :campus do
     name    'UIUC'
     state   'IL'
-    isSecure false
+    isSecure 'F'
     city    'Chicago'
     country 'USA'
     region 'GL'

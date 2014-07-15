@@ -52,6 +52,6 @@ class HrSiProject < ActiveRecord::Base
     
     # are there available participant spots for the person's gender?
     
-    self.find(:all, :conditions => conditions, :order => "name ASC")
+    self.where(conditions).order("name ASC")
   end
 end
