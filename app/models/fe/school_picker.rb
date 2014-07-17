@@ -20,7 +20,7 @@ class Fe::SchoolPicker < Fe::Question
   def colleges(app=nil)
     unless state(app) == ""
       return Campus.where("state = ?", self.state(app)).where("type = 'College'")
-        .where("isClosed is null or isClosed <> 'T'").order(:name).all.collect {|c| c.name}
+        .where("isClosed is null or isClosed <> 'T'").order(:name).to_a.collect {|c| c.name}
     end
     []
   end

@@ -12,7 +12,7 @@ FactoryGirl.define do
   end
 
   factory :school_picker, :parent => :element, :class => 'Fe::SchoolPicker' do
-    kind            'SchoolPicker'
+    kind            'Fe::SchoolPicker'
     label           'Pick School'
     style           'school_picker'
     object_name     'applicant'

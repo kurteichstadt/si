@@ -32,7 +32,6 @@ class UsersController < ApplicationController
       old_user = SiUser.find_by_ssm_id(@person.user) 
       old_user.destroy if old_user # delete the old user so we can create the new one.
       type = params[:temp_user][:role]
-      binding.pry
       @new_user = type.constantize.create!(:ssm_id => @person.user.id,
                                            :created_at => Time.now,
                                            :created_by_id => user.id,

@@ -132,7 +132,7 @@ class HrSiProjectsController < ApplicationController
     show_all = params[:show_all] == "true" ? true : false
     if !@application.nil?
       locations = "'#{@application.locationA}','#{@application.locationB}','#{@application.locationC}'"
-      campus = Campus.find_by_name(person.campus, :conditions => ["state = ?", person.universityState])
+      campus = Campus.where(:name => person.campus).where("state = ?", person.universityState).first
       region = campus.region unless campus.nil?
       project_type = 'n'
       @projects = HrSiProject.find_all_available(locations, region, show_all, person, project_type)
