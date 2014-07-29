@@ -14,6 +14,7 @@ class MakeHrSiApplicationsTheAnswerSheet < ActiveRecord::Migration
 
     # update submitDate
     execute "update hr_si_applications apps join si_applies applies on apps.apply_id = applies.id set apps.submitDate = applies.submitted_at"
+    execute "update hr_si_applications apps join si_applies applies on apps.apply_id = applies.id set apps.submitDate = applies.submitted_at"
   end
 
   def down

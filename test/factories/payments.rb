@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :payment, class: 'Fe::Payment' do
-    association   :answer_sheet, factory: :apply
+    association   :answer_sheet, factory: :application
     payment_type  'Mail'
     amount        35.0
     status        'Pending'

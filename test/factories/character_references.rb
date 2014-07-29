@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :character_reference do
-    association   :apply
+    association   :application
     association   :sleeve_sheet
     name          'Shanda Eickekberger'
     email         'Shanda.Eickelberger@uscm.org'

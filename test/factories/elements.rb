@@ -4,7 +4,6 @@ FactoryGirl.define do
     label               'First Name'
     style               'short'
     required            false
-    sequence(:position) { |n| n }
     is_confidential     false
     hide_label          false
     hide_option_labels  false
