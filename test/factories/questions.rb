@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :question, class: 'Fe::Question' do
     sequence(:label)    {|n| "Question #{n}" }
+    sequence(:position) { |n| n }
     #association         :page_elements
   end
 
