@@ -269,6 +269,9 @@ GEM
     uglifier (2.3.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    xray-rails (0.1.14)
+      coffee-rails
+      rails (>= 3.1.0)
 
 PLATFORMS
   ruby
@@ -313,3 +316,4 @@ DEPENDENCIES
   spork-testunit
   test-unit
   uglifier
+  xray-rails

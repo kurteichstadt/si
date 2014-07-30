@@ -50,6 +50,7 @@ group :development, :test do
   gem 'pry-remote'
   gem 'pry-stack_explorer'
   gem 'pry-byebug'
+  gem 'xray-rails'
   #gem 'pry-debugger'
   #gem 'better_errors'
   #gem 'binding_of_caller'
