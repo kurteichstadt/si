@@ -3,9 +3,11 @@ Fe::Application.class_eval do
 
   self.table_name = "hr_si_applications"
 
-  scope :by_region, proc {|region, year| {:include => [:applicant, :payments, :sitrack_tracking],
-    :conditions => ["#{Fe::Application.table_name}.si_year = ? and (concat_ws('','',#{Fe::Person.table_name}.region )= ? or #{SitrackTracking.table_name}.regionOfOrigin = ?)", year, region, region],
-  :order => "#{Fe::Person.table_name}.lastName, #{Fe::Person.table_name}.firstName"}}
+  scope :by_region, ->(region, year) { 
+    includes([:applicant, :payments, :sitrack_tracking]).
+    where("#{Fe::Application.table_name}.si_year = ? and (concat_ws('','',#{Fe::Person.table_name}.region )= ? or #{SitrackTracking.table_name}.regionOfOrigin = ?)", year, region, region).
+    order("#{Fe::Person.table_name}.lastName, #{Fe::Person.table_name}.firstName")
+  }
 
   has_one    :sitrack_tracking, :foreign_key => 'application_id'
 

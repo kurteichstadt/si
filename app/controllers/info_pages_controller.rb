@@ -34,9 +34,9 @@ class InfoPagesController < ApplicationController
   
   def opportunities
     @active = "opportunities"
-    @national_projects = HrSiProject.where("projectType = 'n' AND siYear = ? AND (onHold <> 1 OR onHold is null)", Fe::Application::YEAR).order("name ASC").all
-    @regional_stint_projects = HrSiProject.where("projectType = 's' AND siYear = ? AND (onHold <> 1 OR onHold is null)", Fe::Application::YEAR).order("name ASC").all
-    @regional_internship_projects = HrSiProject.where("projectType = 'i' AND siYear = ? AND (onHold <> 1 OR onHold is null)", Fe::Application::YEAR).order("name ASC").all
+    @national_projects = HrSiProject.where("projectType = 'n' AND siYear = ? AND (onHold <> 1 OR onHold is null)", Fe::Application::YEAR).order("name ASC").to_a
+    @regional_stint_projects = HrSiProject.where("projectType = 's' AND siYear = ? AND (onHold <> 1 OR onHold is null)", Fe::Application::YEAR).order("name ASC").to_a
+    @regional_internship_projects = HrSiProject.where("projectType = 'i' AND siYear = ? AND (onHold <> 1 OR onHold is null)", Fe::Application::YEAR).order("name ASC").to_a
   end
   
   def a_real_life_story

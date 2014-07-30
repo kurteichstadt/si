@@ -56,5 +56,8 @@ module Si
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # remove this in rails 4.1
+    config.secret_key_base = YAML.load(File.open("#{Rails.root}/config/secrets.yml"))[Rails.env]['secret_key_base']
   end
 end
