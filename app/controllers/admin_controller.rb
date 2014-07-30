@@ -36,23 +36,23 @@ class AdminController < ApplicationController
     apply_base = Fe::Application.by_region(@region.region, @year)
     # Started apps are those that meet the following conditions:
     #   - First Name or Last Name filled in (check :person)
-    @started_apps = apply_base.where("(#{Fe::Person.table_name}.firstName != '' or #{Fe::Person.table_name}.lastName != '') AND #{Fe::Application.table_name}.status IN(?)", Fe::Application.unsubmitted_statuses).all
+    @started_apps = apply_base.where("(#{Fe::Person.table_name}.firstName != '' or #{Fe::Person.table_name}.lastName != '') AND #{Fe::Application.table_name}.status IN(?)", Fe::Application.unsubmitted_statuses).to_a
     # In Process apps
-    @in_process_apps = apply_base.where("#{Fe::Application.table_name}.status IN(?)", Fe::Application.not_ready_statuses).all
+    @in_process_apps = apply_base.where("#{Fe::Application.table_name}.status IN(?)", Fe::Application.not_ready_statuses).to_a
 
     # Ready apps are those that meet the following conditions:
     #   - Submitted (or Completed)
     #     AND Paid
     #     AND All References Submitted
-    @ready_apps = apply_base.where("#{Fe::Application.table_name}.status IN(?)", Fe::Application.ready_statuses).all
+    @ready_apps = apply_base.where("#{Fe::Application.table_name}.status IN(?)", Fe::Application.ready_statuses).to_a
     
     # Post Ready apps
     # Everything from Evaluation through Termination, but not the ppl who dropped out
-    @post_ready_apps = apply_base.where("#{Fe::Application.table_name}.status IN(?)", Fe::Application.post_ready_statuses).all
+    @post_ready_apps = apply_base.where("#{Fe::Application.table_name}.status IN(?)", Fe::Application.post_ready_statuses).to_a
     
     # Not Going apps
     # Withdrawn or declined
-    @not_going = apply_base.where("#{Fe::Application.table_name}.status IN(?)", Fe::Application.not_going_statuses).all
+    @not_going = apply_base.where("#{Fe::Application.table_name}.status IN(?)", Fe::Application.not_going_statuses).to_a
   end
 
 

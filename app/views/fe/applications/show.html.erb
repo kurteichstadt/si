@@ -4,7 +4,7 @@
            <h2><%= @application.applicant.informal_full_name %></h2><br/>
 		<p><label class="desc">Full Name:</label> <span class="answer"><%= (@application.applicant.title.blank? ? "" : @application.applicant.title + " ") + @application.applicant.long_name %></span></p>
 		<p><label class="desc">Date Submitted:</label> <span class="answer"><%= datestamp @application.submitted_at %></span></p>
-		<p><label class="desc">Electronic Signature:</label> <span class="answer"><%= @application.hr_si_application.electronicSignature %></span></p>
+		<p><label class="desc">Electronic Signature:</label> <span class="answer"><%= @application.electronicSignature %></span></p>
 
 <% unless @application.applicant.current_address.nil? -%>
 		<p><label class="desc"><h4>Current Mailing Address</h4></label>
@@ -59,14 +59,12 @@
    elements = []
    if question_sheet
      question_sheet.pages.order(:number).each do |page|
-       elements << page.elements.where("#{Element.table_name}.kind not in (?)", %w(Paragraph)).order(PageElement.table_name + '.position').all
+       elements << page.elements.where("#{Fe::Element.table_name}.kind not in (?)", %w(Paragraph)).order(Fe::PageElement.table_name + '.position').all
      end
      elements = elements.flatten
      elements.reject! {|e| e.is_confidential} if @show_conf == false
-     elements.reject! {|e| e.page_elements.where("page_id = 5").size > 0 }
-     elements.reject! {|e| e.page_elements.where("page_id > 31").size > 0 }
-     elements = QuestionSet.new(elements, answer_sheet).elements.group_by(&:page_id) -%>
-     <%= render :partial => '/answer_sheets/answer_sheet', :locals => {:answer_sheet => answer_sheet, :elements => elements } %>
+     elements = Fe::QuestionSet.new(elements, answer_sheet).elements.group_by(&:page_id) -%>
+     <%= render :partial => 'fe/answer_sheets/answer_sheet', :locals => {:answer_sheet => answer_sheet, :elements => elements } %>
    <% end %>
 <% end -%>
 </div>
