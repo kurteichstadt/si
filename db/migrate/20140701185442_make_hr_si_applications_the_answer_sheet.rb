@@ -9,7 +9,7 @@ class MakeHrSiApplicationsTheAnswerSheet < ActiveRecord::Migration
     ]
 
     queries.each do |query|
-      #execute query
+      execute query
     end
 
     # update submitDate
