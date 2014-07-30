@@ -1,24 +1,24 @@
 <h2 id='sheet-name'><%= answer_sheet.question_sheet.label if answer_sheet.question_sheet %></h2>
 
 <% if elements.length > 0 -%>
-  
+
   <% elements.sort.each do |page_id, page_elements| -%>
-  
+
     <div class="page">
       <h3><%= page_elements[0].pages.first.label %></h3>
       <ul class="questions readonly" start="<%= @question_number %>">
-        <%= render :partial => 'answer_sheets/element', :collection => page_elements, :locals => {:elements => page_elements} %>
+        <%= render :partial => 'fe/answer_sheets/element', :collection => page_elements, :locals => {:elements => page_elements} %>
       </ul>
     </div>
-    
+
     <br />
-  
+
   <% end -%>
 
 <% else -%>
 
-    <div style="background: #ffc;">
-      <p>There are no answers to review at this time.</p>
-    </div>
+  <div style="background: #ffc;">
+    <p>There are no answers to review at this time.</p>
+  </div>
 
 <% end -%>

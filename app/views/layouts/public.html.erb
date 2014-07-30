@@ -32,7 +32,7 @@
    
    <div id="main">
      <% if controller.controller_name == "references" && @application && @reference -%>
-       <%= hidden_field_tag "submit_to", submit_application_reference_path(@application, @reference) %>
+       <%= hidden_field_tag "submit_to", submit_fe_application_reference_path(@application, @reference) %>
      <% end -%>
      <%= yield %>
    </div>
