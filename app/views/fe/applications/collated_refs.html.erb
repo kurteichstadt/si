@@ -25,7 +25,7 @@
 
 <% elements = []
    @reference_question_sheet.pages.order(:number).each do |page|
-     elements << page.elements.where("#{Fe::Element.table_name}.kind not in (?)", %w(Paragraph)).all
+     elements << page.elements.where("#{Fe::Element.table_name}.kind not in (?)", %w(Paragraph)).to_a
    end
    elements = elements.flatten
    elements.reject! {|e| e.is_confidential} if @show_conf == false

@@ -7,6 +7,7 @@ FactoryGirl.define do
 
   factory :ref_question, :parent => :question do
     kind 'Fe::ReferenceQuestion'
-    related_question_sheet_id { create(:ref_question_sheet).id }
+    # app/controllers/fe/applications_controller.rb expects the reference question sheet id to be 2
+    related_question_sheet_id { Fe::QuestionSheet.where(id: 2).first || create(:ref_question_sheet, id: 2).id }
   end
 end

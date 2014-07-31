@@ -70,11 +70,13 @@ class Fe::PaymentsControllerTest < ActionController::TestCase
   
   test "edit" do
     setup_payment
+    setup_reference
     get :edit, :id => @payment, :application_id => @application
     assert_response :success, @response.body
   end
   
   test "edit non-Staff payment" do
+    setup_reference
     cas_login
     @payment = create(:payment, :answer_sheet => @application)
     get :edit, :id => @payment, :application_id => @application
@@ -83,6 +85,7 @@ class Fe::PaymentsControllerTest < ActionController::TestCase
   
   test "update Approve payment" do
     setup_payment
+    setup_reference
     create(:email_template, :name => "Applicant Staff Payment Receipt")
     create(:email_template, :name => "Tool Owner Payment Confirmation")
     #assert_difference 'ActionMailer::Base.deliveries.length', 2 do
@@ -95,6 +98,7 @@ class Fe::PaymentsControllerTest < ActionController::TestCase
   
   test "update Decline payment" do
     setup_payment
+    setup_reference
     create(:email_template, :name => "Payment Refusal")
     #assert_difference 'ActionMailer::Base.deliveries.length', 1 do
       put :update, :id => @payment, :application_id => @application, :payment => {:status => 'Declined'}

@@ -8,8 +8,8 @@ class Fe::ReferencesControllerTest < ActionController::TestCase
   end
   
   test 'edit' do
-    get :edit, :application_id => @application, :id => @reference.access_key
-    assert_redirected_to edit_fe_reference_sheet_path(@reference, :a => @reference.access_key)
+    get :edit, :application_id => @application, :id => @staff_reference.access_key
+    assert_redirected_to edit_fe_reference_sheet_path(@staff_reference, :a => @staff_reference.access_key)
   end
   #
   #test 'send invite' do

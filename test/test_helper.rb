@@ -54,22 +54,26 @@ class ActiveSupport::TestCase
     create(:answer_sheet_question_sheet, :question_sheet => @question_sheet, :answer_sheet => @application)
   end
 
-  def setup_reference
-    @ref_question = create(:ref_question, style: 'staff')
-    @ref_question_sheet = @ref_question.related_question_sheet
-    @ref_answer_sheet = create(:reference, :applicant_answer_sheet => @application, :question => @ref_question)
-    @ref_page = create(:page, :question_sheet => @ref_question_sheet)
-
-    #Staff Reference
-    @reference = @ref_answer_sheet
-
+  def setup_reference_question_sheets
+    @staff_ref_question = create(:ref_question, style: 'staff')
+    @staff_question_sheet = @staff_ref_question.related_question_sheet
     @discipler_ref_question = create(:ref_question, style: 'discipler')
-    @discipler_reference = create(:reference, :applicant_answer_sheet => @application, :question => @discipler_ref_question)
-
+    @discipler_question_sheet = @discipler_ref_question.related_question_sheet
     @roommate_ref_question = create(:ref_question, style: 'roommate')
-    @roommate_reference = create(:reference, :applicant_answer_sheet => @application, :question => @roommate_ref_question)
-
+    @roommate_question_sheet = @roommate_ref_question.related_question_sheet
     @friend_ref_question = create(:ref_question, style: 'friend')
+    @friend_question_sheet = @friend_ref_question.related_question_sheet
+  end
+
+  def setup_reference
+    setup_reference_question_sheets
+
+    @staff_ref_page = create(:page, :question_sheet => @staff_question_sheet)
+
+    # ref instances
+    @staff_reference = create(:reference, :applicant_answer_sheet => @application, :question => @staff_ref_question)
+    @discipler_reference = create(:reference, :applicant_answer_sheet => @application, :question => @discipler_ref_question)
+    @roommate_reference = create(:reference, :applicant_answer_sheet => @application, :question => @roommate_ref_question)
     @friend_reference = create(:reference, :applicant_answer_sheet => @application, :question => @friend_ref_question)
   end
 end

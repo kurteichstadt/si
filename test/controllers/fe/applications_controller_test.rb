@@ -14,12 +14,14 @@ class Fe::ApplicationsControllerTest < ActionController::TestCase
   end
   
   test "show default" do 
+    setup_reference
     get :show_default
     assert_response :success, @response.body
   end
   
   test "show default no application" do 
-    @person.current_si_application.destroy
+    setup_reference_question_sheets
+    @person.application.destroy
     get :show_default
     assert_response :success, @response.body
   end
@@ -37,6 +39,7 @@ class Fe::ApplicationsControllerTest < ActionController::TestCase
   end
   
   test "edit" do
+    setup_reference
     get :edit, :id => @application
     assert_response :success, @response.body
   end
@@ -91,15 +94,14 @@ class Fe::ApplicationsControllerTest < ActionController::TestCase
   
   test "collated refs" do
     setup_reference
-    
     cas_login
-    create(:question_sheet, :id => 2) # hardcoded in app/controllers/applications_controller.rb
     get :collated_refs, :id => @application.id
     assert_response :success, @response.body
     assert_template :collated_refs
   end
   
   test "collated refs with no answer sheets" do
+    setup_reference_question_sheets
     cas_login
     get :collated_refs, :id => @application
     assert_response :success, @response.body

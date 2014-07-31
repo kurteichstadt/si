@@ -5,6 +5,7 @@ class Fe::ReferencePagesControllerTest < ActionController::TestCase
  def setup
     login
     setup_application
+    setup_reference
     @ref_sheet = create(:reference)
   end
   
