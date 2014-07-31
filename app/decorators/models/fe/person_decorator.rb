@@ -1,4 +1,4 @@
 Fe::Person.class_eval do
-  #has_one    :application, :foreign_key => "fk_personID", :class_name => "::Fe::Application"
-  belongs_to              :user, :foreign_key => "fk_ssmUserId"  #Link it to SSM
+  belongs_to :user, :foreign_key => "fk_ssmUserId"  #Link it to SSM
+  has_one    :application, -> { where(si_year: Fe::Application::YEAR) }, :foreign_key => "applicant_id"
 end
