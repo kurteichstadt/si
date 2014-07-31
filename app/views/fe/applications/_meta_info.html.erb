@@ -1,11 +1,11 @@
 <div id="meta" class="<%= @application.status.downcase %>">
   <ul>
-		<% if Apply.completed_statuses.include?(@application.status) %>
+		<% if Fe::Application.completed_statuses.include?(@application.status) %>
 			<li><span>Status</span>APPLICATION COMPLETED</li>
 		<% else -%>
 			<li><span>Status</span><%= @application.status.upcase %></li>
 		<% end -%>
-		<% if Apply.post_submitted_statuses.include?(@application.status) -%>
+		<% if Fe::Application.post_submitted_statuses.include?(@application.status) -%>
 			<li><span>Submitted</span> <%= datestamp @application.submitted_at %></li>
 		<% else -%>
 			<li><span>Started</span> <%= datestamp @application.created_at %></li>

@@ -32,6 +32,8 @@
      <%= render "fe/application/logout" %>
    </div>
    
+   <%= render("fe/applications/meta_info") if current_user && @application %>
+
    <% flash.each do |key, value| %>
      <div class="alert alert-<%= key %>"><%= value %></div>
    <% end %>

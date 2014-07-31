@@ -26,6 +26,48 @@ Fe::Application.class_eval do
   def created_at() dateAppStarted end
   def created_at=(val) dateAppStarted = val; end
 =end
+
+  # The statuses that mean an application has NOT been submitted
+  def self.unsubmitted_statuses
+    %w(started unsubmitted)
+  end
+
+  # The statuses that mean an applicant is NOT ready to evaluate
+  def self.not_ready_statuses
+    %w(submitted)
+  end
+
+  # The statuses that mean an applicant is NOT going
+  def self.not_going_statuses
+    %w(withdrawn declined)
+  end
+
+  # The statuses that mean an applicant IS ready to evaluate
+  def self.ready_statuses
+    %w(completed)
+  end
+
+  # The statuses that mean an applicant's application is not completed, but still in progress
+  def self.uncompleted_statuses
+    %w(started submitted unsubmitted)
+  end
+
+  def self.post_ready_statuses
+    %w(accepted affiliate alumni being_evaluated on_assignment placed re_applied terminated transfer pre_a follow_through)
+  end
+
+  def self.completed_statuses
+    self.ready_statuses | self.post_ready_statuses | %w(declined)
+  end
+
+  def self.post_submitted_statuses
+    self.completed_statuses | self.not_ready_statuses
+  end
+
+  def self.statuses
+    self.unsubmitted_statuses | self.not_ready_statuses | self.ready_statuses | self.post_ready_statuses | self.not_going_statuses
+  end
+
 end
 
 Fe::Application.const_set('YEAR', 2014)
