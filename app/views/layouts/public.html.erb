@@ -5,14 +5,13 @@
 <head>
   <title>STINT/Internship/PTFS Application</title>
   <%= stylesheet_link_tag "print", :media => 'print' %>
-  <%= stylesheet_link_tag 'base' %>
 
   <script type="text/javascript" charset="utf-8">
     var answer_sheet_type = '<%= @answer_sheet.class %>'
   </script>
   <%= csrf_meta_tag %>
-  <%= stylesheet_link_tag 'message_block' %>
-  <%= stylesheet_link_tag asset_path('fe/fe.screen.css') %>
+  <%= stylesheet_link_tag "message_block" %>
+  <%= stylesheet_link_tag "application.css" %>
   <script type="text/javascript" charset="utf-8">
     <%= raw Rack::TimeZone::Javascript %>
     setTimezoneCookie()
@@ -38,6 +37,7 @@
    </div>
 </div>
 <div id="footerwrap">
+  <div style="clear:both"></div>
   <div id="footer">
     <!-- anything in here my be custom branded -->
     <table>

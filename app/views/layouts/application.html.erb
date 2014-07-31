@@ -5,7 +5,6 @@
 <head>
   <title>STINT/Internship/PTFS Tool</title>
   <%= stylesheet_link_tag "print", :media => 'print' %>
-  <%= stylesheet_link_tag "base" %>
 
   <script type="text/javascript" charset="utf-8">
     var answer_sheet_type = '<%= @answer_sheet.class %>'
@@ -15,10 +14,10 @@
     <%#= raw Rack::TimeZone::Javascript %>
     //setTimezoneCookie()
   </script>
-  <%= stylesheet_link_tag asset_path('application.css') %>
-  <%= javascript_include_tag asset_path("application.js") %>
+  <%= stylesheet_link_tag "application.css" %>
+  <%= javascript_include_tag "application.js" %>
   <% if @viewing %>
-    <%= stylesheet_link_tag asset_path('fe.viewing.css') %>
+    <%= stylesheet_link_tag "fe.viewing.css" %>
   <% end %>
 </head>
 <body>
