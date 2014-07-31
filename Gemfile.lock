@@ -1,5 +1,7 @@
-PATH
-  remote: /Users/andrewroth/Development/fe
+GIT
+  remote: git://github.com/CruGlobal/qe.git
+  revision: cd8436851f44724e6c956df33e706224c5870135
+  branch: fe
   specs:
     fe (0.0.3)
       aasm
