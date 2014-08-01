@@ -34,6 +34,10 @@ body {
   line-height: 1.25em;
 }
 
+body.admin {
+  font: 12px/18px "lucida grande", verdana, arial, helvetica, sans-serif;
+}
+
 a {
   text-decoration: none;
   color: #0B486B;
@@ -44,6 +48,12 @@ a {
   width: 1000px;
   margin: 0 auto;
   background: none;
+}
+
+body.admin #wrapper {
+  width: 1100px;
+  margin: 18px auto;
+  background: #eee;
 }
 
 #controls {
@@ -493,7 +503,8 @@ td.actions a {padding: 2px 10px 2px 20px;}
 .delete {background: url("<%= asset_path('fe/icons/minus-button.png') %>") no-repeat 0% 50%;}
 
 
-/* HEADER */
+/* GENERAL HEADER */
+
 #header {
   background: #0B486B;
   padding: 0px;
@@ -519,9 +530,77 @@ td.actions a {padding: 2px 10px 2px 20px;}
   display: block;
 }
 
-#nav-main {
-  margin-left: 5px;
+/* ADMIN HEADER */
+
+#admin_header {
+  background: #0B486B;
+  padding: 0px;
+  -moz-border-radius: 0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  border-top: 4px solid #000;
+  margin-bottom: 20px;
 }
+
+#admin_header {
+  height: 72px;
+  background: #369;
+  border-top: solid 1px #369;
+  margin-bottom: 0px;
+}
+
+#admin_header h1 {
+  position: absolute;
+  color: #f3f3f3;
+  font-weight: bold;
+  margin: 4.5px 18px;
+}
+
+#admin_header li a {
+  color: #333;
+  padding: 3px 9px 3px;
+}
+
+#admin_header li.active a {
+  padding: 3px 9px 3px;
+}
+
+/* NAV */
+
+#nav-main {
+  list-style: none;
+  margin: 48px 0 0 18px;
+  height: auto;
+}
+
+#nav-main li {
+  float: left;
+  margin-right: 9px;
+  height: 24px;
+}
+
+#nav-main li.right {
+  float: right;
+  margin-right: 9px;
+}
+
+#nav-main a {
+  font-size: 12px;
+  background: #ccc;
+  padding: 3px 9px 3px;
+  display: block;
+  line-height: 18px;
+}
+
+#nav-main .active a {
+  background: #eee;
+  font-weight: bold;
+  color: #333;
+}
+
+#nav-main .active a { background: #cc9 !important; }
+
+/* LOGOUT */
 
 #link-log-out {
   float: right;
@@ -626,4 +705,17 @@ td.actions a {padding: 2px 10px 2px 20px;}
 
 #meta.submitted li span {
   color: #ccc;
+}
+
+/* ADMIN-SPECIFIC */
+body.admin #main { 
+  background: #cc9;
+  overflow: hidden;
+  width: 100%;
+}
+
+body.admin #content {
+  margin: 18px;
+  padding: 18px;
+  background: white;
 }

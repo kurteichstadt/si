@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_filter :cas_filter, :only => [:search]
   skip_before_filter :authentication_filter, :only => [:search]
   before_filter :check_valid_user, :except => [:search]
-  layout 'admin', :except => [:search]
+  layout 'application', :except => [:search]
   respond_to :html, :js
 
   def index

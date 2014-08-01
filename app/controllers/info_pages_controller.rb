@@ -2,8 +2,6 @@ class InfoPagesController < ApplicationController
   skip_before_filter :cas_filter
   skip_before_filter :authentication_filter
   
-  layout 'public'
-  
   def index
     if user
       redirect_to show_default_path

@@ -1,8 +1,7 @@
 class AdminController < ApplicationController
   prepend_before_filter :cas_filter
   before_filter :check_valid_user, :except => [:no_access, :logout]
-  layout 'admin'
-  
+
   #def ssl_test
   #  out = "ssl? " + request.ssl?.inspect + "<br/>"
   #  env = request.instance_variable_get(:@env)

@@ -7,7 +7,7 @@
   <%= stylesheet_link_tag "print", :media => 'print' %>
 
   <script type="text/javascript" charset="utf-8">
-    var answer_sheet_type = '<%= @answer_sheet.class %>'
+    var answer_sheet_type = '<%= @answer_sheet.class %>';
   </script>
   <%= csrf_meta_tag %>
   <script type="text/javascript" charset="utf-8">
@@ -20,17 +20,35 @@
     <%= stylesheet_link_tag "fe.viewing.css" %>
   <% end %>
 </head>
-<body>
+<body class="<%= 'admin' if admin_section? %>">
 
 <div id="wrapper">
 
-   <div id="header" style="height: 72px;">
+  <div id="<%= 'admin_' if admin_section? %>header" style="height: 72px;">
      <%= image_tag "cru_logo_top.jpg", :style => "position: absolute; padding-left: 10px; padding-top: 5px;" %>
      <h1 style="display: inline; position: absolute; color: #F3F3F3; margin: 4.5px 70px; line-height: 36px;">STINT/Internship/PTFS Application</h1>
    
      <%= render "fe/application/logout" %>
+
+     <% if admin_section? %>
+       <ul id="nav-main" style="display: inline-block;">
+         <li <% if controller.controller_name == "admin" -%> class="active" <% end -%>><%= link_to 'Home', admin_home_path %></li>
+         <% if si_user && si_user.can_edit_questionnaire? -%>
+           <li <% if controller.controller_name == "question_sheets" -%> class="active" <% end -%>><%= link_to 'Application', fe_admin_question_sheets_path %></li>
+         <% end -%>
+         <% if si_user && si_user.can_edit_email_template? -%>
+           <li <% if controller.controller_name == "email_templates" -%> class="active" <% end -%>><%= link_to 'Email Templates', fe_admin_email_templates_path %></li>
+         <% end -%>
+         <% if si_user && si_user.can_see_projects? -%>
+           <li <% if controller.controller_name == "hr_si_projects" -%> class="active" <% end -%>><%= link_to 'Projects', hr_si_projects_path %></li>
+         <% end -%>
+         <% if si_user && si_user.can_add_user? -%>
+           <li <% if controller.controller_name == "users" -%> class="active" <% end -%>><%= link_to 'Users', users_path %></li>
+         <% end -%>
+       </ul>
+     <% end %>
    </div>
-   
+
    <%= render("fe/applications/meta_info") if current_user && @application %>
 
    <% flash.each do |key, value| %>
