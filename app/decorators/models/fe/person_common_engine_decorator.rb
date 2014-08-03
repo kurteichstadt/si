@@ -1,11 +1,9 @@
 # originally taken from common_engine
 
-require_dependency 'global_registry_methods'
 require 'auto_strip_attributes'
 
 Fe::Person.class_eval do
   include Sidekiq::Worker
-  include GlobalRegistryMethods
 
   auto_strip_attributes :firstName, :lastName, :preferredName, :accountNo, :title
 

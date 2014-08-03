@@ -1,17 +1,13 @@
-require 'global_registry_methods'
 class Region < ActiveRecord::Base
-  include Sidekiq::Worker
-  include GlobalRegistryMethods
-
   self.table_name = "ministry_regionalteam"
   self.primary_key = "teamID"
-  
+
   default_scope -> { order(:region) }
 
   cattr_reader :standard_region_codes, :campus_region_codes
   @@standard_region_codes = ["GL", "GP", "MA", "MS", "NE", "NW", "RR", "SE", "SW", "UM"]
   @@campus_region_codes = @@standard_region_codes.clone << "NC"
-  
+
   def self.standard_regions
     where(["region IN (?)", @@standard_region_codes])
   end
@@ -19,7 +15,7 @@ class Region < ActiveRecord::Base
   def self.campus_regions
     where(["region IN (?)", @@campus_region_codes])
   end
-  
+
   def self.standard_regions_hash
     result = {}
     standard_regions.each do |region|
@@ -27,7 +23,7 @@ class Region < ActiveRecord::Base
     end
     result
   end
-  
+
   def self.full_name(code)
     region = where("region = ?", code).first
     if region
@@ -38,11 +34,11 @@ class Region < ActiveRecord::Base
       ""
     end
   end
-  
+
   def sp_phone
     @sp_phone ||= spPhone.blank? ? phone : spPhone
   end
-  
+
   def to_s
     region
   end
