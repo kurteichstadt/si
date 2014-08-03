@@ -1,5 +1,7 @@
-PATH
-  remote: /Users/josh/htdocs/qe
+GIT
+  remote: git://github.com/CruGlobal/qe.git
+  revision: 8353d3fccde483c30e9b6aabac149d6165df1bbe
+  branch: fe
   specs:
     fe (0.0.3)
       aasm

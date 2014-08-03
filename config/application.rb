@@ -57,7 +57,11 @@ module Si
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # remove this in rails 4.1
-    config.secret_key_base = YAML.load(File.open("#{Rails.root}/config/secrets.yml"))[Rails.env]['secret_key_base']
+    if File.exist?(Rails.root.join('config','memcached.yml'))
+      cache_server = YAML.load_file(Rails.root.join('config','memcached.yml'))[Rails.env]['host']
+    else
+      cache_server = 'localhost'
+    end
+    config.cache_store = :dalli_store, cache_server, { :namespace => 'mpdx', :expires_in => 1.day, :compress => true }
   end
 end

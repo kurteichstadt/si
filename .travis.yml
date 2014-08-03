@@ -1,0 +1,19 @@
+language: ruby
+rvm: 2.1.0
+notifications:
+  recipients:
+    - josh.starcher@cru.org
+    - matt.drees@cru.org
+services:
+  - redis-server
+script: "bundle exec rake spec"
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq libfreeimage-dev
+before_script:
+  - mysql -e 'create database si_test;'
+  - cp config/travis/database.yml config/database.yml
+  - cp config/travis/secrets.yml config/secrets.yml
+  - bundle exec rake db:schema:load RAILS_ENV=test
+
+script: "bundle exec rspec spec && bundle exec rubocop"
