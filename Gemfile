@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.4'
+gem 'rails', '~> 4.1.0'
 
 gem 'aasm'
 gem 'airbrake'
@@ -22,7 +22,7 @@ gem 'omniauth-cas'
 gem 'oa-openid'
 gem 'paperclip'
 gem 'rack-contrib'
-gem 'sass-rails'#,   '~> 3.2.3'
+gem 'sass-rails', '~> 4.0.3'
 gem 'sidekiq'
 gem 'uglifier'#, '>= 1.0.3'
 
@@ -30,11 +30,12 @@ gem 'uglifier'#, '>= 1.0.3'
 gem 'rubycas-client'
 gem 'auto_strip_attributes', '~> 2.0'
 
-#gem 'common_engine', 
+#gem 'common_engine',
   #path: '/Users/andrewroth/Development/common_engine'
   # github: 'CruGlobal/common_engine', branch: 'master'
-gem 'fe', 
+gem 'fe',
   #path: '/Users/andrewroth/Development/fe'
+  #path: '/Users/josh/htdocs/qe'
   github: 'CruGlobal/qe', branch: 'fe'
 
 group :development, :test do
@@ -54,4 +55,5 @@ group :development, :test do
   #gem 'pry-debugger'
   #gem 'better_errors'
   #gem 'binding_of_caller'
+  gem 'spring'
 end

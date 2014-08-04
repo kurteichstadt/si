@@ -1,6 +1,9 @@
-ActiveMerchant::Billing::Base.mode = :test
 GATEWAY = ActiveMerchant::Billing::AuthorizeNetGateway.new(
-   :login => '27KDcrXv4q',
-    :password => '36k8RJ28QBn3a8mh'
+ :login => Rails.application.secrets.merchant_login,
+ :password => Rails.application.secrets.merchant_password
 ) unless defined? GATEWAY
-ActiveMerchant::Billing::AuthorizeNetGateway.live_url = "https://test.authorize.net/gateway/transact.dll"
+
+unless Rails.env.production?
+  ActiveMerchant::Billing::AuthorizeNetGateway.live_url = "https://test.authorize.net/gateway/transact.dll"
+end
+

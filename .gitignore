@@ -10,8 +10,6 @@
 
 # /config/
 /config/database.yml
-/config/active_merchant.yml
-/config/facebook.yml
 
 # /db/
 /db/schema.rb
@@ -51,13 +49,11 @@ public/stylesheets/questionnaire_engine/
 public/questionnaire_engine/
 public/images/questionnaire_engine/
 
-config/initializers/payment.rb
-
 public/blank_iframe.html
 vendor/ruby
-config/config.yml
 
 .idea
 
 *.sql
 trash
+config/secrets.yml

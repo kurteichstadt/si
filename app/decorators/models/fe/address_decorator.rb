@@ -1,8 +1,6 @@
-# originally taken from common engine; 
+# originally taken from common engine;
 
-require 'global_registry_methods'
 Fe::Address.class_eval do
-  include GlobalRegistryMethods
   include Sidekiq::Worker
 
   self.table_name = "ministry_newaddress"

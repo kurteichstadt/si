@@ -1,9 +1,0 @@
-development:
-  auth_net_user: username
-  auth_net_pass: trans_key
-test:
-  auth_net_user: 
-  auth_net_pass: 
-production:
-  auth_net_user: 
-  auth_net_pass: 

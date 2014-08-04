@@ -1,19 +1,15 @@
-require_dependency 'global_registry_methods'
-
 class TargetArea < ActiveRecord::Base
-  include Sidekiq::Worker
-  include GlobalRegistryMethods
 
   self.table_name = "ministry_targetarea"
   self.primary_key = "targetAreaID"
-  
+
   #override the inheritance column
   self.inheritance_column = "nothing"
-  
+
   has_many :activities, -> { where("status != 'IN'") }, :foreign_key => "fk_targetAreaID", :primary_key => "targetAreaID"
   has_many :all_activities, :class_name => "Activity", :foreign_key => "fk_targetAreaID", :primary_key => "targetAreaID"
   has_many :teams, :through => :activities
-  
+
   belongs_to :sp_project, :primary_key => :eventKeyID
 
   validates_uniqueness_of :name
@@ -22,10 +18,10 @@ class TargetArea < ActiveRecord::Base
   validates_presence_of :country, :unless => :is_event?
   validates_presence_of :region, :unless => :is_event?
   #validates_presence_of :state, :if => :country == "USA"
-  
+
   scope :open_school, -> { where("isClosed is null or isClosed <> 'T'").where("eventType is null or eventType <=> ''") }
   scope :special_events, -> { where("type = 'Event' AND ongoing_special_event = 1") }
-  
+
   before_save :stamp_changed
   before_save :ensure_urls_http
   before_update :set_coordinates
@@ -37,19 +33,19 @@ class TargetArea < ActiveRecord::Base
   @@website = "DI"
   @@other = "OT"
   cattr_reader :summer_project, :crs_conference, :other_conference, :website, :other
-  
+
   def is_semester?
     isSemester ? "Yes" : "No"
   end
-  
+
   def is_event?
     type == "Event"
   end
-  
+
   def is_special_event?
-    is_event? && (eventType == "DI" || eventType == "CS" || eventType == "OT") 
+    is_event? && (eventType == "DI" || eventType == "CS" || eventType == "OT")
   end
-  
+
   def active
     @active = false
     activities.each do |activity|
@@ -60,11 +56,11 @@ class TargetArea < ActiveRecord::Base
     end
     @active
   end
-  
+
   def get_activities_for_strategies(strategies)
     all_activities.where(Activity.table_name + ".strategy IN (?)", strategies)
   end
-  
+
   def get_event_activity(date, strategy)
     if eventType == @@other_conference
       activity = all_activities.first
@@ -76,7 +72,7 @@ class TargetArea < ActiveRecord::Base
     end
     activity
   end
-  
+
   def stamp_changed
     self.modified = Time.now
   end
@@ -90,7 +86,7 @@ class TargetArea < ActiveRecord::Base
   def self.inactive_statuses
     ['IN']
   end
-  
+
   def self.target_area_for_event(type, event_id, name, region, is_secure, email, ta_id = nil)
     if !ta_id.blank?
       ta = TargetArea.find(ta_id)
@@ -114,7 +110,7 @@ class TargetArea < ActiveRecord::Base
     end
     ta
   end
-  
+
   def self.special_events_hash
     result = {}
     special_events.each do |event|
