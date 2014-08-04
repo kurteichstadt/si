@@ -16,6 +16,7 @@
   </script>
   <%= stylesheet_link_tag "application.css" %>
   <%= javascript_include_tag "application.js" %>
+  <%= javascript_include_tag "fe/admin.js" if admin_section? %>
   <% if @viewing %>
     <%= stylesheet_link_tag "fe.viewing.css" %>
   <% end %>
