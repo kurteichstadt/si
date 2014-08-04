@@ -36,7 +36,7 @@ class HrSiProjectsController < ApplicationController
     edit
     @active = "opportunities"
     respond_to do |format|
-      format.html { render :layout => 'public' }
+      format.html
       format.xml { render :xml => @hr_si_project.to_xml(:only => [:SIProjectID, :studentStartDate,
                                                    :studentEndDate, :details,
                                                    :displayLocation,
