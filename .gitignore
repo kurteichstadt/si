@@ -18,6 +18,7 @@
 
 # /public/
 /public/plugin_assets
+/public/assets
 
 # /public/images/
 /public/images/calendar_date_select

@@ -303,6 +303,7 @@ DEPENDENCIES
   fe!
   guard-spork
   guard-test
+  jquery-rails
   jquery-ui-rails
   liquid
   mocha
