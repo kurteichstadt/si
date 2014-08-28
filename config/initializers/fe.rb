@@ -9,5 +9,4 @@ module Fe
   
   mattr_accessor :from_email
   self.from_email = 'STINT and Internships <StintandInternships@uscm.org>'
-  
 end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.1.5'
 
 gem 'aasm'
 gem 'airbrake'
@@ -34,9 +34,9 @@ gem 'auto_strip_attributes', '~> 2.0'
   #path: '/Users/andrewroth/Development/common_engine'
   # github: 'CruGlobal/common_engine', branch: 'master'
 gem 'fe',
-  #path: '/Users/andrewroth/Development/fe'
+  path: '/Users/andrewroth/Development/fe'
   #path: '/Users/josh/htdocs/qe'
-  github: 'CruGlobal/qe', branch: 'fe'
+  #github: 'CruGlobal/qe', branch: 'fe'
 
 group :development, :test do
   gem 'simplecov', '>= 0.3.5', require: false

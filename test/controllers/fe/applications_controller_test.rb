@@ -21,7 +21,7 @@ class Fe::ApplicationsControllerTest < ActionController::TestCase
   
   test "show default no application" do 
     setup_reference_question_sheets
-    @person.application.destroy
+    @person.application.try(:destroy)
     get :show_default
     assert_response :success, @response.body
   end

@@ -27,7 +27,7 @@ module Fe
     end
 
     test "submit with payment" do
-      create(:payment, :answer_sheet => @application)
+      create(:payment, :application => @application)
       #assert_difference "ActionMailer::Base.deliveries.length", 8 do
       create(:email_template, name: "Application Submitted")
       create(:email_template, name: "Reference Invite")

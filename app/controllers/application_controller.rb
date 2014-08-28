@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   def done
   end
 
-  def si_user
+  def app_user
     return nil unless user
     @si_user ||= SiUser.where(ssm_id: user.id).first_or_create
     #@si_user ||= SiUser.where(ssm_id: user.id).first
@@ -56,6 +56,7 @@ class ApplicationController < ActionController::Base
     end
     @si_user
   end
+  alias_method :si_user, :app_user
 
   def check_valid_user
     unless si_user

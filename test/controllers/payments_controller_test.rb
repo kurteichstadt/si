@@ -6,12 +6,12 @@ class Fe::PaymentsControllerTest < ActionController::TestCase
  def setup
     login
     setup_application
-    create(:staff)
+    @staff = create(:staff)
   end
   
   def setup_payment
     cas_login
-    @payment = create(:staff_payment, :answer_sheet => @application)
+    @payment = create(:staff_payment, :application => @application, :payment_account_no => @staff.accountNo)
   end
   
   #test "credit card payment" do
@@ -52,7 +52,7 @@ class Fe::PaymentsControllerTest < ActionController::TestCase
     create(:email_template)
      @application.payments.create(:payment_type => 'Staff', :payment_account_no => '000559826', :staff_first => 'John', :staff_last => 'Doe')
     xhr :post, :create, :application_id => @application, :payment => {:payment_type => 'Staff', :payment_account_no => '000559826', :staff_first => 'John', :staff_last => 'Doe'}
-    assert_template 'error'
+    assert_template 'fe/payments/_errors'
   end
   
   test "staff payment" do
@@ -78,7 +78,7 @@ class Fe::PaymentsControllerTest < ActionController::TestCase
   test "edit non-Staff payment" do
     setup_reference
     cas_login
-    @payment = create(:payment, :answer_sheet => @application)
+    @payment = create(:payment, :application => @application)
     get :edit, :id => @payment, :application_id => @application
     assert_template "no_access"
   end
