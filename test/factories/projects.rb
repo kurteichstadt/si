@@ -8,6 +8,6 @@ FactoryGirl.define do
     projectType         's'
     studentStartDate    3.days.from_now
     studentEndDate      1.month.from_now
-    siYear              2014
+    siYear              Fe::Application::YEAR
   end
 end
