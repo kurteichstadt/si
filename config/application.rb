@@ -63,5 +63,8 @@ module Si
       cache_server = 'localhost'
     end
     config.cache_store = :dalli_store, cache_server, { :namespace => 'mpdx', :expires_in => 1.day, :compress => true }
+
+    # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+    config.assets.precompile += %w(print.css)
   end
 end
